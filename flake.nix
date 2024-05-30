@@ -40,8 +40,8 @@
   in
   {
     # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#simple
-    darwinConfigurations."simple" = nix-darwin.lib.darwinSystem {
+    # $ darwin-rebuild build --flake .#ankarhem
+    darwinConfigurations."ankarhem" = nix-darwin.lib.darwinSystem {
       modules = [ configuration ];
     };
 
