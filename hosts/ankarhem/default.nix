@@ -6,17 +6,52 @@
   programs.fish = {
     enable = true;
   };
+  programs.nixvim = {
+    enable = true;
+    colorschemes.gruvbox.enable = true;
+    options = {
+      number = true;
+      relativenumber = true;
 
+      shiftwidth = 2;
+    };
+
+    plugins = {
+      lightline.enable = true;
+      telescope.enable = true;
+      oil.enable = true;
+      treesitter.enable = true;
+      luasnip.enable = true;
+    };
+
+    plugins.lsp = {
+      enable = true;
+      servers = {
+        tsserver.enable = true;
+        lua-ls.enable = true;
+        rust-analyzer.enable = true;
+      };
+    };
+  };
+
+  environment.systemPackages = [
+    pkgs.coreutils
+    pkgs.rustup
+  ];
   environment = {
     shells = with pkgs; [ bash zsh fish ];
 #    loginShell = pkgs.fish;
-    systemPackages = [ pkgs.coreutils ];
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];
+    shellAliases = {
+      vim = "nvim";
+    };
   };
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
+
+  security.pam.enableSudoTouchIdAuth = true;
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 #  fonts.fontDir.enable = true; # DANGER
@@ -25,7 +60,13 @@
   system.defaults = {
     finder.AppleShowAllExtensions = true;
     finder._FXShowPosixPathInTitle = true;
+    # default to column view in finder
+    finder.FXPreferredViewStyle = "clmv";
     dock.autohide = false;
+    # Don’t rearrange spaces based on the most recent use
+    dock.mru-spaces = false;
+    screensaver.askForPasswordDelay = 10;
+    screencapture.location = "~/Pictures/screenshots";
     NSGlobalDomain.AppleShowAllExtensions = true;
     NSGlobalDomain.InitialKeyRepeat = 14;
     NSGlobalDomain.KeyRepeat = 1;

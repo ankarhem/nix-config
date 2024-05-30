@@ -15,15 +15,21 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, darwin, home-manager, nixpkgs }: {
+  outputs = inputs@{ self, darwin, home-manager, nixpkgs, nixvim }: {
     
     darwinConfigurations.ankarhem = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         ./hosts/ankarhem/default.nix
         home-manager.darwinModules.home-manager
+        nixvim.nixDarwinModules.nixvim
       ];
     };
   };
