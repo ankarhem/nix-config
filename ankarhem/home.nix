@@ -2,6 +2,9 @@
 {
   home.stateVersion = "23.11";
 
+  imports = [
+  ];
+
   home.packages = with pkgs; [
     htop
     curl
