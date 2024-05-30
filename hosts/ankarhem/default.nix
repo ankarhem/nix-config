@@ -41,7 +41,7 @@
   environment.systemPackages = with pkgs; [
     coreutils
     rustup
-    git
+    gitAndTools.gitFull
   ];
   environment = {
     shells = with pkgs; [ bash zsh fish ];
@@ -99,6 +99,7 @@
 
       extraConfig = {
 	push = { autoSetupRemote = true; };
+	diff = { external = "${pkgs.difftastic}/bin/difft"; };
       };
     };
   };
