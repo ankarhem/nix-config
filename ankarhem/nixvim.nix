@@ -2,7 +2,15 @@
 {
   programs.nixvim = {
     enable = true;
-    colorschemes.gruvbox.enable = true;
+
+    colorschemes = {
+      base16 = {
+	enable = true;
+	setUpBar = true;
+	colorscheme = "github";
+      };
+    };
+
     opts = {
       number = true;
       relativenumber = true;

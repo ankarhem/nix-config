@@ -10,7 +10,12 @@
   # -- Environment --
   environment = {
     shells = with pkgs; [ bash zsh fish ];
-    systemPath = [ "/opt/homebrew/bin" ];
+    systemPath = [
+      /opt/homebrew/bin
+    ];
+    systemPackages = with pkgs; [
+      fishPlugins.done
+    ];
     pathsToLink = [ "/Applications" ];
     shellAliases = {
       vim = "nvim";
@@ -20,6 +25,8 @@
   programs.zsh.enable = true;
   programs.fish = {
     enable = true;
+    shellInit = ''
+  '';
   };
 
   users.users.ankarhem = {

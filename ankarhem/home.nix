@@ -7,7 +7,7 @@
     curl
     coreutils
     jq
-#    gitAndTools.gitFull
+    (lib.hiPrio gitAndTools.gitFull)
     rustup
   ];
 

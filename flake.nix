@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs = {
 #      url = "github:nixos/nixpkgs/nixos-23.11";
-     url = "github:nixos/nixpkgs/nixos-unstable";
+     url = "github:nixos/nixpkgs";
     };
     darwin = {
       url = "github:LnL7/nix-darwin";
