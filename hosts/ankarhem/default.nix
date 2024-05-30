@@ -96,6 +96,10 @@
       enable = true;
       userName = "Jakob Ankarhem";
       userEmail = "jakob@ankarhem.dev";
+
+      extraConfig = {
+	push = { autoSetupRemote = true; };
+      };
     };
   };
   users.users.ankarhem = {
