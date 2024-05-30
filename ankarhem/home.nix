@@ -6,6 +6,7 @@
   ];
 
   home.packages = with pkgs; [
+    ripgrep
     htop
     curl
     coreutils
@@ -13,6 +14,14 @@
     (lib.hiPrio gitAndTools.gitFull)
     rustup
   ];
+
+  programs.kitty = {
+    enable = true;
+  };
+
+  programs.starship = {
+    enable = true;
+  };
 
   programs.git = {
     enable = true;
