@@ -29,14 +29,19 @@
       servers = {
         tsserver.enable = true;
         lua-ls.enable = true;
-        rust-analyzer.enable = true;
+        rust-analyzer = {
+	  enable = true;
+	  installRustc = false;
+	  installCargo = false;
+	};
       };
     };
   };
 
-  environment.systemPackages = [
-    pkgs.coreutils
-    pkgs.rustup
+  environment.systemPackages = with pkgs; [
+    coreutils
+    rustup
+    git
   ];
   environment = {
     shells = with pkgs; [ bash zsh fish ];
