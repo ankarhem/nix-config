@@ -46,6 +46,11 @@
   home-manager.useUserPackages = true;
   home-manager.users.ankarhem = { pkgs, ... }: {
     home.stateVersion = "23.11";
+    programs.git = {
+      enable = true;
+      userName = "Jakob Ankarhem";
+      userEmail = "jakob@ankarhem.dev";
+    };
   };
   users.users.ankarhem = {
     home = "/Users/ankarhem";
