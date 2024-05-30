@@ -5,12 +5,11 @@
     ./settings.nix
     ./homebrew.nix
     ./nixvim.nix
-    ./fish.nix
+    ./shell.nix
   ];
 
   # -- Environment --
   environment = {
-    shells = with pkgs; [ bash zsh fish ];
     pathsToLink = [ "/Applications" ];
   };
 
