@@ -3,7 +3,7 @@
   programs.nixvim = {
     enable = true;
     colorschemes.gruvbox.enable = true;
-    options = {
+    opts = {
       number = true;
       relativenumber = true;
 

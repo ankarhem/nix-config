@@ -6,9 +6,6 @@
 #      url = "github:nixos/nixpkgs/nixos-23.11";
      url = "github:nixos/nixpkgs/nixos-unstable";
     };
-    nixpkgs-unstable = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,12 +13,10 @@
     home-manager = {
       url = "github:nix-community/home-manager";
 #      url = "github:nix-community/home-manager/release-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
