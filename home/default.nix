@@ -12,7 +12,7 @@
     ./karabiner.nix
     ./ssh.nix
     ./git.nix
-    ./nixvim.nix
+    ./nixvim/default.nix
     ./gpg.nix
     ./vscode.nix
 

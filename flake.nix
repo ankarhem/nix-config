@@ -58,7 +58,7 @@
             home-manager.extraSpecialArgs = {inherit inputs;};
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ankarhem = import ./home/configuration.nix;
+            home-manager.users.ankarhem = import ./home/default.nix;
           }
         ];
       };
