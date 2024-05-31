@@ -16,7 +16,9 @@ in {
     masApps = {
     };
 
-    brews = [];
+    brews = [
+      "pinentry-mac"
+    ];
 
     caskArgs.no_quarantine = true;
     casks = [

@@ -10,18 +10,24 @@
   home.packages = with pkgs; [
     # _1password-gui
     # _1password
+
+    gnupg
+    yubikey-personalization
+    yubikey-manager
+
+    coreutils
     wget
     curl
-    alejandra
-    coreutils
-    ripgrep
-    htop
-    curl
-    jq
     (lib.hiPrio gitAndTools.gitFull)
+    htop
+    ripgrep
+    jq
+
     rustup
-    teams
+    alejandra
+
     mas
+    teams
     slack
     spotify
   ];
