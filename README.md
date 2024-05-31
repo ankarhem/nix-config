@@ -26,8 +26,8 @@ darwin-rebuild switch --flake .
     2. Restart application and go to complex modifications and enable nix
 
 * Configure betterdisplay
-    1. Set to 1920x1080
-    2. Enable HiDPI
+    1. Set Dell display to 1920x1080
+    2. Enable HiDPI on Dell display
 * Replace with official colemak (TODO: create custom package for this?)
     1. Download keyboard `wget https://colemak.com/pub/mac/Colemak.keylayout -P ~/Library/Keyboard\ Layouts/`
     2. Replace default colemak System Preferences > Keyboard > Input Sources
