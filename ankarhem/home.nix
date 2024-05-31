@@ -15,6 +15,8 @@
     rustup
     teams
     mas
+    slack
+    spotify
   ];
   programs.eza.enable = true;
 

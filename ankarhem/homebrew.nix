@@ -25,9 +25,7 @@ in {
       "1password"
       "1password-cli"
       "firefox"
-      "spotify"
       "raycast"
-      "slack"
     ];
   };
 
