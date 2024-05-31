@@ -14,6 +14,7 @@
 
   environment.variables = {
     EDITOR = "nvim";
+    GNUPGHOME = "~/.gnupg";
   };
   environment.shells = with pkgs; [bash zsh fish];
   environment.shellAliases = {

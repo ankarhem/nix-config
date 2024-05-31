@@ -22,6 +22,7 @@
     yubikey-personalization
     yubikey-manager
     openssh
+    openssl
 
     coreutils
     wget

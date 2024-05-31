@@ -42,6 +42,8 @@
     screensaver.askForPasswordDelay = 10;
     screencapture.location = "~/Pictures/screenshots";
     NSGlobalDomain.AppleShowAllExtensions = true;
+    # show hidden files
+    NSGlobalDomain.AppleShowAllFiles = true;
     NSGlobalDomain.InitialKeyRepeat = 14;
     NSGlobalDomain.KeyRepeat = 1;
   };
