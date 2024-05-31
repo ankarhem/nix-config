@@ -33,6 +33,7 @@
     htop
     ripgrep
     jq
+    zoxide
 
     rustup
     alejandra
