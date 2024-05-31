@@ -1,11 +1,11 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.stateVersion = "23.11";
 
   imports = [
   ];
 
   home.packages = with pkgs; [
+    alejandra
     coreutils
     ripgrep
     htop
@@ -19,11 +19,20 @@
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       asvetliakov.vscode-neovim
+      jnoortheen.nix-ide
+      kamadorueda.alejandra
     ];
     userSettings = {
       "extensions.experimental.affinity" = {
         "asvetliakov.vscode-neovim" = 1;
       };
+      "[nix]" = {
+        "editor.defaultFormatter" = "kamadorueda.alejandra";
+        "editor.formatOnPaste" = true;
+        "editor.formatOnSave" = true;
+        "editor.formatOnType" = false;
+      };
+      "alejandra.program" = "alejandra";
     };
   };
 
@@ -41,8 +50,8 @@
     userEmail = "jakob@ankarhem.dev";
 
     extraConfig = {
-      push = { autoSetupRemote = true; };
-      diff = { external = "${pkgs.difftastic}/bin/difft"; };
+      push = {autoSetupRemote = true;};
+      diff = {external = "${pkgs.difftastic}/bin/difft";};
     };
   };
 }
