@@ -13,6 +13,7 @@ darwin-rebuild switch --flake .
 
 ## Manual steps
 
+### Important
 * Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
 * Check that /etc/shells includes fish
 * Change shell with `chsh -s /run/current-system/sw/bin/fish`
@@ -36,8 +37,10 @@ darwin-rebuild switch --flake .
     2. Fix permission on private key `chmod 400 ~/.ssh/id_ed25519_sk`
     3. Connect key and run `gpg-connect-agent "scd serialno" "learn --force" /bye`
 
-### App initialization
-
+### Not super important
+* Enable rectangle
+    1. Open and follow the instructions
+    2. Open settings and enable auto-start and animation
 * Add accounts System Preferences > Internet Accounts
     - Rename email acccounts in Mail app: Settings > Accounts
     - Filter accounts / calendar with focus modes
