@@ -16,6 +16,20 @@ in {
         ControlMaster auto
         ControlPath ~/.ssh/S.%r@%h:%p
         ControlPersist 60m
+      Host synology
+        HostName disketten.local
+        User idealpink
+        Port 1337
+        IdentitiesOnly yes
+        IdentityFile ~/.ssh/id_ed25519_sk
+        IdentityFile ~/.ssh/id_ecdsa_sk
+      Host tower
+        HostName tower.local
+        User root
+        Port 1337
+        IdentitiesOnly yes
+        IdentityFile ~/.ssh/id_ed25519_sk
+        IdentityFile ~/.ssh/id_ecdsa_sk
     '';
   };
 }
