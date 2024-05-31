@@ -17,16 +17,14 @@ darwin-rebuild switch --flake .
 * Check that /etc/shells includes fish
 * Change shell with `chsh -s /run/current-system/sw/bin/fish`
 * Install rustc and cargo with `rustup default stable`
-* Open firefox and login to sync
 * Open raycast and initialize settings, via topbar replace hotkey to cmd+space
 * Replace spotlight
     1. System Preferences > Keyboard > Shortcuts > Spotlight and disable the keyboard shortcut.
     2. Open raycast via topbar and change keymap.
-* Open slack and login using `jakob.ankarhem@norce.io`, select workspaces
 * Enable karabiner
     1. Open and follow the instructions
     2. Restart application and go to complex modifications and enable nix
-* Login to accounts System Preferences > Internet Accounts
+
 * Configure betterdisplay
     1. Set to 1920x1080
     2. Enable HiDPI
@@ -35,4 +33,13 @@ darwin-rebuild switch --flake .
     2. Replace default colemak System Preferences > Keyboard > Input Sources
 * Fix yubikey
     1. Add ssh-keys manually from 1password
-    2. fix permission on private key `chmod 400 ~/.ssh/id_ed25519_sk`
+    2. Fix permission on private key `chmod 400 ~/.ssh/id_ed25519_sk`
+    3. Connect key and run `gpg-connect-agent "scd serialno" "learn --force" /bye`
+
+### App initialization
+
+* Add accounts System Preferences > Internet Accounts
+    - Rename email acccounts in Mail app: Settings > Accounts
+    - Filter accounts / calendar with focus modes
+* Open firefox and login to sync
+* Open slack and login using `jakob.ankarhem@norce.io`, select workspaces

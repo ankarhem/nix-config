@@ -46,6 +46,7 @@
     slack
     spotify
     telegram-desktop
+    rectangle
   ];
   programs.zsh.enable = true;
   programs.fish = {
