@@ -9,7 +9,6 @@
     ripgrep
     htop
     curl
-    coreutils
     jq
     (lib.hiPrio gitAndTools.gitFull)
     rustup

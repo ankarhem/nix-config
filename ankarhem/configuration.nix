@@ -11,6 +11,9 @@
   # -- Environment --
   environment = {
     pathsToLink = [ "/Applications" ];
+    systemPackages = with pkgs; [
+      coreutils
+    ];
   };
 
   users.users.ankarhem = {
