@@ -9,9 +9,9 @@
       oil.enable = true;
       treesitter.enable = true;
       luasnip.enable = true;
-      flash.enable = true;
       which-key.enable = true;
 
+      flash = import ./plugins/flash.nix;
       telescope = import ./plugins/telescope.nix;
       lsp = import ./plugins/lsp.nix;
     };
