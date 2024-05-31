@@ -25,6 +25,8 @@
       "editor.fontSize" = 14;
       "editor.fontFamily" = "Iosevka Nerd Font";
       "terminal.integrated.fontSize" = 14;
+
+      "workbench.colorTheme" = "Default Light Modern";
     };
   };
 }
