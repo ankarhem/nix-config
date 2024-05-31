@@ -32,6 +32,7 @@
       oil.enable = true;
       treesitter.enable = true;
       luasnip.enable = true;
+      flash.enable = true;
     };
 
     plugins.lsp = {
