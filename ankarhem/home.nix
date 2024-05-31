@@ -3,6 +3,7 @@
 
   imports = [
     ./karabiner.nix
+    ./ssh.nix
   ];
 
   home.packages = with pkgs; [

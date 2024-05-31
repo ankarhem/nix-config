@@ -33,3 +33,4 @@ darwin-rebuild switch --flake .
 * Replace with official colemak (TODO: create custom package for this?)
     1. Download keyboard `wget https://colemak.com/pub/mac/Colemak.keylayout -P ~/Library/Keyboard\ Layouts/`
     2. Replace default colemak System Preferences > Keyboard > Input Sources
+* Add yubikey ssh keys
