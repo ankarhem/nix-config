@@ -58,6 +58,10 @@
       name = "Iosevka Nerd Font";
       size = 16;
     };
+    theme = "Github";
+    shellIntegration = {
+      enableFishIntegration = true;
+    };
   };
 
   programs.starship = {
