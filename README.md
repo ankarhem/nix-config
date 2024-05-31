@@ -36,6 +36,3 @@ darwin-rebuild switch --flake .
 * Fix yubikey
     1. Add ssh-keys manually from 1password
     2. fix permission on private key `chmod 400 ~/.ssh/id_ed25519_sk`
-    3. Follow guide for initialization `https://github.com/drduh/YubiKey-Guide?tab=readme-ov-file#using-yubikey`
-    
-* 

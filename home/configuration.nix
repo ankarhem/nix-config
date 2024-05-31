@@ -38,6 +38,7 @@
     teams
     slack
     spotify
+    telegram-desktop
   ];
   programs.eza.enable = true;
 
