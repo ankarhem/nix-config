@@ -39,6 +39,7 @@
 
     rustup
     alejandra
+    devenv
 
     mas
     teams
