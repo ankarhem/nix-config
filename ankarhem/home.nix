@@ -4,9 +4,12 @@
   imports = [
     ./karabiner.nix
     ./ssh.nix
+    ./git.nix
   ];
 
   home.packages = with pkgs; [
+    # _1password-gui
+    # _1password
     wget
     curl
     alejandra
@@ -67,16 +70,5 @@
 
   programs.starship = {
     enable = true;
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "Jakob Ankarhem";
-    userEmail = "jakob@ankarhem.dev";
-
-    extraConfig = {
-      push = {autoSetupRemote = true;};
-      diff = {external = "${pkgs.difftastic}/bin/difft";};
-    };
   };
 }
