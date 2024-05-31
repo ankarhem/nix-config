@@ -13,6 +13,7 @@
     jq
     (lib.hiPrio gitAndTools.gitFull)
     rustup
+    teams
   ];
 
   programs.vscode = {
