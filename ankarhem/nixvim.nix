@@ -11,10 +11,19 @@
     };
 
     opts = {
+      expandtab = true;
       number = true;
       relativenumber = true;
 
+      clipboard = "unnamedplus";
+      tabstop = 2;
+      softtabstop = 2;
       shiftwidth = 2;
+    };
+
+    globals = {
+      mapleader = " ";
+      maplocalleader = ",";
     };
 
     plugins = {
