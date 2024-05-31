@@ -6,6 +6,7 @@
   ];
 
   home.packages = with pkgs; [
+    coreutils
     ripgrep
     htop
     curl
@@ -13,6 +14,18 @@
     (lib.hiPrio gitAndTools.gitFull)
     rustup
   ];
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      asvetliakov.vscode-neovim
+    ];
+    userSettings = {
+      "extensions.experimental.affinity" = {
+        "asvetliakov.vscode-neovim" = 1;
+      };
+    };
+  };
 
   programs.kitty = {
     enable = true;
