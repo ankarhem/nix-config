@@ -18,9 +18,10 @@
     # _1password-gui
     # _1password
 
-    gnupg
+    # gnupg
     yubikey-personalization
     yubikey-manager
+    openssh
 
     coreutils
     wget
@@ -39,6 +40,12 @@
     spotify
   ];
   programs.eza.enable = true;
+
+  programs.gpg = {
+    enable = true;
+
+    publicKeys = [{source = ./yubikey.pub;}];
+  };
 
   programs.vscode = {
     enable = true;
