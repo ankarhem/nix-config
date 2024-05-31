@@ -19,6 +19,10 @@
     ];
   };
 
+  services = {
+    karabiner-elements.enable = true;
+  };
+
   users.users.ankarhem = {
     home = "/Users/ankarhem";
   };

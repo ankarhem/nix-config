@@ -2,6 +2,7 @@
   home.stateVersion = "23.11";
 
   imports = [
+    ./karabiner.nix
   ];
 
   home.packages = with pkgs; [
