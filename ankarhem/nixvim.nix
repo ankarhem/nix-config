@@ -1,13 +1,12 @@
-{ ... }:
-{
+{...}: {
   programs.nixvim = {
     enable = true;
 
     colorschemes = {
       base16 = {
-	enable = true;
-	setUpBar = true;
-	colorscheme = "github";
+        enable = true;
+        setUpBar = true;
+        colorscheme = "github";
       };
     };
 
@@ -32,10 +31,10 @@
         tsserver.enable = true;
         lua-ls.enable = true;
         rust-analyzer = {
-	  enable = true;
-	  installRustc = false;
-	  installCargo = false;
-	};
+          enable = true;
+          installRustc = false;
+          installCargo = false;
+        };
       };
     };
   };

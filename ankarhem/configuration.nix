@@ -1,6 +1,9 @@
 # ankarhem/configuration.nix
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./settings.nix
     ./homebrew.nix
@@ -10,7 +13,7 @@
 
   # -- Environment --
   environment = {
-    pathsToLink = [ "/Applications" ];
+    pathsToLink = ["/Applications"];
     systemPackages = with pkgs; [
       coreutils
     ];
@@ -28,5 +31,4 @@
     experimental-features = nix-command flakes
     extra-platforms = x86_64-darwin aarch64-darwin
   '';
-
 }

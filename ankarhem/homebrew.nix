@@ -11,7 +11,7 @@ in {
     };
 
     global.autoUpdate = false;
-    #global.brewfile = true;
+    global.brewfile = true;
 
     masApps = {
     };
@@ -26,6 +26,8 @@ in {
       "1password-cli"
       "firefox"
       "spotify"
+      "raycast"
+      "slack"
     ];
   };
 

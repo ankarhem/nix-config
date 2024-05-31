@@ -15,8 +15,8 @@
     rustup
     teams
     mas
-    spotify
   ];
+  programs.eza.enable = true;
 
   programs.vscode = {
     enable = true;

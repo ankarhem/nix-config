@@ -17,3 +17,5 @@ darwin-rebuild switch --flake .
 2. Change shell with `chsh -s /run/current-system/sw/bin/fish`
 3. Install rustc and cargo with `rustup default stable`
 4. Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
+5. Open firefox and login to sync
+6. Open raycast and initialize settings
