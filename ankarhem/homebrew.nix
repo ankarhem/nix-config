@@ -1,8 +1,6 @@
-{ inputs, ... }:
-let
+{inputs, ...}: let
   inherit (inputs) homebrew-core homebrew-cask homebrew-bundle;
-in
-{
+in {
   homebrew = {
     enable = true;
     onActivation = {
@@ -15,13 +13,19 @@ in
     global.autoUpdate = false;
     #global.brewfile = true;
 
-    masApps = { };
+    masApps = {
+    };
 
     brews = [];
 
     caskArgs.no_quarantine = true;
     casks = [
       "maccy"
+      "mos"
+      "1password"
+      "1password-cli"
+      "firefox"
+      "spotify"
     ];
   };
 

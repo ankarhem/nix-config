@@ -14,6 +14,8 @@
     (lib.hiPrio gitAndTools.gitFull)
     rustup
     teams
+    mas
+    spotify
   ];
 
   programs.vscode = {
