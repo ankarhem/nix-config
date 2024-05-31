@@ -12,6 +12,9 @@
 
   users.users.ankarhem.shell = pkgs.fish;
 
+  environment.variables = {
+    EDITOR = "nvim";
+  };
   environment.shells = with pkgs; [bash zsh fish];
   environment.shellAliases = {
     vim = "nvim";
