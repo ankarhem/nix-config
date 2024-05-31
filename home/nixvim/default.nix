@@ -2,6 +2,8 @@
   programs.nixvim = {
     enable = true;
 
+    keymaps = import ./keymaps.nix;
+
     plugins = {
       lightline.enable = true;
       oil.enable = true;
