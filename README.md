@@ -26,3 +26,7 @@ darwin-rebuild switch --flake .
 * Enable karabiner
     1. Open and follow the instructions
     2. Restart application and go to complex modifications and enable nix
+* Login to accounts System Preferences > Internet Accounts
+* Configure betterdisplay
+    1. Set to 1920x1080
+    2. Enable HiDPI

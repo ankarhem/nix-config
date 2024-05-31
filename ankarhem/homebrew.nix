@@ -26,6 +26,7 @@ in {
       "1password-cli"
       "firefox"
       "raycast"
+      "betterdisplay"
     ];
   };
 
