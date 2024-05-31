@@ -7,7 +7,6 @@
   imports = [
     ./settings.nix
     ./homebrew.nix
-    ./nixvim.nix
     ./shell.nix
   ];
 

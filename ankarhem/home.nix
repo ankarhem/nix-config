@@ -1,10 +1,17 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   home.stateVersion = "23.11";
 
   imports = [
     ./karabiner.nix
     ./ssh.nix
     ./git.nix
+    ./nixvim.nix
+
+    inputs.nixvim.homeManagerModules.nixvim
   ];
 
   home.packages = with pkgs; [

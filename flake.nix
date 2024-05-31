@@ -47,7 +47,7 @@
       inherit (inputs.darwin.lib) darwinSystem;
       inherit (inputs.nix-homebrew.darwinModules) nix-homebrew;
       inherit (inputs.home-manager.darwinModules) home-manager;
-      inherit (inputs.nixvim.nixDarwinModules) nixvim;
+      # inherit (inputs.nixvim.homeManagerModules) nixvim;
     in {
       ankarhem = darwinSystem {
         system = "aarch64-darwin";
@@ -59,11 +59,11 @@
           {
             nixpkgs = nixpkgsConfig;
 
+            home-manager.extraSpecialArgs = {inherit inputs;};
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.ankarhem = import ./ankarhem/home.nix;
           }
-          nixvim
         ];
       };
     };
