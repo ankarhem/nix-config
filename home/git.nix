@@ -6,14 +6,14 @@
 
     extraConfig = {
       user = {
-        signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDxrxA66YGWmtDzafAlXbnHjQL+ggTdT/HteXoGFSagF";
+        signingKey = "0x529972E4160200DF";
       };
-      gpg = {
-        format = "ssh";
-      };
-      "gpg \"ssh\"" = {
-        program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-      };
+      # gpg = {
+      #   format = "ssh";
+      # };
+      # "gpg \"ssh\"" = {
+      #   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+      # };
       commit = {
         gpgsign = true;
       };
