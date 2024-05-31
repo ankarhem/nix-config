@@ -30,3 +30,6 @@ darwin-rebuild switch --flake .
 * Configure betterdisplay
     1. Set to 1920x1080
     2. Enable HiDPI
+* Replace with official colemak (TODO: create custom package for this?)
+    1. Download keyboard `wget https://colemak.com/pub/mac/Colemak.keylayout -P ~/Library/Keyboard\ Layouts/`
+    2. Replace default colemak System Preferences > Keyboard > Input Sources

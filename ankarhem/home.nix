@@ -6,6 +6,8 @@
   ];
 
   home.packages = with pkgs; [
+    wget
+    curl
     alejandra
     coreutils
     ripgrep
