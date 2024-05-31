@@ -54,7 +54,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           nix-homebrew
-          ./ankarhem/configuration.nix
+          ./hosts/darwin/configuration.nix
           home-manager
           {
             nixpkgs = nixpkgsConfig;
@@ -62,7 +62,7 @@
             home-manager.extraSpecialArgs = {inherit inputs;};
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ankarhem = import ./ankarhem/home.nix;
+            home-manager.users.ankarhem = import ./home/configuration.nix;
           }
         ];
       };
