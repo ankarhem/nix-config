@@ -39,7 +39,7 @@
 
     rustup
     alejandra
-    devenv
+    # devenv
 
     mas
     teams
@@ -48,6 +48,11 @@
     telegram-desktop
     rectangle
   ];
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   programs.zsh.enable = true;
   programs.fish = {
     enable = true;
