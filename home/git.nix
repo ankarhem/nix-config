@@ -8,12 +8,6 @@
       user = {
         signingKey = "0x529972E4160200DF";
       };
-      # gpg = {
-      #   format = "ssh";
-      # };
-      # "gpg \"ssh\"" = {
-      #   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-      # };
       commit = {
         gpgsign = true;
       };

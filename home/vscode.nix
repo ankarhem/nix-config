@@ -5,8 +5,6 @@
       asvetliakov.vscode-neovim
       jnoortheen.nix-ide
       kamadorueda.alejandra
-
-      # Javascript
       svelte.svelte-vscode
     ];
     userSettings = {
@@ -14,6 +12,13 @@
       "extensions.experimental.affinity" = {
         "asvetliakov.vscode-neovim" = 1;
       };
+
+      # Font settings
+      "editor.fontSize" = 14;
+      "editor.fontFamily" = "Iosevka Nerd Font";
+      "terminal.integrated.fontSize" = 14;
+
+      "workbench.colorTheme" = "Default Light Modern";
 
       # Nix settings
       "[nix]" = {
@@ -23,13 +28,6 @@
         "editor.formatOnType" = false;
       };
       "alejandra.program" = "alejandra";
-
-      # Font settings
-      "editor.fontSize" = 14;
-      "editor.fontFamily" = "Iosevka Nerd Font";
-      "terminal.integrated.fontSize" = 14;
-
-      "workbench.colorTheme" = "Default Light Modern";
     };
   };
 }
