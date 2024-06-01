@@ -38,9 +38,12 @@ darwin-rebuild switch --flake .
     3. Connect key and run `gpg-connect-agent "scd serialno" "learn --force" /bye`
 
 ### Not super important
+
 * Enable rectangle
     1. Open and follow the instructions
     2. Open settings and enable auto-start and animation
+* Open mos settings and enable autostart
+* Open keyboard settings and disable ^+space (changes language)
 * Add accounts System Preferences > Internet Accounts
     - Rename email acccounts in Mail app: Settings > Accounts
     - Filter accounts / calendar with focus modes
