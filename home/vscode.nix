@@ -5,6 +5,8 @@
       asvetliakov.vscode-neovim
       jnoortheen.nix-ide
       kamadorueda.alejandra
+
+      # Javascript
       svelte.svelte-vscode
     ];
     userSettings = {
