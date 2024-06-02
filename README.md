@@ -49,3 +49,17 @@ darwin-rebuild switch --flake .
     - Filter accounts / calendar with focus modes
 * Open firefox and login to sync
 * Open slack and login using `jakob.ankarhem@norce.io`, select workspaces
+
+## Finding custom settings
+
+Find the plist you want to edit
+
+```bash
+ls ~/Library/Preferences/ | grep '^com.apple.' | head -10
+```
+
+List the different values you can tweak and find the one you are looking for
+
+```bash
+defaults read com.apple.finder
+```

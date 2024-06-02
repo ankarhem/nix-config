@@ -34,8 +34,8 @@
   system.defaults = {
     finder.AppleShowAllExtensions = true;
     finder._FXShowPosixPathInTitle = true;
-    # default to column view in finder
-    finder.FXPreferredViewStyle = "clmv";
+    # default to list view in finder
+    finder.FXPreferredViewStyle = "Nlsv";
     dock.autohide = false;
     # Don’t rearrange spaces based on the most recent use
     dock.mru-spaces = false;
@@ -46,5 +46,11 @@
     NSGlobalDomain.AppleShowAllFiles = true;
     NSGlobalDomain.InitialKeyRepeat = 14;
     NSGlobalDomain.KeyRepeat = 1;
+  };
+  system.defaults.CustomUserPreferences = {
+    "com.apple.finder" = {
+      FXICloudDriveDesktop = true;
+      FXICloudDriveDocuments = true;
+    };
   };
 }
