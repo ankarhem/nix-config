@@ -51,6 +51,7 @@
     "com.apple.finder" = {
       FXICloudDriveDesktop = true;
       FXICloudDriveDocuments = true;
+      _FXSortFoldersFirst = true;
     };
   };
 }

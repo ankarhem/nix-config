@@ -25,6 +25,7 @@ darwin-rebuild switch --flake .
 * Enable karabiner
     1. Open and follow the instructions
     2. Restart application and go to complex modifications and enable nix
+* Enable desktop + documents icloud sync
 
 * Configure betterdisplay
     1. Set Dell display to 1920x1080
@@ -52,14 +53,5 @@ darwin-rebuild switch --flake .
 
 ## Finding custom settings
 
-Find the plist you want to edit
-
-```bash
-ls ~/Library/Preferences/ | grep '^com.apple.' | head -10
-```
-
-List the different values you can tweak and find the one you are looking for
-
-```bash
-defaults read com.apple.finder
-```
+- https://macos-defaults.com/
+- https://daiderd.com/nix-darwin/manual/index.html
