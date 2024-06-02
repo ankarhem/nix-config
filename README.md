@@ -55,3 +55,10 @@ darwin-rebuild switch --flake .
 
 - https://macos-defaults.com/
 - https://daiderd.com/nix-darwin/manual/index.html
+
+### Diffing to find settings
+
+1. Generate starting point `defaults read > before`
+2. Make changes
+3. Generate current `defaults read > after`
+4. Diff them to find settings `diff before after`
