@@ -22,13 +22,14 @@ in {
 
     caskArgs.no_quarantine = true;
     casks = [
-      "maccy"
-      "mos"
-      "1password"
       "1password-cli"
-      "firefox"
-      "raycast"
+      "1password"
       "betterdisplay"
+      "firefox"
+      "maccy"
+      "microsoft-excel"
+      "mos"
+      "raycast"
     ];
   };
 
