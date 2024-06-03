@@ -41,11 +41,16 @@
     dock.mru-spaces = false;
     screensaver.askForPasswordDelay = 10;
     screencapture.location = "~/Pictures/screenshots";
-    NSGlobalDomain.AppleShowAllExtensions = true;
-    # show hidden files
-    NSGlobalDomain.AppleShowAllFiles = true;
-    NSGlobalDomain.InitialKeyRepeat = 14;
-    NSGlobalDomain.KeyRepeat = 1;
+
+    NSGlobalDomain = {
+      AppleShowAllExtensions = true;
+      # show hidden files
+      AppleShowAllFiles = true;
+      # default press and hold opens popover for á ä etc.
+      ApplePressAndHoldEnabled = false;
+      InitialKeyRepeat = 14;
+      KeyRepeat = 1;
+    };
   };
   system.defaults.CustomUserPreferences = {
     "com.apple.finder" = {

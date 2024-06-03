@@ -18,6 +18,9 @@
       jnoortheen.nix-ide
       ## formatting
       kamadorueda.alejandra
+
+      # Syntax highlighting for .bru
+      # bruno-api-client.bruno
     ];
     userSettings = {
       # Neovim integration
