@@ -48,6 +48,7 @@
     telegram-desktop
     rectangle
     bruno
+    jetbrains.rider
   ];
   programs.direnv = {
     enable = true;
