@@ -76,7 +76,7 @@
       name = "Iosevka Nerd Font";
       size = 16;
     };
-    theme = "Github";
+    theme = "Alabaster";
     shellIntegration = {
       enableFishIntegration = true;
     };
