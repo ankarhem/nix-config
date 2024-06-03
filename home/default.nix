@@ -47,6 +47,7 @@
     spotify
     telegram-desktop
     rectangle
+    bruno
   ];
   programs.direnv = {
     enable = true;
