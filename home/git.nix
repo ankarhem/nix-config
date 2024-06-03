@@ -5,6 +5,8 @@
     userEmail = "jakob@ankarhem.dev";
 
     extraConfig = {
+      # Configure Git to ensure line endings in files you checkout are correct for macOS
+      core.autocrlf = "input";
       user = {
         signingKey = "0x529972E4160200DF";
       };
