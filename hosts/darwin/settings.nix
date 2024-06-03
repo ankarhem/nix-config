@@ -46,8 +46,7 @@
       AppleShowAllExtensions = true;
       # show hidden files
       AppleShowAllFiles = true;
-      # default press and hold opens popover for á ä etc.
-      ApplePressAndHoldEnabled = false;
+      ApplePressAndHoldEnabled = true;
       InitialKeyRepeat = 14;
       KeyRepeat = 1;
     };
@@ -57,6 +56,9 @@
       FXICloudDriveDesktop = true;
       FXICloudDriveDocuments = true;
       _FXSortFoldersFirst = true;
+    };
+    "com.jetbrains.rider" = {
+      ApplePressAndHoldEnabled = false;
     };
   };
 }
