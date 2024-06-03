@@ -15,7 +15,14 @@
       dbaeumer.vscode-eslint
 
       # Nx
-      # nrwl.angular-console
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+        mktplcRef = {
+          name = "angular-console";
+          publisher = "nrwl";
+          version = "18.21.4";
+          sha256 = "sha256-TbTe5KjtmQ3pA/3nmuUiQdZBl+MIZVa+Q6YguYBPYdk=";
+        };
+      })
 
       # Nix
       jnoortheen.nix-ide
@@ -23,7 +30,14 @@
       kamadorueda.alejandra
 
       # Syntax highlighting for .bru
-      # bruno-api-client.bruno
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+        mktplcRef = {
+          name = "bruno";
+          publisher = "bruno-api-client";
+          version = "3.1.0";
+          sha256 = "sha256-jLQincxitnVCCeeaoX0SOuj5PJyR7CdOjK4Kl52ShlA=";
+        };
+      })
     ];
     userSettings = {
       # Neovim integration
