@@ -30,6 +30,7 @@ in {
       "microsoft-excel"
       "microsoft-teams"
       "mos"
+      "openvpn-connect"
       "raycast"
     ];
   };
