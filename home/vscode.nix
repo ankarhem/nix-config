@@ -2,12 +2,22 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
+      # Neovim
       asvetliakov.vscode-neovim
-      jnoortheen.nix-ide
-      kamadorueda.alejandra
 
       # Javascript
       svelte.svelte-vscode
+      ## formatting
+      esbenp.prettier-vscode
+      dbaeumer.vscode-eslint
+
+      # Nx
+      # nrwl.angular-console
+
+      # Nix
+      jnoortheen.nix-ide
+      ## formatting
+      kamadorueda.alejandra
     ];
     userSettings = {
       # Neovim integration
