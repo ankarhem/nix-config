@@ -42,7 +42,7 @@
     # devenv
 
     mas
-    teams
+    # teams
     slack
     spotify
     telegram-desktop

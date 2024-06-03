@@ -28,6 +28,7 @@ in {
       "firefox"
       "maccy"
       "microsoft-excel"
+      "microsoft-teams"
       "mos"
       "raycast"
     ];
