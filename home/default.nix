@@ -49,6 +49,7 @@
     rectangle
     bruno
     jetbrains.rider
+    jetbrains.rust-rover
   ];
   programs.direnv = {
     enable = true;

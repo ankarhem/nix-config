@@ -60,5 +60,8 @@
     "com.jetbrains.rider" = {
       ApplePressAndHoldEnabled = false;
     };
+    "com.jetbrains.rustrover-EAP" = {
+      ApplePressAndHoldEnabled = false;
+    };
   };
 }
