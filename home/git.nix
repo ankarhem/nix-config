@@ -1,4 +1,18 @@
 {pkgs, ...}: {
+  programs.gh = {
+    enable = true;
+
+    settings = {
+      git_protocol = "ssh";
+      prompt = "enabled";
+
+      aliases = {
+        co = "pr checkout";
+        pv = "pr view";
+      };
+    };
+  };
+
   programs.git = {
     enable = true;
     userName = "Jakob Ankarhem";
