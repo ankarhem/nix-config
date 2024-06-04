@@ -18,6 +18,7 @@
       # Rust
       rust-lang.rust-analyzer
       serayuzgur.crates
+      tamasfe.even-better-toml
 
       # Nx
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
