@@ -17,7 +17,6 @@ darwin-rebuild switch --flake .
 * Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
 * Check that /etc/shells includes fish
 * Change shell with `chsh -s /run/current-system/sw/bin/fish`
-* Install rustc and cargo with `rustup default stable`
 * Open raycast and initialize settings, via topbar replace hotkey to cmd+space
 * Replace spotlight
     1. System Preferences > Keyboard > Shortcuts > Spotlight and disable the keyboard shortcut.

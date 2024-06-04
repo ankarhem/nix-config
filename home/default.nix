@@ -37,7 +37,6 @@
     ripgrep
     jq
 
-    rustup
     alejandra
     # devenv
 
