@@ -15,6 +15,10 @@
       esbenp.prettier-vscode
       dbaeumer.vscode-eslint
 
+      # Rust
+      rust-lang.rust-analyzer
+      serayuzgur.crates
+
       # Nx
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
