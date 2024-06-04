@@ -10,6 +10,7 @@
 
       # Javascript
       svelte.svelte-vscode
+      bradlc.vscode-tailwindcss
       ## formatting
       esbenp.prettier-vscode
       dbaeumer.vscode-eslint
