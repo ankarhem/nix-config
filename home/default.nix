@@ -73,6 +73,10 @@
         name = "git-abbr";
         src = git-abbr.src;
       }
+      {
+        name = "grc";
+        src = grc.src;
+      }
     ];
   };
   programs.fzf.enable = true;
