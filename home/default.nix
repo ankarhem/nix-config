@@ -27,7 +27,6 @@
     yubikey-personalization
     yubikey-manager
     openssh
-    openssl
 
     coreutils
     wget
@@ -36,6 +35,7 @@
     htop
     ripgrep
     jq
+    grc
 
     alejandra
     # devenv
