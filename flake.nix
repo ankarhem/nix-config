@@ -44,21 +44,29 @@
       inherit (inputs.darwin.lib) darwinSystem;
       inherit (inputs.nix-homebrew.darwinModules) nix-homebrew;
       inherit (inputs.home-manager.darwinModules) home-manager;
+
+      username = "ankarhem";
+      hostname = "ankarhem";
+      system = "aarch64-darwin";
     in {
-      ankarhem = darwinSystem {
-        system = "aarch64-darwin";
-        specialArgs = {inherit inputs;};
+      "${hostname}" = darwinSystem {
+        system = system;
+        specialArgs = {inherit inputs username hostname;};
         modules = [
+          ./hosts/darwin/nix.nix
+          ./hosts/darwin/environment.nix
+          ./hosts/darwin/user.nix
+          ./hosts/darwin/settings.nix
+          ./hosts/darwin/homebrew.nix
           nix-homebrew
-          ./hosts/darwin/configuration.nix
           home-manager
           {
             nixpkgs = nixpkgsConfig;
 
-            home-manager.extraSpecialArgs = {inherit inputs;};
+            home-manager.extraSpecialArgs = {inherit inputs username hostname;};
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ankarhem = import ./home/default.nix;
+            home-manager.users.${username} = import ./home;
           }
         ];
       };

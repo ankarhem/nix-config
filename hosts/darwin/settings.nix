@@ -1,8 +1,25 @@
 {pkgs, ...}: {
+  system.activationScripts = {
+    # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
+    postUserActivation.text = ''
+      # activateSettings -u will reload the settings from the database and apply them to the current session,
+      # so we do not need to logout and login again to make the changes take effect.
+      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+    '';
+  };
+
+  programs = {
+    zsh.enable = true;
+    fish.enable = true;
+  };
+
   # -- MacOS Settings --
   security.pam.enableSudoTouchIdAuth = true;
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = true;
+
+  services = {
+    karabiner-elements.enable = true;
+  };
+
   fonts = {
     # will be removed after this PR is merged:
     #   https://github.com/LnL7/nix-darwin/pull/754
@@ -30,7 +47,10 @@
       })
     ];
   };
-  services.nix-daemon.enable = true;
+
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToEscape = true;
+
   system.defaults = {
     finder.AppleShowAllExtensions = true;
     finder._FXShowPosixPathInTitle = true;

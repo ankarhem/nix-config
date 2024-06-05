@@ -1,4 +1,8 @@
-{inputs, ...}: let
+{
+  inputs,
+  username,
+  ...
+}: let
   inherit (inputs) homebrew-core homebrew-cask homebrew-bundle;
 in {
   homebrew = {
@@ -42,7 +46,7 @@ in {
     enableRosetta = true;
 
     # TODO: Move this to dynamic username
-    user = "ankarhem";
+    user = username;
 
     taps = {
       "homebrew/homebrew-core" = homebrew-core;

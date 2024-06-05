@@ -1,8 +1,10 @@
 {pkgs, ...}: {
-  programs.zsh.enable = true;
-  programs.fish.enable = true;
-  users.users.ankarhem.shell = pkgs.fish;
-
+  environment = {
+    pathsToLink = ["/Applications"];
+    systemPackages = with pkgs; [
+      coreutils
+    ];
+  };
   environment.variables = {
     EDITOR = "nvim";
     GNUPGHOME = "~/.gnupg";
