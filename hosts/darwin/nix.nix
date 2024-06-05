@@ -19,7 +19,7 @@
 
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
-    auto-optimise-store = false;
+    auto-optimise-store = true;
     # nix settings for flake support
     experimental-features = ["nix-command" "flakes"];
     extra-platforms = ["x86_64-darwin" "aarch64-darwin"];
