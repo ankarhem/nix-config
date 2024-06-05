@@ -19,6 +19,7 @@
     userEmail = "jakob@ankarhem.dev";
 
     extraConfig = {
+      init.defaultBranch = "main";
       # Configure Git to ensure line endings in files you checkout are correct for macOS
       core.autocrlf = "input";
       user = {
