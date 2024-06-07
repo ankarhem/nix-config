@@ -11,6 +11,15 @@
       # Javascript
       svelte.svelte-vscode
       bradlc.vscode-tailwindcss
+      # testing
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+        mktplcRef = {
+          name = "explorer";
+          publisher = "vitest";
+          version = "0.12.0";
+          sha256 = "sha256-lIpYU3w8M7sXL0JSKReXfnbRCFzs2ggwqfwi6E5M9cg=";
+        };
+      })
       ## formatting
       esbenp.prettier-vscode
       dbaeumer.vscode-eslint
