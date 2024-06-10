@@ -72,6 +72,9 @@
     };
   };
   system.defaults.CustomUserPreferences = {
+    "com.apple.ical" = {
+      "Show Week Numbers" = true;
+    };
     "com.apple.finder" = {
       FXICloudDriveDesktop = true;
       FXICloudDriveDocuments = true;
