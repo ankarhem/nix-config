@@ -36,6 +36,7 @@ in {
       "mos"
       "openvpn-connect"
       "raycast"
+      "runelite"
     ];
   };
 
