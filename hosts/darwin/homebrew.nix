@@ -37,6 +37,7 @@ in {
       "openvpn-connect"
       "raycast"
       "runelite"
+      "microsoft-remote-desktop"
     ];
   };
 
