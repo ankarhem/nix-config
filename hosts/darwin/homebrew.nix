@@ -38,6 +38,7 @@ in {
       "raycast"
       "runelite"
       "microsoft-remote-desktop"
+      "azure-data-studio"
     ];
   };
 
