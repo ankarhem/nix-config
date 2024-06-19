@@ -37,6 +37,7 @@
     ripgrep
     jq
     grc
+    gitleaks
 
     alejandra
     # devenv
