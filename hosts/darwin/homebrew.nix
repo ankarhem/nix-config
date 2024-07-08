@@ -30,6 +30,7 @@ in {
       "1password"
       "betterdisplay"
       "firefox"
+      "google-chrome"
       "maccy"
       "microsoft-excel"
       "microsoft-teams"
