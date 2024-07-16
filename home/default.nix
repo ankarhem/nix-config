@@ -38,6 +38,7 @@
     jq
     grc
     gitleaks
+    bottom
 
     alejandra
     # devenv
