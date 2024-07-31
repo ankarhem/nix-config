@@ -5,6 +5,8 @@
     enableExtensionUpdateCheck = false;
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
+      ms-vsliveshare.vsliveshare
+
       # Neovim
       asvetliakov.vscode-neovim
 
