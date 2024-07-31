@@ -39,6 +39,7 @@
     grc
     gitleaks
     bottom
+    bat
 
     alejandra
     # devenv
