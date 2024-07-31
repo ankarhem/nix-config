@@ -18,18 +18,21 @@
     userName = "Jakob Ankarhem";
     userEmail = "jakob@ankarhem.dev";
 
+    signing = {
+      signByDefault = true;
+      key = "0x529972E4160200DF";
+    };
+
     extraConfig = {
       init.defaultBranch = "main";
       # Configure Git to ensure line endings in files you checkout are correct for macOS
       core.autocrlf = "input";
-      user = {
-        signingKey = "0x529972E4160200DF";
+      push = {
+        autoSetupRemote = true;
       };
-      commit = {
-        gpgsign = true;
+      diff = {
+        external = "${pkgs.difftastic}/bin/difft";
       };
-      push = {autoSetupRemote = true;};
-      diff = {external = "${pkgs.difftastic}/bin/difft";};
     };
   };
 }
