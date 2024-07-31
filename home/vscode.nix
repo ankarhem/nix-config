@@ -26,7 +26,7 @@
 
       # Rust
       rust-lang.rust-analyzer
-      serayuzgur.crates
+      fill-labs.dependi
       tamasfe.even-better-toml
 
       # Nx
