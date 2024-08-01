@@ -40,6 +40,7 @@
     gitleaks
     bottom
     bat
+    tree
 
     alejandra
     # devenv
