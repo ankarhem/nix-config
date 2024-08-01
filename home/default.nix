@@ -82,6 +82,10 @@
         name = "grc";
         src = grc.src;
       }
+      {
+        name = "colored-man-pages";
+        src = colored-man-pages.src;
+      }
     ];
   };
   programs.fzf.enable = true;
