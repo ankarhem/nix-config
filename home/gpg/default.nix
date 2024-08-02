@@ -2,6 +2,8 @@ _: {
   programs.gpg = {
     enable = true;
 
+    mutableKeys = false;
+    mutableTrust = false;
     publicKeys = [
       {
         source = ./public-keys/yubikey.pub;
