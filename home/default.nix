@@ -14,7 +14,7 @@
     ./ssh.nix
     ./git.nix
     ./nixvim/default.nix
-    ./gpg.nix
+    ./gpg/default.nix
     ./vscode.nix
 
     inputs.nixvim.homeManagerModules.nixvim

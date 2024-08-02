@@ -4,8 +4,12 @@ _: {
 
     publicKeys = [
       {
-        source = ./yubikey.pub;
+        source = ./public-keys/yubikey.pub;
         trust = 5;
+      }
+      {
+        source = ./public-keys/jonatan.pub;
+        trust = 4;
       }
     ];
 
