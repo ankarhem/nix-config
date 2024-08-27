@@ -7,13 +7,13 @@
     plugins = {
       lightline.enable = true;
       oil.enable = true;
-      treesitter.enable = true;
       luasnip.enable = true;
       which-key.enable = true;
 
       flash = import ./plugins/flash.nix;
       telescope = import ./plugins/telescope.nix;
       lsp = import ./plugins/lsp.nix;
+      treesitter = import ./plugins/treesitter.nix;
     };
 
     colorschemes = {
