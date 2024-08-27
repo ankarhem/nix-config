@@ -7,6 +7,10 @@
   home.username = username;
   home.homeDirectory = "/Users/${username}";
   home.stateVersion = "23.11";
+  home.sessionVariables = {
+    PATH = "$PATH:$GOPATH/bin";
+  };
+
   programs.home-manager.enable = true;
 
   imports = [
@@ -109,5 +113,10 @@
 
   programs.starship = {
     enable = true;
+  };
+
+  programs.go = {
+    enable = true;
+    goPath = ".go";
   };
 }

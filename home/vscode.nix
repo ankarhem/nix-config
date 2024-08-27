@@ -31,6 +31,25 @@
       fill-labs.dependi
       tamasfe.even-better-toml
 
+      # Go
+      golang.go
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+        mktplcRef = {
+          name = "templ";
+          publisher = "a-h";
+          version = "0.0.26";
+          sha256 = "sha256-/77IO+WjgWahUrj6xVl0tkvICh9Cy+MtfH2dewxH8LE=";
+        };
+      })
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+        mktplcRef = {
+          name = "htmx-tags";
+          publisher = "otovo-oss";
+          version = "0.0.8";
+          sha256 = "sha256-sF5VpdmPluygAiGt9a9E/bM/VzA6a++0dR87dweMCyQ=";
+        };
+      })
+
       # Nx
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
