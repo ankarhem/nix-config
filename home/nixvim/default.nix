@@ -17,11 +17,7 @@
     };
 
     colorschemes = {
-      base16 = {
-        enable = true;
-        setUpBar = true;
-        colorscheme = "github";
-      };
+      vscode.enable = true;
     };
 
     opts = {
