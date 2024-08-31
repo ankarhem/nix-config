@@ -2,6 +2,8 @@
   imports = [
     ./keymaps.nix
 
+    ./plugins/autocmd.nix
+    ./plugins/which-key.nix
     ./plugins/flash.nix
     ./plugins/lsp.nix
     ./plugins/treesitter.nix
@@ -16,7 +18,6 @@
     # lightline.enable = true;
     # oil.enable = true;
     luasnip.enable = true;
-    which-key.enable = true;
     chatgpt.enable = true;
     copilot-chat.enable = true;
   };
