@@ -1,49 +1,43 @@
 {...}: {
-  programs.nixvim = {
-    enable = true;
+  imports = [
+    ./keymaps.nix
 
-    keymaps = import ./keymaps.nix;
+    ./plugins/flash.nix
+    ./plugins/lsp.nix
+    ./plugins/treesitter.nix
+    ./plugins/telescope.nix
+    ./plugins/cmp.nix
+  ];
 
-    plugins = {
-      direnv.enable = true;
-      lightline.enable = true;
-      oil.enable = true;
-      luasnip.enable = true;
-      which-key.enable = true;
-      flash = import ./plugins/flash.nix;
-      telescope = import ./plugins/telescope.nix;
-      gitsigns = {
-        enable = true;
+  enable = true;
 
-        settings = {
-          current_line_blame = true;
-        };
-      };
+  plugins = {
+    direnv.enable = true;
+    # lightline.enable = true;
+    # oil.enable = true;
+    luasnip.enable = true;
+    which-key.enable = true;
+    chatgpt.enable = true;
+    copilot-chat.enable = true;
+  };
 
-      chatgpt.enable = true;
-      copilot-chat.enable = true;
-      lsp = import ./plugins/lsp.nix;
-      treesitter = import ./plugins/treesitter.nix;
-    };
+  colorschemes = {
+    vscode.enable = true;
+  };
 
-    colorschemes = {
-      vscode.enable = true;
-    };
+  opts = {
+    expandtab = true;
+    number = true;
+    relativenumber = true;
 
-    opts = {
-      expandtab = true;
-      number = true;
-      relativenumber = true;
+    clipboard = "unnamedplus";
+    tabstop = 2;
+    softtabstop = 2;
+    shiftwidth = 2;
+  };
 
-      clipboard = "unnamedplus";
-      tabstop = 2;
-      softtabstop = 2;
-      shiftwidth = 2;
-    };
-
-    globals = {
-      mapleader = " ";
-      maplocalleader = ",";
-    };
+  globals = {
+    mapleader = " ";
+    maplocalleader = ",";
   };
 }

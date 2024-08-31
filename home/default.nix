@@ -17,12 +17,13 @@
     ./karabiner.nix
     ./ssh.nix
     ./git.nix
-    ./nixvim/default.nix
+    # ./nixvim/default.nix
     ./gpg/default.nix
     ./vscode.nix
 
     inputs.nixvim.homeManagerModules.nixvim
   ];
+  programs.nixvim = import ./nixvim/default.nix;
 
   home.packages = with pkgs; [
     # _1password-gui
