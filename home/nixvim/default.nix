@@ -3,6 +3,7 @@
     ./keymaps.nix
 
     ./plugins/autocmd.nix
+    ./plugins/autopairs.nix
     ./plugins/which-key.nix
     ./plugins/flash.nix
     ./plugins/lsp.nix
