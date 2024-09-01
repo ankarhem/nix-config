@@ -34,6 +34,14 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    session-manager = {
+      url = "github:Shatur/neovim-session-manager";
+      flake = false;
+    };
+    ntree-float = {
+      url = "github:JMarkin/nvim-tree.lua-float-preview";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {self, ...}: let

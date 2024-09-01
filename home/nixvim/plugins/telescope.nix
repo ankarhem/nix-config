@@ -1,6 +1,5 @@
 {mkKey, ...}: let
-  helpers = import ../../../helpers;
-  mkKeymap = helpers.mkKey.mkKeymap;
+  inherit (mkKey) mkKeymap;
 in {
   plugins.telescope = {
     enable = true;

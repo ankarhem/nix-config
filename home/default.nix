@@ -17,7 +17,6 @@
     ./karabiner.nix
     ./ssh.nix
     ./git.nix
-    # ./nixvim/default.nix
     ./gpg/default.nix
     ./vscode.nix
 

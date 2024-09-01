@@ -1,4 +1,6 @@
-{...}: {
+{mkKey, ...}: let
+  inherit (mkKey) mkKeymap;
+in {
   plugins.flash = {
     enable = true;
 
@@ -16,4 +18,9 @@
       };
     };
   };
+
+  keymaps = [
+    (mkKeymap "n" "s" "<cmd>lua require('flash').jump()<cr>" "Jump")
+    (mkKeymap "n" "S" "<cmd>lua require('flash').treesitter()<cr>" "Treesitter jump")
+  ];
 }

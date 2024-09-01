@@ -14,5 +14,5 @@
     mkKeymapWithOpts = mode: key: action: desc: opts:
       (mkKeymap mode key action desc) // {options = opts;};
   };
-  # icons = import ./icons.nix;
+  icons = import ./icons.nix;
 }

@@ -402,6 +402,22 @@
         "type": "github"
       }
     },
+    "ntree-float": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720950868,
+        "narHash": "sha256-F1sdW9ZpK3wexuva6lvERq9W8ohkIcYXa+XRtF9o4vM=",
+        "owner": "JMarkin",
+        "repo": "nvim-tree.lua-float-preview",
+        "rev": "78b3ff2e0423438a341c9628f2f10f51b80a69c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JMarkin",
+        "repo": "nvim-tree.lua-float-preview",
+        "type": "github"
+      }
+    },
     "nuschtosSearch": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -433,7 +449,25 @@
         "homebrew-core": "homebrew-core",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_3",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "ntree-float": "ntree-float",
+        "session-manager": "session-manager"
+      }
+    },
+    "session-manager": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722584687,
+        "narHash": "sha256-HnNbB5Nx65Zb5oTjED0et+bAAEVX5+8pZxwTZvxRtQ8=",
+        "owner": "Shatur",
+        "repo": "neovim-session-manager",
+        "rev": "cbaebd92dce84e9ba63cb07d3199e5a19b204c1a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Shatur",
+        "repo": "neovim-session-manager",
+        "type": "github"
       }
     },
     "systems": {

@@ -1,4 +1,4 @@
-{...}: {
+{opts, ...}: {
   autoCmd = [
     {
       desc = "Highlight on yank";
@@ -67,7 +67,7 @@
             local hover_opts = {
               focusable = false,
               close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-              border = "rounded",
+              border = "${opts.border}",
               source = "always",
             }
             vim.diagnostic.open_float(nil, hover_opts)
