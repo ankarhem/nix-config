@@ -67,6 +67,12 @@
     };
   };
   system.defaults.CustomUserPreferences = {
+    "com.apple.Safari" = {
+      IncludeDevelopMenu = true;
+      WebKitDeveloperExtrasEnabledPreferenceKey = true;
+      "ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
+    };
+
     "com.apple.ical" = {
       "Show Week Numbers" = true;
     };
