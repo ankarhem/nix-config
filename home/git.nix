@@ -27,12 +27,13 @@
       init.defaultBranch = "main";
       # Configure Git to ensure line endings in files you checkout are correct for macOS
       core.autocrlf = "input";
-      push = {
-        autoSetupRemote = true;
-      };
-      diff = {
-        external = "${pkgs.difftastic}/bin/difft";
-      };
+
+      # Default to git pull --rebase
+      pull.rebase = true;
+      # Automatically --set-upstream if not set
+      push.autoSetupRemote = true;
+
+      diff.external = "${pkgs.difftastic}/bin/difft";
     };
   };
 }

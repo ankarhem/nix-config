@@ -1,5 +1,5 @@
 {opts, ...}: {
-  autoCmd = [
+  programs.nixvim.autoCmd = [
     {
       desc = "Highlight on yank";
       event = ["TextYankPost"];

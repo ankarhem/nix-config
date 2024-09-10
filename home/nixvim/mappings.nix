@@ -113,5 +113,5 @@
     (mkKeymap "x" "p" ''p:let @+=@0<CR>:let @"=@0<CR>'' "Dont copy replaced text")
   ];
 in {
-  keymaps = insert ++ normal ++ v ++ xv;
+  programs.nixvim.keymaps = insert ++ normal ++ v ++ xv;
 }

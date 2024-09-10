@@ -67,10 +67,9 @@
     };
   };
   system.defaults.CustomUserPreferences = {
-    "com.apple.Safari" = {
-      IncludeDevelopMenu = true;
+    "com.apple.Safari.SandboxBroker" = {
+      ShowDevelopMenu = true;
       WebKitDeveloperExtrasEnabledPreferenceKey = true;
-      "ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" = true;
     };
 
     "com.apple.ical" = {

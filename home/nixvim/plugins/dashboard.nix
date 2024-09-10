@@ -1,5 +1,5 @@
 {icons, ...}: {
-  plugins.dashboard = {
+  programs.nixvim.plugins.dashboard = {
     # TODO: search for fix when free
     enable = true;
     settings = {

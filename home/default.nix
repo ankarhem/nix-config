@@ -1,4 +1,4 @@
-{
+args @ {
   pkgs,
   inputs,
   username,
@@ -19,10 +19,10 @@
     ./git.nix
     ./gpg/default.nix
     ./vscode.nix
+    ./nixvim/default.nix
 
     inputs.nixvim.homeManagerModules.nixvim
   ];
-  programs.nixvim = import ./nixvim/default.nix;
 
   home.packages = with pkgs; [
     # _1password-gui
@@ -39,6 +39,7 @@
     (lib.hiPrio gitAndTools.gitFull)
     htop
     ripgrep
+    rm-improved
     jq
     grc
     gitleaks

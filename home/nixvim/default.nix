@@ -2,17 +2,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  lib = import ./lib;
-in {
-  _module.args.pkgs = pkgs;
-  _module.args.inputs = inputs;
-  _module.args.mkKey = lib.mkKey;
-  _module.args.icons = lib.icons;
-  _module.args.opts = {
-    border = "rounded";
-  };
-
+}: {
   imports = [
     ./mappings.nix
 
@@ -35,35 +25,37 @@ in {
     ./plugins/which-key.nix
   ];
 
-  enableMan = true;
-  viAlias = true;
-  vimAlias = true;
+  programs.nixvim = {
+    enableMan = true;
+    viAlias = true;
+    vimAlias = true;
 
-  enable = true;
+    enable = true;
 
-  plugins = {
-    direnv.enable = true;
-    otter.enable = true;
-    luasnip.enable = true;
-  };
+    plugins = {
+      direnv.enable = true;
+      otter.enable = true;
+      luasnip.enable = true;
+    };
 
-  colorschemes = {
-    vscode.enable = true;
-  };
+    colorschemes = {
+      vscode.enable = true;
+    };
 
-  opts = {
-    expandtab = true;
-    number = true;
-    relativenumber = true;
+    opts = {
+      expandtab = true;
+      number = true;
+      relativenumber = true;
 
-    clipboard = "unnamedplus";
-    tabstop = 2;
-    softtabstop = 2;
-    shiftwidth = 2;
-  };
+      clipboard = "unnamedplus";
+      tabstop = 2;
+      softtabstop = 2;
+      shiftwidth = 2;
+    };
 
-  globals = {
-    mapleader = " ";
-    maplocalleader = ",";
+    globals = {
+      mapleader = " ";
+      maplocalleader = ",";
+    };
   };
 }
