@@ -86,6 +86,12 @@
     "com.jetbrains.rustrover-EAP" = {
       ApplePressAndHoldEnabled = false;
     };
+    "com.jetbrains.rustrover" = {
+      ApplePressAndHoldEnabled = false;
+    };
+    "com.microsoft.VSCode" = {
+      ApplePressAndHoldEnabled = false;
+    };
 
     "com.apple.desktopservices" = {
       # Avoid creating .DS_Store files on network or USB volumes
