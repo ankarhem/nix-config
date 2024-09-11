@@ -17,6 +17,14 @@
       # testing
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
+          name = "playwright";
+          publisher = "ms-playwright";
+          version = "1.1.10";
+          sha256 = "sha256-ALsbUWJERbP+p4uhRnDq6ovwinczZVZbbqd9eXumEng=";
+        };
+      })
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+        mktplcRef = {
           name = "explorer";
           publisher = "vitest";
           version = "0.12.0";
