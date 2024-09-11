@@ -46,6 +46,7 @@ args @ {
     bottom
     bat
     tree
+    ngrok
 
     alejandra
     # devenv
