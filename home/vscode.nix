@@ -6,6 +6,7 @@
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
       ms-vsliveshare.vsliveshare
+      github.copilot
 
       # Neovim
       asvetliakov.vscode-neovim
