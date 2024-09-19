@@ -25,10 +25,6 @@ args @ {
   ];
 
   home.packages = with pkgs; [
-    # _1password-gui
-    # _1password
-
-    # gnupg
     yubikey-personalization
     yubikey-manager
     openssh
@@ -49,10 +45,8 @@ args @ {
     ngrok
 
     alejandra
-    # devenv
 
     mas
-    # teams
     slack
     spotify
     telegram-desktop

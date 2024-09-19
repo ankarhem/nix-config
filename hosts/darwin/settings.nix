@@ -51,9 +51,34 @@
     finder._FXShowPosixPathInTitle = true;
     # default to list view in finder
     finder.FXPreferredViewStyle = "Nlsv";
-    dock.autohide = false;
-    # Don’t rearrange spaces based on the most recent use
-    dock.mru-spaces = false;
+    dock = {
+      autohide = false;
+      # Don’t rearrange spaces based on the most recent use
+      mru-spaces = false;
+
+      persistent-apps = [
+        "${pkgs.jetbrains.rider}/Applications/Rider.app/"
+        "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
+        "${pkgs.kitty}/Applications/kitty.app/"
+        "${pkgs.slack}/Applications/Slack.app/"
+        "${pkgs.spotify}/Applications/Spotify.app/"
+        "${pkgs.telegram-desktop}/Applications/Telegram.app/"
+        "${pkgs.vscode}/Applications/Visual Studio Code.app/"
+        "/Applications/1Password.app/"
+        "/Applications/Firefox.app/"
+        "/Applications/Microsoft Excel.app/"
+        "/Applications/Microsoft Teams.app/"
+        "/Applications/OpenVPN Connect/OpenVPN Connect.app/"
+        "/System/Applications/Calendar.app/"
+        "/System/Applications/Facetime.app/"
+        "/System/Applications/Mail.app/"
+        "/System/Applications/Maps.app/"
+        "/System/Applications/Messages.app/"
+        "/System/Applications/Notes.app/"
+        "/System/Applications/Photos.app/"
+        "/System/Applications/System Settings.app/"
+      ];
+    };
     screensaver.askForPasswordDelay = 10;
     screencapture.location = "~/Pictures/screenshots";
 

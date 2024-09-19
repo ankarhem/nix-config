@@ -29,6 +29,7 @@
 
 ### Not super important
 
+* Open maccy and enable autostart
 * Open mos settings and enable autostart
 * Add accounts System Preferences > Internet Accounts
     - Rename email acccounts in Mail app: Settings > Accounts
