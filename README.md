@@ -14,6 +14,7 @@
 
 ### Important
 * Open raycast and initialize settings, via topbar replace hotkey to cmd+space
+* Make firefox default browser System Preferences > General > Default Web Browser
 * Enable karabiner
     1. Open and follow the instructions
     2. Restart application and go to complex modifications and enable nix
