@@ -98,5 +98,18 @@
       DSDontWriteNetworkStores = true;
       DSDontWriteUSBStores = true;
     };
+
+    "com.apple.symbolichotkeys" = {
+      AppleSymbolicHotKeys = {
+        # Disable spotlight with cmd+space
+        "64" = {
+          enabled = false;
+        };
+        # Disable language switching with ctrl+space
+        "60" = {
+          enabled = false;
+        };
+      };
+    };
   };
 }
