@@ -38,6 +38,7 @@ in {
       "openvpn-connect"
       "raycast"
       "runelite"
+      "steam"
       "microsoft-remote-desktop"
       "azure-data-studio"
     ];
