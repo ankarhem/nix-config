@@ -1,37 +1,26 @@
 # nix-config
 
-bootstrap first installation with 
+## Steps
 
-```bash
-nix run nix-darwin -- switch --flake .
-```
-
-rebuild subsequent with
-```bash
-darwin-rebuild switch --flake .
-```
+1. Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
+2. Install nix using [determinate systems](https://github.com/DeterminateSystems/nix-installer)
+3. Install colemak `curl -O --output-dir ~/Library/Keyboard\ Layouts/ https://colemak.com/pub/mac/Colemak.keylayout`
+4. Install git `xcode-select --install`
+5. Replace default colemak System Preferences > Keyboard > Input Sources
+6. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#ankarhem`
+7. Change shell with `chsh -s /run/current-system/sw/bin/fish`
 
 ## Manual steps
 
 ### Important
-* Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
-* Check that /etc/shells includes fish
-* Change shell with `chsh -s /run/current-system/sw/bin/fish`
 * Open raycast and initialize settings, via topbar replace hotkey to cmd+space
-* Replace spotlight
-    1. System Preferences > Keyboard > Shortcuts > Spotlight and disable the keyboard shortcut.
-    2. Open raycast via topbar and change keymap.
 * Enable karabiner
     1. Open and follow the instructions
     2. Restart application and go to complex modifications and enable nix
 * Enable desktop + documents icloud sync
-
 * Configure betterdisplay
     1. Set Dell display to 1920x1080
     2. Enable HiDPI on Dell display
-* Replace with official colemak (TODO: create custom package for this?)
-    1. Download keyboard `wget https://colemak.com/pub/mac/Colemak.keylayout -P ~/Library/Keyboard\ Layouts/`
-    2. Replace default colemak System Preferences > Keyboard > Input Sources
 * Fix yubikey
     1. Add ssh-keys manually from 1password
     2. Fix permission on private key `chmod 400 ~/.ssh/id_ed25519_sk`
@@ -39,11 +28,7 @@ darwin-rebuild switch --flake .
 
 ### Not super important
 
-* Enable rectangle
-    1. Open and follow the instructions
-    2. Open settings and enable auto-start and animation
 * Open mos settings and enable autostart
-* Open keyboard settings and disable ^+space (changes language)
 * Add accounts System Preferences > Internet Accounts
     - Rename email acccounts in Mail app: Settings > Accounts
     - Filter accounts / calendar with focus modes
