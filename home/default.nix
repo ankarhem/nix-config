@@ -56,7 +56,6 @@ args @ {
     slack
     spotify
     telegram-desktop
-    rectangle
     bruno
     jetbrains.rider
     jetbrains.rust-rover

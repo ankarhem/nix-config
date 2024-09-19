@@ -40,7 +40,6 @@ in {
       "runelite"
       "steam"
       "microsoft-remote-desktop"
-      "azure-data-studio"
     ];
   };
 
