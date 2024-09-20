@@ -18,6 +18,7 @@
 * Enable karabiner
     1. Open and follow the instructions
     2. Restart application and go to complex modifications and enable nix
+    3. Enable extension System Settings > General > Login Items & Extensions > Driver Extensions.
 * Enable desktop + documents icloud sync
 * Configure betterdisplay
     1. Set Dell display to 1920x1080
