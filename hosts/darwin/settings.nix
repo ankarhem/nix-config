@@ -124,6 +124,10 @@
       DSDontWriteUSBStores = true;
     };
 
+    "com.apple.WindowManager" = {
+      EnableTiledWindowMargins = false;
+    };
+
     "com.apple.symbolichotkeys" = {
       AppleSymbolicHotKeys = {
         # Disable spotlight with cmd+space
