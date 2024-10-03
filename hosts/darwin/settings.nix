@@ -57,6 +57,7 @@
       mru-spaces = false;
 
       persistent-apps = [
+        "${pkgs.bruno}/Applications/Bruno.app/"
         "${pkgs.jetbrains.rider}/Applications/Rider.app/"
         "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
         "${pkgs.kitty}/Applications/kitty.app/"
