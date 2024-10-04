@@ -14,7 +14,16 @@
       # Javascript
       svelte.svelte-vscode
       angular.ng-template
+      ## Angular
       bradlc.vscode-tailwindcss
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+        mktplcRef = {
+          name = "vscode-angular-html";
+          publisher = "ghaschel";
+          version = "2.13.0";
+          sha256 = "sha256-z+NnZpqa7jxUhtwPMi5D7UT9H1xnlwZgPJeE88/Kfww=";
+        };
+      })
       # testing
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
