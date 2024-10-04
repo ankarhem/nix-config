@@ -14,6 +14,7 @@
       # Javascript
       svelte.svelte-vscode
       angular.ng-template
+      vue.volar
       ## Angular
       bradlc.vscode-tailwindcss
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
