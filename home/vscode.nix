@@ -13,6 +13,7 @@
 
       # Javascript
       svelte.svelte-vscode
+      angular.ng-template
       bradlc.vscode-tailwindcss
       # testing
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
