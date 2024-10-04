@@ -8,6 +8,7 @@
   environment.variables = {
     EDITOR = "nvim";
     GNUPGHOME = "~/.gnupg";
+    LESS = "-r";
   };
   environment.shells = with pkgs; [bash zsh fish];
   environment.shellAliases = {
