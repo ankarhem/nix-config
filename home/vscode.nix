@@ -45,6 +45,7 @@
       ## formatting
       esbenp.prettier-vscode
       dbaeumer.vscode-eslint
+      kamadorueda.alejandra
 
       # Rust
       rust-lang.rust-analyzer
@@ -82,8 +83,6 @@
 
       # Nix
       jnoortheen.nix-ide
-      ## formatting
-      kamadorueda.alejandra
 
       # Syntax highlighting for .bru
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
