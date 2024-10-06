@@ -15,6 +15,14 @@
       svelte.svelte-vscode
       angular.ng-template
       vue.volar
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+        mktplcRef = {
+          name = "arkdark";
+          publisher = "arktypeio";
+          version = "5.12.2";
+          sha256 = "sha256-rnYX+8KFx9WBOhI7OFIuBX0cyG3hJbJh/c5vxcTXMvw=";
+        };
+      })
       ## Angular
       bradlc.vscode-tailwindcss
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
