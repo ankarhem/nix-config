@@ -28,6 +28,8 @@
       # Configure Git to ensure line endings in files you checkout are correct for macOS
       core.autocrlf = "input";
 
+      merge.tool = "nvimdiff2";
+
       # Default to git pull --rebase
       pull.rebase = true;
       # Automatically --set-upstream if not set
