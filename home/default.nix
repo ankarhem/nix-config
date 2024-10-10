@@ -19,9 +19,7 @@ args @ {
     ./git.nix
     ./gpg/default.nix
     ./vscode.nix
-    ./nixvim/default.nix
-
-    inputs.nixvim.homeManagerModules.nixvim
+    ./neovim/default.nix
   ];
 
   home.packages = with pkgs; [

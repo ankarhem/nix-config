@@ -2,9 +2,7 @@
   description = "MacOS System Configuration flake";
 
   inputs = {
-    nixpkgs = {
-      url = "github:nixos/nixpkgs";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs";
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,19 +25,6 @@
     };
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    session-manager = {
-      url = "github:Shatur/neovim-session-manager";
-      flake = false;
-    };
-    ntree-float = {
-      url = "github:JMarkin/nvim-tree.lua-float-preview";
       flake = false;
     };
   };
