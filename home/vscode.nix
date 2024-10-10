@@ -8,10 +8,9 @@
       ms-vsliveshare.vsliveshare
       github.copilot
 
-      # Neovim
       asvetliakov.vscode-neovim
-
-      # Javascript
+      catppuccin.catppuccin-vsc
+      catppuccin.catppuccin-vsc-icons
       svelte.svelte-vscode
       angular.ng-template
       vue.volar
@@ -23,7 +22,6 @@
           sha256 = "sha256-rnYX+8KFx9WBOhI7OFIuBX0cyG3hJbJh/c5vxcTXMvw=";
         };
       })
-      ## Angular
       bradlc.vscode-tailwindcss
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
@@ -33,7 +31,6 @@
           sha256 = "sha256-z+NnZpqa7jxUhtwPMi5D7UT9H1xnlwZgPJeE88/Kfww=";
         };
       })
-      # testing
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
           name = "playwright";
@@ -50,17 +47,14 @@
           sha256 = "sha256-lIpYU3w8M7sXL0JSKReXfnbRCFzs2ggwqfwi6E5M9cg=";
         };
       })
-      ## formatting
       esbenp.prettier-vscode
       dbaeumer.vscode-eslint
       kamadorueda.alejandra
 
-      # Rust
       rust-lang.rust-analyzer
       fill-labs.dependi
       tamasfe.even-better-toml
 
-      # Go
       golang.go
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
@@ -79,7 +73,6 @@
         };
       })
 
-      # Nx
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
           name = "angular-console";
@@ -89,10 +82,8 @@
         };
       })
 
-      # Nix
       jnoortheen.nix-ide
 
-      # Syntax highlighting for .bru
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
         mktplcRef = {
           name = "bruno";
@@ -113,7 +104,7 @@
       "editor.fontFamily" = "Iosevka Nerd Font";
       "terminal.integrated.fontSize" = 14;
 
-      "workbench.colorTheme" = "Default Light Modern";
+      "workbench.colorTheme" = "Catppuccin Latte";
 
       # Nix settings
       "[nix]" = {
