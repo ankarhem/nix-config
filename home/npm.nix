@@ -3,12 +3,12 @@
     target = ".npmrc";
     enable = true;
     text = ''
-      prefix = ''${HOME}/.npm
+      prefix = ${config.xdg.dataHome}/npm
       init-license=MIT
       color=true
       '';
   };
   home.sessionPath = [
-    "${config.xdg.dataHome}/.npm/bin"
+    "${config.xdg.dataHome}/npm/bin"
   ];
 }
