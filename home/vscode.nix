@@ -105,6 +105,7 @@
       "terminal.integrated.fontSize" = 14;
 
       "workbench.colorTheme" = "Catppuccin Latte";
+      "workbench.iconTheme" = "catppuccin-latte";
 
       # Nix settings
       "[nix]" = {
