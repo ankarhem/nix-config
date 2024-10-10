@@ -20,7 +20,7 @@
     ./plugins/lsp.nix
     ./plugins/none-ls.nix
     ./plugins/telescope.nix
-    ./plugins/ufo.nix
+    # ./plugins/ufo.nix
     ./plugins/treesitter.nix
     ./plugins/which-key.nix
   ];
