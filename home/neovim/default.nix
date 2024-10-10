@@ -3,18 +3,26 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+
+  requiredPkgs = with pkgs; [
+    ripgrep  
+  ];
+  lsps = with pkgs; [
+    lua-language-server
+    nil
+    nodePackages.svelte-language-server
+    stylua
+    vscode-langservers-extracted
+    tailwindcss-language-server
+  ];
+in {
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
     extraPackages = with pkgs; [
-      # LazyVim
-      lua-language-server
-      stylua
-      # Telescope
-      ripgrep
-    ];
+    ] ++ requiredPkgs ++ lsps;
 
     plugins = with pkgs.vimPlugins; [
       lazy-nvim

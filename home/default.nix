@@ -20,6 +20,7 @@ args @ {
     ./gpg/default.nix
     ./vscode.nix
     ./neovim/default.nix
+    ./npm.nix
   ];
 
   home.packages = with pkgs; [
