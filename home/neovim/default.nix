@@ -152,8 +152,58 @@ in {
       paths =
         (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins:
           with plugins; [
+            # styled
+            # zig
+            angular
+            bash
             c
+            c_sharp
+            css
+            diff
+            dockerfile
+            editorconfig
+            fish
+            git_config
+            git_rebase
+            gitattributes
+            gitcommit
+            gitignore
+            go
+            goctl
+            godot_resource
+            gomod
+            gosum
+            gotmpl
+            gowork
+            gpg
+            graphql
+            html
+            ini
+            jq
+            jsdoc
+            json
+            jsonc
+            jsonnet
+            just
             lua
+            make
+            markdown
+            nix
+            passwd
+            python
+            regex
+            requirements
+            rust
+            scss
+            sql
+            svelte
+            templ
+            terraform
+            toml
+            tsx
+            typescript
+            vue
+            yaml
           ]))
         .dependencies;
     };
