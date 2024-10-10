@@ -4,23 +4,23 @@
   ...
 }: {
   imports = [
+    # ./plugins/autocmd.nix
+    # ./plugins/ufo.nix
     ./mappings.nix
-
-    ./plugins/autocmd.nix
     ./plugins/autopairs.nix
     ./plugins/bufferline.nix
-    ./plugins/noice.nix
-    ./plugins/nvimtree.nix
-    ./plugins/session.nix
     ./plugins/cmp.nix
     ./plugins/comment.nix
     ./plugins/copilot.nix
-    ./plugins/dashboard.nix
+    # ./plugins/dashboard.nix
     ./plugins/flash.nix
+    # ./plugins/gitsigns.nix
     ./plugins/lsp.nix
+    ./plugins/noice.nix
     ./plugins/none-ls.nix
+    ./plugins/nvimtree.nix
+    ./plugins/session.nix
     ./plugins/telescope.nix
-    # ./plugins/ufo.nix
     ./plugins/treesitter.nix
     ./plugins/which-key.nix
   ];
