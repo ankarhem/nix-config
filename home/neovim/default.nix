@@ -16,9 +16,6 @@
     stylua
     vscode-langservers-extracted
     tailwindcss-language-server
-    omnisharp-roslyn
-    csharpier
-    netcoredbg
   ];
 in {
   programs.neovim = {
