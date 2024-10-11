@@ -6,7 +6,8 @@
 }: let
 
   requiredPkgs = with pkgs; [
-    ripgrep  
+    ripgrep
+    fd
   ];
   lsps = with pkgs; [
     lua-language-server
@@ -15,6 +16,9 @@
     stylua
     vscode-langservers-extracted
     tailwindcss-language-server
+    omnisharp-roslyn
+    csharpier
+    netcoredbg
   ];
 in {
   programs.neovim = {
