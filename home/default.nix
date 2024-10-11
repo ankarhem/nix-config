@@ -42,6 +42,7 @@ args @ {
     bat
     tree
     ngrok
+    fd
 
     alejandra
 
