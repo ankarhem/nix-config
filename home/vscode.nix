@@ -14,7 +14,7 @@
       svelte.svelte-vscode
       angular.ng-template
       vue.volar
-      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "arkdark";
           publisher = "arktypeio";
@@ -23,7 +23,7 @@
         };
       })
       bradlc.vscode-tailwindcss
-      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "vscode-angular-html";
           publisher = "ghaschel";
@@ -31,7 +31,7 @@
           sha256 = "sha256-z+NnZpqa7jxUhtwPMi5D7UT9H1xnlwZgPJeE88/Kfww=";
         };
       })
-      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "playwright";
           publisher = "ms-playwright";
@@ -39,7 +39,7 @@
           sha256 = "sha256-ALsbUWJERbP+p4uhRnDq6ovwinczZVZbbqd9eXumEng=";
         };
       })
-      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "explorer";
           publisher = "vitest";
@@ -56,7 +56,7 @@
       tamasfe.even-better-toml
 
       golang.go
-      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "templ";
           publisher = "a-h";
@@ -64,7 +64,7 @@
           sha256 = "sha256-/77IO+WjgWahUrj6xVl0tkvICh9Cy+MtfH2dewxH8LE=";
         };
       })
-      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "htmx-tags";
           publisher = "otovo-oss";
@@ -73,7 +73,7 @@
         };
       })
 
-      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "angular-console";
           publisher = "nrwl";
@@ -84,7 +84,7 @@
 
       jnoortheen.nix-ide
 
-      (pkgs.vscode-utils.buildVscodeMarketplaceExtension rec {
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "bruno";
           publisher = "bruno-api-client";
