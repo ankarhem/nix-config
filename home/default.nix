@@ -43,6 +43,7 @@ args @ {
     tree
     ngrok
     fd
+    nodejs_20
 
     alejandra
 
