@@ -49,6 +49,7 @@ args @ {
 
     mas
     slack
+    discord
     spotify
     telegram-desktop
     bruno
