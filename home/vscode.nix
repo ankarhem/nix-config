@@ -12,7 +12,14 @@
       catppuccin.catppuccin-vsc
       catppuccin.catppuccin-vsc-icons
       svelte.svelte-vscode
-      angular.ng-template
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "ng-template";
+          publisher = "angular";
+          version = "18.2.0";
+          sha256 = "sha256-rl04nqSSBMjZfPW8Y+UtFLFLDFd5FSxJs3S937mhDWE=";
+        };
+      })
       vue.volar
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
