@@ -100,6 +100,19 @@
         };
       })
     ];
+
+    keybindings = [
+      {
+        key = "Cmd+Shift+I";
+        command = "editor.action.sourceAction";
+        # when = "config.workspaceKeybindings.importMissingDeps.enabled";
+        args = {
+          kind = "source.addMissingImports";
+          apply = "first";
+        };
+      }
+    ];
+
     userSettings = {
       # Neovim integration
       "extensions.experimental.affinity" = {
