@@ -54,6 +54,7 @@
           sha256 = "sha256-lIpYU3w8M7sXL0JSKReXfnbRCFzs2ggwqfwi6E5M9cg=";
         };
       })
+      firsttris.vscode-jest-runner
       esbenp.prettier-vscode
       dbaeumer.vscode-eslint
       kamadorueda.alejandra
@@ -135,6 +136,26 @@
         "editor.formatOnType" = false;
       };
       "alejandra.program" = "alejandra";
+
+      # Typescript settings
+      ## Inlay hints
+      "editor.inlayHints.enabled" = "on";
+      "typescript.inlayHints.enumMemberValues.enabled" = true;
+      "typescript.inlayHints.parameterNames.enabled" = true;
+      "typescript.inlayHints.functionLikeReturnTypes.enabled" = true;
+      "typescript.inlayHints.parameterTypes.enabled" = true;
+      "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName" = false;
+      "typescript.inlayHints.variableTypes.enabled" = true;
+      "typescript.inlayHints.propertyDeclarationTypes.enabled" = true;
+      "typescript.inlayHints.variableTypes.suppressWhenTypeMatchesName" = false;
+      "typescript.suggest.autoImports" = true;
+
+      ## references / implementations
+      "references.preferredLocation" = "view";
+      "typescript.implementationsCodeLens.enabled" = true;
+      "typescript.implementationsCodeLens.showOnInterfaceMethods" = true;
+      "typescript.referencesCodeLens.enabled" = true;
+      "typescript.referencesCodeLens.showOnAllFunctions" = false;
     };
   };
 }
