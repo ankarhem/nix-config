@@ -101,7 +101,7 @@ args @ {
       name = "Iosevka Nerd Font";
       size = 16;
     };
-    theme = "Alabaster";
+    themeFile = "Alabaster";
     shellIntegration = {
       enableFishIntegration = true;
     };
