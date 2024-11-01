@@ -95,7 +95,7 @@
       AppleShowAllExtensions = true;
       # show hidden files
       AppleShowAllFiles = true;
-      ApplePressAndHoldEnabled = true;
+      ApplePressAndHoldEnabled = false;
       InitialKeyRepeat = 14;
       KeyRepeat = 1;
     };
@@ -114,19 +114,6 @@
       FXICloudDriveDocuments = true;
       _FXSortFoldersFirst = true;
     };
-    "com.jetbrains.rider" = {
-      ApplePressAndHoldEnabled = false;
-    };
-    "com.jetbrains.rustrover-EAP" = {
-      ApplePressAndHoldEnabled = false;
-    };
-    "com.jetbrains.rustrover" = {
-      ApplePressAndHoldEnabled = false;
-    };
-    "com.microsoft.VSCode" = {
-      ApplePressAndHoldEnabled = false;
-    };
-
     "com.apple.desktopservices" = {
       # Avoid creating .DS_Store files on network or USB volumes
       DSDontWriteNetworkStores = true;
