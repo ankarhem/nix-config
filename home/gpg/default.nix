@@ -6,7 +6,7 @@ _: {
     mutableTrust = false;
     publicKeys = [
       {
-        source = ./public-keys/yubikey.pub;
+        source = ./public-keys/jakob-2024-11-01.pub;
         trust = 5;
       }
       {
