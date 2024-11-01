@@ -2,7 +2,9 @@
   description = "MacOS System Configuration flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,6 +53,10 @@
       "${hostname}" = darwinSystem rec {
         system = "aarch64-darwin";
         specialArgs = {
+          pkgs-stable = import inputs.nixpkgs-stable {
+            inherit system;
+            config = nixpkgsConfig;
+          };
           inherit inputs username hostname mkKey icons opts;
         };
         modules = [

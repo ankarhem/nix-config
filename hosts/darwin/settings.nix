@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  pkgs-stable,
+  ...
+}: {
   system.activationScripts = {
     # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
     postUserActivation.text = ''
@@ -18,7 +22,10 @@
   security.pam.enableSudoTouchIdAuth = true;
 
   services = {
-    karabiner-elements.enable = true;
+    karabiner-elements = {
+      enable = true;
+      package = pkgs-stable.karabiner-elements;
+    };
   };
 
   fonts = {
