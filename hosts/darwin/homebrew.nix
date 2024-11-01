@@ -36,6 +36,7 @@ in {
       "microsoft-remote-desktop"
       "microsoft-teams"
       "mos"
+      "kitty"
       "openvpn-connect"
       "raycast"
       "runelite"
