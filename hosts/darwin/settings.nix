@@ -64,7 +64,7 @@
         "${pkgs.slack}/Applications/Slack.app/"
         "${pkgs.discord}/Applications/Discord.app/"
         "${pkgs.spotify}/Applications/Spotify.app/"
-        "${pkgs.telegram-desktop}/Applications/Telegram.app/"
+        "/Applications/Telegram.app/"
         "${pkgs.vscode}/Applications/Visual Studio Code.app/"
         "/Applications/1Password.app/"
         "/Applications/Firefox.app/"

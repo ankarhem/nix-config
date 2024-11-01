@@ -26,20 +26,21 @@ in {
 
     caskArgs.no_quarantine = true;
     casks = [
-      "1password-cli"
       "1password"
+      "1password-cli"
       "betterdisplay"
       "firefox"
       "google-chrome"
       "maccy"
       "microsoft-excel"
+      "microsoft-remote-desktop"
       "microsoft-teams"
       "mos"
       "openvpn-connect"
       "raycast"
       "runelite"
       "steam"
-      "microsoft-remote-desktop"
+      "telegram"
     ];
   };
 

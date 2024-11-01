@@ -51,7 +51,6 @@ args @ {
     slack
     discord
     spotify
-    telegram-desktop
     bruno
     jetbrains.rider
     jetbrains.rust-rover
