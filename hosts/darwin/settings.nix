@@ -9,6 +9,14 @@
       # activateSettings -u will reload the settings from the database and apply them to the current session,
       # so we do not need to logout and login again to make the changes take effect.
       /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+
+      # Check if ~/Applications/Home\ Manager\ Apps exists and symlink directory to /Applications
+      HMA_DIRECTORY_SOURCE=~/Applications/Home\ Manager\ Apps
+      HMA_DIRECTORY_TARGET=/Applications
+      if [ -d "$HMA_DIRECTORY_SOURCE" ] && [ ! -L "$HMA_DIRECTORY_TARGET/Home Manager Apps" ]; then
+        echo "Symlinking ~/Applications/Home\ Manager\ Apps directory to /Applications"
+        ln -s "$HMA_DIRECTORY_SOURCE" "$HMA_DIRECTORY_TARGET"
+      fi
     '';
   };
 
