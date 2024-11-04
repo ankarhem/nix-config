@@ -49,7 +49,6 @@ args @ {
 
     mas
     slack
-    discord
     spotify
     bruno
     jetbrains.rider

@@ -77,7 +77,7 @@
         "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
         "/Applications/kitty.app/"
         "${pkgs.slack}/Applications/Slack.app/"
-        "${pkgs.discord}/Applications/Discord.app/"
+        "/Applications/legcord.app/"
         "${pkgs.spotify}/Applications/Spotify.app/"
         "/Applications/Telegram.app/"
         "${pkgs.vscode}/Applications/Visual Studio Code.app/"

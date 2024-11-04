@@ -31,6 +31,7 @@ in {
       "betterdisplay"
       "firefox"
       "google-chrome"
+      "legcord"
       "maccy"
       "microsoft-excel"
       "microsoft-remote-desktop"
