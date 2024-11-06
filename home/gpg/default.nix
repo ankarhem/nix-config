@@ -11,11 +11,11 @@ _: {
       }
       {
         source = ./public-keys/jonatan.pub;
-        trust = 4;
+        trust = 3;
       }
       {
         source = ./public-keys/william.pub;
-        trust = 4;
+        trust = 2;
       }
     ];
 
