@@ -13,6 +13,10 @@ _: {
         source = ./public-keys/jonatan.pub;
         trust = 4;
       }
+      {
+        source = ./public-keys/william.pub;
+        trust = 4;
+      }
     ];
 
     # https://raw.githubusercontent.com/drduh/config/master/gpg.conf
