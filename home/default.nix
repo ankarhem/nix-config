@@ -66,7 +66,21 @@ args @ {
       set fish_greeting # Disable greeting
     '';
     # Reorders stuff so that nix can override system binaries
-    loginShellInit = "fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /nix/var/nix/profiles/default/bin /run/current-system/sw/bin";
+    loginShellInit = ''
+      fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /nix/var/nix/profiles/default/bin /run/current-system/sw/bin
+
+      function secret
+        set output (string join . $argv[1] (date +%s) enc)
+        gpg --encrypt --armor --output $output -r $KEYID $argv[1]
+        and echo "$argv[1] -> $output"
+      end
+
+      function reveal
+        set output (echo $argv[1] | rev | cut -c16- | rev)
+        gpg --decrypt --output $output $argv[1]
+        and echo "$argv[1] -> $output"
+      end
+    '';
 
     plugins = with pkgs.fishPlugins; [
       {

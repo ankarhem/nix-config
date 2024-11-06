@@ -4,7 +4,6 @@
   pkgs,
   ...
 }: let
-
   requiredPkgs = with pkgs; [
     ripgrep
     fd
@@ -22,8 +21,11 @@ in {
     enable = true;
     viAlias = true;
     vimAlias = true;
-    extraPackages = with pkgs; [
-    ] ++ requiredPkgs ++ lsps;
+    extraPackages = with pkgs;
+      [
+      ]
+      ++ requiredPkgs
+      ++ lsps;
 
     plugins = with pkgs.vimPlugins; [
       lazy-nvim

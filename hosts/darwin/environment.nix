@@ -9,6 +9,7 @@
     EDITOR = "nvim";
     GNUPGHOME = "~/.gnupg";
     LESS = "-r";
+    KEYID = "529972E4160200DF";
   };
   environment.shells = with pkgs; [bash zsh fish];
   environment.shellAliases = {
