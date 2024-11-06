@@ -37,6 +37,7 @@ in {
       "microsoft-remote-desktop"
       "microsoft-teams"
       "mos"
+      "seadrive"
       "kitty"
       "openvpn-connect"
       "raycast"
