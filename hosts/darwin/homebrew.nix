@@ -29,6 +29,7 @@ in {
       "1password"
       "1password-cli"
       "betterdisplay"
+      "cursor"
       "firefox"
       "google-chrome"
       "legcord"
