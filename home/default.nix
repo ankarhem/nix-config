@@ -44,6 +44,7 @@ args @ {
     ngrok
     fd
     nodejs_20
+    deno
 
     alejandra
 

@@ -12,6 +12,7 @@
       catppuccin.catppuccin-vsc
       catppuccin.catppuccin-vsc-icons
       ms-dotnettools.csdevkit
+      denoland.vscode-deno
       svelte.svelte-vscode
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
