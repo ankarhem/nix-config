@@ -41,7 +41,7 @@
       };
     in {
       nixos = inputs.nixpkgs.lib.nixosSystem rec {
-      system = "x86_64-linux";
+        system = "x86_64-linux";
 
         specialArgs = {
           pkgs-stable = import inputs.nixpkgs-stable {
@@ -51,16 +51,16 @@
           inherit inputs username hostname;
         };
 
-      modules = [
-        ./hosts/homelab/configuration.nix
-	home-manager
-	{
-          home-manager.extraSpecialArgs = specialArgs;
-	  home-manager.useGlobalPkgs = true;
-	  home-manager.useUserPackages = true;
+        modules = [
+          ./hosts/homelab/configuration.nix
+          home-manager
+          {
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-          home-manager.users.${username} = import ./hosts/homelab/home.nix;
-	}
+            home-manager.users.${username} = import ./hosts/homelab/home.nix;
+          }
         ];
       };
     };
