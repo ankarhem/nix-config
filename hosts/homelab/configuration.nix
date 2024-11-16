@@ -100,6 +100,9 @@
       PermitRootLogin = "prohibit-password";
       PasswordAuthentication = false;
     };
+    extraConfig = ''
+      StreamLocalBindUnlink yes
+    '';
   };
 
   # Open ports in the firewall.

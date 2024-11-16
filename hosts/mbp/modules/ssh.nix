@@ -30,6 +30,15 @@ in {
         IdentitiesOnly yes
         IdentityFile ~/.ssh/id_ed25519_sk
         IdentityFile ~/.ssh/id_ecdsa_sk
+      Host homelab
+        HostName 192.168.1.174
+        User idealpink
+        Port 22
+        IdentitiesOnly yes
+        IdentityFile ~/.ssh/id_ed25519_sk
+        IdentityFile ~/.ssh/id_ecdsa_sk
+        RemoteForward /run/user/1000/gnupg/S.gpg-agent /Users/ankarhem/.gnupg/S.gpg-agent.extra
+        # RemoteForward /home/idealpink/.gnupg/S.gpg-agent /Users/ankarhem/.gnupg/S.gpg-agent.extra
     '';
   };
 }
