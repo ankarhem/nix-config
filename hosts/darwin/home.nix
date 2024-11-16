@@ -14,6 +14,7 @@ args @ {
   programs.home-manager.enable = true;
 
   imports = [
+    ../../modules/fish.nix
     ../../modules/git.nix
     ../../modules/gpg/default.nix
     ../../modules/neovim/default.nix
@@ -62,11 +63,6 @@ args @ {
 
   programs.zsh.enable = true;
   programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-    '';
-    # Reorders stuff so that nix can override system binaries
     loginShellInit = ''
       fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /nix/var/nix/profiles/default/bin /run/current-system/sw/bin
 
@@ -82,32 +78,14 @@ args @ {
         and echo "$argv[1] -> $output"
       end
     '';
-
-    plugins = with pkgs.fishPlugins; [
-      {
-        name = "fzf-fish";
-        src = fzf-fish.src;
-      }
-      {
-        name = "git-abbr";
-        src = git-abbr.src;
-      }
-      {
-        name = "grc";
-        src = grc.src;
-      }
-      {
-        name = "colored-man-pages";
-        src = colored-man-pages.src;
-      }
-    ];
   };
-  programs.fzf.enable = true;
-
   programs.zoxide = {
     enable = true;
   };
   programs.eza.enable = true;
+  programs.starship = {
+    enable = true;
+  };
 
   programs.kitty = {
     enable = true;
@@ -119,10 +97,6 @@ args @ {
     shellIntegration = {
       enableFishIntegration = true;
     };
-  };
-
-  programs.starship = {
-    enable = true;
   };
 
   programs.go = {
