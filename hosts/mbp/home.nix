@@ -4,14 +4,13 @@ args @ {
   username,
   ...
 }: {
+  programs.home-manager.enable = true;
   home.username = username;
   home.homeDirectory = "/Users/${username}";
   home.stateVersion = "23.11";
   home.sessionVariables = {
     PATH = "$PATH:$GOPATH/bin";
   };
-
-  programs.home-manager.enable = true;
 
   imports = [
     ../../modules/fish.nix

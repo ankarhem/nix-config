@@ -32,11 +32,37 @@
   };
 
   outputs = inputs @ {self, ...}: {
-    nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
+    nixosConfigurations = let
+      inherit (inputs.home-manager.nixosModules) home-manager;
+      username = "idealpink";
+      hostname = "nixos";
+      nixpkgsConfig = {
+        config.allowUnfree = true;
+      };
+    in {
+      nixos = inputs.nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
+
+        specialArgs = {
+          pkgs-stable = import inputs.nixpkgs-stable {
+            inherit system;
+            config = nixpkgsConfig;
+          };
+          inherit inputs username hostname;
+        };
+
       modules = [
         ./hosts/homelab/configuration.nix
-      ];
+	home-manager
+	{
+          home-manager.extraSpecialArgs = specialArgs;
+	  home-manager.useGlobalPkgs = true;
+	  home-manager.useUserPackages = true;
+
+          home-manager.users.${username} = import ./hosts/homelab/home.nix;
+	}
+        ];
+      };
     };
 
     darwinConfigurations = let
