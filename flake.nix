@@ -35,7 +35,7 @@
     nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./hosts/nixos/configuration.nix
+        ./hosts/homelab/configuration.nix
       ];
     };
 
@@ -61,7 +61,7 @@
           inherit inputs username hostname;
         };
         modules = [
-          ./hosts/darwin/default.nix
+          ./hosts/mbp/default.nix
           nix-homebrew
           home-manager
           {
@@ -70,7 +70,7 @@
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./hosts/darwin/home.nix;
+            home-manager.users.${username} = import ./hosts/mbp/home.nix;
           }
         ];
       };
