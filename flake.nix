@@ -31,11 +31,7 @@
     };
   };
 
-  outputs = inputs @ {self, ...}: let
-    nixpkgsConfig = {
-      config.allowUnfree = true;
-    };
-  in {
+  outputs = inputs @ {self, ...}: {
     darwinConfigurations = let
       inherit (inputs.darwin.lib) darwinSystem;
       inherit (inputs.nix-homebrew.darwinModules) nix-homebrew;
@@ -43,6 +39,10 @@
 
       username = "ankarhem";
       hostname = "ankarhem";
+
+      nixpkgsConfig = {
+        config.allowUnfree = true;
+      };
     in {
       "${hostname}" = darwinSystem rec {
         system = "aarch64-darwin";
