@@ -32,7 +32,7 @@
   };
 
   outputs = inputs @ {self, ...}: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nixos = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./hosts/nixos/configuration.nix
