@@ -32,6 +32,13 @@
   };
 
   outputs = inputs @ {self, ...}: {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hosts/nixos/configuration.nix
+      ];
+    };
+
     darwinConfigurations = let
       inherit (inputs.darwin.lib) darwinSystem;
       inherit (inputs.nix-homebrew.darwinModules) nix-homebrew;
