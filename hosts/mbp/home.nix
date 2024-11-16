@@ -55,15 +55,6 @@ args @ {
     jetbrains.rider
     jetbrains.rust-rover
   ];
-  services.gpg-agent = {
-    enable = true;
-    enableExtraSocket = true;
-    extraConfig = ''
-      allow-loopback-pinentry
-      pinentry-program /opt/homebrew/bin/pinentry-mac
-    '';
-  };
-
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
