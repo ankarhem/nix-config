@@ -1,6 +1,6 @@
 # nix-config
 
-## Steps
+## Macos manual steps
 
 1. Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
 2. Install nix using [determinate systems](https://github.com/DeterminateSystems/nix-installer)
@@ -9,8 +9,6 @@
 5. Replace default colemak System Preferences > Keyboard > Input Sources
 6. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#ankarhem`
 7. Change shell with `chsh -s /run/current-system/sw/bin/fish`
-
-## Manual steps
 
 ### Important
 * Open raycast and initialize settings, via topbar replace hotkey to cmd+space
