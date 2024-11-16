@@ -13,6 +13,7 @@
     ../../modules/git.nix
     ../../modules/gpg/default.nix
     ../../modules/neovim/default.nix
+    ./modules/ssh.nix
   ];
 
   home.packages = with pkgs; [
