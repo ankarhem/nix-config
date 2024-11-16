@@ -54,7 +54,6 @@ in {
     enable = true;
     enableRosetta = true;
 
-    # TODO: Move this to dynamic username
     user = username;
 
     taps = {

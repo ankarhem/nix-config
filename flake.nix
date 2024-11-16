@@ -35,17 +35,11 @@
     nixpkgsConfig = {
       config.allowUnfree = true;
     };
-    lib = import ./home/nixvim/lib;
-    opts = {
-      border = "rounded";
-    };
   in {
     darwinConfigurations = let
       inherit (inputs.darwin.lib) darwinSystem;
       inherit (inputs.nix-homebrew.darwinModules) nix-homebrew;
       inherit (inputs.home-manager.darwinModules) home-manager;
-      inherit (lib) mkKey;
-      inherit (lib) icons;
 
       username = "ankarhem";
       hostname = "ankarhem";
@@ -57,14 +51,10 @@
             inherit system;
             config = nixpkgsConfig;
           };
-          inherit inputs username hostname mkKey icons opts;
+          inherit inputs username hostname;
         };
         modules = [
-          ./hosts/darwin/nix.nix
-          ./hosts/darwin/environment.nix
-          ./hosts/darwin/user.nix
-          ./hosts/darwin/settings.nix
-          ./hosts/darwin/homebrew.nix
+          ./hosts/darwin/default.nix
           nix-homebrew
           home-manager
           {
@@ -73,7 +63,7 @@
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./home;
+            home-manager.users.${username} = import ./hosts/darwin/home.nix;
           }
         ];
       };

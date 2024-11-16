@@ -14,13 +14,13 @@ args @ {
   programs.home-manager.enable = true;
 
   imports = [
-    ./karabiner.nix
-    ./ssh.nix
-    ./git.nix
-    ./gpg/default.nix
-    ./vscode.nix
-    ./neovim/default.nix
-    ./npm.nix
+    ../../modules/git.nix
+    ../../modules/gpg/default.nix
+    ../../modules/neovim/default.nix
+    ./modules/karabiner.nix
+    ./modules/npm.nix
+    ./modules/ssh.nix
+    ./modules/vscode.nix
   ];
 
   home.packages = with pkgs; [
