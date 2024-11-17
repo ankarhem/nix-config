@@ -49,7 +49,7 @@ args @ {
     tree
     ngrok
     fd
-    nfs-utils
+    # nfs-utils
     nodejs_20
     deno
 
