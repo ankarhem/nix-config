@@ -35,6 +35,7 @@
     bat
     tree
     fd
+    nfs-utils
 
     alejandra
   ];
