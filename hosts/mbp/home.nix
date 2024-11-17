@@ -21,7 +21,13 @@ args @ {
     ./modules/npm.nix
     ./modules/ssh.nix
     ./modules/vscode.nix
+    inputs.nix-index-database.hmModules.nix-index
   ];
+
+  programs.nix-index-database = {
+    comma.enable = true;
+  };
+  programs.nix-index.enable = true;
 
   home.packages = with pkgs; [
     yubikey-personalization
