@@ -44,7 +44,7 @@
         config.allowUnfree = true;
       };
     in {
-      nixos = inputs.nixpkgs.lib.nixosSystem rec {
+      "${hostname}" = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
 
         specialArgs = {
