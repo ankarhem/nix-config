@@ -24,7 +24,6 @@
     zsh.enable = true;
     fish.enable = true;
   };
-  programs.nix-index.enable = true;
 
   # -- MacOS Settings --
   security.pam.enableSudoTouchIdAuth = true;

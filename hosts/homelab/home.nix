@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  inputs,
   ...
 }: {
   programs.home-manager.enable = true;
@@ -14,7 +15,13 @@
     ../../modules/gpg/default.nix
     ../../modules/neovim/default.nix
     ./modules/ssh.nix
+    inputs.nix-index-database.hmModules.nix-index
   ];
+
+  programs.nix-index-database = {
+    comma.enable = true;
+  };
+  programs.nix-index.enable = true;
 
   home.packages = with pkgs; [
     yubikey-personalization
