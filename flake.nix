@@ -70,18 +70,13 @@
     };
 
     darwinConfigurations = let
-      inherit (inputs.darwin.lib) darwinSystem;
-      inherit (inputs.nix-homebrew.darwinModules) nix-homebrew;
-      inherit (inputs.home-manager.darwinModules) home-manager;
-
       username = "ankarhem";
       hostname = "ankarhem";
-
       nixpkgsConfig = {
         config.allowUnfree = true;
       };
     in {
-      "${hostname}" = darwinSystem rec {
+      "${hostname}" = inputs.darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
         specialArgs = {
           pkgs-stable = import inputs.nixpkgs-stable {
@@ -92,8 +87,8 @@
         };
         modules = [
           ./hosts/mbp/default.nix
-          nix-homebrew
-          home-manager
+          inputs.nix-homebrew.darwinModules.nix-homebrew
+          inputs.home-manager.darwinModules.home-manager
           {
             nixpkgs = nixpkgsConfig;
 
