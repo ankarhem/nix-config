@@ -14,7 +14,19 @@
     ./modules/nfs.nix
   ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    settings = {
+      experimental-features = ["nix-command" "flakes"];
+      # auto-optimise-store = true;
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -66,9 +78,6 @@
       ./id_ed25519_sk.pub
     ];
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
