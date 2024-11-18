@@ -62,6 +62,11 @@ args @ {
     jetbrains.rider
     jetbrains.rust-rover
   ];
+  programs.nh = {
+    enable = true;
+    flake = "/Users/${username}/nix-config";
+  };
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
