@@ -3,31 +3,10 @@
   pkgs-stable,
   ...
 }: {
-  system.activationScripts = {
-    # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
-    postUserActivation.text = ''
-      # activateSettings -u will reload the settings from the database and apply them to the current session,
-      # so we do not need to logout and login again to make the changes take effect.
-      /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-
-      # Check if ~/Applications/Home\ Manager\ Apps exists and symlink directory to /Applications
-      HMA_DIRECTORY_SOURCE=~/Applications/Home\ Manager\ Apps
-      HMA_DIRECTORY_TARGET=/Applications
-      if [ -d "$HMA_DIRECTORY_SOURCE" ] && [ ! -L "$HMA_DIRECTORY_TARGET/Home Manager Apps" ]; then
-        echo "Symlinking ~/Applications/Home\ Manager\ Apps directory to /Applications"
-        ln -s "$HMA_DIRECTORY_SOURCE" "$HMA_DIRECTORY_TARGET"
-      fi
-    '';
-  };
-
   programs = {
     zsh.enable = true;
     fish.enable = true;
   };
-
-  # -- MacOS Settings --
-  security.pam.enableSudoTouchIdAuth = true;
-
   services = {
     karabiner-elements = {
       enable = true;
@@ -57,6 +36,7 @@
     ];
   };
 
+  security.pam.enableSudoTouchIdAuth = true;
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
 
@@ -105,43 +85,6 @@
       ApplePressAndHoldEnabled = false;
       InitialKeyRepeat = 14;
       KeyRepeat = 1;
-    };
-  };
-  system.defaults.CustomUserPreferences = {
-    "com.apple.Safari.SandboxBroker" = {
-      ShowDevelopMenu = true;
-      WebKitDeveloperExtrasEnabledPreferenceKey = true;
-    };
-
-    "com.apple.ical" = {
-      "Show Week Numbers" = true;
-    };
-    "com.apple.finder" = {
-      FXICloudDriveDesktop = true;
-      FXICloudDriveDocuments = true;
-      _FXSortFoldersFirst = true;
-    };
-    "com.apple.desktopservices" = {
-      # Avoid creating .DS_Store files on network or USB volumes
-      DSDontWriteNetworkStores = true;
-      DSDontWriteUSBStores = true;
-    };
-
-    "com.apple.WindowManager" = {
-      EnableTiledWindowMargins = false;
-    };
-
-    "com.apple.symbolichotkeys" = {
-      AppleSymbolicHotKeys = {
-        # Disable spotlight with cmd+space
-        "64" = {
-          enabled = false;
-        };
-        # Disable language switching with ctrl+space
-        "60" = {
-          enabled = false;
-        };
-      };
     };
   };
 }
