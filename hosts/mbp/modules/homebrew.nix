@@ -28,6 +28,7 @@ in {
     casks = [
       "1password"
       "1password-cli"
+      "azure-data-studio"
       "betterdisplay"
       "cursor"
       "firefox"
