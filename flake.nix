@@ -34,25 +34,26 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs = inputs @ {self, ...}: {
     nixosConfigurations = let
-      username = "idealpink";
-      hostname = "nixos";
       nixpkgsConfig = {
         config.allowUnfree = true;
       };
     in {
-      "${hostname}" = inputs.nixpkgs.lib.nixosSystem rec {
+      homelab = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
-
         specialArgs = {
           pkgs-stable = import inputs.nixpkgs-stable {
             inherit system;
             config = nixpkgsConfig;
           };
-          inherit inputs username hostname;
+          inherit inputs;
+          username = "idealpink";
+          hostname = "homelab";
         };
 
         modules = [
@@ -63,27 +64,52 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.${username} = import ./hosts/homelab/home.nix;
+            home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
+          }
+        ];
+      };
+      wsl = inputs.nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = {
+          pkgs-stable = import inputs.nixpkgs-stable {
+            inherit system;
+            config = nixpkgsConfig;
+          };
+          inherit inputs;
+          username = "nixos";
+          hostname = "wsl";
+        };
+
+        modules = [
+          ./hosts/wsl/configuration.nix
+          inputs.nixos-wsl.nixosModules.default
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
           }
         ];
       };
     };
 
     darwinConfigurations = let
-      username = "ankarhem";
-      hostname = "ankarhem";
       nixpkgsConfig = {
         config.allowUnfree = true;
       };
     in {
-      "${hostname}" = inputs.darwin.lib.darwinSystem rec {
+      ankarhem = inputs.darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
         specialArgs = {
           pkgs-stable = import inputs.nixpkgs-stable {
             inherit system;
             config = nixpkgsConfig;
           };
-          inherit inputs username hostname;
+          inherit inputs;
+          username = "ankarhem";
+          hostname = "mbp";
         };
         modules = [
           ./hosts/mbp/default.nix
@@ -95,7 +121,7 @@
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./hosts/mbp/home.nix;
+            home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
           }
         ];
       };
