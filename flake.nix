@@ -36,6 +36,11 @@
     };
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {self, ...}: {
@@ -44,6 +49,13 @@
         config.allowUnfree = true;
       };
     in {
+      installer = inputs.nixpkgs.lib.nixosSystem rec {
+        # system = "x86_64-linux";
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/installer/configuration.nix
+        ];
+      };
       homelab = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
