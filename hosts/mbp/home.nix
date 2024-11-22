@@ -52,6 +52,7 @@ args @ {
     # nfs-utils
     nodejs_20
     deno
+    imagemagick
 
     alejandra
 
