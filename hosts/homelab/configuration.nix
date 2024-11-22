@@ -74,8 +74,9 @@
     description = username;
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [];
-    openssh.authorizedKeys.keyFiles = [
-      ./id_ed25519_sk.pub
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyP+c89r1blDaX3MI8kxqFlRsUquGmI9qWMOyo9n5oV ankarhem@ankarhem"
+      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIFnDqR5H4mLaZ97/fKkNqNn6SfRk2HcTvQkdDGt39DcCAAAAC3NzaDpTU0ggS2V5 ankarhem@ankarhem"
     ];
   };
 
