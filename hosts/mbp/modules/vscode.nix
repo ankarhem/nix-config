@@ -15,6 +15,7 @@
       ms-dotnettools.csharp
       denoland.vscode-deno
       svelte.svelte-vscode
+      nefrob.vscode-just-syntax
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "ng-template";
