@@ -112,7 +112,7 @@
         config.allowUnfree = true;
       };
     in {
-      ankarhem = inputs.darwin.lib.darwinSystem rec {
+      mbp = inputs.darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
         specialArgs = {
           pkgs-stable = import inputs.nixpkgs-stable {
