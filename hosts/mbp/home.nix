@@ -53,6 +53,7 @@ args @ {
     nodejs_20
     deno
     imagemagick
+    k9s
 
     alejandra
 
