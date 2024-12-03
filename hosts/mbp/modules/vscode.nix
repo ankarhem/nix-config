@@ -16,6 +16,7 @@
       denoland.vscode-deno
       svelte.svelte-vscode
       nefrob.vscode-just-syntax
+      vadimcn.vscode-lldb
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "ng-template";
