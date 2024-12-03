@@ -13,6 +13,7 @@
       catppuccin.catppuccin-vsc-icons
       ms-dotnettools.csdevkit
       ms-dotnettools.csharp
+      ms-dotnettools.vscode-dotnet-runtime
       denoland.vscode-deno
       svelte.svelte-vscode
       nefrob.vscode-just-syntax
