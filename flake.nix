@@ -80,6 +80,30 @@
           }
         ];
       };
+      nas = inputs.nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = {
+          pkgs-stable = import inputs.nixpkgs-stable {
+            inherit system;
+            config = nixpkgsConfig;
+          };
+          inherit inputs;
+          username = "idealpink";
+          hostname = "nas";
+        };
+
+        modules = [
+          ./hosts/nas/configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
+          }
+        ];
+      };
       wsl = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
