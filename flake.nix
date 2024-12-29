@@ -2,8 +2,8 @@
   description = "MacOS System Configuration flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -15,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -59,7 +59,7 @@
       homelab = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
-          pkgs-stable = import inputs.nixpkgs-stable {
+          pkgs-unstable = import inputs.nixpkgs-unstable {
             inherit system;
             config = nixpkgsConfig;
           };
@@ -80,34 +80,34 @@
           }
         ];
       };
-      nas = inputs.nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = {
-          pkgs-stable = import inputs.nixpkgs-stable {
-            inherit system;
-            config = nixpkgsConfig;
-          };
-          inherit inputs;
-          username = "idealpink";
-          hostname = "nas";
-        };
+      # nas = inputs.nixpkgs.lib.nixosSystem rec {
+      #   system = "x86_64-linux";
+      #   specialArgs = {
+      #     pkgs-unstable = import inputs.nixpkgs-unstable {
+      #       inherit system;
+      #       config = nixpkgsConfig;
+      #     };
+      #     inherit inputs;
+      #     username = "idealpink";
+      #     hostname = "nas";
+      #   };
 
-        modules = [
-          ./hosts/nas/configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = specialArgs;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
+      #   modules = [
+      #     ./hosts/nas/configuration.nix
+      #     inputs.home-manager.nixosModules.home-manager
+      #     {
+      #       home-manager.extraSpecialArgs = specialArgs;
+      #       home-manager.useGlobalPkgs = true;
+      #       home-manager.useUserPackages = true;
 
-            home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
-          }
-        ];
-      };
+      #       home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
+      #     }
+      #   ];
+      # };
       wsl = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
-          pkgs-stable = import inputs.nixpkgs-stable {
+          pkgs-unstable = import inputs.nixpkgs-unstable {
             inherit system;
             config = nixpkgsConfig;
           };
@@ -139,7 +139,7 @@
       mbp = inputs.darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
         specialArgs = {
-          pkgs-stable = import inputs.nixpkgs-stable {
+          pkgs-unstable = import inputs.nixpkgs-unstable {
             inherit system;
             config = nixpkgsConfig;
           };

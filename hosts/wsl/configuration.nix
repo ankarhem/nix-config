@@ -6,6 +6,7 @@
   pkgs,
   username,
   hostname,
+  pkgs-unstable,
   ...
 }: {
   imports = [
@@ -17,7 +18,7 @@
 
     usbip = {
       enable = true;
-      autoAttach = [ "1-6" ];
+      autoAttach = ["1-6"];
     };
 
     useWindowsDriver = true;
@@ -40,7 +41,7 @@
   };
 
   services.pcscd.enable = true;
-  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.udev.packages = [pkgs.yubikey-personalization];
 
   programs.gnupg.agent = {
     enable = true;
@@ -74,7 +75,6 @@
     settings = {
       trusted-users = [username];
       experimental-features = ["nix-command" "flakes"];
-      # auto-optimise-store = true;
     };
   };
 
@@ -109,25 +109,19 @@
   };
 
   fonts = {
-    packages = with pkgs; [
-      # packages = with pkgs; [
-      # icon fonts
-      material-design-icons
-      font-awesome
-
-      # nerdfonts
-      # https://github.com/NixOS/nixpkgs/blob/nixos-23.11/pkgs/data/fonts/nerdfonts/shas.nix
-      (nerdfonts.override {
-        fonts = [
-          # symbols icon only
-          "NerdFontsSymbolsOnly"
-          # Characters
-          "FiraCode"
-          "JetBrainsMono"
-          "Iosevka"
-        ];
-      })
-    ];
+    packages = with pkgs;
+      [
+        # packages = with pkgs; [
+        # icon fonts
+        material-design-icons
+        font-awesome
+      ]
+      ++ [
+        pkgs-unstable.nerd-fonts.symbols-only
+        pkgs-unstable.nerd-fonts.fira-code
+        pkgs-unstable.nerd-fonts.jetbrains-mono
+        pkgs-unstable.nerd-fonts.iosevka
+      ];
   };
 
   # This value determines the NixOS release from which the default

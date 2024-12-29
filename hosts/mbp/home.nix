@@ -101,7 +101,7 @@ args @ {
   };
 
   programs.kitty = {
-    enable = true;
+    enable = false;
     font = {
       name = "Iosevka Nerd Font";
       size = 16;

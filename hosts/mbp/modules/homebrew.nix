@@ -33,6 +33,7 @@ in {
       "cursor"
       "docker"
       "firefox"
+      "ghostty"
       "google-chrome"
       "kitty"
       "legcord"

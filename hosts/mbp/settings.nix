@@ -1,39 +1,45 @@
 {
   pkgs,
-  pkgs-stable,
+  pkgs-unstable,
   ...
 }: {
   programs = {
     zsh.enable = true;
     fish.enable = true;
   };
+
+  nixpkgs.overlays = [
+    (self: super: {
+      karabiner-elements = super.karabiner-elements.overrideAttrs (old: {
+        version = "14.13.0";
+
+        src = super.fetchurl {
+          inherit (old.src) url;
+          hash = "sha256-gmJwoht/Tfm5qMecmq1N6PSAIfWOqsvuHU8VDJY8bLw=";
+        };
+      });
+    })
+  ];
   services = {
     karabiner-elements = {
       enable = true;
-      package = pkgs-stable.karabiner-elements;
     };
   };
 
   fonts = {
-    packages = with pkgs; [
-      # packages = with pkgs; [
-      # icon fonts
-      material-design-icons
-      font-awesome
-
-      # nerdfonts
-      # https://github.com/NixOS/nixpkgs/blob/nixos-23.11/pkgs/data/fonts/nerdfonts/shas.nix
-      (nerdfonts.override {
-        fonts = [
-          # symbols icon only
-          "NerdFontsSymbolsOnly"
-          # Characters
-          "FiraCode"
-          "JetBrainsMono"
-          "Iosevka"
-        ];
-      })
-    ];
+    packages = with pkgs;
+      [
+        # packages = with pkgs; [
+        # icon fonts
+        material-design-icons
+        font-awesome
+      ]
+      ++ [
+        pkgs-unstable.nerd-fonts.symbols-only
+        pkgs-unstable.nerd-fonts.fira-code
+        pkgs-unstable.nerd-fonts.jetbrains-mono
+        pkgs-unstable.nerd-fonts.iosevka
+      ];
   };
 
   security.pam.enableSudoTouchIdAuth = true;
