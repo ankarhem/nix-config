@@ -6,6 +6,12 @@
     ./settings.nix
     ./modules/homebrew.nix
     ../../darwinModules/default.nix
+    ../../modules/default.nix
   ];
-  myDarwin.settings.enable = true;
+  darwin.settings.enable = true;
+
+  modules.ghostty = {
+    enable = true;
+    username = "ankarhem";
+  };
 }

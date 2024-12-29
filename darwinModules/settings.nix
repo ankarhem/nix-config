@@ -4,10 +4,10 @@
   ...
 }:
 with lib; let
-  cfg = config.myDarwin.settings;
+  cfg = config.darwin.settings;
 in {
   options = {
-    myDarwin.settings = {
+    darwin.settings = {
       enable = mkEnableOption "my macOS settings";
 
       safari.showDevelopMenu = mkOption {
