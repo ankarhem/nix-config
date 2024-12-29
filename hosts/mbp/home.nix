@@ -90,6 +90,10 @@ args @ {
         gpg --decrypt --output $output $argv[1]
         and echo "$argv[1] -> $output"
       end
+
+      function copy-term-info
+        infocmp -x | ssh $argv[1] -- tic -x -
+      end
     '';
   };
   programs.zoxide = {

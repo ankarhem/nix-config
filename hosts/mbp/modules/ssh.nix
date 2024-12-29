@@ -17,6 +17,7 @@ in {
         ControlPath ~/.ssh/S.%r@%h:%p
         ControlPersist 60m
       Host synology
+        SetEnv TERM=xterm-256color
         HostName disketten.local
         User idealpink
         Port 1337
