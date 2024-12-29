@@ -14,7 +14,6 @@ args @ {
 
   imports = [
     ../../modules/fish.nix
-    ../../modules/git.nix
     ../../modules/gpg/default.nix
     ../../modules/neovim/default.nix
     ./modules/karabiner.nix
@@ -22,7 +21,10 @@ args @ {
     ./modules/ssh.nix
     ./modules/vscode.nix
     inputs.nix-index-database.hmModules.nix-index
+    ../../homeManagerModules/default.nix
   ];
+
+  modules.git.enable = true;
 
   programs.nix-index-database = {
     comma.enable = true;

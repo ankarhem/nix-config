@@ -11,12 +11,17 @@
 
   imports = [
     ../../modules/fish.nix
-    ../../modules/git.nix
     ../../modules/gpg/default.nix
     ../../modules/neovim/default.nix
     ./modules/ssh.nix
     inputs.nix-index-database.hmModules.nix-index
+    ../../homeManagerModules/default.nix
   ];
+
+  modules.git = {
+    enable = true;
+    gh.enable = false;
+  };
 
   programs.nix-index-database = {
     comma.enable = true;
