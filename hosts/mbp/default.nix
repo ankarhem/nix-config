@@ -13,5 +13,6 @@
   modules.ghostty = {
     enable = true;
     username = "ankarhem";
+    theme = "dark:catppuccin-frappe,light:catppuccin-latte";
   };
 }

@@ -21,6 +21,12 @@ in {
         description = "Font size for Ghostty";
         default = 16;
       };
+
+      theme = mkOption {
+        type = types.str;
+        description = "Theme for Ghostty";
+        default = "";
+      };
     };
   };
 
@@ -32,6 +38,7 @@ in {
         target = ".config/ghostty/config";
         text = ''
           font-size = ${toString cfg.font-size}
+          theme = ${cfg.theme}
         '';
       };
     };
