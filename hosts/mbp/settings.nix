@@ -61,6 +61,7 @@
         "${pkgs.jetbrains.rider}/Applications/Rider.app/"
         "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
         "/Applications/kitty.app/"
+        "/Applications/Ghostty.app/"
         "${pkgs.slack}/Applications/Slack.app/"
         "/Applications/legcord.app/"
         "${pkgs.spotify}/Applications/Spotify.app/"
