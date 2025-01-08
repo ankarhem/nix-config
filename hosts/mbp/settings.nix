@@ -60,6 +60,7 @@
         "${pkgs.bruno}/Applications/Bruno.app/"
         "${pkgs.jetbrains.rider}/Applications/Rider.app/"
         "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
+        "${pkgs.jetbrains.webstorm}/Applications/WebStorm.app/"
         "/Applications/kitty.app/"
         "/Applications/Ghostty.app/"
         "${pkgs.slack}/Applications/Slack.app/"

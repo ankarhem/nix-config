@@ -65,6 +65,7 @@ args @ {
     bruno
     jetbrains.rider
     jetbrains.rust-rover
+    jetbrains.webstorm
   ];
   programs.nh = {
     enable = true;
