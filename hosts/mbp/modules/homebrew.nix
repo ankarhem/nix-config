@@ -34,7 +34,6 @@ in {
       "docker"
       "firefox"
       "google-chrome"
-      "kitty"
       "legcord"
       "maccy"
       "microsoft-excel"

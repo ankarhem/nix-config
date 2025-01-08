@@ -107,18 +107,6 @@ args @ {
     enable = true;
   };
 
-  programs.kitty = {
-    enable = false;
-    font = {
-      name = "Iosevka Nerd Font";
-      size = 16;
-    };
-    themeFile = "Alabaster";
-    shellIntegration = {
-      enableFishIntegration = true;
-    };
-  };
-
   programs.go = {
     enable = true;
     goPath = ".go";
