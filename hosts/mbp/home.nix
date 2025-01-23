@@ -56,6 +56,7 @@ args @ {
     deno
     imagemagick
     k9s
+    mitmproxy
 
     alejandra
 
