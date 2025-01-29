@@ -52,7 +52,7 @@ args @ {
     ngrok
     fd
     # nfs-utils
-    nodejs_20
+    nodejs_22
     deno
     imagemagick
     k9s
