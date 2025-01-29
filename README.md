@@ -7,8 +7,9 @@
 3. Install colemak `curl -O --output-dir ~/Library/Keyboard\ Layouts/ https://colemak.com/pub/mac/Colemak.keylayout`
 4. Install git `xcode-select --install`
 5. Replace default colemak System Preferences > Keyboard > Input Sources
-6. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#ankarhem`
-7. Change shell with `chsh -s /run/current-system/sw/bin/fish`
+6. Add access token to `~/.config/nix/nix.conf`. `mkdir -p ~/.config/nix && echo "access-tokens = github.com=ghp_*****" > ~/.config/nix/nix.conf`
+7. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#ankarhem`
+8. Change shell with `chsh -s /run/current-system/sw/bin/fish`
 
 ### Important
 * Open raycast and initialize settings, via topbar replace hotkey to cmd+space
