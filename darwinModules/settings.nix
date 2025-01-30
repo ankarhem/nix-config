@@ -33,6 +33,11 @@ in {
           description = mdDoc "Sort folders before files in Finder";
           default = true;
         };
+        preferredViewStyle = mkOption {
+          type = types.string;
+          description = mdDoc "Default file layout in finder";
+          default = "Nlsv";
+        };
       };
 
       services.dsStore = mkOption {
@@ -82,6 +87,7 @@ in {
         FXICloudDriveDesktop = cfg.finder.enableICloudDrive;
         FXICloudDriveDocuments = cfg.finder.enableICloudDrive;
         _FXSortFoldersFirst = cfg.finder.sortFoldersFirst;
+        FXPreferredViewStyle = cfg.finder.preferredViewStyle;
       };
       "com.apple.desktopservices" = {
         # Avoid creating .DS_Store files on network or USB volumes

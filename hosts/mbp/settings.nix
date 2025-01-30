@@ -49,8 +49,6 @@
   system.defaults = {
     finder.AppleShowAllExtensions = true;
     finder._FXShowPosixPathInTitle = true;
-    # default to list view in finder
-    finder.FXPreferredViewStyle = "Nlsv";
     dock = {
       autohide = false;
       # Don’t rearrange spaces based on the most recent use
