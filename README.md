@@ -26,6 +26,10 @@
     1. Add ssh-keys manually from 1password
     2. Fix permission on private key `chmod 400 ~/.ssh/id_ed25519_sk`
     3. Connect key and run `gpg-connect-agent "scd serialno" "learn --force" /bye`
+* Install azure credetials provider
+    1. `wget https://github.com/microsoft/artifacts-credprovider/releases/download/v1.3.0/Microsoft.NuGet.CredentialProvider.tar.gz`
+    2. `tar -xzf Microsoft.NuGet.CredentialProvider.tar.gz`
+    3. `mv plugins ~/.nuget/`
 
 ### Not super important
 
@@ -36,6 +40,7 @@
     - Filter accounts / calendar with focus modes
 * Open firefox and login to sync
 * Open slack and login using `jakob.ankarhem@norce.io`, select workspaces
+* Add home folder to finder sidebar in settings
 
 ## Finding custom settings
 
