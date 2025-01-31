@@ -20,6 +20,14 @@
       vadimcn.vscode-lldb
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
+          name = "stately-vscode";
+          publisher = "statelyai";
+          version = "2.1.0";
+          sha256 = "sha256-ZTbdFDN/5HpwQiPAnFcYQ9o+2+Rx/akflP9tjkmG3Jg=";
+        };
+      })
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+        mktplcRef = {
           name = "ng-template";
           publisher = "angular";
           version = "18.2.0";
