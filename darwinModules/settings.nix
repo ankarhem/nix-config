@@ -34,7 +34,7 @@ in {
           default = true;
         };
         preferredViewStyle = mkOption {
-          type = types.string;
+          type = types.str;
           description = mdDoc "Default file layout in finder";
           default = "Nlsv";
         };
