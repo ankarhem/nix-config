@@ -25,6 +25,7 @@ args @ {
   ];
 
   modules.git.enable = true;
+  modules.custom-scripts.enable = true;
 
   programs.nix-index-database = {
     comma.enable = true;

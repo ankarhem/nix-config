@@ -45,6 +45,8 @@ The user account / home map folder must be named `ankarhem`.
 * Open firefox and login to sync
 * Open slack and login using `jakob.ankarhem@norce.io`, select workspaces
 * Add home folder to finder sidebar in settings
+* Login to Github `gh auth login`
+* Clone all norce repos `mkdir -p ~/repos && cd ~/repos && clone_org NorceTech`
 
 ## Finding custom settings
 
