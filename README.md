@@ -2,13 +2,17 @@
 
 ## Macos manual steps
 
+### Prerequisites
+
+The user account / home map folder must be named `ankarhem`.
+
 1. Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
-2. Install nix using [determinate systems](https://github.com/DeterminateSystems/nix-installer)
+2. Install nix using [determinate systems](https://github.com/DeterminateSystems/nix-installer). ❗NOT the determinate distribution
 3. Install colemak `curl -O --output-dir ~/Library/Keyboard\ Layouts/ https://colemak.com/pub/mac/Colemak.keylayout`
 4. Install git `xcode-select --install`
 5. Replace default colemak System Preferences > Keyboard > Input Sources
 6. Add access token to `~/.config/nix/nix.conf`. `mkdir -p ~/.config/nix && echo "access-tokens = github.com=ghp_*****" > ~/.config/nix/nix.conf`
-7. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#ankarhem`
+7. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#mbp`
 8. Change shell with `chsh -s /run/current-system/sw/bin/fish`
 
 ### Important
@@ -20,7 +24,7 @@
     3. Enable extension System Settings > General > Login Items & Extensions > Driver Extensions.
 * Enable desktop + documents icloud sync
 * Configure betterdisplay
-    1. Set Dell display to 1920x1080
+    1. Set Dell display to 2048x1152
     2. Enable HiDPI on Dell display
 * Fix yubikey
     1. Add ssh-keys manually from 1password
@@ -29,7 +33,7 @@
 * Install azure credetials provider
     1. `wget https://github.com/microsoft/artifacts-credprovider/releases/download/v1.3.0/Microsoft.NuGet.CredentialProvider.tar.gz`
     2. `tar -xzf Microsoft.NuGet.CredentialProvider.tar.gz`
-    3. `mv plugins ~/.nuget/`
+    3. `mkdir -p ~/.nuget && mv plugins ~/.nuget/`
 
 ### Not super important
 
