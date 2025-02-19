@@ -14,6 +14,7 @@ in {
       Host github.com
         User git
         HostName github.com
+        IdentityAgent ${onePassPath}
         IdentitiesOnly yes
         IdentityFile ~/.ssh/id_ed25519
         # Persist connection for 60min
