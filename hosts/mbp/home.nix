@@ -63,6 +63,7 @@ args @ {
 
     mas
     slack
+    element-desktop
     spotify
     bruno
     jetbrains.rider
