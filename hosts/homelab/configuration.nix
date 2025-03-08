@@ -13,7 +13,7 @@
     # Include the default lxc/lxd configuration.
     # "${modulesPath}/virtualisation/lxc-container.nix"
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
-    # ./modules/nfs.nix
+    ./apps/default.nix
   ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
