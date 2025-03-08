@@ -35,8 +35,6 @@
       flake = false;
     };
 
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +48,6 @@
       };
     in {
       installer = inputs.nixpkgs.lib.nixosSystem rec {
-        # system = "x86_64-linux";
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/installer/configuration.nix
@@ -70,55 +67,6 @@
 
         modules = [
           ./hosts/homelab/configuration.nix
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = specialArgs;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
-          }
-        ];
-      };
-      # nas = inputs.nixpkgs.lib.nixosSystem rec {
-      #   system = "x86_64-linux";
-      #   specialArgs = {
-      #     pkgs-unstable = import inputs.nixpkgs-unstable {
-      #       inherit system;
-      #       config = nixpkgsConfig;
-      #     };
-      #     inherit inputs;
-      #     username = "idealpink";
-      #     hostname = "nas";
-      #   };
-
-      #   modules = [
-      #     ./hosts/nas/configuration.nix
-      #     inputs.home-manager.nixosModules.home-manager
-      #     {
-      #       home-manager.extraSpecialArgs = specialArgs;
-      #       home-manager.useGlobalPkgs = true;
-      #       home-manager.useUserPackages = true;
-
-      #       home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
-      #     }
-      #   ];
-      # };
-      wsl = inputs.nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = {
-          pkgs-unstable = import inputs.nixpkgs-unstable {
-            inherit system;
-            config = nixpkgsConfig;
-          };
-          inherit inputs;
-          username = "nixos";
-          hostname = "wsl";
-        };
-
-        modules = [
-          ./hosts/wsl/configuration.nix
-          inputs.nixos-wsl.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = specialArgs;
