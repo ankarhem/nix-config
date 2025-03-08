@@ -35,7 +35,7 @@ in {
         IdentityFile ~/.ssh/id_ed25519_sk
         IdentityFile ~/.ssh/id_ecdsa_sk
       Host homelab
-        HostName 192.168.1.174
+        HostName 192.168.1.222
         User idealpink
         Port 22
         IdentitiesOnly yes
