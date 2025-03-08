@@ -11,8 +11,9 @@
 }: {
   imports = [
     # Include the default lxc/lxd configuration.
-    "${modulesPath}/virtualisation/lxc-container.nix"
-    ./modules/nfs.nix
+    # "${modulesPath}/virtualisation/lxc-container.nix"
+    "${modulesPath}/virtualisation/proxmox-lxc.nix"
+    # ./modules/nfs.nix
   ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -27,8 +28,10 @@
     };
   };
 
+  proxmoxLXC = {
+    manageNetwork = true;
+  };
   boot.isContainer = true;
-
   networking.hostName = hostname; # Define your hostname.
   time.timeZone = "Europe/Stockholm";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -89,10 +92,5 @@
   };
   environment.variables.EDITOR = "nvim";
 
-  systemd.suppressedSystemUnits = [
-    "dev-mqueue.mount"
-    "sys-kernel-debug.mount"
-    "sys-fs-fuse-connections.mount"
-  ];
   system.stateVersion = "24.05"; # Did you read the comment?
 }
