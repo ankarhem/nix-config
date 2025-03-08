@@ -28,6 +28,13 @@
       experimental-features = ["nix-command" "flakes"];
     };
   };
+  
+  services.avahi.enable = true;
+  services.avahi.nssmdns4 = true;
+  services.avahi.publish = {
+    enable = true;
+    addresses = true;
+  };
 
   proxmoxLXC = {
     manageNetwork = true;
