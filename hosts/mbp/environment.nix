@@ -10,6 +10,7 @@
     GNUPGHOME = "~/.gnupg";
     LESS = "-r";
     KEYID = "529972E4160200DF";
+    SOPS_AGE_KEY_FILE = "~/.config/sops/age/keys.txt";
   };
   environment.shells = with pkgs; [bash zsh fish];
   environment.shellAliases = {

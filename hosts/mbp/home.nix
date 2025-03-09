@@ -58,6 +58,8 @@ args @ {
     imagemagick
     k9s
     mitmproxy
+    sops
+    age
 
     alejandra
 

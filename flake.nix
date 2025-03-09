@@ -39,6 +39,11 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {self, ...}: {
@@ -67,6 +72,7 @@
 
         modules = [
           ./hosts/homelab/configuration.nix
+          inputs.sops-nix.nixosModules.sops
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = specialArgs;
