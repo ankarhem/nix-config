@@ -19,6 +19,12 @@
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "admin@internetfeno.men";
 
+  services.nginx.virtualHosts."ankarhem.dev" =  {
+    addSSL = true;
+    enableACME = true;
+    root = "/var/www/ankarhem.dev";
+  };
+
   virtualisation.docker = {
     enable = true;
     autoPrune.enable = true;
