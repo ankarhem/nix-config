@@ -1,5 +1,10 @@
-{ ... }:
+{ config, ... }:
 {
+  sops.secrets.picoshare_env = {
+    sopsFile = ../../../secrets/homelab/picoshare.env;
+    format = "dotenv";
+  };
+
   services.nginx.virtualHosts."pico.ankarhem.dev" =  {
     addSSL = true;
     enableACME = true;
@@ -16,8 +21,10 @@
       ];
       environment = {
         PORT = "4001";
-        PS_SHARED_SECRET= "redacted";
       };
+      environmentFiles = [
+        config.sops.secrets.picoshare_env.path
+      ];
       cmd = [
         "-db" "/data/store.db"
       ];

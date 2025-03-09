@@ -14,6 +14,7 @@
     # "${modulesPath}/virtualisation/lxc-container.nix"
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
     ./apps/default.nix
+    ./modules/sops.nix
   ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

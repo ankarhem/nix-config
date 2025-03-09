@@ -1,8 +1,8 @@
 keys:
   - &admin_mbp age1tuff9rc0jgz0ssw6djgwygcncchgz3dq0m2uhj5dpgpt7f9uuvzqf60vj6
-  - &server_homelab age1876jfrdmm8afne52qw26w7kxkerjq69wkz9sjdnh0m7g9nm2halsrl7j26
+  - &server_homelab age1hg84p3jc5lvxm8j2qypec6kxr94599tvvfesjkm2rrsnhf0xhcpq3rxcdw
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: secrets/homelab/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
         - *admin_mbp

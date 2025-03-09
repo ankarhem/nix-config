@@ -48,6 +48,7 @@
     tree
     fd
     nfs-utils
+    sops
 
     alejandra
   ];
