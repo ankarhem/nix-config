@@ -56,11 +56,6 @@
       proxy_set_header X-Plex-Device-Vendor $http_x_plex_device_vendor;
       proxy_set_header X-Plex-Model $http_x_plex_model;
 
-      # Websockets
-      proxy_http_version 1.1;
-      proxy_set_header Upgrade $http_upgrade;
-      proxy_set_header Connection "upgrade";
-
       # Buffering off send to the client as soon as the data is received from Plex.
       proxy_redirect off;
       proxy_buffering off;
@@ -68,6 +63,7 @@
 
     locations."/" = {
       proxyPass = "http://127.0.0.1:32400";
+      proxyWebsockets = true;
     };
   };
 }
