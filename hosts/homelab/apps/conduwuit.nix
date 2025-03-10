@@ -32,6 +32,12 @@ in {
     ];
     addSSL = true;
     enableACME = true;
+    extraConfig = ''
+      add_header X-Frame-Options SAMEORIGIN;
+      add_header X-Content-Type-Options nosniff;
+      add_header X-XSS-Protection "1; mode=block";
+      add_header Content-Security-Policy "frame-ancestors 'self'";
+    '';
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString element-web.port}";
     };
@@ -55,9 +61,12 @@ in {
     ];
   };
   virtualisation.oci-containers.containers."element-web" = {
-    image = "vectorim/element-web:latest";
+    image = "vectorim/element-web:v1.11.94";
+    environment = {
+      ELEMENT_WEB_PORT = toString element-web.port;
+    };
     ports = [
-      "127.0.0.1:${toString element-web.port}:80/tcp"
+      "127.0.0.1:${toString element-web.port}:${toString element-web.port}/tcp"
     ];
   };
   virtualisation.oci-containers.containers."maubot" = {
