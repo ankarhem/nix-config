@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./plex.nix
-    # ./conduwuit.nix
+    ./tautulli.nix
     ./picoshare.nix
   ];
 
