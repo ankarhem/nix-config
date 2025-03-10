@@ -4,6 +4,7 @@
     ./tautulli.nix
     ./picoshare.nix
     ./conduwuit.nix
+    ./swerdle.nix
   ];
 
   services.nginx = {
