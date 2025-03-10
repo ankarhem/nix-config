@@ -73,7 +73,7 @@
   users.users."${username}" = {
     isNormalUser = true;
     description = username;
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyP+c89r1blDaX3MI8kxqFlRsUquGmI9qWMOyo9n5oV ankarhem@ankarhem"
@@ -90,8 +90,6 @@
       StreamLocalBindUnlink yes
     '';
   };
-
-  virtualisation.docker.enable = true;
 
   environment.systemPackages = with pkgs; [
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
