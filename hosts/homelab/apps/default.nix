@@ -3,6 +3,7 @@
     ./plex.nix
     ./tautulli.nix
     ./picoshare.nix
+    ./conduwuit.nix
   ];
 
   services.nginx = {
