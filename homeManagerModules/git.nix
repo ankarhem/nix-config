@@ -41,7 +41,7 @@ in {
 
       signing = {
         signByDefault = true;
-        key = "0x529972E4160200DF";
+        key = mkDefault "0x529972E4160200DF";
       };
 
       extraConfig = {
