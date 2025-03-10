@@ -4,7 +4,7 @@ let
 in
 {
   services.nginx.virtualHosts."swerdle.ankarhem.dev" =  {
-    addSSL = true;
+    forceSSL = true;
     enableACME = true;
     serverAliases = [
       "swerdle.internetfeno.men"

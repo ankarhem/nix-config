@@ -22,7 +22,7 @@
   security.acme.defaults.email = "admin@internetfeno.men";
 
   services.nginx.virtualHosts."ankarhem.dev" = {
-    addSSL = true;
+    forceSSL = true;
     enableACME = true;
     root = "/var/www/ankarhem.dev";
   };

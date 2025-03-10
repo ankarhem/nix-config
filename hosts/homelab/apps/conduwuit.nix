@@ -14,7 +14,7 @@ in {
 
   # Nginx
   services.nginx.virtualHosts."matrix.internetfeno.men" = {
-    addSSL = true;
+    forceSSL = true;
     enableACME = true;
 
     extraConfig = ''
@@ -30,7 +30,7 @@ in {
     serverAliases = [
       "chat.internetfeno.men"
     ];
-    addSSL = true;
+    forceSSL = true;
     enableACME = true;
     extraConfig = ''
       add_header X-Frame-Options SAMEORIGIN;

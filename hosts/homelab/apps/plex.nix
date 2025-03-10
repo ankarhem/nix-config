@@ -5,7 +5,7 @@
   };
 
   services.nginx.virtualHosts."plex.internetfeno.men" =  {
-    addSSL = true;
+    forceSSL = true;
     enableACME = true;
 
     http2 = true;
