@@ -6,6 +6,7 @@
     ./conduwuit.nix
     ./swerdle.nix
     ./tibia-api.nix
+    ./kometa.nix
   ];
 
   services.nginx = {

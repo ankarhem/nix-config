@@ -2,7 +2,6 @@
 let
   port = 8181;
 in {
-
   services.tautulli = {
     enable = true;
     openFirewall = true;
