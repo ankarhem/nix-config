@@ -14,12 +14,12 @@
   };
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [80 443];
   };
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "admin@internetfeno.men";
 
-  services.nginx.virtualHosts."ankarhem.dev" =  {
+  services.nginx.virtualHosts."ankarhem.dev" = {
     addSSL = true;
     enableACME = true;
     root = "/var/www/ankarhem.dev";
@@ -30,5 +30,9 @@
     enable = true;
     autoPrune.enable = true;
     dockerCompat = true;
+    defaultNetwork.settings = {
+      dns_enabled = true;
+    };
   };
+  networking.firewall.interfaces."podman+".allowedUDPPorts = [53];
 }
