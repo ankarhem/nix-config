@@ -15,7 +15,7 @@ in {
   # Nginx
   services.nginx.virtualHosts."matrix.internetfeno.men" = {
     forceSSL = true;
-    enableACME = true;
+    useACMEHost = "internetfeno.men";
 
     extraConfig = ''
       listen 8448 ssl http2 default_server;
@@ -31,7 +31,7 @@ in {
       "chat.internetfeno.men"
     ];
     forceSSL = true;
-    enableACME = true;
+    useACMEHost = "internetfeno.men";
     extraConfig = ''
       add_header X-Frame-Options SAMEORIGIN;
       add_header X-Content-Type-Options nosniff;

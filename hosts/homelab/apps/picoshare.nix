@@ -10,7 +10,7 @@ in
 
   services.nginx.virtualHosts."pico.ankarhem.dev" =  {
     forceSSL = true;
-    enableACME = true;
+    useACMEHost = "ankarhem.dev";
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString port}";
     };

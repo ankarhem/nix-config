@@ -1,4 +1,4 @@
-{...}: {
+{config,...}: {
   imports = [
     ./plex.nix
     ./tautulli.nix
@@ -18,12 +18,38 @@
     enable = true;
     allowedTCPPorts = [80 443];
   };
-  security.acme.acceptTerms = true;
-  security.acme.defaults.email = "admin@internetfeno.men";
+
+  sops.secrets.cloudflare_credentials_env = {
+    sopsFile = ../../../secrets/homelab/cloudflare_credentials.env;
+    format = "dotenv";
+  };
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "admin@internetfeno.men";
+    certs."ankarhem.dev" = {
+      domain = "ankarhem.dev";
+      extraDomainNames = ["*.ankarhem.dev"];
+      email = "jakob@ankarhem.dev";
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      dnsPropagationCheck = true;
+      environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
+    };
+    certs."internetfeno.men" = {
+      domain = "internetfeno.men";
+      extraDomainNames = ["*.internetfeno.men"];
+      email = "admin@internetfeno.men";
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      dnsPropagationCheck = true;
+      environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
+    };
+  };
+  users.users.nginx.extraGroups = [ "acme" ];
 
   services.nginx.virtualHosts."ankarhem.dev" = {
     forceSSL = true;
-    enableACME = true;
+    useACMEHost = "ankarhem.dev";
     root = "/var/www/ankarhem.dev";
   };
 

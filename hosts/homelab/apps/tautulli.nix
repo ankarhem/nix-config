@@ -11,7 +11,7 @@ in {
 
   services.nginx.virtualHosts."tautulli.internetfeno.men" =  {
     forceSSL = true;
-    enableACME = true;
+    useACMEHost = "internetfeno.men";
     locations."/" = {
       proxyPass = "http://127.0.0.1:${builtins.toString port}";
     };
