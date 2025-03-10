@@ -10,6 +10,13 @@
   ];
   darwin.settings.enable = true;
 
+  sops = {
+    defaultSopsFile = ../../../secrets/mbp/secrets.yaml;
+    age = {
+      keyFile = "/Users/ankarhem/.config/sops/age/keys.txt";
+    };
+  };
+
   modules.ghostty = {
     enable = true;
     username = "ankarhem";

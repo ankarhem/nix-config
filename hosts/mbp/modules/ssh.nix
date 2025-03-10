@@ -27,13 +27,6 @@ in {
         IdentitiesOnly yes
         IdentityFile ~/.ssh/id_ed25519_sk
         IdentityFile ~/.ssh/id_ecdsa_sk
-      Host tower
-        HostName tower.local
-        User root
-        Port 1337
-        IdentitiesOnly yes
-        IdentityFile ~/.ssh/id_ed25519_sk
-        IdentityFile ~/.ssh/id_ecdsa_sk
       Host homelab
         HostName 192.168.1.222
         User idealpink

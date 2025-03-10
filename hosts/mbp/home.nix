@@ -10,6 +10,7 @@ args @ {
   home.stateVersion = "23.11";
   home.sessionVariables = {
     PATH = "$PATH:$GOPATH/bin";
+    SOPS_AGE_KEY_FILE = "/Users/ankarhem/.config/sops/age/keys.txt";
   };
 
   imports = [
