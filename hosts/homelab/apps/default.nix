@@ -5,6 +5,7 @@
     ./picoshare.nix
     ./conduwuit.nix
     ./swerdle.nix
+    ./tibia-api.nix
   ];
 
   services.nginx = {
