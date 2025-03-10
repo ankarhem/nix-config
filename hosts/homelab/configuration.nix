@@ -29,6 +29,13 @@
       experimental-features = ["nix-command" "flakes"];
     };
   };
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-sdk
+    ];
+  };
   
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
