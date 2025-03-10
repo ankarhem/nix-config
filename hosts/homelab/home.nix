@@ -22,6 +22,17 @@
     enable = true;
     gh.enable = false;
   };
+  home.file.".config/git/allowed_signers".text =
+    "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDP0ZbXrl+MxQ+9l5hcLjNpLs1cfH+8M+K8jT3VEh02w idealpink@homelab";
+  programs.git = {
+    signing = {
+      key = "~/.ssh/id_ed25519.pub";
+    };
+    extraConfig = {
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
+    };
+  };
 
   programs.nix-index-database = {
     comma.enable = true;
