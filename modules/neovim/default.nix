@@ -7,6 +7,7 @@
   requiredPkgs = with pkgs; [
     ripgrep
     fd
+    nodejs_22
   ];
   lsps = with pkgs; [
     lua-language-server
