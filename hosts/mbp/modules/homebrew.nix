@@ -45,6 +45,7 @@ in {
       "runelite"
       "seadrive"
       "steam"
+      "tailscale"
       "telegram"
     ];
   };
