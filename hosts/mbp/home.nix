@@ -61,6 +61,7 @@ args @ {
     mitmproxy
     sops
     age
+    tailscale
 
     alejandra
 
