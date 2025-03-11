@@ -25,6 +25,7 @@ return {
 	{ import = "lazyvim.plugins.extras.linting.eslint" },
 	-- Lsp
 	{ import = "lazyvim.plugins.extras.lsp.none-ls" },
+	{ import = "lazyvim.plugins.extras.ai.copilot" },
 	-- Test
 	{ import = "lazyvim.plugins.extras.test.core" },
 }
