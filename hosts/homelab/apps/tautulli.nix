@@ -8,9 +8,9 @@ in {
     inherit port;
   };
 
-  services.nginx.virtualHosts."tautulli.internetfeno.men" =  {
+  services.nginx.virtualHosts."tautulli.internal.internetfeno.men" =  {
     forceSSL = true;
-    useACMEHost = "internetfeno.men";
+    useACMEHost = "internal.internetfeno.men";
     locations."/" = {
       proxyPass = "http://127.0.0.1:${builtins.toString port}";
     };

@@ -37,6 +37,15 @@
       dnsPropagationCheck = true;
       environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
     };
+    certs."internal.ankarhem.dev" = {
+      domain = "internal.ankarhem.dev";
+      extraDomainNames = ["*.internal.ankarhem.dev"];
+      email = "jakob@ankarhem.dev";
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      dnsPropagationCheck = true;
+      environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
+    };
     certs."internetfeno.men" = {
       domain = "internetfeno.men";
       extraDomainNames = ["*.internetfeno.men"];
@@ -46,8 +55,42 @@
       dnsPropagationCheck = true;
       environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
     };
+    certs."internal.internetfeno.men" = {
+      domain = "internal.internetfeno.men";
+      extraDomainNames = ["*.internal.internetfeno.men"];
+      email = "admin@internetfeno.men";
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      dnsPropagationCheck = true;
+      environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
+    };
   };
   users.users.nginx.extraGroups = [ "acme" ];
+
+  networking.networkmanager.insertNameservers = [ "127.0.0.1" ];
+  networking.nameservers = ["127.0.0.1"];
+  services.coredns = {
+    enable = true;
+    config = ''
+    . {
+      # Cloudflare and Google
+      forward . 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
+      cache
+    }
+
+    internal.internetfeno.men {
+      template IN A  {
+          answer "{{ .Name }} 0 IN A 192.168.1.222"
+      }
+    }
+    internal.ankarhem.dev {
+      template IN A  {
+          answer "{{ .Name }} 0 IN A 192.168.1.222"
+      }
+    }
+    '';
+  };
+  networking.firewall.allowedUDPPorts = [53];
 
   services.nginx.virtualHosts."ankarhem.dev" = {
     forceSSL = true;
@@ -56,13 +99,14 @@
   };
 
   virtualisation.containers.enable = true;
+  virtualisation.docker.enable = true;
+  virtualisation.oci-containers.backend = "docker";
   virtualisation.podman = {
-    enable = true;
+    enable = false;
     autoPrune.enable = true;
     dockerCompat = true;
     defaultNetwork.settings = {
       dns_enabled = true;
     };
   };
-  networking.firewall.interfaces."podman+".allowedUDPPorts = [53];
 }

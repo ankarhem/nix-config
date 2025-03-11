@@ -5,6 +5,8 @@
   conduwuit.port = 6167;
   element-web.port = 8009;
   maubot.port = 29316;
+  mautrix-instagram.port = 29319;
+  mautrix-telegram.port = 29317;
 in {
   networking.firewall.allowedTCPPorts = [
     conduwuit.port
@@ -40,6 +42,27 @@ in {
     '';
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString element-web.port}";
+    };
+  };
+  services.nginx.virtualHosts."mautrix-instagram.internal.internetfeno.men" = {
+    forceSSL = true;
+    useACMEHost = "internal.internetfeno.men";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString mautrix-instagram.port}";
+    };
+  };
+  services.nginx.virtualHosts."mautrix-telegram.internal.internetfeno.men" = {
+    forceSSL = true;
+    useACMEHost = "internal.internetfeno.men";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString mautrix-telegram.port}";
+    };
+  };
+  services.nginx.virtualHosts."maubot.internal.internetfeno.men" = {
+    forceSSL = true;
+    useACMEHost = "internal.internetfeno.men";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString maubot.port}";
     };
   };
 
@@ -83,11 +106,17 @@ in {
     volumes = [
       "/var/lib/matrix/instagram-bridge:/data:rw"
     ];
+    ports = [
+      "127.0.0.1:${toString mautrix-instagram.port}:${toString mautrix-instagram.port}/tcp"
+    ];
   };
   virtualisation.oci-containers.containers."mautrix-telegram" = {
     image = "dock.mau.dev/mautrix/telegram:v0.15.2";
     volumes = [
       "/var/lib/matrix/telegram-bridge:/data:rw"
+    ];
+    ports = [
+      "127.0.0.1:${toString mautrix-telegram.port}:${toString mautrix-telegram.port}/tcp"
     ];
   };
 }
