@@ -15,6 +15,7 @@
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
     ./apps/default.nix
     ./modules/sops.nix
+    ./modules/tailscale.nix
   ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
