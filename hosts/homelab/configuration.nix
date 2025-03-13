@@ -7,6 +7,7 @@
   pkgs,
   username,
   hostname,
+  helpers,
   ...
 }: {
   imports = [
@@ -76,10 +77,10 @@
     description = username;
     extraGroups = ["networkmanager" "wheel" "podman"];
     packages = with pkgs; [];
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyP+c89r1blDaX3MI8kxqFlRsUquGmI9qWMOyo9n5oV ankarhem@ankarhem"
-      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIFnDqR5H4mLaZ97/fKkNqNn6SfRk2HcTvQkdDGt39DcCAAAAC3NzaDpTU0ggS2V5 ankarhem@ankarhem"
-    ];
+    openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys ({
+      username = "ankarhem";
+      sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
+    });
   };
   services.openssh = {
     enable = true;

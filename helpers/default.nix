@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs }:
 {
   ssh = import ./ssh.nix { inherit pkgs; };
 }

@@ -52,8 +52,12 @@
         config.allowUnfree = true;
       };
     in {
-      installer = inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
+      installer = inputs.nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs;
+          helpers = import ./helpers { pkgs = import inputs.nixpkgs { inherit system; }; };
+        };
         modules = [
           ./hosts/installer/configuration.nix
         ];
@@ -68,7 +72,7 @@
           inherit inputs;
           username = "idealpink";
           hostname = "homelab";
-          helpers = import ./helpers { pkgs = inputs.nixpkgs { inherit system; }; };
+          helpers = import ./helpers { pkgs = import inputs.nixpkgs { inherit system; }; };
         };
 
         modules = [
@@ -101,7 +105,6 @@
           inherit inputs;
           username = "ankarhem";
           hostname = "mbp";
-          helpers = import ./helpers { pkgs = inputs.nixpkgs { inherit system; }; };
         };
         modules = [
           ./hosts/mbp/default.nix
