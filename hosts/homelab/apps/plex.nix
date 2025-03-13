@@ -2,6 +2,7 @@
   services.plex = {
     enable = true;
     openFirewall = true;
+    # accelerationDevices = [ "/dev/dri/renderD128" ]; 
   };
 
   services.nginx.virtualHosts."plex.internetfeno.men" =  {

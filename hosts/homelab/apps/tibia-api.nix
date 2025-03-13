@@ -1,6 +1,6 @@
-{ config, ... }:
+{ ... }:
 let
-  port = 7032;
+  port = "7032";
 in
 {
   services.nginx.virtualHosts."tibia.ankarhem.dev" =  {
@@ -10,15 +10,15 @@ in
       "api.tibiacenter.com"
     ];
     locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString port}";
+      proxyPass = "http://127.0.0.1:${port}";
     };
   };
   virtualisation.oci-containers.containers = {
     tibia-api = {
       image = "ghcr.io/ankarhem/tibia-api-rust:main";
-      ports = ["127.0.0.1:${toString port}:${toString port}"];
+      ports = ["127.0.0.1:${port}:${port}"];
       environment = {
-        PORT = toString port;
+        PORT = port;
         RUST_LOG = "info,html5ever=error";
       };
       volumes = [

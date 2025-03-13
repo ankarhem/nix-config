@@ -9,6 +9,7 @@
     ./kometa.nix
     ./omada.nix
     ./synology.nix
+    ./arrs/default.nix
   ];
 
   services.nginx = {

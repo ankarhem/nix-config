@@ -4,7 +4,6 @@ let
 in {
   services.tautulli = {
     enable = true;
-    openFirewall = true;
     inherit port;
   };
 

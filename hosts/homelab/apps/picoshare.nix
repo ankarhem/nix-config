@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  port = 4001;
+  port = "4001";
 in
 {
   sops.secrets.picoshare_env = {
@@ -12,18 +12,18 @@ in
     forceSSL = true;
     useACMEHost = "ankarhem.dev";
     locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString port}";
+      proxyPass = "http://127.0.0.1:${port}";
     };
   };
   virtualisation.oci-containers.containers = {
     picoshare = {
       image = "mtlynch/picoshare:latest";
-      ports = ["127.0.0.1:${toString port}:${toString port}"];
+      ports = ["127.0.0.1:${port}:${port}"];
       volumes = [
         "/mnt/DISKETTEN_drive/picoshare:/data"
       ];
       environment = {
-        PORT = toString port;
+        PORT = port;
       };
       environmentFiles = [
         config.sops.secrets.picoshare_env.path
