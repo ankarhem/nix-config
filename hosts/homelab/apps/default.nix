@@ -8,6 +8,7 @@
     ./tibia-api.nix
     ./kometa.nix
     ./omada.nix
+    ./synology.nix
   ];
 
   services.nginx = {
