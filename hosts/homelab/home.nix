@@ -20,7 +20,7 @@
 
   modules.git = {
     enable = true;
-    gh.enable = false;
+    gh.enable = true;
   };
   home.file.".config/git/allowed_signers".text =
     "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDP0ZbXrl+MxQ+9l5hcLjNpLs1cfH+8M+K8jT3VEh02w idealpink@homelab";
