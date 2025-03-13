@@ -34,6 +34,7 @@ in {
         IdentitiesOnly yes
         IdentityFile ~/.ssh/id_ed25519_sk
         IdentityFile ~/.ssh/id_ecdsa_sk
+        IdentityFile ~/.ssh/id_ed25519
         RemoteForward /run/user/1000/gnupg/S.gpg-agent /Users/ankarhem/.gnupg/S.gpg-agent.extra
         # RemoteForward /home/idealpink/.gnupg/S.gpg-agent /Users/ankarhem/.gnupg/S.gpg-agent.extra
     '';
