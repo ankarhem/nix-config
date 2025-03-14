@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   modulesPath,
-  config,
   pkgs,
   username,
   hostname,
@@ -11,12 +10,11 @@
   ...
 }: {
   imports = [
-    # Include the default lxc/lxd configuration.
-    # "${modulesPath}/virtualisation/lxc-container.nix"
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
     ./apps/default.nix
     ./modules/sops.nix
     ./modules/tailscale.nix
+    ./modules/fail2ban.nix
   ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -76,7 +74,7 @@
     isNormalUser = true;
     description = username;
     extraGroups = ["networkmanager" "wheel" "podman"];
-    packages = with pkgs; [];
+    packages = [];
     openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys ({
       username = "ankarhem";
       sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
