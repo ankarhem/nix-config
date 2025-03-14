@@ -19,22 +19,25 @@ in {
 
   services.fail2ban = {
     enable = true;
-    maxretry = 3;
-    bantime = "24h";
+    bantime-increment.enable = true;
     extraPackages = [ pkgs.curl ];
-  };
+    jails = {
+      nginx-http-auth.settings.enabled = true;
+      nginx-botsearch.settings.enabled = true;
+      nginx-bad-request.settings.enabled = true;
+      # nginx-forbidden.settings.enabled = true;
 
-  services.fail2ban.jails = {
-    nginx-bruteforce.settings = {
-      enabled = true;
-      filter = "nginx-bruteforce";
-      logpath = "/var/log/nginx/access.log";
-      backend = "auto";
-      findtime = "1h";
-      action  = ''
-        cf
-        iptables-multiport[port="http,https"]
-      '';
+      nginx-bruteforce.settings = {
+        enabled = true;
+        filter = "nginx-bruteforce";
+        logpath = "/var/log/nginx/*.log";
+        backend = "auto";
+        findtime = "1d";
+        action  = ''
+          cf
+          iptables-multiport[port="http,https"]
+        '';
+      };
     };
   };
 
