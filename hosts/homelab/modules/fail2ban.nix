@@ -1,4 +1,4 @@
-{pkgs,...}: let
+{config, pkgs,...}: let
   realIpsFromList = pkgs.lib.strings.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};");
   fileToList = x: pkgs.lib.strings.splitString "\n" (builtins.readFile x);
 
@@ -21,7 +21,6 @@ in {
     enable = true;
     maxretry = 3;
     bantime = "24h";
-    findtime = "1h";
     extraPackages = [ pkgs.curl ];
   };
 
@@ -31,12 +30,38 @@ in {
       filter = "nginx-bruteforce";
       logpath = "/var/log/nginx/access.log";
       backend = "auto";
+      findtime = "1h";
       action  = ''
         cf
         iptables-multiport[port="http,https"]
       '';
     };
   };
+
+  sops.secrets.cloudflare_global_api_key = {};
+  sops.secrets.cloudflare_username = {};
+  sops.templates."cloudflare-action.conf".content = ''
+    [Definition]
+
+    actionstart =
+    actionstop =
+    actioncheck =
+
+    actionban = ${pkgs.curl} -s -o /dev/null -X POST 
+          -H "X-Auth-Email: <cfuser>" 
+          -H "X-Auth-Key: <cftoken>" 
+          -H "Content-Type: application/json" 
+          -d '{"mode":"block","configuration":{"target":"ip","value":"<ip>"},"notes":"Fail2Ban <name>"}' 
+          "https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules"
+
+    actionunban = ${pkgs.curl} -s -o /dev/null -X DELETE -H 'X-Auth-Email: <cfuser>' -H 'X-Auth-Key: <cftoken>' 
+          https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules/$(/run/current-system/sw/bin/curl -s -X GET -H 'X-Auth-Email: <cfuser>' -H 'X-Auth-Key: <cftoken>' 
+          'https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules?mode=block&configuration_target=ip&configuration_value=&page=1&per_page=1' | tr -d '\n' | cut -d'"' -f6)
+
+    [Init]
+    cftoken = ${config.sops.placeholder.cloudflare_global_api_key}
+    cfuser = ${config.sops.placeholder.cloudflare_username}
+  '';
 
   environment.etc = {
     # Defines a filter that detects URL probing by reading the Nginx access log
@@ -45,25 +70,6 @@ in {
       failregex = ^<HOST>.*(GET /(wp-|admin|boaform|phpmyadmin|\.env|\.git)|\.(dll|so|cfm|asp)|(\?|&)(=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000|=PHPE9568F36-D428-11d2-A769-00AA001ACF42|=PHPE9568F35-D428-11d2-A769-00AA001ACF42|=PHPE9568F34-D428-11d2-A769-00AA001ACF42)|\\x[0-9a-zA-Z]{2})
     '');
 
-    "fail2ban/action.d/cf.conf".text = pkgs.lib.mkDefault (pkgs.lib.mkAfter ''
-      [Definition]
-
-      actionstart =
-      actionstop =
-      actioncheck =
-
-      actionban = ${pkgs.curl} -s -o /dev/null -X POST 
-            -H "X-Auth-Email: <cfuser>" 
-            -H "X-Auth-Key: <cftoken>" 
-            -H "Content-Type: application/json" 
-            -d '{"mode":"block","configuration":{"target":"ip","value":"<ip>"},"notes":"Fail2Ban <name>"}' 
-            "https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules"
-
-      actionunban = ${pkgs.curl} -s -o /dev/null -X DELETE -H 'X-Auth-Email: <cfuser>' -H 'X-Auth-Key: <cftoken>' 
-            https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules/$(/run/current-system/sw/bin/curl -s -X GET -H 'X-Auth-Email: <cfuser>' -H 'X-Auth-Key: <cftoken>' 
-            'https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules?mode=block&configuration_target=ip&configuration_value=&page=1&per_page=1' | tr -d '\n' | cut -d'"' -f6)
-
-      [Init]
-    '');
+    "fail2ban/action.d/cf.conf".source = config.sops.templates."cloudflare-action.conf".path;
   };
 }
