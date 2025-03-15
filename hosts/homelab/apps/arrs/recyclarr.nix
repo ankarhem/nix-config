@@ -7,14 +7,9 @@
   sops.secrets.radarr_api_key = {};
   sops.secrets.sonarr_api_key = {};
 
-  sops.templates."recyclarr-secrets.yml".content = ''
-movies_api_key: ${config.sops.placeholder.radarr_api_key}
-tv_api_key: ${config.sops.placeholder.sonarr_api_key}
-  '';
-
-  # put the template at /var/lib/recyclarr/config.json
-  systemd.tmpfiles.rules = [
-    "L /var/lib/recyclarr/secrets.yml - - - - ${config.sops.templates."recyclarr-secrets.yml".path}"
+  systemd.services.recyclarr.serviceConfig.LoadCredential = [
+    "radarr_api_key:${config.sops.secrets.radarr_api_key.path}"
+    "sonarr_api_key:${config.sops.secrets.sonarr_api_key.path}"
   ];
 
   services.recyclarr = {
@@ -23,12 +18,12 @@ tv_api_key: ${config.sops.placeholder.sonarr_api_key}
 
     configuration = {
       radarr.movies = {
-        base_url = "https://sonarr.internal.internetfeno.men";
-        api_key = "!secret movies_api_key";
+        base_url = "https://radarr.internal.internetfeno.men";
+        api_key._secret = "/run/credentials/recyclarr.service/radarr_api_key";
       };
       sonarr.tv = {
-        base_url = "https://radarr.internal.internetfeno.men";
-        api_key = "!secret tv_api_key";
+        base_url = "https://sonarr.internal.internetfeno.men";
+        api_key._secret = "/run/credentials/recyclarr.service/sonarr_api_key";
       };
     };
   };
