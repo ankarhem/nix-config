@@ -7,6 +7,7 @@
     ./recyclarr.nix
     ./sonarr.nix
     ./tautulli.nix
+    ./flaresolverr.nix
   ];
 }
 
