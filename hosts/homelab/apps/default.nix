@@ -1,15 +1,12 @@
 {config,...}: {
   imports = [
-    ./plex.nix
-    ./tautulli.nix
-    ./picoshare.nix
-    ./conduwuit.nix
-    ./swerdle.nix
-    ./tibia-api.nix
-    ./kometa.nix
-    ./omada.nix
-    ./synology.nix
     ./arrs/default.nix
+    ./conduwuit.nix
+    ./omada.nix
+    ./picoshare.nix
+    ./swerdle.nix
+    ./synology.nix
+    ./tibia-api.nix
   ];
 
   services.nginx = {
