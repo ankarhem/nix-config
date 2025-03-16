@@ -19,15 +19,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix = {
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
     settings = {
       trusted-users = [ "root" "@wheel" ];
       experimental-features = ["nix-command" "flakes"];
     };
+  };
+  programs.nh = {
+    enable = true;
+    flake = "/home/${username}/nix-config/";
+    clean.enable = true;
   };
 
   hardware.graphics = {
