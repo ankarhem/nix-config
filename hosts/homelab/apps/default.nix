@@ -69,6 +69,14 @@
 
   networking.networkmanager.insertNameservers = [ "127.0.0.1" ];
   networking.nameservers = ["127.0.0.1"];
+  networking.useHostResolvConf = false;
+  services.resolved = {
+    enable = true;
+    fallbackDns = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4"];
+    extraConfig = ''
+      DNS=127.0.0.1
+    '';
+  };
   services.coredns = {
     enable = true;
     config = ''
@@ -80,12 +88,12 @@
 
     internal.internetfeno.men {
       template IN A  {
-          answer "{{ .Name }} 0 IN A 192.168.1.222"
+          answer "{{ .Name }} 0 IN A 192.168.1.221"
       }
     }
     internal.ankarhem.dev {
       template IN A  {
-          answer "{{ .Name }} 0 IN A 192.168.1.222"
+          answer "{{ .Name }} 0 IN A 192.168.1.221"
       }
     }
     '';
