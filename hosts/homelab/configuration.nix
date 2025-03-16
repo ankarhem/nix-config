@@ -15,6 +15,7 @@
     ./modules/sops.nix
     ./modules/tailscale.nix
     ./modules/fail2ban.nix
+    ./modules/networking.nix
   ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
