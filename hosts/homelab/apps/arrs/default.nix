@@ -8,6 +8,7 @@
     ./sonarr.nix
     ./tautulli.nix
     ./qbittorrent.nix
+    ./overseerr.nix
   ];
 }
 
