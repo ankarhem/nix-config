@@ -60,7 +60,7 @@ in {
 
   # Containers
   virtualisation.oci-containers.containers."conduwuit" = {
-    image = "girlbossceo/conduwuit:main";
+    image = "ghcr.io/girlbossceo/conduwuit:main";
     environment = {
       "CONDUWUIT_ADDRESS" = "0.0.0.0";
       "CONDUWUIT_CONFIG" = "/etc/conduwuit.toml";
