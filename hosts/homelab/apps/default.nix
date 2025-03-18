@@ -108,6 +108,9 @@
 
   virtualisation.containers.enable = true;
   virtualisation.docker.enable = true;
+  virtualisation.docker.daemon.settings = {
+    dns = [ "192.168.1.221" ];
+  };
   virtualisation.oci-containers.backend = "docker";
   virtualisation.podman = {
     enable = false;
