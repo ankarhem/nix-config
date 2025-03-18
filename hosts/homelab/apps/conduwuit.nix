@@ -60,7 +60,7 @@ in {
 
   # Containers
   virtualisation.oci-containers.containers."conduwuit" = {
-    image = "girlbossceo/conduwuit:latest";
+    image = "girlbossceo/conduwuit:main";
     environment = {
       "CONDUWUIT_ADDRESS" = "0.0.0.0";
       "CONDUWUIT_CONFIG" = "/etc/conduwuit.toml";
@@ -70,6 +70,7 @@ in {
       "/var/lib/matrix/conduwuit/.registry_tokens:/etc/conduwuit/.registry_tokens:rw"
       "/var/lib/matrix/conduwuit/conduwuit.toml:/etc/conduwuit.toml:rw"
       "/var/lib/matrix/conduwuit/db:/var/lib/conduwuit:rw"
+      "/mnt/DISKETTEN_drive/conduwuit/backups:/backups:rw"
     ];
     ports = [
       "127.0.0.1:${conduwuit.port}:${conduwuit.port}/tcp"

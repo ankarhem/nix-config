@@ -3,7 +3,7 @@
     forceSSL = true;
     useACMEHost = "internal.internetfeno.men";
     locations."/" = {
-      proxyPass = "https://disketten.local:5001";
+      proxyPass = "https://192.168.1.163:5001";
     };
   };
 }
