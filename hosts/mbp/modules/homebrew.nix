@@ -43,7 +43,6 @@ in {
       "openvpn-connect"
       "raycast"
       "runelite"
-      "seadrive"
       "steam"
       "tailscale"
       "telegram"
