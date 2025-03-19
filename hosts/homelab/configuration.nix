@@ -73,7 +73,7 @@
   users.users."${username}" = {
     isNormalUser = true;
     description = username;
-    extraGroups = ["networkmanager" "wheel" "podman"];
+    extraGroups = ["networkmanager" "wheel" "podman" "docker"];
     packages = [];
     openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys ({
       username = "ankarhem";
