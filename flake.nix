@@ -105,6 +105,7 @@
           inherit inputs;
           username = "ankarhem";
           hostname = "mbp";
+          helpers = import ./helpers { pkgs = import inputs.nixpkgs { inherit system; }; };
         };
         modules = [
           ./hosts/mbp/default.nix
