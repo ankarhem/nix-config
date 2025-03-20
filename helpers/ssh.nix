@@ -5,5 +5,5 @@
       inherit sha256;
     };
     keys = pkgs.lib.splitString "\n" (builtins.readFile authorizedKeysFile);
-  in keys;
+  in builtins.filter (s: s != "") keys;
 }
