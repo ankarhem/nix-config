@@ -1,8 +1,8 @@
 { config, ... }:
 {
   services.opentelemetry-collector.settings = {
-    exporters.otlphttp.endpoint = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}/otlp";
-    service.pipelines.logs.exporters = [ "otlphttp" ];
+    exporters."otlphttp/loki".endpoint = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}/otlp";
+    service.pipelines.logs.exporters = [ "otlphttp/loki" ];
   };
 
   # https://git.ingolf-wagner.de/palo/nixos-config/src/branch/main/machines/chungus/telemetry/loki.nix
@@ -95,7 +95,7 @@
       {
         name = "Loki";
         type = "loki";
-        url = "http://localhost:${toString config.services.loki.configuration.server.http_listen_port}";
+        url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}";
         orgId = 1;
         jsonData = {
           timeout = 360;

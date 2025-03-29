@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ...}:{
+{ pkgs, pkgs-unstable, ...}:{
   environment.systemPackages = [
     pkgs.bat
     (pkgs.writers.writeBashBin "opentelemetry-show-config" ''
@@ -19,6 +19,6 @@
     
     service.pipelines.logs.receivers = [ "otlp" ];
     service.pipelines.metrics.receivers = [ "otlp" ];
-    # service.pipelines.traces.receivers = [ "otlp" ];
+    service.pipelines.traces.receivers = [ "otlp" ];
   };
 }
