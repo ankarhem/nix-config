@@ -7,6 +7,7 @@
     ./swerdle.nix
     ./synology.nix
     ./tibia-api.nix
+    ./seafile.nix
     ./telemetry/default.nix
   ];
 
