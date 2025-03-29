@@ -7,6 +7,7 @@
     ./swerdle.nix
     ./synology.nix
     ./tibia-api.nix
+    ./telemetry/default.nix
   ];
 
   services.nginx = {
