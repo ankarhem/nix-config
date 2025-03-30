@@ -15,7 +15,7 @@ in {
   programs.gpg = {
     enable = true;
 
-    mutableKeys = false;
+    mutableKeys = true;
     mutableTrust = false;
     publicKeys = [
       {
