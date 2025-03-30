@@ -1,4 +1,17 @@
-_: {
+{pkgs, ...}:let
+  fetchKey = { key, hash, keyserver ? "keys.openpgp.org" }:
+    let
+      validKeyservers = [ "keys.openpgp.org" ];
+      url =
+        if keyserver == "keys.openpgp.org" then
+          "https://${keyserver}/vks/v1/by-keyid/${key}"
+        else
+          abort "Invalid keyserver. Must be one of: ${builtins.toString validKeyservers}";
+    in
+      pkgs.fetchurl {
+        inherit url hash;
+      };
+in {
   programs.gpg = {
     enable = true;
 
@@ -6,15 +19,24 @@ _: {
     mutableTrust = false;
     publicKeys = [
       {
-        source = ./public-keys/jakob-2024-11-01.pub;
+        source = fetchKey {
+          key = "529972E4160200DF";
+          hash = "sha256-Hgr7+Uze9Hlr3cobKwwsrU9OS4luL6LzLVOoZBNrPtw=0";
+        };
         trust = 5;
       }
       {
-        source = ./public-keys/jonatan.pub;
+        source = fetchKey {
+          key = "304CB5F9C479DFFA";
+          hash = "sha256-JyH3kUJiNMAF49RM0H3Zjs75BJfYl0BlF0gsfeeQT+s=";
+        };
         trust = 3;
       }
       {
-        source = ./public-keys/william.pub;
+        source = pkgs.fetchurl {
+          url = "https://github.com/krabba.gpg";
+          hash = "sha256-T0HrnFx5rHIX3N5ux01jWIoxeJ9xCkbbtUoZpWpCGNU=";
+        };
         trust = 2;
       }
     ];
