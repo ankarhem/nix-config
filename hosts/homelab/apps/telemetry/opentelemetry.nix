@@ -16,9 +16,15 @@
       otlp.protocols.grpc.endpoint = "127.0.0.1:4317";
       otlp.protocols.http.endpoint = "127.0.0.1:4318";
     };
-    
     service.pipelines.logs.receivers = [ "otlp" ];
     service.pipelines.metrics.receivers = [ "otlp" ];
     service.pipelines.traces.receivers = [ "otlp" ];
+
+    processors = {
+      batch = {};
+    };
+    service.pipelines.logs.processors = [ "batch" ];
+    service.pipelines.metrics.processors = [ "batch" ];
+    service.pipelines.traces.processors = [ "batch" ];
   };
 }
