@@ -9,7 +9,7 @@
     ./tautulli.nix
     ./qbittorrent.nix
     ./jellyseerr.nix
-    ./jellyfin.nix
+    # ./jellyfin.nix
     ./unpackerr.nix
   ];
 }
