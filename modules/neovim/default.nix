@@ -1,43 +1,38 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config, lib, pkgs, ... }:
+let
   requiredPkgs = with pkgs; [
-    # for blink.cmp
+    ast-grep
+    csharpier
     curl
-    # for git
-    lazygit
-    # for copilot
-    nodejs_22
-    # for fzf-lua
-    ripgrep
     fd
     fzf
+    lazygit
+    markdownlint-cli2
+    mermaid-cli
+    nixfmt-classic
+    nodePackages.prettier
+    nodejs_22
+    python312Packages.pylatexenc
+    ripgrep
+    shfmt
+    tectonic
   ];
   lsps = with pkgs; [
     lua-language-server
     nil
     nodePackages.svelte-language-server
     stylua
-    vscode-langservers-extracted
     tailwindcss-language-server
+    vscode-langservers-extracted
   ];
 in {
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
-    extraPackages = with pkgs;
-      [
-      ]
-      ++ requiredPkgs
-      ++ lsps;
+    extraPackages = with pkgs; [ ] ++ requiredPkgs ++ lsps;
 
-    plugins = with pkgs.vimPlugins; [
-      lazy-nvim
-    ];
+    plugins = with pkgs.vimPlugins; [ lazy-nvim ];
 
     extraLuaConfig = let
       plugins = with pkgs.vimPlugins; [
@@ -74,6 +69,7 @@ in {
         nvim-web-devicons
         persistence-nvim
         plenary-nvim
+        rocks-nvim
         telescope-fzf-native-nvim
         telescope-nvim
         todo-comments-nvim
@@ -116,13 +112,13 @@ in {
         }
       ];
       mkEntryFromDrv = drv:
-        if lib.isDerivation drv
-        then {
+        if lib.isDerivation drv then {
           name = "${lib.getName drv}";
           path = drv;
-        }
-        else drv;
-      lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
+        } else
+          drv;
+      lazyPath =
+        pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
     in ''
       require("lazy").setup({
         defaults = {
@@ -160,63 +156,65 @@ in {
   xdg.configFile."nvim/parser".source = let
     parsers = pkgs.symlinkJoin {
       name = "treesitter-parsers";
-      paths =
-        (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins:
-          with plugins; [
-            # styled
-            # zig
-            angular
-            bash
-            c
-            c_sharp
-            css
-            diff
-            dockerfile
-            editorconfig
-            fish
-            git_config
-            git_rebase
-            gitattributes
-            gitcommit
-            gitignore
-            go
-            goctl
-            godot_resource
-            gomod
-            gosum
-            gotmpl
-            gowork
-            gpg
-            graphql
-            html
-            ini
-            jq
-            jsdoc
-            json
-            jsonc
-            jsonnet
-            just
-            lua
-            make
-            markdown
-            nix
-            passwd
-            python
-            regex
-            requirements
-            rust
-            scss
-            sql
-            svelte
-            templ
-            terraform
-            toml
-            tsx
-            typescript
-            vue
-            yaml
-          ]))
-        .dependencies;
+      paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins:
+        with plugins; [
+          # styled
+          # zig
+          angular
+          bash
+          c
+          c_sharp
+          css
+          diff
+          dockerfile
+          editorconfig
+          fish
+          git_config
+          git_rebase
+          gitattributes
+          gitcommit
+          gitignore
+          go
+          goctl
+          godot_resource
+          gomod
+          gosum
+          gotmpl
+          gowork
+          gpg
+          graphql
+          html
+          ini
+          javascript
+          jq
+          jsdoc
+          json
+          jsonc
+          jsonnet
+          just
+          latex
+          lua
+          make
+          markdown
+          nix
+          norg
+          passwd
+          python
+          regex
+          requirements
+          rust
+          scss
+          sql
+          svelte
+          templ
+          terraform
+          toml
+          tsx
+          typescript
+          typst
+          vue
+          yaml
+        ])).dependencies;
     };
   in "${parsers}/parser";
 
