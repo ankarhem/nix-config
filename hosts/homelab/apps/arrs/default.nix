@@ -10,6 +10,7 @@
     ./qbittorrent.nix
     ./jellyseerr.nix
     ./jellyfin.nix
+    ./unpackerr.nix
   ];
 }
 
