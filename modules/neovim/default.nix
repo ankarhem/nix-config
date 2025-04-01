@@ -5,9 +5,16 @@
   ...
 }: let
   requiredPkgs = with pkgs; [
+    # for blink.cmp
+    curl
+    # for git
+    lazygit
+    # for copilot
+    nodejs_22
+    # for fzf-lua
     ripgrep
     fd
-    nodejs_22
+    fzf
   ];
   lsps = with pkgs; [
     lua-language-server

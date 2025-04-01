@@ -21,11 +21,16 @@ return {
 	{ import = "lazyvim.plugins.extras.lang.toml" },
 	{ import = "lazyvim.plugins.extras.lang.typescript" },
 	{ import = "lazyvim.plugins.extras.lang.yaml" },
-	-- Linting
+	-- Linting / Formatting
 	{ import = "lazyvim.plugins.extras.linting.eslint" },
+	{ import = "lazyvim.plugins.extras.formatting.prettier" },
 	-- Lsp
 	{ import = "lazyvim.plugins.extras.lsp.none-ls" },
 	{ import = "lazyvim.plugins.extras.ai.copilot" },
 	-- Test
 	{ import = "lazyvim.plugins.extras.test.core" },
+	-- Ui
+	{ import = "lazyvim.plugins.extras.ui.smear-cursor" },
+	-- Utils
+	{ import = "lazyvim.plugins.extras.util.mini-hipatterns" },
 }
