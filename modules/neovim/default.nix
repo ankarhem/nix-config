@@ -6,6 +6,9 @@ let
     curl
     fd
     fzf
+    gofumpt
+    gomodifytags
+    gotools
     lazygit
     markdownlint-cli2
     mermaid-cli
