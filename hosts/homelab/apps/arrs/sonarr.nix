@@ -9,6 +9,7 @@ in {
     useACMEHost = "internal.internetfeno.men";
     locations."/" = {
       proxyPass = "http://127.0.0.1:${port}";
+      proxyWebsockets = true;
     };
   };
 }
