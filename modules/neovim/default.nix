@@ -39,14 +39,16 @@ in {
 
     extraLuaConfig = let
       plugins = with pkgs.vimPlugins; [
-        # LazyVim
         LazyVim
+        SchemaStore-nvim
         bufferline-nvim
         cmp-buffer
+        cmp-git
         cmp-nvim-lsp
         cmp-path
         cmp_luasnip
         conform-nvim
+        crates-nvim
         dashboard-nvim
         dressing-nvim
         flash-nvim
@@ -57,9 +59,14 @@ in {
         neo-tree-nvim
         neoconf-nvim
         neodev-nvim
+        neotest
+        neotest-golang
         noice-nvim
+        none-ls-nvim
         nui-nvim
         nvim-cmp
+        nvim-dap
+        nvim-dap-go
         nvim-lint
         nvim-lspconfig
         nvim-notify
@@ -70,9 +77,11 @@ in {
         nvim-ts-autotag
         nvim-ts-context-commentstring
         nvim-web-devicons
+        overseer-nvim
         persistence-nvim
         plenary-nvim
         rocks-nvim
+        rustaceanvim
         telescope-fzf-native-nvim
         telescope-nvim
         todo-comments-nvim
@@ -99,6 +108,10 @@ in {
         }
         {
           name = "mini.comment";
+          path = mini-nvim;
+        }
+        {
+          name = "mini.icons";
           path = mini-nvim;
         }
         {
