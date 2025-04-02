@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   requiredPkgs = with pkgs; [
     ast-grep
@@ -8,6 +8,7 @@ let
     fzf
     gofumpt
     gomodifytags
+    gotestsum
     gotools
     lazygit
     markdownlint-cli2
@@ -21,19 +22,25 @@ let
     tectonic
   ];
   lsps = with pkgs; [
+    angular-language-server
+    astro-language-server
+    jsonnet-language-server
     lua-language-server
+    nginx-language-server
     nil
-    nodePackages.svelte-language-server
     stylua
+    svelte-language-server
     tailwindcss-language-server
+    typescript-language-server
     vscode-langservers-extracted
+    vue-language-server
   ];
 in {
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
-    extraPackages = with pkgs; [ ] ++ requiredPkgs ++ lsps;
+    extraPackages = [ ] ++ requiredPkgs ++ lsps;
 
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
 
