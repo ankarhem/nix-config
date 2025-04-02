@@ -6,6 +6,8 @@ let
     curl
     fd
     fzf
+    gcc
+    gnumake
     gofumpt
     gomodifytags
     gotestsum
@@ -25,14 +27,17 @@ let
     angular-language-server
     astro-language-server
     csharp-ls
+    gopls
     jsonnet-language-server
     lua-language-server
     nginx-language-server
     nil
+    nixd
     stylua
     svelte-language-server
     tailwindcss-language-server
     typescript-language-server
+    terraform-ls
     vscode-langservers-extracted
     vue-language-server
   ];
