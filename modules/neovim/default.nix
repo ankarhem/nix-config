@@ -36,9 +36,9 @@ let
     stylua
     svelte-language-server
     tailwindcss-language-server
-    typescript-language-server
     terraform-ls
     vscode-langservers-extracted
+    vtsls
     vue-language-server
   ];
 in {
