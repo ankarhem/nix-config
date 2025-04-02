@@ -24,6 +24,7 @@ let
   lsps = with pkgs; [
     angular-language-server
     astro-language-server
+    csharp-ls
     jsonnet-language-server
     lua-language-server
     nginx-language-server
