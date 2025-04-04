@@ -15,6 +15,7 @@ let
     lazygit
     markdownlint-cli2
     mermaid-cli
+    netcoredbg
     nixfmt-classic
     nodePackages.prettier
     nodejs_22
@@ -26,13 +27,13 @@ let
   lsps = with pkgs; [
     angular-language-server
     astro-language-server
-    csharp-ls
     gopls
     jsonnet-language-server
     lua-language-server
     nginx-language-server
     nil
     nixd
+    omnisharp-roslyn
     stylua
     svelte-language-server
     tailwindcss-language-server
@@ -90,6 +91,7 @@ in {
         nvim-ts-autotag
         nvim-ts-context-commentstring
         nvim-web-devicons
+        omnisharp-extended-lsp-nvim
         overseer-nvim
         persistence-nvim
         plenary-nvim
