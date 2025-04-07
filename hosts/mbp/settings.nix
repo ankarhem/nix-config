@@ -1,8 +1,4 @@
-{
-  pkgs,
-  pkgs-unstable,
-  ...
-}: {
+{ pkgs, pkgs-unstable, ... }: {
   programs = {
     zsh.enable = true;
     fish.enable = true;
@@ -18,13 +14,10 @@
           hash = "sha256-gmJwoht/Tfm5qMecmq1N6PSAIfWOqsvuHU8VDJY8bLw=";
         };
       });
+      bruno = pkgs-unstable.bruno;
     })
   ];
-  services = {
-    karabiner-elements = {
-      enable = true;
-    };
-  };
+  services = { karabiner-elements = { enable = true; }; };
 
   fonts = {
     packages = with pkgs;
@@ -33,8 +26,7 @@
         # icon fonts
         material-design-icons
         font-awesome
-      ]
-      ++ [
+      ] ++ [
         pkgs-unstable.nerd-fonts.symbols-only
         pkgs-unstable.nerd-fonts.fira-code
         pkgs-unstable.nerd-fonts.jetbrains-mono
