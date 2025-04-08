@@ -12,6 +12,8 @@
     accelerationDevices = [ "*" ];
   };
 
+  users.users.plex.extraGroups = [ "render" ];
+
   services.nginx.virtualHosts."plex.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internetfeno.men";
