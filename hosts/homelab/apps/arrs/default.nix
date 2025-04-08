@@ -1,4 +1,4 @@
-{...}:{
+{ ... }: {
   imports = [
     ./kometa.nix
     ./plex.nix
