@@ -2,7 +2,7 @@
   hardware.enableRedistributableFirmware = true;
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ intel-media-sdk ];
+    extraPackages = with pkgs; [ intel-media-driver ];
   };
   environment.systemPackages = with pkgs; [ mesa libva libva-utils ];
 
