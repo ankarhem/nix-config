@@ -1,11 +1,18 @@
-{...}: {
+{ pkgs, ... }: {
+  hardware.enableRedistributableFirmware = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [ intel-media-sdk ];
+  };
+  environment.systemPackages = with pkgs; [ mesa libva libva-utils ];
+
   services.plex = {
     enable = true;
     openFirewall = true;
-    # accelerationDevices = [ "/dev/dri/renderD128" ]; 
+    accelerationDevices = [ "*" ];
   };
 
-  services.nginx.virtualHosts."plex.internetfeno.men" =  {
+  services.nginx.virtualHosts."plex.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internetfeno.men";
 

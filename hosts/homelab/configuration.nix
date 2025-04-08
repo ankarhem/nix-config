@@ -1,14 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  modulesPath,
-  pkgs,
-  username,
-  hostname,
-  helpers,
-  ...
-}: {
+{ modulesPath, pkgs, username, hostname, helpers, ... }: {
   imports = [
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
     ./apps/default.nix
@@ -21,7 +14,7 @@
   nix = {
     settings = {
       trusted-users = [ "root" "@wheel" ];
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
     };
   };
   programs.nh = {
@@ -30,13 +23,6 @@
     clean.enable = true;
   };
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-sdk
-    ];
-  };
-  
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
   services.avahi.publish = {
@@ -44,9 +30,7 @@
     addresses = true;
   };
 
-  proxmoxLXC = {
-    manageNetwork = true;
-  };
+  proxmoxLXC = { manageNetwork = true; };
   boot.isContainer = true;
   networking.hostName = hostname; # Define your hostname.
   time.timeZone = "Europe/Stockholm";
@@ -73,8 +57,8 @@
   users.users."${username}" = {
     isNormalUser = true;
     description = username;
-    extraGroups = ["networkmanager" "wheel" "podman" "docker"];
-    packages = [];
+    extraGroups = [ "networkmanager" "wheel" "podman" "docker" ];
+    packages = [ ];
     openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys ({
       username = "ankarhem";
       sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
