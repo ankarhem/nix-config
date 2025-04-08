@@ -69,14 +69,15 @@
   };
   users.users.nginx.extraGroups = [ "acme" ];
 
-  networking.networkmanager.insertNameservers = [ "127.0.0.1" ];
-  networking.nameservers = [ "127.0.0.1" ];
+  networking.nameservers =
+    [ "127.0.0.1" "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
   networking.useHostResolvConf = false;
   services.resolved = {
-    enable = lib.mkForce false;
+    enable = true;
     fallbackDns = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
     extraConfig = ''
       DNS=127.0.0.1
+      DNSStubListener=no
     '';
   };
   services.coredns = {
