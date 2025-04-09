@@ -19,9 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-homebrew = {
-      url = "github:zhaofengli-wip/nix-homebrew";
-    };
+    nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -46,21 +44,18 @@
     };
   };
 
-  outputs = inputs @ {self, ...}: {
-    nixosConfigurations = let
-      nixpkgsConfig = {
-        config.allowUnfree = true;
-      };
+  outputs = inputs@{ self, ... }: {
+    nixosConfigurations = let nixpkgsConfig = { config.allowUnfree = true; };
     in {
       installer = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
-          helpers = import ./helpers { pkgs = import inputs.nixpkgs { inherit system; }; };
+          helpers = import ./helpers {
+            pkgs = import inputs.nixpkgs { inherit system; };
+          };
         };
-        modules = [
-          ./hosts/installer/configuration.nix
-        ];
+        modules = [ ./hosts/installer/configuration.nix ];
       };
       homelab = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
@@ -72,7 +67,9 @@
           inherit inputs;
           username = "idealpink";
           hostname = "homelab";
-          helpers = import ./helpers { pkgs = import inputs.nixpkgs { inherit system; }; };
+          helpers = import ./helpers {
+            pkgs = import inputs.nixpkgs { inherit system; };
+          };
         };
 
         modules = [
@@ -84,16 +81,14 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
+            home-manager.users.${specialArgs.username} =
+              import ./hosts/${specialArgs.hostname}/home.nix;
           }
         ];
       };
     };
 
-    darwinConfigurations = let
-      nixpkgsConfig = {
-        config.allowUnfree = true;
-      };
+    darwinConfigurations = let nixpkgsConfig = { config.allowUnfree = true; };
     in {
       mbp = inputs.darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
@@ -105,7 +100,9 @@
           inherit inputs;
           username = "ankarhem";
           hostname = "mbp";
-          helpers = import ./helpers { pkgs = import inputs.nixpkgs { inherit system; }; };
+          helpers = import ./helpers {
+            pkgs = import inputs.nixpkgs { inherit system; };
+          };
         };
         modules = [
           ./hosts/mbp/default.nix
@@ -118,7 +115,8 @@
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${specialArgs.username} = import ./hosts/${specialArgs.hostname}/home.nix;
+            home-manager.users.${specialArgs.username} =
+              import ./hosts/${specialArgs.hostname}/home.nix;
           }
         ];
       };
