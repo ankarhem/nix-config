@@ -12,6 +12,7 @@ let
     gomodifytags
     gotestsum
     gotools
+    hadolint
     lazygit
     markdownlint-cli2
     mermaid-cli
