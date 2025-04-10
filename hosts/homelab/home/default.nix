@@ -12,7 +12,6 @@
     ../../../presets/neovim/default.nix
     ./ssh.nix
     inputs.nix-index-database.hmModules.nix-index
-    ../../../homeManagerModules/default.nix
   ];
 
   home.file.".config/git/allowed_signers".text =

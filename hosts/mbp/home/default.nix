@@ -20,7 +20,7 @@
     ./vscode.nix
     ./ghostty.nix
     inputs.nix-index-database.hmModules.nix-index
-    ../../../homeManagerModules/default.nix
+    ../../../homeManagerModules/scripts.nix
   ];
 
   home.file.".config/git/allowed_signers".text = let

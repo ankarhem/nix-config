@@ -1,5 +1,1 @@
-{...}: {
-  imports = [
-    ./settings.nix
-  ];
-}
+{ ... }: { imports = [ ./settings.nix ]; }
