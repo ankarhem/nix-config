@@ -1,6 +1,1 @@
-{...}: {
-  imports = [
-    ./git.nix
-    ./scripts.nix
-  ];
-}
+{ ... }: { imports = [ ./scripts.nix ]; }

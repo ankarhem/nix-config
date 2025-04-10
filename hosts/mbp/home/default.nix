@@ -11,6 +11,8 @@
   imports = [
     ../../../presets/fish.nix
     ../../../presets/gpg.nix
+    ../../../presets/git.nix
+    ../../../presets/gh.nix
     ../../../presets/neovim/default.nix
     ./karabiner.nix
     ./npm.nix
@@ -21,7 +23,6 @@
     ../../../homeManagerModules/default.nix
   ];
 
-  modules.git.enable = true;
   home.file.".config/git/allowed_signers".text = let
     authorizedKeys = helpers.ssh.getGithubKeys {
       username = "ankarhem";
