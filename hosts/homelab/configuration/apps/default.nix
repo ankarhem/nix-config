@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ config, ... }: {
   imports = [
     ./arrs/default.nix
     ./conduwuit.nix
