@@ -73,7 +73,7 @@
         };
 
         modules = [
-          ./hosts/homelab/configuration.nix
+          ./hosts/${specialArgs.hostname}/configuration/default.nix
           inputs.sops-nix.nixosModules.sops
           inputs.home-manager.nixosModules.home-manager
           {
@@ -82,7 +82,7 @@
             home-manager.useUserPackages = true;
 
             home-manager.users.${specialArgs.username} =
-              import ./hosts/${specialArgs.hostname}/home.nix;
+              import ./hosts/${specialArgs.hostname}/home/default.nix;
           }
         ];
       };
