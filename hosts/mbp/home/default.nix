@@ -1,10 +1,4 @@
-{
-  pkgs,
-  inputs,
-  username,
-  helpers,
-  ...
-}: {
+{ pkgs, inputs, username, helpers, ... }: {
   programs.home-manager.enable = true;
   home.username = username;
   home.homeDirectory = "/Users/${username}";
@@ -15,29 +9,28 @@
   };
 
   imports = [
-    ../../modules/fish.nix
-    ../../modules/gpg/default.nix
-    ../../modules/neovim/default.nix
-    ./modules/karabiner.nix
-    ./modules/npm.nix
-    ./modules/ssh.nix
-    ./modules/vscode.nix
+    ../../../modules/fish.nix
+    ../../../modules/gpg/default.nix
+    ../../../modules/neovim/default.nix
+    ./karabiner.nix
+    ./npm.nix
+    ./ssh.nix
+    ./vscode.nix
     inputs.nix-index-database.hmModules.nix-index
-    ../../homeManagerModules/default.nix
+    ../../../homeManagerModules/default.nix
   ];
 
   modules.git.enable = true;
-  home.file.".config/git/allowed_signers".text = let 
+  home.file.".config/git/allowed_signers".text = let
     authorizedKeys = helpers.ssh.getGithubKeys {
       username = "ankarhem";
       sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
     };
-    allowedSigners = builtins.concatStringsSep "\n" (builtins.map (key: "* ${key}") authorizedKeys);
+    allowedSigners = builtins.concatStringsSep "\n"
+      (builtins.map (key: "* ${key}") authorizedKeys);
   in allowedSigners;
   programs.git = {
-    signing = {
-      key = "~/.ssh/id_ed25519.pub";
-    };
+    signing = { key = "~/.ssh/id_ed25519.pub"; };
     extraConfig = {
       gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
@@ -46,9 +39,7 @@
 
   modules.custom-scripts.enable = true;
 
-  programs.nix-index-database = {
-    comma.enable = true;
-  };
+  programs.nix-index-database = { comma.enable = true; };
   programs.nix-index.enable = true;
 
   home.packages = with pkgs; [
@@ -124,13 +115,9 @@
       end
     '';
   };
-  programs.zoxide = {
-    enable = true;
-  };
+  programs.zoxide = { enable = true; };
   programs.eza.enable = true;
-  programs.starship = {
-    enable = true;
-  };
+  programs.starship = { enable = true; };
 
   programs.go = {
     enable = true;

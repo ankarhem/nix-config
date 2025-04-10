@@ -1,4 +1,4 @@
-{config, ...}:{
+{ config, ... }: {
   home.file.npmrc = {
     target = ".npmrc";
     enable = true;
@@ -6,9 +6,7 @@
       prefix = ${config.xdg.dataHome}/npm
       init-license=MIT
       color=true
-      '';
+    '';
   };
-  home.sessionPath = [
-    "${config.xdg.dataHome}/npm/bin"
-  ];
+  home.sessionPath = [ "${config.xdg.dataHome}/npm/bin" ];
 }

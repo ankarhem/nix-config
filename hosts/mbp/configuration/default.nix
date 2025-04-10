@@ -1,20 +1,18 @@
-{...}: {
+{ ... }: {
   imports = [
     ./nix.nix
     ./environment.nix
     ./user.nix
     ./settings.nix
-    ./modules/homebrew.nix
-    ../../darwinModules/default.nix
-    ../../modules/default.nix
+    ./homebrew.nix
+    ../../../darwinModules/default.nix
+    ../../../modules/default.nix
   ];
   darwin.settings.enable = true;
 
   sops = {
-    defaultSopsFile = ../../../secrets/mbp/secrets.yaml;
-    age = {
-      keyFile = "/Users/ankarhem/.config/sops/age/keys.txt";
-    };
+    defaultSopsFile = ../../../../secrets/mbp/secrets.yaml;
+    age = { keyFile = "/Users/ankarhem/.config/sops/age/keys.txt"; };
   };
 
   modules.ghostty = {

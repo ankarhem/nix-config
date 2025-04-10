@@ -1,9 +1,4 @@
-{
-  pkgs,
-  username,
-  hostname,
-  ...
-}: {
+{ pkgs, username, hostname, ... }: {
   networking.hostName = hostname;
   networking.computerName = hostname;
 
@@ -14,5 +9,5 @@
     shell = pkgs.fish;
   };
 
-  nix.settings.trusted-users = [username];
+  nix.settings.trusted-users = [ username ];
 }

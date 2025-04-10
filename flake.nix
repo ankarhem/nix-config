@@ -105,7 +105,7 @@
           };
         };
         modules = [
-          ./hosts/mbp/default.nix
+          ./hosts/${specialArgs.hostname}/configuration/default.nix
           inputs.sops-nix.darwinModules.sops
           inputs.nix-homebrew.darwinModules.nix-homebrew
           inputs.home-manager.darwinModules.home-manager
@@ -116,7 +116,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.${specialArgs.username} =
-              import ./hosts/${specialArgs.hostname}/home.nix;
+              import ./hosts/${specialArgs.hostname}/home/default.nix;
           }
         ];
       };

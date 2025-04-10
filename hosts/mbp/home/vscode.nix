@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.vscode = {
     enable = true;
     enableUpdateCheck = false;
@@ -116,23 +116,19 @@
       })
     ];
 
-    keybindings = [
-      {
-        key = "Cmd+Shift+I";
-        command = "editor.action.sourceAction";
-        # when = "config.workspaceKeybindings.importMissingDeps.enabled";
-        args = {
-          kind = "source.addMissingImports";
-          apply = "first";
-        };
-      }
-    ];
+    keybindings = [{
+      key = "Cmd+Shift+I";
+      command = "editor.action.sourceAction";
+      # when = "config.workspaceKeybindings.importMissingDeps.enabled";
+      args = {
+        kind = "source.addMissingImports";
+        apply = "first";
+      };
+    }];
 
     userSettings = {
       # Neovim integration
-      "extensions.experimental.affinity" = {
-        "asvetliakov.vscode-neovim" = 1;
-      };
+      "extensions.experimental.affinity" = { "asvetliakov.vscode-neovim" = 1; };
 
       # Font settings
       "editor.fontSize" = 14;
@@ -158,7 +154,8 @@
       "typescript.inlayHints.parameterNames.enabled" = true;
       "typescript.inlayHints.functionLikeReturnTypes.enabled" = true;
       "typescript.inlayHints.parameterTypes.enabled" = true;
-      "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName" = false;
+      "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName" =
+        false;
       "typescript.inlayHints.variableTypes.enabled" = true;
       "typescript.inlayHints.propertyDeclarationTypes.enabled" = true;
       "typescript.inlayHints.variableTypes.suppressWhenTypeMatchesName" = false;
