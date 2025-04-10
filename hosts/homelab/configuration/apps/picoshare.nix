@@ -1,8 +1,8 @@
-{ config, ... }:
+{ self, config, ... }:
 let port = "4001";
 in {
   sops.secrets.picoshare_env = {
-    sopsFile = ../../../../secrets/homelab/picoshare.env;
+    sopsFile = "${self}/secrets/homelab/picoshare.env";
     format = "dotenv";
   };
 

@@ -1,15 +1,15 @@
-{ pkgs, username, inputs, ... }: {
+{ self, pkgs, username, inputs, ... }: {
   programs.home-manager.enable = true;
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "24.05";
 
   imports = [
-    ../../../presets/fish.nix
-    ../../../presets/git.nix
-    ../../../presets/gh.nix
-    ../../../presets/gpg.nix
-    ../../../presets/neovim/default.nix
+    "${self}/presets/fish.nix"
+    "${self}/presets/git.nix"
+    "${self}/presets/gh.nix"
+    "${self}/presets/gpg.nix"
+    "${self}/presets/neovim/default.nix"
     ./ssh.nix
     inputs.nix-index-database.hmModules.nix-index
   ];

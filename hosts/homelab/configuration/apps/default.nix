@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ self, config, ... }: {
   imports = [
     ./arrs/default.nix
     ./conduwuit.nix
@@ -24,7 +24,7 @@
   };
 
   sops.secrets.cloudflare_credentials_env = {
-    sopsFile = ../../../../secrets/homelab/cloudflare_credentials.env;
+    sopsFile = "${self}/secrets/homelab/cloudflare_credentials.env";
     format = "dotenv";
   };
   security.acme = {

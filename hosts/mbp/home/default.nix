@@ -1,4 +1,4 @@
-{ pkgs, inputs, username, helpers, ... }: {
+{ self, pkgs, inputs, username, helpers, ... }: {
   programs.home-manager.enable = true;
   home.username = username;
   home.homeDirectory = "/Users/${username}";
@@ -9,18 +9,18 @@
   };
 
   imports = [
-    ../../../presets/fish.nix
-    ../../../presets/gpg.nix
-    ../../../presets/git.nix
-    ../../../presets/gh.nix
-    ../../../presets/neovim/default.nix
+    "${self}/homeManagerModules/scripts.nix"
+    "${self}/presets/fish.nix"
+    "${self}/presets/gpg.nix"
+    "${self}/presets/git.nix"
+    "${self}/presets/gh.nix"
+    "${self}/presets/neovim/default.nix"
     ./karabiner.nix
     ./npm.nix
     ./ssh.nix
     ./vscode.nix
     ./ghostty.nix
     inputs.nix-index-database.hmModules.nix-index
-    ../../../homeManagerModules/scripts.nix
   ];
 
   home.file.".config/git/allowed_signers".text = let

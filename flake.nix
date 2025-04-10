@@ -51,6 +51,7 @@
         system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
+          inherit self;
           helpers = import ./helpers {
             pkgs = import inputs.nixpkgs { inherit system; };
           };
@@ -65,6 +66,7 @@
             config = nixpkgsConfig;
           };
           inherit inputs;
+          inherit self;
           username = "idealpink";
           hostname = "homelab";
           helpers = import ./helpers {
@@ -98,6 +100,7 @@
             config = nixpkgsConfig;
           };
           inherit inputs;
+          inherit self;
           username = "ankarhem";
           hostname = "mbp";
           helpers = import ./helpers {
