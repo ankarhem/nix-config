@@ -1,14 +1,17 @@
-{ self, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
-    "${self}/darwinModules/default.nix"
     ./environment.nix
+    ./fonts.nix
     ./homebrew.nix
     ./settings.nix
     ./sops.nix
     ./user.nix
   ];
 
-  darwin.settings.enable = true;
+  programs = {
+    zsh.enable = true;
+    fish.enable = true;
+  };
 
   # backwards compat; don't change
   system.stateVersion = 4;

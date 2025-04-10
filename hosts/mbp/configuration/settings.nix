@@ -1,8 +1,6 @@
-{ pkgs, pkgs-unstable, ... }: {
-  programs = {
-    zsh.enable = true;
-    fish.enable = true;
-  };
+{ self, pkgs, pkgs-unstable, ... }: {
+  imports = [ "${self}/darwinModules/default.nix" ];
+  darwin.settings.enable = true;
 
   nixpkgs.overlays = [
     (self: super: {
@@ -18,21 +16,6 @@
     })
   ];
   services = { karabiner-elements = { enable = true; }; };
-
-  fonts = {
-    packages = with pkgs;
-      [
-        # packages = with pkgs; [
-        # icon fonts
-        material-design-icons
-        font-awesome
-      ] ++ [
-        pkgs-unstable.nerd-fonts.symbols-only
-        pkgs-unstable.nerd-fonts.fira-code
-        pkgs-unstable.nerd-fonts.jetbrains-mono
-        pkgs-unstable.nerd-fonts.iosevka
-      ];
-  };
 
   security.pam.enableSudoTouchIdAuth = true;
   system.keyboard.enableKeyMapping = true;
