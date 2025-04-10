@@ -1,9 +1,5 @@
-{
-  inputs,
-  username,
-  ...
-}: let
-  inherit (inputs) homebrew-core homebrew-cask homebrew-bundle;
+{ inputs, username, ... }:
+let inherit (inputs) homebrew-core homebrew-cask homebrew-bundle;
 in {
   homebrew = {
     enable = true;
@@ -17,12 +13,9 @@ in {
     global.autoUpdate = false;
     global.brewfile = true;
 
-    masApps = {
-    };
+    masApps = { };
 
-    brews = [
-      "pinentry-mac"
-    ];
+    brews = [ "pinentry-mac" ];
 
     caskArgs.no_quarantine = true;
     casks = [
@@ -31,7 +24,6 @@ in {
       "azure-data-studio"
       "betterdisplay"
       "cursor"
-      "docker"
       "firefox"
       "google-chrome"
       "legcord"
@@ -41,6 +33,7 @@ in {
       "microsoft-teams"
       "mos"
       "openvpn-connect"
+      "orbstack"
       "raycast"
       "runelite"
       "steam"
