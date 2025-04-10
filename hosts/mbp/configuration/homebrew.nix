@@ -25,6 +25,7 @@ in {
       "betterdisplay"
       "cursor"
       "firefox"
+      "ghostty"
       "google-chrome"
       "legcord"
       "maccy"

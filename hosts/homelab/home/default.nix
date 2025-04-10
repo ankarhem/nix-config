@@ -5,9 +5,9 @@
   home.stateVersion = "24.05";
 
   imports = [
-    ../../../modules/fish.nix
-    ../../../modules/gpg/default.nix
-    ../../../modules/neovim/default.nix
+    ../../../presets/fish.nix
+    ../../../presets/gpg.nix
+    ../../../presets/neovim/default.nix
     ./ssh.nix
     inputs.nix-index-database.hmModules.nix-index
     ../../../homeManagerModules/default.nix

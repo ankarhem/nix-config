@@ -9,13 +9,14 @@
   };
 
   imports = [
-    ../../../modules/fish.nix
-    ../../../modules/gpg/default.nix
-    ../../../modules/neovim/default.nix
+    ../../../presets/fish.nix
+    ../../../presets/gpg.nix
+    ../../../presets/neovim/default.nix
     ./karabiner.nix
     ./npm.nix
     ./ssh.nix
     ./vscode.nix
+    ./ghostty.nix
     inputs.nix-index-database.hmModules.nix-index
     ../../../homeManagerModules/default.nix
   ];
