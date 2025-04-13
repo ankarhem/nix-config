@@ -9,6 +9,7 @@
     ./tibia-api.nix
     ./seafile.nix
     ./telemetry/default.nix
+    ./matrix/default.nix
   ];
 
   services.nginx = {
