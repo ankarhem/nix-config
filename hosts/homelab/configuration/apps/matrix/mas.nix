@@ -62,19 +62,18 @@ let
     };
   };
 in {
-  services.nginx.virtualHosts."auth.${config.services.matrix-synapse.settings.server_name}" =
-    {
-      useACMEHost = "internetfeno.men";
-      forceSSL = true;
-      locations."/".proxyPass = "http://[::1]:${toString port}";
-      locations."/assets" = {
-        root =
-          "${pkgs.matrix-authentication-service}/share/matrix-authentication-service";
-        extraConfig = ''
-          add_header Cache-Control "public, immutable, max-age=31536000";
-        '';
-      };
+  services.nginx.virtualHosts."auth.internetfeno.men" = {
+    useACMEHost = "internetfeno.men";
+    forceSSL = true;
+    locations."/".proxyPass = "http://[::1]:${toString port}";
+    locations."/assets" = {
+      root =
+        "${pkgs.matrix-authentication-service}/share/matrix-authentication-service";
+      extraConfig = ''
+        add_header Cache-Control "public, immutable, max-age=31536000";
+      '';
     };
+  };
 
   services.nginx.virtualHosts."${config.services.matrix-synapse.settings.public_baseurl}" =
     {

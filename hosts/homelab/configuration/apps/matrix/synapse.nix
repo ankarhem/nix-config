@@ -1,4 +1,4 @@
-{ config, pkgs }:
+{ config, pkgs, ... }:
 let
   domain = "internetfeno.men";
   port = 8008;
@@ -9,6 +9,54 @@ let
     sha256 = "sha256-s6qbYUzxJ9ca3K2X5H0X2WwbwebmnH5wKG2Vj2rGjpg=";
   };
 in {
+  services.nginx.virtualHosts."${config.services.matrix-synapse.settings.server_name}" =
+    {
+      useACMEHost = domain;
+      locations."/.well-known/matrix/server".extraConfig = ''
+        default_type application/json;
+        return 200 '${
+          builtins.toJSON {
+            m.server =
+              "${config.services.matrix-synapse.settings.public_baseurl}:443";
+          }
+        }';
+      '';
+      locations."/.well-known/matrix/client".extraConfig = ''
+        default_type application/json;
+        return 200 '${
+          builtins.toJSON {
+            m.homeserver = {
+              base_url =
+                "${config.services.matrix-synapse.settings.public_baseurl}";
+              server_name = config.services.matrix-synapse.settings.server_name;
+            }; // lib.attrsets.optionalAttrs config.systemd.services.matrix-synapse-authentication.enable {
+              org.matrix.msc2965.authentication = {
+                issuer = "https://auth.${config.services.matrix-synapse.settings.server_name}/";
+                account = "https://auth.${config.services.matrix-synapse.settings.server_name}/account";
+              };
+            }; // lib.attrsets.optionalAttrs config.systemd.services.lk-jwt-service.enable {
+              org.matrix.msc4143.rtc_foci = [
+                {
+                  type = "livekit";
+                  livekit_service_url = "https://livekit-jwt.internetfeno.men"
+                }
+              ];
+            };
+          }
+        }';
+      '';
+    };
+  services.nginx.virtualHosts."${config.services.matrix-synapse.settings.public_baseurl}" =
+    {
+      useACMEHost = domain;
+      forceSSL = true;
+      locations."/".extraConfig = ''
+        return 404;
+      '';
+      locations."/_matrix".proxyPass = "http://[::1]:${toString port}";
+      locations."/_synapse/client".proxyPass = "http://[::1]:${toString port}";
+    };
+
   sops.templates.synapse_config.content = "";
 
   services.matrix-synapse = {
@@ -77,17 +125,6 @@ in {
     name = "synapse";
     options.path = "${dashboards}/contrib/grafana/synapse.json";
   }];
-
-  services.nginx.virtualHosts."${config.services.matrix-synapse.settings.public_baseurl}" =
-    {
-      enableACME = true;
-      forceSSL = true;
-      locations."/".extraConfig = ''
-        return 404;
-      '';
-      locations."/_matrix".proxyPass = "http://[::1]:${toString port}";
-      locations."/_synapse/client".proxyPass = "http://[::1]:${toString port}";
-    };
 
   environment.systemPackages = [
     (pkgs.writeScriptBin "matrix-synapse-run-synapse_auto_compressor" ''

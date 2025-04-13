@@ -1,11 +1,18 @@
 { self, config, pkgs, ... }:
 let port = 8083;
 in {
+  services.nginx.virtualHosts."livekit-jwt.internetfeno.men" = {
+    useACMEHost = "internetfeno.men";
+    forceSSL = true;
+    locations."/" = { proxyPass = "http://127.0.0.1:${toString port}"; };
+  };
+
   sops.secrets.lk_jwt_env = {
     sopsFile = "${self}/secrets/homelab/lk-jwt.env";
     format = "dotenv";
   };
   systemd.services.lk-jwt-service = {
+    enable = true;
     description = "Minimal service to issue LiveKit JWTs for MatrixRTC";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
@@ -33,10 +40,4 @@ in {
   };
 
   users.groups.lk-jwt-service = { };
-
-  services.nginx.virtualHosts."livekit-jwt.internetfeno.men" = {
-    enableACME = true;
-    forceSSL = true;
-    locations."/" = { proxyPass = "http://127.0.0.1:${toString port}"; };
-  };
 }

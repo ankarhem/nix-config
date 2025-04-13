@@ -22,11 +22,6 @@ let
     };
   };
 in {
-  sops.secrets.livekit_keys = {
-    sopsFile = "${self}/secrets/homelab/livekit_keys.json";
-    format = "json";
-  };
-
   services.nginx.virtualHosts."livekit.internetfeno.men" = {
     useACMEHost = "internetfeno.men";
     forceSSL = true;
@@ -36,7 +31,12 @@ in {
     };
   };
 
+  sops.secrets.livekit_keys = {
+    sopsFile = "${self}/secrets/homelab/livekit_keys.json";
+    format = "json";
+  };
   systemd.services.livekit = {
+    enable = true;
     description = "LiveKit SFU server";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
