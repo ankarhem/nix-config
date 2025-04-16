@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, pkgs-unstable, ... }:
 let
   requiredPkgs = with pkgs; [
     ast-grep
@@ -53,7 +53,7 @@ in {
     plugins = with pkgs.vimPlugins; [ lazy-nvim ];
 
     extraLuaConfig = let
-      plugins = with pkgs.vimPlugins; [
+      plugins = with pkgs-unstable.vimPlugins; [
         LazyVim
         SchemaStore-nvim
         bufferline-nvim
@@ -98,6 +98,8 @@ in {
         plenary-nvim
         rocks-nvim
         rustaceanvim
+        # smear-cursor-nvim
+        snacks-nvim
         telescope-fzf-native-nvim
         telescope-nvim
         todo-comments-nvim
@@ -165,14 +167,15 @@ in {
         },
         spec = {
           { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+          -- import/override with your plugins
+          { import = "extras" },
+          { import = "plugins" },
           -- The following configs are needed for fixing lazyvim on nix
           -- force enable telescope-fzf-native.nvim
           { "nvim-telescope/telescope-fzf-native.nvim", enabled = true },
           -- disable mason.nvim, use programs.neovim.extraPackages
           { "williamboman/mason-lspconfig.nvim", enabled = false },
           { "williamboman/mason.nvim", enabled = false },
-          -- import/override with your plugins
-          { import = "plugins" },
           -- treesitter handled by xdg.configFile."nvim/parser", put this line at the end of spec to clear ensure_installed
           { "nvim-treesitter/nvim-treesitter",
              opts = function(_, opts)
@@ -188,7 +191,8 @@ in {
   xdg.configFile."nvim/parser".source = let
     parsers = pkgs.symlinkJoin {
       name = "treesitter-parsers";
-      paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+      paths =
+        pkgs-unstable.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
     };
   in "${parsers}/parser";
 
