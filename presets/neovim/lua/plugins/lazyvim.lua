@@ -6,6 +6,12 @@ return {
 		},
 	},
 	{
+		"folke/snacks.nvim",
+		opts = {
+			scroll = { enabled = false },
+		},
+	},
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		opts = {

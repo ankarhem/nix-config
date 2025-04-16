@@ -1,9 +1,13 @@
 { lib, pkgs, pkgs-unstable, ... }:
 let
-  requiredPkgs = with pkgs; [
+  requiredPkgs = with pkgs-unstable; [
     ast-grep
     csharpier
     curl
+    (dotnetCorePackages.combinePackages [
+      dotnetCorePackages.dotnet_8.sdk
+      dotnetCorePackages.dotnet_9.sdk
+    ])
     fd
     fzf
     gcc
@@ -25,7 +29,7 @@ let
     shfmt
     tectonic
   ];
-  lsps = with pkgs; [
+  lsps = with pkgs-unstable; [
     angular-language-server
     astro-language-server
     gopls
@@ -48,9 +52,10 @@ in {
     enable = true;
     viAlias = true;
     vimAlias = true;
-    extraPackages = [ ] ++ requiredPkgs ++ lsps;
+    vimdiffAlias = true;
+    extraPackages = requiredPkgs ++ lsps;
 
-    plugins = with pkgs.vimPlugins; [ lazy-nvim ];
+    plugins = with pkgs-unstable.vimPlugins; [ lazy-nvim ];
 
     extraLuaConfig = let
       plugins = with pkgs-unstable.vimPlugins; [
@@ -97,6 +102,7 @@ in {
         persistence-nvim
         plenary-nvim
         rocks-nvim
+        rust-tools-nvim
         rustaceanvim
         # smear-cursor-nvim
         snacks-nvim
@@ -165,23 +171,14 @@ in {
           -- fallback to download
           fallback = true,
         },
+        install = {
+          missing = false,
+        };
         spec = {
           { "LazyVim/LazyVim", import = "lazyvim.plugins" },
           -- import/override with your plugins
           { import = "extras" },
           { import = "plugins" },
-          -- The following configs are needed for fixing lazyvim on nix
-          -- force enable telescope-fzf-native.nvim
-          { "nvim-telescope/telescope-fzf-native.nvim", enabled = true },
-          -- disable mason.nvim, use programs.neovim.extraPackages
-          { "williamboman/mason-lspconfig.nvim", enabled = false },
-          { "williamboman/mason.nvim", enabled = false },
-          -- treesitter handled by xdg.configFile."nvim/parser", put this line at the end of spec to clear ensure_installed
-          { "nvim-treesitter/nvim-treesitter",
-             opts = function(_, opts)
-              opts.ensure_installed = {}
-            end,
-          },
         },
       })
     '';
