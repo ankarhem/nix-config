@@ -80,6 +80,7 @@ in {
         neoconf-nvim
         neodev-nvim
         neotest
+        neotest-dotnet
         neotest-golang
         noice-nvim
         none-ls-nvim
