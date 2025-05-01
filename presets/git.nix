@@ -15,6 +15,8 @@
       core.autocrlf = "input";
 
       merge.tool = "nvimdiff2";
+      mergetool.hideResolved = true;
+      mergetool.keepBackup = false;
 
       # Default to git pull --rebase
       pull.rebase = true;
