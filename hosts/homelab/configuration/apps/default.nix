@@ -1,14 +1,15 @@
 { self, config, ... }: {
   imports = [
     ./arrs/default.nix
+    ./telemetry/default.nix
     ./conduwuit.nix
+    ./invidious.nix
     ./omada.nix
     ./picoshare.nix
+    ./seafile.nix
     ./swerdle.nix
     ./synology.nix
     ./tibia-api.nix
-    ./seafile.nix
-    ./telemetry/default.nix
   ];
 
   services.nginx = {
