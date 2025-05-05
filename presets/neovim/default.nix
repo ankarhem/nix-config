@@ -70,9 +70,9 @@ in {
         conform-nvim
         crates-nvim
         dashboard-nvim
-        dressing-nvim
         flash-nvim
         friendly-snippets
+        fzf-lua
         gitsigns-nvim
         indent-blankline-nvim
         lualine-nvim
@@ -105,10 +105,7 @@ in {
         rocks-nvim
         rust-tools-nvim
         rustaceanvim
-        # smear-cursor-nvim
         snacks-nvim
-        telescope-fzf-native-nvim
-        telescope-nvim
         todo-comments-nvim
         tokyonight-nvim
         trouble-nvim

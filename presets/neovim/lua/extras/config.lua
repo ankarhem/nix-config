@@ -3,6 +3,7 @@ return {
 	{ import = "lazyvim.plugins.extras.ai.copilot" },
 	{ import = "lazyvim.plugins.extras.editor.inc-rename" },
 	{ import = "lazyvim.plugins.extras.editor.overseer" },
+	{ import = "lazyvim.plugins.extras.editor.fzf" },
 	{ import = "lazyvim.plugins.extras.formatting.prettier" },
 	{ import = "lazyvim.plugins.extras.lang.angular" },
 	{ import = "lazyvim.plugins.extras.lang.astro" },
