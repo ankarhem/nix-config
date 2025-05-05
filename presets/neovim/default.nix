@@ -91,6 +91,7 @@ in {
         nvim-lint
         nvim-lspconfig
         nvim-notify
+        nvim-sops
         nvim-spectre
         nvim-treesitter
         nvim-treesitter-context
