@@ -1,4 +1,4 @@
-{ self, pkgs, inputs, username, helpers, ... }: {
+{ self, pkgs, pkgs-unstable, inputs, username, helpers, ... }: {
   programs.home-manager.enable = true;
   home.username = username;
   home.homeDirectory = "/Users/${username}";
@@ -44,7 +44,7 @@
   programs.nix-index-database = { comma.enable = true; };
   programs.nix-index.enable = true;
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     yubikey-personalization
     yubikey-manager
     openssh
@@ -78,13 +78,13 @@
 
     mas
     slack
-    element-desktop
+    # element-desktop
     spotify
     bruno
     jetbrains.rider
     jetbrains.rust-rover
     jetbrains.webstorm
-  ];
+  ]) ++ (with pkgs-unstable; [ element-desktop ]);
   programs.nh = {
     enable = true;
     flake = "/Users/${username}/nix-config";

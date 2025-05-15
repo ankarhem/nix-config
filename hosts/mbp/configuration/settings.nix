@@ -36,7 +36,7 @@
         "${pkgs.jetbrains.webstorm}/Applications/WebStorm.app/"
         "/Applications/Ghostty.app/"
         "${pkgs.slack}/Applications/Slack.app/"
-        "${pkgs.element-desktop}/Applications/Element.app/"
+        "${pkgs-unstable.element-desktop}/Applications/Element.app/"
         "/Applications/legcord.app/"
         "${pkgs.spotify}/Applications/Spotify.app/"
         "/System/Applications/Music.app/"

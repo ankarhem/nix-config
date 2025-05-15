@@ -17,7 +17,7 @@
       denoland.vscode-deno
       svelte.svelte-vscode
       nefrob.vscode-just-syntax
-      vadimcn.vscode-lldb
+      # vadimcn.vscode-lldb
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "stately-vscode";
@@ -73,7 +73,7 @@
       dbaeumer.vscode-eslint
       kamadorueda.alejandra
 
-      rust-lang.rust-analyzer
+      # rust-lang.rust-analyzer
       fill-labs.dependi
       tamasfe.even-better-toml
 
