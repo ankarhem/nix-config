@@ -9,6 +9,9 @@ in {
   services.nginx.virtualHosts."pico.ankarhem.dev" = {
     forceSSL = true;
     useACMEHost = "ankarhem.dev";
+    extraConfig = ''
+      client_max_body_size 100M;
+    '';
     locations."/" = { proxyPass = "http://127.0.0.1:${port}"; };
   };
   virtualisation.oci-containers.containers = {
