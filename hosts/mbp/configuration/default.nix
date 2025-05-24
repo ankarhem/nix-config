@@ -14,12 +14,10 @@
   };
 
   # backwards compat; don't change
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 
+  nix.enable = true;
   nix.package = pkgs.nix;
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   # do garbage collection weekly to keep disk usage low
   nix.gc = {
