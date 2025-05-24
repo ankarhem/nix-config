@@ -12,7 +12,6 @@
           hash = "sha256-gmJwoht/Tfm5qMecmq1N6PSAIfWOqsvuHU8VDJY8bLw=";
         };
       });
-      bruno = pkgs-unstable.bruno;
     })
   ];
   services = { karabiner-elements = { enable = true; }; };
