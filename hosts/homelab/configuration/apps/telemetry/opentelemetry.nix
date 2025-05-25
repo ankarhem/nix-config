@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, ... }:
 let
   ports = {
     grpc = 4317;
@@ -16,7 +16,7 @@ in {
   services.opentelemetry-collector = {
     enable = true;
     package =
-      pkgs-unstable.opentelemetry-collector-contrib; # compiled with extra exporters
+      pkgs.opentelemetry-collector-contrib; # compiled with extra exporters
   };
 
   services.opentelemetry-collector.settings = {
