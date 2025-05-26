@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   exporter_ports = {
     node = 9002;
@@ -19,13 +19,13 @@ in {
     exporters = {
       node = {
         enable = true;
-        enabledCollectors = [ "systemd" ];
+        enabledCollectors = [ "systemd" "processes" ];
         port = exporter_ports.node;
       };
     };
     scrapeConfigs = [
       {
-        job_name = config.networking.hostName;
+        job_name = "node";
         static_configs =
           [{ targets = [ "127.0.0.1:${toString exporter_ports.node}" ]; }];
       }
@@ -50,4 +50,13 @@ in {
       orgId = 1;
     }];
   };
+  services.grafana.provision.dashboards.settings.providers = [{
+    name = "Node Exporter Full";
+    options.path = pkgs.fetchurl {
+      name = "node-exporter-full-37-grafana-dashboard.json";
+      url = "https://grafana.com/api/dashboards/1860/revisions/37/download";
+      hash = "sha256-1DE1aaanRHHeCOMWDGdOS1wBXxOF84UXAjJzT5Ek6mM=";
+    };
+    orgId = 1;
+  }];
 }
