@@ -25,7 +25,7 @@ in {
     };
     scrapeConfigs = [
       {
-        job_name = "node";
+        job_name = config.networking.hostName;
         static_configs =
           [{ targets = [ "127.0.0.1:${toString exporter_ports.node}" ]; }];
       }
