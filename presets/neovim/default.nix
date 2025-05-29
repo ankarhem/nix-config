@@ -62,9 +62,9 @@ in {
         LazyVim
         SchemaStore-nvim
         bufferline-nvim
-        cmp-buffer
+        blink-cmp
+        blink-cmp-copilot
         cmp-git
-        cmp-nvim-lsp
         cmp-path
         cmp_luasnip
         conform-nvim
@@ -74,6 +74,7 @@ in {
         friendly-snippets
         fzf-lua
         gitsigns-nvim
+        grug-far-nvim
         indent-blankline-nvim
         lualine-nvim
         neo-tree-nvim
@@ -85,14 +86,12 @@ in {
         noice-nvim
         none-ls-nvim
         nui-nvim
-        nvim-cmp
         nvim-dap
         nvim-dap-go
         nvim-lint
         nvim-lspconfig
         nvim-notify
         nvim-sops
-        nvim-spectre
         nvim-treesitter
         nvim-treesitter-context
         nvim-treesitter-textobjects
