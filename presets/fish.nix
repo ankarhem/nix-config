@@ -8,6 +8,10 @@
 
     plugins = with pkgs.fishPlugins; [
       {
+        name = "bang-bang";
+        src = bang-bang.src;
+      }
+      {
         name = "fzf-fish";
         src = fzf-fish.src;
       }
