@@ -40,6 +40,7 @@ in {
       "steam"
       "tailscale"
       "telegram"
+      "whisky"
     ];
   };
 
