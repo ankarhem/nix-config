@@ -45,7 +45,7 @@
   };
 
   outputs = inputs@{ self, ... }: {
-    nixosConfigurations = let nixpkgsConfig = { config.allowUnfree = true; };
+    nixosConfigurations = let nixpkgsConfig = { allowUnfree = true; };
     in {
       installer = inputs.nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
@@ -90,7 +90,7 @@
       };
     };
 
-    darwinConfigurations = let nixpkgsConfig = { config.allowUnfree = true; };
+    darwinConfigurations = let nixpkgsConfig = { allowUnfree = true; };
     in {
       mbp = inputs.darwin.lib.darwinSystem rec {
         system = "aarch64-darwin";
