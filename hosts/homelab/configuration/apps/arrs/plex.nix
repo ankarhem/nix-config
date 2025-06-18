@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-unstable, ... }: {
   hardware.enableRedistributableFirmware = true;
   hardware.graphics = {
     enable = true;
@@ -10,6 +10,7 @@
     enable = true;
     openFirewall = true;
     accelerationDevices = [ "*" ];
+    package = pkgs-unstable.plex;
   };
 
   users.users.plex.extraGroups = [ "render" ];
