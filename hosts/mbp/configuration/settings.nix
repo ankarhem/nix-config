@@ -2,19 +2,19 @@
   imports = [ "${self}/darwinModules/default.nix" ];
   darwin.settings.enable = true;
 
-  nixpkgs.overlays = [
-    (self: super: {
-      karabiner-elements = super.karabiner-elements.overrideAttrs (old: {
+  services = {
+    karabiner-elements = {
+      enable = true;
+      package = pkgs.karabiner-elements.overrideAttrs (old: {
         version = "14.13.0";
-
-        src = super.fetchurl {
+        src = pkgs.fetchurl {
           inherit (old.src) url;
           hash = "sha256-gmJwoht/Tfm5qMecmq1N6PSAIfWOqsvuHU8VDJY8bLw=";
         };
+        dontFixup = true;
       });
-    })
-  ];
-  services = { karabiner-elements = { enable = true; }; };
+    };
+  };
 
   security.pam.services.sudo_local.touchIdAuth = true;
   system.keyboard.enableKeyMapping = true;
