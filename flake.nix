@@ -113,7 +113,7 @@
           inputs.nix-homebrew.darwinModules.nix-homebrew
           inputs.home-manager.darwinModules.home-manager
           {
-            nixpkgs = nixpkgsConfig;
+            nixpkgs = { config = nixpkgsConfig; };
 
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.useGlobalPkgs = true;

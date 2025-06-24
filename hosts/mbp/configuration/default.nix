@@ -28,7 +28,6 @@
   #   automatic = true;
   # };
 
-  nixpkgs.config.allowUnfree = true;
   nix.settings = {
     # nix settings for flake support
     experimental-features = [ "nix-command" "flakes" ];
