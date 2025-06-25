@@ -79,7 +79,6 @@
     mas
     slack
     # element-desktop
-    teams
     spotify
     bruno
     jetbrains.rider
