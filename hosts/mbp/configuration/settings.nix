@@ -44,7 +44,7 @@
         "/Applications/1Password.app/"
         "/Applications/Firefox.app/"
         "/Applications/Microsoft Excel.app/"
-        "/Applications/Microsoft Teams.app/"
+        "${pkgs.teams}/Teams.app/"
         "/Applications/OpenVPN Connect/OpenVPN Connect.app/"
         "/System/Applications/Calendar.app/"
         "/System/Applications/Facetime.app/"
