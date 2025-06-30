@@ -79,6 +79,7 @@
     mas
     slack
     # element-desktop
+    gimp
     spotify
     bruno
     jetbrains.rider
