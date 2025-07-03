@@ -85,7 +85,7 @@
     jetbrains.rider
     jetbrains.rust-rover
     jetbrains.webstorm
-  ]) ++ (with pkgs-unstable; [ element-desktop ]);
+  ]) ++ (with pkgs-unstable; [ opencode element-desktop ]);
   programs.nh = {
     enable = true;
     flake = "/Users/${username}/nix-config";
