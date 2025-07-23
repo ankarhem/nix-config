@@ -107,6 +107,22 @@
         "type": "github"
       }
     },
+    "homebrew-kegworks": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1744394634,
+        "narHash": "sha256-uucM6ioR3dyYcF78oxJ8nv4WW2caEcIeqol6dNqbrNE=",
+        "owner": "Kegworks-App",
+        "repo": "homebrew-kegworks",
+        "rev": "9ab1f5fcc628f0e90a86ea2d7df24bbabf09ec0a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Kegworks-App",
+        "repo": "homebrew-kegworks",
+        "type": "github"
+      }
+    },
     "nix-homebrew": {
       "inputs": {
         "brew-src": "brew-src"
@@ -220,6 +236,7 @@
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
+        "homebrew-kegworks": "homebrew-kegworks",
         "nix-homebrew": "nix-homebrew",
         "nix-index-database": "nix-index-database",
         "nixos-generators": "nixos-generators",

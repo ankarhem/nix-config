@@ -32,6 +32,10 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
+    homebrew-kegworks = {
+      url = "github:Kegworks-App/homebrew-kegworks";
+      flake = false;
+    };
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";

@@ -1,5 +1,7 @@
 { inputs, username, ... }:
-let inherit (inputs) homebrew-core homebrew-cask homebrew-bundle;
+let
+  inherit (inputs)
+    homebrew-core homebrew-cask homebrew-bundle homebrew-kegworks;
 in {
   homebrew = {
     enable = true;
@@ -40,7 +42,7 @@ in {
       "steam"
       "tailscale"
       "telegram"
-      "whisky"
+      "kegworks"
     ];
   };
 
@@ -56,6 +58,7 @@ in {
       "homebrew/homebrew-core" = homebrew-core;
       "homebrew/homebrew-cask" = homebrew-cask;
       "homebrew/homebrew-bundle" = homebrew-bundle;
+      "Kegworks-App/homebrew-kegworks" = homebrew-kegworks;
     };
 
     mutableTaps = false;
