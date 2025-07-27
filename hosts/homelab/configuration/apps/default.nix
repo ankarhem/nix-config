@@ -10,6 +10,7 @@
     ./swerdle.nix
     ./synology.nix
     ./tibia-api.nix
+    ./dokploy.nix
   ];
 
   services.nginx = {
