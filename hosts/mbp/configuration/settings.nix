@@ -42,6 +42,7 @@
         # "/Applications/Telegram.app/"
         "${pkgs.vscode}/Applications/Visual Studio Code.app/"
         "/Applications/1Password.app/"
+        "/Applications/Bitwarden.app/"
         "/Applications/Firefox.app/"
         "/Applications/Microsoft Excel.app/"
         "/Applications/Microsoft Teams.app/"

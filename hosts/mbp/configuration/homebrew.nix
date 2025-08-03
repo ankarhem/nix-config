@@ -25,6 +25,7 @@ in {
       "1password-cli"
       "azure-data-studio"
       "betterdisplay"
+      "bitwarden"
       "cursor"
       "firefox"
       "ghostty"
