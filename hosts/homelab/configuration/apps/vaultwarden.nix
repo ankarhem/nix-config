@@ -3,9 +3,15 @@ let
   domain = "vault.ankarhem.dev";
   port = 8222;
 in {
+  systemd.tmpfiles.rules =
+    [ "d /var/log/nginx/vaultwarden 0750 nginx nginx - -" ];
   services.nginx.virtualHosts."${domain}" = {
     forceSSL = true;
     useACMEHost = "ankarhem.dev";
+    extraConfig = ''
+      access_log /var/log/nginx/vaultwarden/access.log;
+      error_log /var/log/nginx/vaultwarden/error.log;
+    '';
     locations."/" = {
       proxyWebsockets = true;
       proxyPass = "http://127.0.0.1:${toString port}";
@@ -53,69 +59,73 @@ in {
     };
   };
 
-  # TODO
-  # services.fail2ban = {
-  #   jails = {
-  #     vaultwarden.settings = {
-  #       enabled = false;
-  #       port = "80,443,8081";
-  #       filter = "vaultwarden";
-  #       banaction = "%(banaction_allports)s";
-  #       logpath = "/var/vaultwarden/logs/*.log";
-  #       maxretry = 3;
-  #       bantime = 14400;
-  #       findtime = 14400;
-  #     };
-  #     vaultwarden-admin.settings = {
-  #       enabled = false;
-  #       port = "80,443";
-  #       filter = "vaultwarden-admin";
-  #       banaction = "%(banaction_allports)s";
-  #       logpath = "/var/vaultwarden/logs/*.log";
-  #       maxretry = 3;
-  #       bantime = 14400;
-  #       findtime = 14400;
-  #     };
-  #     vaultwarden-totp.settings = {
-  #       enabled = false;
-  #       port = "80,443";
-  #       filter = "vaultwarden-totp";
-  #       banaction = ''
-  #         iptables-multiport[name=vaultwarden-totp, port="80,443", protocol=tcp]'';
-  #       logpath = "/var/vaultwarden/logs/*.log";
-  #       maxretry = 3;
-  #       bantime = 14400;
-  #       findtime = 14400;
-  #     };
-  #   };
-  # };
-  # environment.etc = {
-  #   "fail2ban/filter.d/vaultwarden.local".text = pkgs.lib.mkDefault
-  #     (pkgs.lib.mkAfter ''
-  #       [INCLUDES]
-  #       before = common.conf
-  #
-  #       [Definition]
-  #       failregex = ^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$
-  #       ignoreregex =
-  #     '');
-  #   "fail2ban/filter.d/vaultwarden-admin.local".text = pkgs.lib.mkDefault
-  #     (pkgs.lib.mkAfter ''
-  #       [INCLUDES]
-  #       before = common.conf
-  #
-  #       [Definition]
-  #       failregex = ^.*Invalid admin token\. IP: <ADDR>.*$
-  #       ignoreregex =
-  #     '');
-  #   "fail2ban/filter.d/vaultwarden-totp.local".text = pkgs.lib.mkDefault
-  #     (pkgs.lib.mkAfter ''
-  #       [INCLUDES]
-  #       before = common.conf
-  #
-  #       [Definition]
-  #       failregex = ^.*\[ERROR\] Invalid TOTP code! Server time: (.*) UTC IP: <ADDR>$
-  #       ignoreregex =
-  #     '');
-  # };
+  services.fail2ban = {
+    jails = {
+      vaultwarden.settings = {
+        enabled = true;
+        port = "80,443,8081";
+        filter = "vaultwarden";
+        banaction = ''
+          cf
+          iptables-multiport[name=vaultwarden, port="http,https"]'';
+        logpath = "/var/logs/nginx/vaultwarden/*.log";
+        maxretry = 5;
+        bantime = 14400;
+        findtime = 14400;
+      };
+      vaultwarden-admin.settings = {
+        enabled = true;
+        port = "80,443";
+        filter = "vaultwarden-admin";
+        banaction = ''
+          cf
+          iptables-multiport[name=vaultwarden-admin, port="http,https"]'';
+        logpath = "/var/logs/nginx/vaultwarden/*.log";
+        maxretry = 3;
+        bantime = 14400;
+        findtime = 14400;
+      };
+      vaultwarden-totp.settings = {
+        enabled = true;
+        port = "80,443";
+        filter = "vaultwarden-totp";
+        banaction = ''
+          cf
+          iptables-multiport[name=vaultwarden-totp, port="http,https"]'';
+        logpath = "/var/logs/nginx/vaultwarden/*.log";
+        maxretry = 3;
+        bantime = 14400;
+        findtime = 14400;
+      };
+    };
+  };
+  environment.etc = {
+    "fail2ban/filter.d/vaultwarden.local".text = pkgs.lib.mkDefault
+      (pkgs.lib.mkAfter ''
+        [INCLUDES]
+        before = common.conf
+
+        [Definition]
+        failregex = ^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$
+        ignoreregex =
+      '');
+    "fail2ban/filter.d/vaultwarden-admin.local".text = pkgs.lib.mkDefault
+      (pkgs.lib.mkAfter ''
+        [INCLUDES]
+        before = common.conf
+
+        [Definition]
+        failregex = ^.*Invalid admin token\. IP: <ADDR>.*$
+        ignoreregex =
+      '');
+    "fail2ban/filter.d/vaultwarden-totp.local".text = pkgs.lib.mkDefault
+      (pkgs.lib.mkAfter ''
+        [INCLUDES]
+        before = common.conf
+
+        [Definition]
+        failregex = ^.*\[ERROR\] Invalid TOTP code! Server time: (.*) UTC IP: <ADDR>$
+        ignoreregex =
+      '');
+  };
 }
