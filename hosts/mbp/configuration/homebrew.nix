@@ -30,12 +30,14 @@ in {
       "firefox"
       "ghostty"
       "google-chrome"
+      "kegworks"
       "legcord"
       "maccy"
       "microsoft-excel"
       "microsoft-remote-desktop"
       "microsoft-teams"
       "mos"
+      "mullvad-browser"
       "openvpn-connect"
       "orbstack"
       "raycast"
@@ -43,7 +45,6 @@ in {
       "steam"
       "tailscale"
       "telegram"
-      "kegworks"
     ];
   };
 
