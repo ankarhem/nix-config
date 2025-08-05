@@ -45,46 +45,43 @@
   programs.nix-index.enable = true;
 
   home.packages = (with pkgs; [
-    yubikey-personalization
-    yubikey-manager
     openssh
+    yubikey-manager
+    yubikey-personalization
 
-    coreutils
-    wget
-    curl
     (lib.hiPrio gitAndTools.gitFull)
+    age
+    alejandra
+    bat
+    bottom
+    coreutils
+    curl
+    deno
+    fd
+    gitleaks
+    grc
     htop
+    imagemagick
+    jq
+    k9s
+    mas
+    mitmproxy
+    ngrok
+    nodejs_22
     ripgrep
     rm-improved
-    jq
-    grc
-    gitleaks
-    bottom
-    bat
-    tree
-    ngrok
-    fd
-    # nfs-utils
-    nodejs_22
-    deno
-    imagemagick
-    k9s
-    mitmproxy
     sops
-    age
     tailscale
+    tree
+    wget
 
-    alejandra
-
-    mas
-    slack
-    # element-desktop
-    gimp
-    spotify
     bruno
+    gimp
     jetbrains.rider
     jetbrains.rust-rover
     jetbrains.webstorm
+    slack
+    spotify
   ]) ++ (with pkgs-unstable; [ opencode element-desktop ]);
   programs.nh = {
     enable = true;
