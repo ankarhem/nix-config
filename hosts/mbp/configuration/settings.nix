@@ -43,6 +43,7 @@
         "/Applications/Ghostty.app/"
         "/Applications/Microsoft Excel.app/"
         "/Applications/Microsoft Teams.app/"
+        "/Applications/Mullvad Browser.app/"
         "/Applications/OpenVPN Connect/OpenVPN Connect.app/"
         "/Applications/legcord.app/"
         "/System/Applications/Calendar.app/"
