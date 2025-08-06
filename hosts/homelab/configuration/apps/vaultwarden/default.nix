@@ -16,19 +16,21 @@ let
       #!/usr/bin/env bash
       set -euo pipefail
 
-      SYNOLOGY_PATH=/mnt/DISKETTEN_drive/vaultwarden
+      DISKETTEN_PATH=/mnt/DISKETTEN_drive/vaultwarden
+      # FILESHARE_PATH=~/backups/vaultwarden
       # Create folder if not exists
-      if [ ! -d "$SYNOLOGY_PATH" ]; then
-        echo "Folder $SYNOLOGY_PATH does not exist, creating it."
-        mkdir -p $SYNOLOGY_PATH
+      if [ ! -d "$DISKETTEN_PATH" ]; then
+        echo "Folder $DISKETTEN_PATH does not exist, creating it."
+        mkdir -p $DISKETTEN_PATH
       fi
 
       # BACKUP_FOLDER is a default environment variable set in the nixos module
       # which is the folder set at services.vaultwarden.backupDir
-      rsync -avh --delete --no-owner --no-group "$BACKUP_FOLDER/" "$SYNOLOGY_PATH/" || {
+      rsync -avh --delete --no-owner --no-group "$BACKUP_FOLDER/" "$DISKETTEN_PATH/" || {
         echo "Error: failed to sync Vaultwarden backup to Synology NAS." >&2
         exit 1
       }
+      echo "Successfully synced Vaultwarden backups to Synology NAS."
     '';
   };
 in {
