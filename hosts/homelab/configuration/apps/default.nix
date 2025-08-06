@@ -11,7 +11,7 @@
     ./synology.nix
     ./tibia-api.nix
     ./dokploy.nix
-    ./vaultwarden.nix
+    ./vaultwarden/default.nix
   ];
 
   services.nginx = {

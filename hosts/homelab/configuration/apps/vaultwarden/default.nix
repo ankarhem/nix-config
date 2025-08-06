@@ -1,22 +1,15 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   domain = "vault.ankarhem.dev";
   port = 8222;
-in {
-  systemd.tmpfiles.rules =
-    [ "d /var/log/nginx/vaultwarden 0750 nginx nginx - -" ];
-  services.nginx.virtualHosts."${domain}" = {
-    forceSSL = true;
-    useACMEHost = "ankarhem.dev";
-    extraConfig = ''
-      access_log /var/log/nginx/vaultwarden/access.log;
-      error_log /var/log/nginx/vaultwarden/error.log;
-    '';
-    locations."/" = {
-      proxyWebsockets = true;
-      proxyPass = "http://127.0.0.1:${toString port}";
-    };
+
+  backupScript = pkgs.writeShellApplication {
+    name = "vaultwarden-backup";
+    runtimeInputs = [ pkgs.sqlite pkgs.busybox ];
+    text = (builtins.readFile ./backup.sh);
   };
+in {
+  environment.systemPackages = [ backupScript ];
 
   sops.secrets = {
     "smtp/username" = { };
@@ -45,6 +38,7 @@ in {
       }
     '';
   };
+
   services.vaultwarden = {
     enable = true;
     dbBackend = "sqlite";
@@ -58,7 +52,12 @@ in {
       invitationsAllowed = true;
     };
   };
+  ## Override the backup script, and make it more frequent
+  systemd.services.backup-vaultwarden.serviceConfig.ExecStart = lib.mkForce
+    "${pkgs.bash}/bin/bash ${backupScript}/bin/${backupScript.name}";
+  systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "hourly";
 
+  ## FIREWALL
   services.fail2ban = {
     jails = {
       vaultwarden.settings = {
@@ -127,5 +126,20 @@ in {
         failregex = ^.*\[ERROR\] Invalid TOTP code! Server time: (.*) UTC IP: <ADDR>$
         ignoreregex =
       '');
+  };
+
+  systemd.tmpfiles.rules =
+    [ "d /var/log/nginx/vaultwarden 0750 nginx nginx - -" ];
+  services.nginx.virtualHosts."${domain}" = {
+    forceSSL = true;
+    useACMEHost = "ankarhem.dev";
+    extraConfig = ''
+      access_log /var/log/nginx/vaultwarden/access.log;
+      error_log /var/log/nginx/vaultwarden/error.log;
+    '';
+    locations."/" = {
+      proxyWebsockets = true;
+      proxyPass = "http://127.0.0.1:${toString port}";
+    };
   };
 }
