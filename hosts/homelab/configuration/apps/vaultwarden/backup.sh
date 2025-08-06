@@ -57,7 +57,6 @@ done
 # Check if required parameters are provided
 if [ -z "$BACKUP_FOLDER" ] || [ -z "$DATA_FOLDER" ]; then
 	echo "Error: Both --backup-dir and --data-dir must be specified (or set via environment variables)" >&2
-	echo
 	show_help
 	exit 1
 fi
@@ -92,7 +91,7 @@ cp -r "$DATA_FOLDER"/!(db.*) "$TEMP_BACKUP_DIR"/ 2>/dev/null || true
 
 # Check if there is anything to backup
 if [ -z "$(ls -A "$TEMP_BACKUP_DIR")" ]; then
-	echo "Warning: Temporary backup directory '$TEMP_BACKUP_DIR' is empty. Skipping backup creation."
+	echo "Warning: Temporary backup directory '$TEMP_BACKUP_DIR' is empty. Skipping backup creation." >&2
 else
 	# Create tar.gz archive
 	tar -czf "$BACKUP_FOLDER/$BACKUP_NAME" -C "$TEMP_BACKUP_DIR" .

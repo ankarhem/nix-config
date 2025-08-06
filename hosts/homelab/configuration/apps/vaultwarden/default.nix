@@ -8,6 +8,29 @@ let
     runtimeInputs = [ pkgs.sqlite pkgs.busybox ];
     text = (builtins.readFile ./backup.sh);
   };
+
+  syncScript = pkgs.writeShellApplication {
+    name = "vaultwarden-sync";
+    runtimeInputs = [ pkgs.rsync ];
+    text = ''
+      #!/usr/bin/env bash
+      set -euo pipefail
+
+      SYNOLOGY_PATH=/mnt/DISKETTEN_drive/vaultwarden
+      # Create folder if not exists
+      if [ ! -d "$SYNOLOGY_PATH" ]; then
+        echo "Folder $SYNOLOGY_PATH does not exist, creating it."
+        mkdir -p $SYNOLOGY_PATH
+      fi
+
+      # BACKUP_FOLDER is a default environment variable set in the nixos module
+      # which is the folder set at services.vaultwarden.backupDir
+      rsync -avh --delete --info=progress2 --no-owner --no-group "$BACKUP_FOLDER/" "$SYNOLOGY_PATH/" || {
+        echo "Error: failed to sync Vaultwarden backup to Synology NAS." >&2
+        exit 1
+      }
+    '';
+  };
 in {
   environment.systemPackages = [ backupScript ];
 
@@ -53,8 +76,12 @@ in {
     };
   };
   ## Override the backup script, and make it more frequent
-  systemd.services.backup-vaultwarden.serviceConfig.ExecStart = lib.mkForce
-    "${pkgs.bash}/bin/bash ${backupScript}/bin/${backupScript.name}";
+  systemd.services.backup-vaultwarden.serviceConfig = {
+    ExecStart = lib.mkForce
+      "${pkgs.bash}/bin/bash ${backupScript}/bin/${backupScript.name}";
+    ExecStartPost =
+      "${pkgs.bash}/bin/bash ${syncScript}/bin/${syncScript.name}";
+  };
   systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "hourly";
 
   ## FIREWALL
