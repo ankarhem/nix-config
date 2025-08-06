@@ -25,7 +25,7 @@ let
 
       # BACKUP_FOLDER is a default environment variable set in the nixos module
       # which is the folder set at services.vaultwarden.backupDir
-      rsync -avh --delete --info=progress2 --no-owner --no-group "$BACKUP_FOLDER/" "$SYNOLOGY_PATH/" || {
+      rsync -avh --delete --no-owner --no-group "$BACKUP_FOLDER/" "$SYNOLOGY_PATH/" || {
         echo "Error: failed to sync Vaultwarden backup to Synology NAS." >&2
         exit 1
       }
