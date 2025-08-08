@@ -3,9 +3,10 @@ let
   domain = "vault.ankarhem.dev";
   port = 8222;
 
+  backupGpgHomePath = "/var/lib/backup/.gnupg";
   backupScript = pkgs.writeShellApplication {
     name = "vaultwarden-backup";
-    runtimeInputs = [ pkgs.sqlite pkgs.busybox ];
+    runtimeInputs = [ pkgs.sqlite pkgs.busybox pkgs.gnupg ];
     text = (builtins.readFile ./backup.sh);
   };
 
@@ -42,6 +43,10 @@ in {
     "vaultwarden/admin_token" = { };
     "vaultwarden/installation_id" = { };
     "vaultwarden/installation_key" = { };
+    "vaultwarden/symmetric_key" = {
+      owner = config.users.users.vaultwarden.name;
+      group = config.users.users.vaultwarden.group;
+    };
   };
   sops.templates."vaultwarden.env" = {
     content = ''
@@ -78,11 +83,17 @@ in {
     };
   };
   ## Override the backup script, and make it more frequent
-  systemd.services.backup-vaultwarden.serviceConfig = {
-    ExecStart = lib.mkForce
-      "${pkgs.bash}/bin/bash ${backupScript}/bin/${backupScript.name}";
-    ExecStartPost =
-      "${pkgs.bash}/bin/bash ${syncScript}/bin/${syncScript.name}";
+  systemd.services.backup-vaultwarden = {
+    environment = {
+      GNUPGHOME = backupGpgHomePath;
+      PASSWORD_FILE = config.sops.secrets."vaultwarden/symmetric_key".path;
+    };
+    serviceConfig = {
+      ExecStart = lib.mkForce
+        "${pkgs.bash}/bin/bash ${backupScript}/bin/${backupScript.name}";
+      ExecStartPost =
+        "${pkgs.bash}/bin/bash ${syncScript}/bin/${syncScript.name}";
+    };
   };
   systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "hourly";
 
@@ -157,8 +168,10 @@ in {
       '');
   };
 
-  systemd.tmpfiles.rules =
-    [ "d /var/log/nginx/vaultwarden 0750 nginx nginx - -" ];
+  systemd.tmpfiles.rules = [
+    "d /var/log/nginx/vaultwarden 0750 nginx nginx - -"
+    "d ${backupGpgHomePath} 0700 vaultwarden vaultwarden - -"
+  ];
   services.nginx.virtualHosts."${domain}" = {
     forceSSL = true;
     useACMEHost = "ankarhem.dev";

@@ -96,8 +96,12 @@ else
 	# Create tar.gz archive
 	tar -czf "$BACKUP_FOLDER/$BACKUP_NAME" -C "$TEMP_BACKUP_DIR" .
 	echo "Backup created: $BACKUP_NAME"
+	# Encrypting backup
+	gpg --no-options --batch --passphrase-file "$PASSWORD_FILE" --symmetric --output "$BACKUP_FOLDER/$BACKUP_NAME.enc" "$BACKUP_FOLDER/$BACKUP_NAME"
+	rm "$BACKUP_FOLDER/$BACKUP_NAME"
+	echo "Backup encrypted: $BACKUP_NAME.enc"
 	# Remove backups older than 30 days
-	find "$BACKUP_FOLDER" -name "vaultwarden-*.tar.gz" -type f -mtime +30 -delete
+	find "$BACKUP_FOLDER" -name "vaultwarden-*.tar.gz.enc" -type f -mtime +30 -delete
 	echo "Old backups (>30 days) removed"
 fi
 
