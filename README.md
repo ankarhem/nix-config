@@ -55,6 +55,10 @@ The user account / home map folder must be named `ankarhem`.
 - https://macos-defaults.com/
 - https://daiderd.com/nix-darwin/manual/index.html
 
+## Accept tailscale subnet routing
+
+- `sudo tailscale set --accept-routes`
+
 ### Diffing to find settings
 
 1. Generate starting point `defaults read > before`
