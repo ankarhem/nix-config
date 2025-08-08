@@ -12,13 +12,13 @@ let
 
   syncScript = pkgs.writeShellApplication {
     name = "vaultwarden-sync";
-    runtimeInputs = [ pkgs.rsync ];
+    runtimeInputs = [ pkgs.rsync pkgs.openssh ];
     text = ''
       #!/usr/bin/env bash
       set -euo pipefail
 
       DISKETTEN_PATH=/mnt/DISKETTEN_drive/vaultwarden
-      # FILESHARE_PATH=~/backups/vaultwarden
+      FILESHARE_PATH=/mnt/fileshare/vaultwarden
       # Create folder if not exists
       if [ ! -d "$DISKETTEN_PATH" ]; then
         echo "Folder $DISKETTEN_PATH does not exist, creating it."
@@ -32,6 +32,13 @@ let
         exit 1
       }
       echo "Successfully synced Vaultwarden backups to Synology NAS."
+      rsync -avh --delete --no-owner --no-group -e 'ssh -p 9023 -i ${
+        config.sops.secrets."vaultwarden/ssh_key".path
+      } -o UserKnownHostsFile=/etc/ssh/fileshare-known-hosts ' "$BACKUP_FOLDER/" internetfenomen-openssh-server@fileshare.se:"$FILESHARE_PATH/" || {
+        echo "Error: failed to sync Vaultwarden backup to Fileshare." >&2
+        exit 1
+      }
+      echo "Successfully synced Vaultwarden backups to Fileshare."
     '';
   };
 in {
@@ -44,6 +51,10 @@ in {
     "vaultwarden/installation_id" = { };
     "vaultwarden/installation_key" = { };
     "vaultwarden/symmetric_key" = {
+      owner = config.users.users.vaultwarden.name;
+      group = config.users.users.vaultwarden.group;
+    };
+    "vaultwarden/ssh_key" = {
       owner = config.users.users.vaultwarden.name;
       group = config.users.users.vaultwarden.group;
     };
@@ -82,11 +93,18 @@ in {
       invitationsAllowed = true;
     };
   };
+
+  environment.etc."ssh/fileshare-known-hosts".text = ''
+    [fileshare.se]:9023 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILpJC74ZxcYzh+AFt3FrM/Wj/OoOWv4S86PKXOiNvOKY
+    [fileshare.se]:9023 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOWurI5ivrpz+YYK/8hC4qtBxap2laFnDR2wwQEbAM6r754aFlxnVNG5ml8/W9nbnUb1zSQOHux4NS0eFBbKr2E=
+    [fileshare.se]:9023 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDAOHPDPlAO8jqqAtZpw1aknDSH7gePCMHlmKCTEoBxH+XVUGSNqK8WxMlyxD3IOGC2OXwQHKCWO20FJUpPTjykidCPc8zt7SP2LFKt0eQ9NAvNoQCkd7dwcbdkkVBWXKBtxwj50GB7YKTr3+gskE7Bc5/UPCTg0Eyt1IdNvYKkjDThEyvsUdgQwtQS6/KgO7daaTX3nbB3YKeGblM2A0Y7lbcSeRYkqiMx1O7I1S6fUQHcmJhr9MYclY81ZhAHjLts2uXg7WNOL4ZMNo3+Vbl+O8jP09h0+D4R3OVH0ARM/yg0L0gFFrAU0686chddHmBtDEF7laKsjtGBqa5OAbpNdY6g0D4iFMrA4PhfaC0PlKrJtbfh83Kh7MtEH4ZLemCRwE90BCPpZZkXa6KxyF61gOBra/T2ktaeMdP44LtXEgkmg30CBiADe1pDv6yHncvwEMXGk28FrvuS3ioUbYD7yespaltmUvqAnJOWpXFIjluhAaIAOhmOWgei6D2BpiM=
+  '';
   ## Override the backup script, and make it more frequent
   systemd.services.backup-vaultwarden = {
     environment = {
       GNUPGHOME = backupGpgHomePath;
       PASSWORD_FILE = config.sops.secrets."vaultwarden/symmetric_key".path;
+      KNOWN_HOSTS_FILE = "/etc/ssh/fileshare-known-hosts";
     };
     serviceConfig = {
       ExecStart = lib.mkForce
