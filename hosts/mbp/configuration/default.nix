@@ -13,6 +13,9 @@
     fish.enable = true;
   };
 
+  services.tailscale.enable = true;
+  services.tailscale.overrideLocalDns = true;
+
   # backwards compat; don't change
   system.stateVersion = 5;
 

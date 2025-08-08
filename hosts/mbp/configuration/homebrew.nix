@@ -43,7 +43,6 @@ in {
       "raycast"
       "runelite"
       "steam"
-      "tailscale"
       "telegram"
     ];
   };
