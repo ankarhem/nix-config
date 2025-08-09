@@ -20,7 +20,7 @@
     ./ssh.nix
     ./vscode.nix
     ./ghostty.nix
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
   ];
 
   home.file.".config/git/allowed_signers".text = let
