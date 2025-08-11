@@ -55,7 +55,7 @@ in {
 
   # Containers
   virtualisation.oci-containers.containers."conduwuit" = {
-    image = "ghcr.io/girlbossceo/conduwuit:main";
+    image = "ghcr.io/matrix-construct/tuwunel:latest";
     environment = {
       "CONDUWUIT_ADDRESS" = "0.0.0.0";
       "CONDUWUIT_CONFIG" = "/etc/conduwuit.toml";
