@@ -12,6 +12,7 @@
     # ./jellyfin.nix
     ./unpackerr.nix
     ./bazarr.nix
+    ./plex-auto-languages.nix
   ];
 }
 
