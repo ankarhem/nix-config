@@ -54,6 +54,7 @@
     alejandra
     bat
     bottom
+    codex
     coreutils
     curl
     deno
