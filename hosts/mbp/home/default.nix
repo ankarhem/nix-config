@@ -54,6 +54,7 @@
     alejandra
     bat
     bottom
+    claude-code
     codex
     coreutils
     curl
