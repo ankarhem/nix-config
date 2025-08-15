@@ -9,6 +9,7 @@
     ./tailscale.nix
     ./fail2ban.nix
   ];
+  nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
       trusted-users = [ "root" "@wheel" ];
