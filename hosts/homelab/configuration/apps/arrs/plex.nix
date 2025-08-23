@@ -8,11 +8,12 @@
 
   nixpkgs.overlays = [
     (self: super: {
-      plexRaw = super.plexRaw.overrideAttrs (old: {
+      plexRaw = super.plexRaw.overrideAttrs (old: rec {
         version = "1.42.1.10060-4e8b05daf";
         src = super.fetchurl {
-          inherit (old.src) url;
-          hash = "sha256-4ZbSGQGdkXCCZZ00w0/BwRHju4DJUQQBGid0gBFK0Ck=";
+          url =
+            "https://downloads.plex.tv/plex-media-server-new/${version}/debian/plexmediaserver_${version}_amd64.deb";
+          hash = "sha256-OoItvG0IpgUKlZ0JmzDc2WqMtyZrlNCF7MCnUKqBl/Q=";
         };
       });
     })
