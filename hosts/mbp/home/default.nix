@@ -74,6 +74,7 @@
     sops
     tailscale
     tree
+    uv # dependency for ddg-mcp
     wget
 
     bruno
