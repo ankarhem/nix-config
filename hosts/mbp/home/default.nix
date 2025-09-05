@@ -15,7 +15,6 @@
     "${self}/presets/git.nix"
     "${self}/presets/gh.nix"
     "${self}/presets/neovim/default.nix"
-    ./karabiner.nix
     ./npm.nix
     ./ssh.nix
     ./vscode.nix
