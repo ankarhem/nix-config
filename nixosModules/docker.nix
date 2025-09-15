@@ -7,7 +7,7 @@ in {
 
     interval = lib.mkOption {
       type = lib.types.int;
-      default = 300;
+      default = 60;
       description = lib.mdDoc ''
         Interval in seconds for Watchtower to check for updates.
       '';
