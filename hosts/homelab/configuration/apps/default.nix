@@ -12,6 +12,7 @@
     ./tibia-api.nix
     ./dokploy.nix
     ./vaultwarden/default.nix
+    ./hitster.nix
   ];
 
   services.nginx = {
