@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-darwin, ... }: {
   imports = [
     ./environment.nix
     ./fonts.nix
@@ -38,5 +38,24 @@
     # nix settings for flake support
     experimental-features = [ "nix-command" "flakes" ];
     extra-platforms = [ "x86_64-darwin" "aarch64-darwin" ];
+
+    trusted-users = [ "@admin" ];
+  };
+
+  # remove extra config to hit cache if building for the first time
+  nix.linux-builder = {
+    enable = true;
+    package = pkgs-darwin.darwin.linux-builder-x86_64;
+    ephemeral = true;
+    maxJobs = 4;
+    config = {
+      virtualisation = {
+        darwin-builder = {
+          diskSize = 40 * 1024;
+          memorySize = 8 * 1024;
+        };
+        cores = 6;
+      };
+    };
   };
 }
