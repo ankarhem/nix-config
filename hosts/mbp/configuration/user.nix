@@ -11,4 +11,5 @@
   };
 
   nix.settings.trusted-users = [ username ];
+  nix.settings.extra-trusted-users = [ username ];
 }
