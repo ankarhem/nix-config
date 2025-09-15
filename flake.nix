@@ -18,6 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
     darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -98,6 +99,10 @@
         system = "aarch64-darwin";
         specialArgs = {
           pkgs-unstable = import inputs.nixpkgs-unstable {
+            inherit system;
+            config = nixpkgsConfig;
+          };
+          pkgs-darwin = import inputs.nixpkgs-darwin {
             inherit system;
             config = nixpkgsConfig;
           };
