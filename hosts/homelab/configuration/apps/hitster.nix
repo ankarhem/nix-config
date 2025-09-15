@@ -18,12 +18,15 @@ in {
     useACMEHost = "ankarhem.dev";
     locations."/" = { proxyPass = "http://127.0.0.1:${port}"; };
   };
-  virtualisation.oci-containers.containers = {
-    hitster = {
-      image = "ghcr.io/ankarhem/hitster:latest";
-      ports = [ "127.0.0.1:${port}:3000" ];
-      environmentFiles = [ config.sops.templates."hitster.env".path ];
-      volumes = [ "/var/lib/hitster/db:/data/db" ];
+  virtualisation.oci-containers = {
+    autoUpdater.containers.hitster.enable = true;
+    containers = {
+      hitster = {
+        image = "ghcr.io/ankarhem/hitster:latest";
+        ports = [ "127.0.0.1:${port}:3000" ];
+        environmentFiles = [ config.sops.templates."hitster.env".path ];
+        volumes = [ "/var/lib/hitster/db:/data/db" ];
+      };
     };
   };
 }

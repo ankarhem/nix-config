@@ -1,5 +1,6 @@
 { self, config, ... }: {
   imports = [
+    "${self}/nixosModules/docker.nix"
     ./arrs/default.nix
     ./telemetry/default.nix
     ./conduwuit.nix
@@ -117,6 +118,7 @@
   virtualisation.docker.enable = true;
   virtualisation.docker.daemon.settings = { dns = [ "192.168.1.221" ]; };
   virtualisation.oci-containers.backend = "docker";
+  virtualisation.oci-containers.autoUpdater.enable = true;
   virtualisation.podman = {
     enable = false;
     autoPrune.enable = true;
