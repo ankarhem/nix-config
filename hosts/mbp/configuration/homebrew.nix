@@ -1,4 +1,4 @@
-{ inputs, username, ... }:
+{ config, inputs, username, ... }:
 let
   inherit (inputs)
     homebrew-core homebrew-cask homebrew-bundle homebrew-kegworks;
@@ -64,4 +64,6 @@ in {
 
     mutableTaps = false;
   };
+
+  homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
 }
