@@ -10,6 +10,11 @@ in {
     content = ''
       SPOTIFY_CLIENT_ID=${config.sops.placeholder."spotify/client_id"}
       SPOTIFY_CLIENT_SECRET=${config.sops.placeholder."spotify/client_secret"}
+
+      HITSTER_SPOTIFY__CLIENT_ID=${config.sops.placeholder."spotify/client_id"}
+      HITSTER_SPOTIFY__CLIENT_SECRET=${
+        config.sops.placeholder."spotify/client_secret"
+      }
     '';
   };
 
@@ -24,8 +29,10 @@ in {
       hitster = {
         image = "ghcr.io/ankarhem/hitster:latest";
         ports = [ "127.0.0.1:${port}:3000" ];
+        environment = { HITSTER_SERVER__HOST = "0.0.0.0"; };
         environmentFiles = [ config.sops.templates."hitster.env".path ];
-        volumes = [ "/var/lib/hitster/db:/data/db" ];
+        volumes =
+          [ "/var/lib/hitster/db:/data/db" "/var/lib/hitster/config:/config" ];
       };
     };
   };

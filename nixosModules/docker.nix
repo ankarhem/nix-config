@@ -30,11 +30,13 @@ in {
         {
           image = "containrrr/watchtower:latest";
           cmd = [
+            # Only fetch new images, do not attempt to restart containers:
+            "--no-restart"
             # By default, update only containers with the label:
             "--label-enable"
             # Cleanup old images after updating:
             "--cleanup"
-            # Polling interval
+            # Polling interval:
             "--interval=${toString cfg.interval}"
           ];
           # Do not update watchtower itself unless explicitly opted-in:
