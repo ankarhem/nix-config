@@ -1,14 +1,21 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ modulesPath, pkgs, username, hostname, helpers, ... }: {
+{ self, modulesPath, pkgs, username, hostname, helpers, ... }: {
   imports = [
+    "${self}/nixosModules/networking.nix"
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
     ./apps/default.nix
     ./sops.nix
     ./tailscale.nix
     ./fail2ban.nix
   ];
+  networking.custom = {
+    homelabIp = "192.168.1.221";
+    synologyIp = "192.168.1.163";
+    lanNetwork = "192.168.1.0/24";
+  };
+
   nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
