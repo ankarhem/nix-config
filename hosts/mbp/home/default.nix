@@ -83,7 +83,8 @@
     jetbrains.webstorm
     slack
     spotify
-  ]) ++ (with pkgs-unstable; [ claude-code opencode element-desktop ]);
+  ])
+    ++ (with pkgs-unstable; [ claude-code mcp-nixos opencode element-desktop ]);
   programs.nh = {
     enable = true;
     flake = "/Users/${username}/nix-config";
