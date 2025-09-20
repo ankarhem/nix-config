@@ -1,7 +1,7 @@
 { config, inputs, username, ... }:
 let
   inherit (inputs)
-    homebrew-core homebrew-cask homebrew-bundle homebrew-kegworks;
+    homebrew-core homebrew-cask homebrew-bundle homebrew-sikarugir;
 in {
   homebrew = {
     enable = true;
@@ -31,7 +31,7 @@ in {
       "firefox@developer-edition"
       "ghostty"
       "google-chrome"
-      "kegworks"
+      "sikarugir"
       "legcord"
       "maccy"
       "microsoft-excel"
@@ -59,7 +59,7 @@ in {
       "homebrew/homebrew-core" = homebrew-core;
       "homebrew/homebrew-cask" = homebrew-cask;
       "homebrew/homebrew-bundle" = homebrew-bundle;
-      "Kegworks-App/homebrew-kegworks" = homebrew-kegworks;
+      "Sikarugir-App/homebrew-sikarugir" = homebrew-sikarugir;
     };
 
     mutableTaps = false;

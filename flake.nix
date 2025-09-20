@@ -36,8 +36,8 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
-    homebrew-kegworks = {
-      url = "github:Kegworks-App/homebrew-kegworks";
+    homebrew-sikarugir = {
+      url = "github:Sikarugir-App/homebrew-sikarugir";
       flake = false;
     };
 

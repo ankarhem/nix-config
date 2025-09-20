@@ -107,19 +107,19 @@
         "type": "github"
       }
     },
-    "homebrew-kegworks": {
+    "homebrew-sikarugir": {
       "flake": false,
       "locked": {
         "lastModified": 1755132769,
         "narHash": "sha256-SN1PrxawrvkOGe9LYBWsb/o9ae+rd7E1xVtGEumUw5c=",
-        "owner": "Kegworks-App",
-        "repo": "homebrew-kegworks",
+        "owner": "Sikarugir-App",
+        "repo": "homebrew-sikarugir",
         "rev": "f40f3149ea598ec4fedd052c8784dc1b3b0a2694",
         "type": "github"
       },
       "original": {
-        "owner": "Kegworks-App",
-        "repo": "homebrew-kegworks",
+        "owner": "Sikarugir-App",
+        "repo": "homebrew-sikarugir",
         "type": "github"
       }
     },
@@ -252,7 +252,7 @@
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
-        "homebrew-kegworks": "homebrew-kegworks",
+        "homebrew-sikarugir": "homebrew-sikarugir",
         "nix-homebrew": "nix-homebrew",
         "nix-index-database": "nix-index-database",
         "nixos-generators": "nixos-generators",
