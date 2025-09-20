@@ -96,12 +96,12 @@
 
       internal.internetfeno.men {
         template IN A  {
-            answer "{{ .Name }} 0 IN A 192.168.1.221"
+            answer "{{ .Name }} 0 IN A ${config.networking.custom.homelabIp}"
         }
       }
       internal.ankarhem.dev {
         template IN A  {
-            answer "{{ .Name }} 0 IN A 192.168.1.221"
+            answer "{{ .Name }} 0 IN A ${config.networking.custom.homelabIp}"
         }
       }
     '';
@@ -116,7 +116,9 @@
 
   virtualisation.containers.enable = true;
   virtualisation.docker.enable = true;
-  virtualisation.docker.daemon.settings = { dns = [ "192.168.1.221" ]; };
+  virtualisation.docker.daemon.settings = {
+    dns = [ config.networking.custom.homelabIp ];
+  };
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.autoUpdater.enable = true;
   virtualisation.podman = {

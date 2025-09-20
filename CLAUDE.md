@@ -1,1 +1,2 @@
 - Use mcp-nixos when searching for nix packages or options
+- You can run `nix flake check` to check whether the flake evaluates and run its tests
