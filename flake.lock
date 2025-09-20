@@ -110,11 +110,11 @@
     "homebrew-kegworks": {
       "flake": false,
       "locked": {
-        "lastModified": 1744394634,
-        "narHash": "sha256-uucM6ioR3dyYcF78oxJ8nv4WW2caEcIeqol6dNqbrNE=",
+        "lastModified": 1755132769,
+        "narHash": "sha256-SN1PrxawrvkOGe9LYBWsb/o9ae+rd7E1xVtGEumUw5c=",
         "owner": "Kegworks-App",
         "repo": "homebrew-kegworks",
-        "rev": "9ab1f5fcc628f0e90a86ea2d7df24bbabf09ec0a",
+        "rev": "f40f3149ea598ec4fedd052c8784dc1b3b0a2694",
         "type": "github"
       },
       "original": {
