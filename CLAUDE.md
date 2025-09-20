@@ -1,0 +1,1 @@
+- Use mcp-nixos when searching for nix packages or options
