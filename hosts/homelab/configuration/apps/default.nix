@@ -4,7 +4,6 @@
     ./arrs/default.nix
     ./telemetry/default.nix
     ./conduwuit.nix
-    ./invidious.nix
     ./omada.nix
     ./picoshare.nix
     ./seafile.nix
