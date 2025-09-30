@@ -1,4 +1,22 @@
-{ self, pkgs, pkgs-unstable, inputs, username, helpers, ... }: {
+{
+  self,
+  pkgs,
+  pkgs-unstable,
+  inputs,
+  username,
+  helpers,
+  ...
+}:
+let
+  claude-code = pkgs-unstable.claude-code.overrideAttrs (old: rec {
+    version = "2.0.1";
+    src = pkgs-unstable.fetchzip {
+      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
+      hash = "sha256-LUbDPFa0lY74MBU4hvmYVntt6hVZy6UUZFN0iB4Eno8=";
+    };
+  });
+in
+{
   programs.home-manager.enable = true;
   home.username = username;
   home.homeDirectory = "/Users/${username}";
@@ -22,16 +40,19 @@
     inputs.nix-index-database.homeModules.nix-index
   ];
 
-  home.file.".config/git/allowed_signers".text = let
-    authorizedKeys = helpers.ssh.getGithubKeys {
-      username = "ankarhem";
-      sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
-    };
-    allowedSigners = builtins.concatStringsSep "\n"
-      (builtins.map (key: "* ${key}") authorizedKeys);
-  in allowedSigners;
+  home.file.".config/git/allowed_signers".text =
+    let
+      authorizedKeys = helpers.ssh.getGithubKeys {
+        username = "ankarhem";
+        sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
+      };
+      allowedSigners = builtins.concatStringsSep "\n" (builtins.map (key: "* ${key}") authorizedKeys);
+    in
+    allowedSigners;
   programs.git = {
-    signing = { key = "~/.ssh/id_ed25519.pub"; };
+    signing = {
+      key = "~/.ssh/id_ed25519.pub";
+    };
     extraConfig = {
       gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
@@ -40,51 +61,59 @@
 
   modules.custom-scripts.enable = true;
 
-  programs.nix-index-database = { comma.enable = true; };
+  programs.nix-index-database = {
+    comma.enable = true;
+  };
   programs.nix-index.enable = true;
 
-  home.packages = (with pkgs; [
-    openssh
-    yubikey-manager
-    yubikey-personalization
+  home.packages =
+    (with pkgs; [
+      openssh
+      yubikey-manager
+      yubikey-personalization
 
-    (lib.hiPrio gitAndTools.gitFull)
-    age
-    alejandra
-    bat
-    bottom
-    codex
-    coreutils
-    curl
-    deno
-    fd
-    gitleaks
-    grc
-    htop
-    imagemagick
-    jq
-    k9s
-    mas
-    mitmproxy
-    ngrok
-    nodejs_22
-    ripgrep
-    rm-improved
-    sops
-    tailscale
-    tree
-    uv # dependency for ddg-mcp
-    wget
+      (lib.hiPrio gitAndTools.gitFull)
+      age
+      alejandra
+      bat
+      bottom
+      codex
+      coreutils
+      curl
+      deno
+      fd
+      gitleaks
+      grc
+      htop
+      imagemagick
+      jq
+      k9s
+      mas
+      mitmproxy
+      ngrok
+      nodejs_22
+      ripgrep
+      rm-improved
+      sops
+      tailscale
+      tree
+      uv # dependency for ddg-mcp
+      wget
 
-    bruno
-    gimp
-    jetbrains.rider
-    jetbrains.rust-rover
-    jetbrains.webstorm
-    slack
-    spotify
-  ])
-    ++ (with pkgs-unstable; [ claude-code mcp-nixos opencode element-desktop ]);
+      bruno
+      gimp
+      jetbrains.rider
+      jetbrains.rust-rover
+      jetbrains.webstorm
+      slack
+      spotify
+    ])
+    ++ (with pkgs-unstable; [
+      mcp-nixos
+      opencode
+      element-desktop
+    ])
+    ++ [ claude-code ];
   programs.nh = {
     enable = true;
     flake = "/Users/${username}/nix-config";
@@ -117,9 +146,13 @@
       end
     '';
   };
-  programs.zoxide = { enable = true; };
+  programs.zoxide = {
+    enable = true;
+  };
   programs.eza.enable = true;
-  programs.starship = { enable = true; };
+  programs.starship = {
+    enable = true;
+  };
 
   programs.go = {
     enable = true;
