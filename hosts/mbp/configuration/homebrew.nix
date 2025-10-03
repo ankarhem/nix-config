@@ -1,8 +1,18 @@
-{ config, inputs, username, ... }:
+{
+  config,
+  inputs,
+  username,
+  ...
+}:
 let
   inherit (inputs)
-    homebrew-core homebrew-cask homebrew-bundle homebrew-sikarugir;
-in {
+    homebrew-core
+    homebrew-cask
+    homebrew-bundle
+    homebrew-sikarugir
+    ;
+in
+{
   homebrew = {
     enable = true;
     onActivation = {
@@ -31,7 +41,6 @@ in {
       "firefox@developer-edition"
       "ghostty"
       "google-chrome"
-      "sikarugir"
       "legcord"
       "maccy"
       "microsoft-excel"
@@ -42,6 +51,7 @@ in {
       "orbstack"
       "raycast"
       "runelite"
+      "sikarugir"
       "steam"
       "telegram"
     ];
