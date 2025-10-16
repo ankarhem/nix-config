@@ -55,6 +55,7 @@ in
       "sikarugir"
       "steam"
       "telegram"
+      "tor-browser"
     ];
   };
 
