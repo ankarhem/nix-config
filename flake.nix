@@ -17,6 +17,10 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
     darwin = {
