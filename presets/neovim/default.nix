@@ -4,6 +4,7 @@
     inputs.nixvim.homeModules.nixvim
     ./plugins/mini.nix
     ./plugins/telescope.nix
+    ./lsp.nix
   ];
 
   programs.nixvim = {
