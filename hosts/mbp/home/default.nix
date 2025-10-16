@@ -7,15 +7,6 @@
   helpers,
   ...
 }:
-let
-  claude-code = pkgs-unstable.claude-code.overrideAttrs (old: rec {
-    version = "2.0.1";
-    src = pkgs-unstable.fetchzip {
-      url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
-      hash = "sha256-LUbDPFa0lY74MBU4hvmYVntt6hVZy6UUZFN0iB4Eno8=";
-    };
-  });
-in
 {
   programs.home-manager.enable = true;
   home.username = username;
@@ -109,11 +100,11 @@ in
       spotify
     ])
     ++ (with pkgs-unstable; [
+      claude-code
       mcp-nixos
       opencode
       element-desktop
-    ])
-    ++ [ claude-code ];
+    ]);
   programs.nh = {
     enable = true;
     flake = "/Users/${username}/nix-config";
