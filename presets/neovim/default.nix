@@ -32,6 +32,7 @@
     };
 
     plugins = {
+      oil.enable = true;
       flash.enable = true;
       which-key.enable = true;
       ts-comments.enable = true;
