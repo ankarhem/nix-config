@@ -4,6 +4,7 @@
     inputs.nixvim.homeModules.nixvim
     ./plugins/mini.nix
     ./plugins/telescope.nix
+    ./plugins/flash.nix
     ./lsp.nix
     ./treesitter.nix
   ];
@@ -32,14 +33,13 @@
     };
 
     plugins = {
-      oil.enable = true;
-      flash.enable = true;
+      gitsigns.enable = true;
       which-key.enable = true;
       ts-comments.enable = true;
-      gitsigns.enable = true;
-      # fugitive.enable = true;
       diffview.enable = true;
       todo-comments.enable = true;
+      oil.enable = true;
+      # fugitive.enable = true;
       trouble.enable = true;
     };
   };
