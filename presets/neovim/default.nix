@@ -5,6 +5,7 @@
     ./plugins/mini.nix
     ./plugins/telescope.nix
     ./lsp.nix
+    ./treesitter.nix
   ];
 
   programs.nixvim = {
