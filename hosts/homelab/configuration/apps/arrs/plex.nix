@@ -6,23 +6,11 @@
   };
   environment.systemPackages = with pkgs; [ mesa libva libva-utils ];
 
-  nixpkgs.overlays = [
-    (self: super: {
-      plexRaw = super.plexRaw.overrideAttrs (old: rec {
-        version = "1.42.1.10060-4e8b05daf";
-        src = super.fetchurl {
-          url =
-            "https://downloads.plex.tv/plex-media-server-new/${version}/debian/plexmediaserver_${version}_amd64.deb";
-          hash = "sha256-OoItvG0IpgUKlZ0JmzDc2WqMtyZrlNCF7MCnUKqBl/Q=";
-        };
-      });
-    })
-  ];
   services.plex = {
     enable = true;
     openFirewall = true;
     accelerationDevices = [ "*" ];
-    # package = pkgs-unstable.plex;
+    package = pkgs-unstable.plex;
   };
 
   users.users.plex.extraGroups = [ "render" ];
