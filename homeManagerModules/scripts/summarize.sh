@@ -43,51 +43,104 @@ if ! command -v curl &>/dev/null; then
 	exit 1
 fi
 
+# Initialize variables
+custom_command=""
+text=""
+
+# Parse command line arguments
+parse_args() {
+	while [[ $# -gt 0 ]]; do
+		case $1 in
+		--command | -c)
+			custom_command="$2"
+			shift 2
+			;;
+		--help | -h)
+			show_help
+			exit 0
+			;;
+		*)
+			# Treat remaining arguments as text to process
+			text="$text$1 "
+			shift
+			;;
+		esac
+	done
+}
+
+# Show help message
+show_help() {
+	echo "Usage: $0 [OPTIONS] <text to summarize>"
+	echo "   or: cat file.txt | $0 [OPTIONS]"
+	echo ""
+	echo "OPTIONS:"
+	echo "  -c, --command <command>  Custom command/question to ask about the text"
+	echo "  -h, --help              Show this help message"
+	echo ""
+	echo "Configuration priority (highest to lowest):"
+	echo "  1. Environment variables"
+	echo "  2. ~/.claude/settings.json"
+	echo "  3. Default values"
+	echo ""
+	echo "Environment variables:"
+	echo "  ANTHROPIC_AUTH_TOKEN           - Required: Your Anthropic API key"
+	echo "  ANTHROPIC_BASE_URL             - Optional: API base URL"
+	echo "  ANTHROPIC_DEFAULT_SONNET_MODEL - Optional: Model to use"
+	echo ""
+	echo "Examples:"
+	echo "  $0 \"This is a long text to summarize\""
+	echo "  cat document.txt | $0"
+	echo "  $0 -c \"What were the ingredients?\" \"The recipe calls for flour, sugar, eggs...\""
+	echo "  cat recipe.txt | $0 --command \"Extract the cooking instructions\""
+	echo ""
+	echo "Current settings:"
+	echo "  API Key: $([ -n "$ANTHROPIC_AUTH_TOKEN" ] && echo "***$(echo "$ANTHROPIC_AUTH_TOKEN" | tail -c 5)" || echo "not set")"
+	echo "  Base URL: $ANTHROPIC_BASE_URL"
+	echo "  Model: $ANTHROPIC_DEFAULT_SONNET_MODEL"
+}
+
 # Check if input is from pipe or arguments
 if [ -t 0 ]; then
 	# Input from arguments
 	if [ $# -eq 0 ]; then
-		echo "Usage: $0 <text to summarize>"
-		echo "   or: cat file.txt | $0"
-		echo ""
-		echo "Configuration priority (highest to lowest):"
-		echo "  1. Environment variables"
-		echo "  2. ~/.claude/settings.json"
-		echo "  3. Default values"
-		echo ""
-		echo "Environment variables:"
-		echo "  ANTHROPIC_AUTH_TOKEN           - Required: Your Anthropic API key"
-		echo "  ANTHROPIC_BASE_URL             - Optional: API base URL"
-		echo "  ANTHROPIC_DEFAULT_SONNET_MODEL - Optional: Model to use"
-		echo ""
-		echo "Current settings:"
-		echo "  API Key: $([ -n "$ANTHROPIC_AUTH_TOKEN" ] && echo "***$(echo "$ANTHROPIC_AUTH_TOKEN" | tail -c 5)" || echo "not set")"
-		echo "  Base URL: $ANTHROPIC_BASE_URL"
-		echo "  Model: $ANTHROPIC_DEFAULT_SONNET_MODEL"
+		show_help
 		exit 1
 	fi
-	text="$*"
+	parse_args "$@"
+	# Remove trailing space from text
+	text="${text% }"
 else
 	# Input from pipe
 	text=$(cat)
+	# Parse any remaining arguments when using pipe
+	parse_args "$@"
 fi
 
 # Check if text is empty
 if [ -z "$text" ]; then
-	echo "Error: No text provided to summarize" >&2
+	echo "Error: No text provided to process" >&2
 	exit 1
 fi
 
 summarize_text() {
 	local text="$1"
+	local command="$2"
 
 	# Escape the text for JSON
 	local escaped_text
 	escaped_text=$(echo "$text" | jq -Rs .)
+
+	# Create the prompt - always include summary, add custom command if provided
+	local prompt="Please provide a concise summary of the following text.".
+	if [ -n "$command" ]; then
+		prompt="$prompt. $command"
+	fi
+
 	# Create JSON payload using jq
 	local json_payload
 	json_payload=$(jq -n \
 		--arg model "$ANTHROPIC_DEFAULT_SONNET_MODEL" \
+		--arg prompt "$prompt" \
 		--arg text "$escaped_text" \
 		'{
             model: $model,
@@ -95,7 +148,7 @@ summarize_text() {
             messages: [
                 {
                     role: "user",
-                    content: "Please provide a concise summary of the following text"
+                    content: $prompt
                 },
                 {
                     role: "user",
@@ -111,5 +164,5 @@ summarize_text() {
 		-d "$json_payload" | jq -r '.content[0].text'
 }
 
-# Summarize the text
-summarize_text "$text"
+# Summarize the text with optional custom command
+summarize_text "$text" "$custom_command"
