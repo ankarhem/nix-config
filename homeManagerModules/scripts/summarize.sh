@@ -5,9 +5,12 @@ load_claude_settings() {
 
 	if [ -f "$settings_file" ] && command -v jq &>/dev/null; then
 		# Extract values from the settings file
-		local file_auth_token=$(jq -r '.env.ANTHROPIC_AUTH_TOKEN // empty' "$settings_file" 2>/dev/null)
-		local file_base_url=$(jq -r '.env.ANTHROPIC_BASE_URL // empty' "$settings_file" 2>/dev/null)
-		local file_sonnet_model=$(jq -r '.env.ANTHROPIC_DEFAULT_SONNET_MODEL // empty' "$settings_file" 2>/dev/null)
+		local file_auth_token
+		file_auth_token=$(jq -r '.env.ANTHROPIC_AUTH_TOKEN // empty' "$settings_file" 2>/dev/null)
+		local file_base_url
+		file_base_url=$(jq -r '.env.ANTHROPIC_BASE_URL // empty' "$settings_file" 2>/dev/null)
+		local file_sonnet_model
+		file_sonnet_model=$(jq -r '.env.ANTHROPIC_DEFAULT_SONNET_MODEL // empty' "$settings_file" 2>/dev/null)
 
 		# Set variables with priority: env > file > default
 		ANTHROPIC_AUTH_TOKEN="${ANTHROPIC_AUTH_TOKEN:-${file_auth_token}}"
@@ -79,9 +82,11 @@ summarize_text() {
 	local text="$1"
 
 	# Escape the text for JSON
-	local escaped_text=$(echo "$text" | jq -Rs .)
+	local escaped_text
+	escaped_text=$(echo "$text" | jq -Rs .)
 	# Create JSON payload using jq
-	local json_payload=$(jq -n \
+	local json_payload
+	json_payload=$(jq -n \
 		--arg model "$ANTHROPIC_DEFAULT_SONNET_MODEL" \
 		--arg text "$escaped_text" \
 		'{
