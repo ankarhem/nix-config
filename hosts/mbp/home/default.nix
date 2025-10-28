@@ -96,6 +96,7 @@
       gimp
       slack
       spotify
+      obsidian
     ])
     ++ (with pkgs-unstable; [
       claude-code
