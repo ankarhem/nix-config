@@ -1,15 +1,23 @@
-{ self, pkgs, pkgs-unstable, ... }: {
+{
+  self,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
+{
   imports = [ "${self}/darwinModules/default.nix" ];
   darwin.settings.enable = true;
 
   security.pam.services.sudo_local.touchIdAuth = true;
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToEscape = true;
-  system.keyboard.userKeyMapping = [{
-    # Right Command to Option
-    HIDKeyboardModifierMappingSrc = 30064771303;
-    HIDKeyboardModifierMappingDst = 30064771302;
-  }];
+  system.keyboard.userKeyMapping = [
+    {
+      # Right Command to Option
+      HIDKeyboardModifierMappingSrc = 30064771303;
+      HIDKeyboardModifierMappingDst = 30064771302;
+    }
+  ];
 
   system.defaults = {
     finder.AppleShowAllExtensions = true;
@@ -22,9 +30,9 @@
       persistent-apps = [
         "${pkgs-unstable.element-desktop}/Applications/Element.app/"
         "${pkgs.bruno}/Applications/Bruno.app/"
-        "${pkgs.jetbrains.rider}/Applications/Rider.app/"
-        "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
-        "${pkgs.jetbrains.webstorm}/Applications/WebStorm.app/"
+        "${pkgs-unstable.jetbrains.rider}/Applications/Rider.app/"
+        "${pkgs-unstable.jetbrains.rust-rover}/Applications/RustRover.app/"
+        "${pkgs-unstable.jetbrains.webstorm}/Applications/WebStorm.app/"
         "${pkgs.slack}/Applications/Slack.app/"
         "${pkgs.spotify}/Applications/Spotify.app/"
         "${pkgs.vscode}/Applications/Visual Studio Code.app/"

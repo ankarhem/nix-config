@@ -93,9 +93,6 @@
 
       bruno
       gimp
-      jetbrains.rider
-      jetbrains.rust-rover
-      jetbrains.webstorm
       slack
       spotify
     ])
@@ -104,6 +101,9 @@
       mcp-nixos
       opencode
       element-desktop
+      jetbrains.rider
+      jetbrains.rust-rover
+      jetbrains.webstorm
     ]);
   programs.nh = {
     enable = true;
