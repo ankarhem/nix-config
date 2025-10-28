@@ -2,6 +2,7 @@
   self,
   pkgs,
   pkgs-unstable,
+  scriptPkgs,
   inputs,
   username,
   helpers,
@@ -104,6 +105,10 @@
       jetbrains.rider
       jetbrains.rust-rover
       jetbrains.webstorm
+    ])
+    ++ (with scriptPkgs; [
+      yt-sub
+      summarize
     ]);
   programs.nh = {
     enable = true;

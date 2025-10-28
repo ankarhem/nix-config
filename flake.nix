@@ -49,6 +49,8 @@
     };
 
     git-hooks.url = "github:cachix/git-hooks.nix";
+
+    scripts.url = "github:ankarhem/scripts";
   };
 
   outputs =
@@ -158,6 +160,7 @@
               helpers = import ./helpers {
                 pkgs = import inputs.nixpkgs { inherit system; };
               };
+              scriptPkgs = inputs.scripts.packages.${system};
             };
             modules = [
               ./hosts/${specialArgs.hostname}/configuration/default.nix
