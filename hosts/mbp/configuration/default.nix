@@ -1,4 +1,5 @@
-{ pkgs, pkgs-darwin, ... }: {
+{ pkgs, pkgs-darwin, ... }:
+{
   imports = [
     ./environment.nix
     ./fonts.nix
@@ -14,9 +15,12 @@
   };
 
   services.tailscale.enable = true;
-  services.tailscale.overrideLocalDns = true;
-  networking.knownNetworkServices =
-    [ "USB 10/100/1000 LAN" "Thunderbolt Bridge" "Wi-Fi" ];
+  # services.tailscale.overrideLocalDns = true;
+  networking.knownNetworkServices = [
+    "USB 10/100/1000 LAN"
+    "Thunderbolt Bridge"
+    "Wi-Fi"
+  ];
 
   # backwards compat; don't change
   system.stateVersion = 5;
@@ -36,8 +40,14 @@
 
   nix.settings = {
     # nix settings for flake support
-    experimental-features = [ "nix-command" "flakes" ];
-    extra-platforms = [ "x86_64-darwin" "aarch64-darwin" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    extra-platforms = [
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
 
     trusted-users = [ "@admin" ];
   };
