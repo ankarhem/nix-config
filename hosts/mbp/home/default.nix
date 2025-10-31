@@ -84,6 +84,7 @@
       mitmproxy
       ngrok
       nodejs_22
+      pup
       ripgrep
       rm-improved
       sops
