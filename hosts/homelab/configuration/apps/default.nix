@@ -13,6 +13,7 @@
     ./dokploy.nix
     ./vaultwarden/default.nix
     ./hitster.nix
+    ./immich.nix
   ];
 
   services.nginx = {
