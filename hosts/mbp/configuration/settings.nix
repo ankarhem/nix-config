@@ -29,10 +29,11 @@
 
       persistent-apps = [
         "${pkgs-unstable.element-desktop}/Applications/Element.app/"
-        "${pkgs.bruno}/Applications/Bruno.app/"
         "${pkgs-unstable.jetbrains.rider}/Applications/Rider.app/"
         "${pkgs-unstable.jetbrains.rust-rover}/Applications/RustRover.app/"
         "${pkgs-unstable.jetbrains.webstorm}/Applications/WebStorm.app/"
+        "${pkgs.bruno}/Applications/Bruno.app/"
+        "${pkgs.obsidian}/Applications/Obsidian.app/"
         "${pkgs.slack}/Applications/Slack.app/"
         "${pkgs.spotify}/Applications/Spotify.app/"
         "${pkgs.vscode}/Applications/Visual Studio Code.app/"
