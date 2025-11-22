@@ -14,6 +14,7 @@
     ./vaultwarden/default.nix
     ./hitster.nix
     ./immich.nix
+    ./baikal.nix
   ];
 
   services.nginx = {
