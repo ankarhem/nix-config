@@ -80,6 +80,7 @@
       imagemagick
       jq
       k9s
+      kubelogin
       mas
       mitmproxy
       ngrok
