@@ -27,6 +27,10 @@ in {
         replyTo = "noreply@ankarhem.dev";
         transport = { host = "smtp.mail.me.com"; };
       };
+      ffmpeg = {
+        accel = "qsv";
+        accelDecode = true;
+      };
     };
   };
 
