@@ -103,7 +103,6 @@
     ++ (with pkgs-unstable; [
       claude-code
       mcp-nixos
-      opencode
       element-desktop
       jetbrains.rider
       jetbrains.rust-rover
