@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 {
   imports = [ inputs.lazyvim.homeManagerModules.default ];
 
@@ -13,24 +18,27 @@
     installCoreDependencies = true;
 
     plugins.colorscheme = builtins.readFile ./plugins/colorscheme.lua;
-    plugins.sops = builtins.readFile ./plugins/sops.lua;
+    plugins.nvim_sops = builtins.readFile ./plugins/nvim-sops.lua;
 
     extraPackages = with pkgs; [
       (dotnetCorePackages.combinePackages [
-        # dotnet_6.sdk
-        # dotnet_7.sdk
-        dotnet_sdk
-        dotnet_9.sdk
-        dotnet_10.sdk
+        # dotnet-sdk_6
+        # dotnet-sdk_7
+        dotnet-sdk
+        dotnet-sdk_9
+        dotnet-sdk_10
       ])
     ];
+
+    treesitterParsers = pkgs-unstable.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
 
     extras = {
       ai.copilot.enable = true;
       editor = {
+        fzf.enable = true;
         inc-rename.enable = true;
         overseer.enable = true;
-        fzf.enable = true;
+        telescope.enable = true;
       };
       formatting.prettier.enable = true;
       lang = {
@@ -76,13 +84,13 @@
       linting.eslint.enable = true;
       lsp.none-ls.enable = true;
       test.core.enable = true;
-      ui.treesitter-context.enable = true;
+      ui.treesitter_context.enable = true;
       util = {
         dot.enable = true;
         gitui.enable = true;
-        mini-hipatterns.enable = true;
+        gh.enable = true;
+        mini_hipatterns.enable = true;
       };
-      vscode.enable = true;
     };
   };
 }
