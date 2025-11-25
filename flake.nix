@@ -49,6 +49,7 @@
     };
 
     git-hooks.url = "github:cachix/git-hooks.nix";
+    lazyvim.url = "github:pfassina/lazyvim-nix";
 
     scripts.url = "github:ankarhem/scripts";
   };
