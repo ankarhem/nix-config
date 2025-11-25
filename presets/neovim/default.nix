@@ -5,7 +5,11 @@
   ...
 }:
 {
-  imports = [ inputs.lazyvim.homeManagerModules.default ];
+  imports = [
+    inputs.lazyvim.homeManagerModules.default
+    ./languages/default.nix
+    ./plugins/default.nix
+  ];
 
   programs.neovim = {
     viAlias = true;
@@ -17,23 +21,20 @@
 
     installCoreDependencies = true;
 
-    plugins.colorscheme = builtins.readFile ./plugins/colorscheme.lua;
-    plugins.nvim_sops = builtins.readFile ./plugins/nvim-sops.lua;
-
-    extraPackages = with pkgs; [
-      (dotnetCorePackages.combinePackages [
-        # dotnet-sdk_6
-        # dotnet-sdk_7
-        dotnet-sdk
-        dotnet-sdk_9
-        dotnet-sdk_10
-      ])
-    ];
-
     treesitterParsers = pkgs-unstable.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
 
     extras = {
       ai.copilot.enable = true;
+      coding = {
+        blink.enable = true;
+        luasnip.enable = true;
+        mini-surround.enable = true;
+        yanky.enable = true;
+      };
+      dap = {
+        core.enable = true;
+        nlua.enable = true;
+      };
       editor = {
         fzf.enable = true;
         inc-rename.enable = true;
@@ -41,46 +42,6 @@
         telescope.enable = true;
       };
       formatting.prettier.enable = true;
-      lang = {
-        docker = {
-          enable = true;
-          installDependencies = true;
-        };
-        git.enable = true;
-        json = {
-          enable = true;
-          installDependencies = true;
-        };
-        markdown = {
-          enable = true;
-          installDependencies = true;
-          installRuntimeDependencies = true;
-        };
-        nix.enable = true;
-        dotnet = {
-          enable = true;
-          installDependencies = true;
-          installRuntimeDependencies = false; # added in extraPackages
-        };
-        rust = {
-          enable = true;
-          installDependencies = false;
-          installRuntimeDependencies = false;
-        };
-        tailwind = {
-          enable = true;
-          installDependencies = true;
-        };
-        toml = {
-          enable = true;
-          installDependencies = true;
-        };
-        typescript = {
-          enable = true;
-          installDependencies = true;
-        };
-        yaml.enable = true;
-      };
       linting.eslint.enable = true;
       lsp.none-ls.enable = true;
       test.core.enable = true;
