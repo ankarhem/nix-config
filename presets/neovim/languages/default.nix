@@ -1,7 +1,7 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs-unstable, ... }:
 let
-  grammarPlugins = builtins.attrValues pkgs.vimPlugins.nvim-treesitter.grammarPlugins;
-  grammarPackages = builtins.attrValues pkgs.tree-sitter-grammars;
+  grammarPlugins = builtins.attrValues pkgs-unstable.vimPlugins.nvim-treesitter.grammarPlugins;
+  grammarPackages = builtins.attrValues pkgs-unstable.tree-sitter-grammars;
   filterNonPackage = builtins.filter lib.isDerivation;
   filterBroken = builtins.filter (n: !n.meta.broken);
   filterEmpty = builtins.filter (n: n.pname or "" != "");
@@ -25,7 +25,7 @@ in
   ];
 
   programs.lazyvim.extraPackages =
-    with pkgs;
+    with pkgs-unstable;
     [
       tree-sitter
     ]

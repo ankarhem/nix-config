@@ -19,6 +19,8 @@
   programs.lazyvim = {
     enable = true;
 
+    pluginSource = "latest";
+
     installCoreDependencies = true;
 
     treesitterParsers = pkgs-unstable.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
@@ -37,9 +39,11 @@
       };
       editor = {
         fzf.enable = true;
-        inc-rename.enable = true;
+        inc_rename.enable = true;
         overseer.enable = true;
         telescope.enable = true;
+        dial.enable = true;
+        snacks_picker.enable = true;
       };
       formatting.prettier.enable = true;
       linting.eslint.enable = true;
