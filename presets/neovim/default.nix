@@ -57,6 +57,7 @@
         telescope.enable = true;
         dial.enable = true;
         snacks_picker.enable = true;
+        neo_tree.enable = true;
       };
       formatting.prettier.enable = true;
       linting.eslint.enable = true;
