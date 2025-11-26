@@ -1,13 +1,3 @@
-{ lib, pkgs-unstable, ... }:
-let
-  grammarPlugins = builtins.attrValues pkgs-unstable.vimPlugins.nvim-treesitter.grammarPlugins;
-  grammarPackages = builtins.attrValues pkgs-unstable.tree-sitter-grammars;
-  filterNonPackage = builtins.filter lib.isDerivation;
-  filterBroken = builtins.filter (n: !n.meta.broken);
-  filterEmpty = builtins.filter (n: n.pname or "" != "");
-  allGrammarPlugins = filterEmpty (filterBroken (filterNonPackage grammarPlugins));
-  allGrammarPackages = filterEmpty (filterBroken (filterNonPackage grammarPackages));
-in
 {
   imports = [
     ./docker.nix
@@ -23,12 +13,4 @@ in
     ./typescript.nix
     ./yaml.nix
   ];
-
-  programs.lazyvim.extraPackages =
-    with pkgs-unstable;
-    [
-      tree-sitter
-    ]
-    ++ allGrammarPlugins
-    ++ allGrammarPackages;
 }
