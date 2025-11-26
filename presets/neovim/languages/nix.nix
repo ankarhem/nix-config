@@ -11,6 +11,7 @@
 
     extraPackages = with pkgs; [
       nixd
+      statix
       nixpkgs-fmt
       alejandra
     ];
