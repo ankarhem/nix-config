@@ -104,6 +104,7 @@ in
 
       bruno
       slack
+      teams
       obsidian
     ])
     ++ (with pkgs-unstable; [

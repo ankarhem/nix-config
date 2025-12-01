@@ -45,7 +45,6 @@ in
       "maccy"
       "microsoft-excel"
       "microsoft-remote-desktop"
-      "microsoft-teams"
       "mos"
       "openvpn-connect"
       "orbstack"
