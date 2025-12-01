@@ -35,7 +35,7 @@
         "${pkgs.bruno}/Applications/Bruno.app/"
         "${pkgs.obsidian}/Applications/Obsidian.app/"
         "${pkgs.slack}/Applications/Slack.app/"
-        "${pkgs.spotify}/Applications/Spotify.app/"
+        # "${pkgs.spotify}/Applications/Spotify.app/"
         "${pkgs.vscode}/Applications/Visual Studio Code.app/"
         "/Applications/1Password.app/"
         "/Applications/Bitwarden.app/"

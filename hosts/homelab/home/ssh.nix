@@ -1,19 +1,21 @@
-{ ... }: {
+{ ... }:
+{
   programs.ssh = {
     enable = true;
 
-    extraConfig = ''
-      Host *
-        IdentityFile ~/.ssh/id_ed25519
-      Host github.com
-        User git
-        HostName github.com
-        IdentitiesOnly yes
-        IdentityFile ~/.ssh/id_ed25519
-        # Persist connection for 60min
-        ControlMaster auto
-        ControlPath ~/.ssh/S.%r@%h:%p
-        ControlPersist 60m
-    '';
+    matchBlocks = {
+      "*" = {
+        identityFile = [ "~/.ssh/id_ed25519" ];
+      };
+      "github.com" = {
+        user = "git";
+        hostname = "github.com";
+        identitiesOnly = true;
+        identityFile = [ "~/.ssh/id_ed25519" ];
+        controlMaster = "auto";
+        controlPath = "~/.ssh/S.%r@%h:%p";
+        controlPersist = "60m";
+      };
+    };
   };
 }
