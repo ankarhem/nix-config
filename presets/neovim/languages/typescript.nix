@@ -10,14 +10,12 @@
     };
 
     extraPackages = with pkgs; [
-      # nodejs_latest
-      # yarn
+      vtsls
       typescript
-      # deno
       nodePackages.prettier
+      tailwindcss
       # eslint_d
       # eslint
-      # bun
     ];
   };
 }
