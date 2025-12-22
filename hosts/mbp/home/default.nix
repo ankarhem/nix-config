@@ -8,6 +8,14 @@
   helpers,
   ...
 }:
+let
+  spotify = pkgs.spotify.overrideAttrs (oldAttrs: {
+    src = pkgs.fetchurl {
+      url = "https://web.archive.org/web/20251029235406/https://download.scdn.co/SpotifyARM64.dmg";
+      hash = "sha256-0gwoptqLBJBM0qJQ+dGAZdCD6WXzDJEs0BfOxz7f2nQ=";
+    };
+  });
+in
 {
   programs.home-manager.enable = true;
   home.username = username;
@@ -45,7 +53,7 @@
     signing = {
       key = "~/.ssh/id_ed25519.pub";
     };
-    extraConfig = {
+    settings = {
       gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
     };
@@ -64,7 +72,7 @@
       yubikey-manager
       yubikey-personalization
 
-      (lib.hiPrio gitAndTools.gitFull)
+      git
       age
       alejandra
       bat
@@ -93,17 +101,21 @@
       tree
       uv # dependency for ddg-mcp
       wget
+      (dotnetCorePackages.combinePackages [
+        # dotnet-sdk_6
+        # dotnet-sdk_7
+        dotnet-sdk
+        dotnet-sdk_9
+        dotnet-sdk_10
+      ])
 
       bruno
-      gimp
       slack
-      spotify
       obsidian
     ])
     ++ (with pkgs-unstable; [
       claude-code
       mcp-nixos
-      opencode
       element-desktop
       jetbrains.rider
       jetbrains.rust-rover
@@ -112,7 +124,8 @@
     ++ (with scriptPkgs; [
       yt-sub
       summarize
-    ]);
+    ])
+    ++ [ spotify ];
   programs.nh = {
     enable = true;
     flake = "/Users/${username}/nix-config";
@@ -155,6 +168,8 @@
 
   programs.go = {
     enable = true;
-    goPath = ".go";
+    env = {
+      GOPATH = ".go";
+    };
   };
 }

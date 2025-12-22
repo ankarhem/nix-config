@@ -15,7 +15,7 @@
   };
 
   services.tailscale.enable = true;
-  # services.tailscale.overrideLocalDns = true;
+  services.tailscale.overrideLocalDns = true;
   networking.knownNetworkServices = [
     "USB 10/100/1000 LAN"
     "Thunderbolt Bridge"
