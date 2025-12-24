@@ -92,6 +92,7 @@ in
       kubelogin
       mas
       mitmproxy
+      newt
       ngrok
       nodejs_22
       pup
