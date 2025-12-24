@@ -72,6 +72,7 @@ in
       yubikey-manager
       yubikey-personalization
 
+      azure-cli
       git
       age
       alejandra
