@@ -35,7 +35,7 @@ in {
       {
         source = pkgs.fetchurl {
           url = "https://github.com/krabba.gpg";
-          hash = "sha256-T0HrnFx5rHIX3N5ux01jWIoxeJ9xCkbbtUoZpWpCGNU=";
+          hash = "sha256-XWXfQ/rI/0eBmUCaA3TtXlwN0K9C+pXF6jfsMRh0yYA=";
         };
         trust = 2;
       }
