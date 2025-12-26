@@ -16,6 +16,7 @@
     ./gpu.nix
     ./sops.nix
     ./fonts.nix
+    ./gaming.nix
   ];
 
   # Bootloader
