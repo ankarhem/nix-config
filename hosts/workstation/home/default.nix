@@ -1,5 +1,6 @@
 {
   self,
+  helpers,
   pkgs,
   username,
   inputs,
@@ -12,6 +13,7 @@
   home.stateVersion = "25.11";
 
   imports = [
+    "${self}/homeManagerModules/scripts.nix"
     "${self}/presets/fish.nix"
     "${self}/presets/git.nix"
     "${self}/presets/gh.nix"
@@ -22,7 +24,14 @@
   ];
 
   home.file.".config/git/allowed_signers".text =
-    "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDP0ZbXrl+MxQ+9l5hcLjNpLs1cfH+8M+K8jT3VEh02w idealpink@homelab";
+    let
+      authorizedKeys = helpers.ssh.getGithubKeys {
+        username = "ankarhem";
+        sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
+      };
+      allowedSigners = builtins.concatStringsSep "\n" (builtins.map (key: "* ${key}") authorizedKeys);
+    in
+    allowedSigners;
   programs.git = {
     signing = {
       key = "~/.ssh/id_ed25519.pub";
