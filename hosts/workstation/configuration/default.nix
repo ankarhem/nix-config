@@ -12,6 +12,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./bluetooth.nix
     ./gpu.nix
     ./sops.nix
     ./fonts.nix
