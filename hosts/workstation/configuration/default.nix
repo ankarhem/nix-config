@@ -97,7 +97,9 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "colemak";
+    options = "caps:escape";
   };
+  console.useXkbConfig = true;
 
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
