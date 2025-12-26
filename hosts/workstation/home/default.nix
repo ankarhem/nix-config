@@ -90,6 +90,7 @@
       wget
 
       bruno
+      bitwarden-desktop
       slack
       spotify
       obsidian
