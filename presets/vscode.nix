@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = false;
@@ -117,15 +118,17 @@
         })
       ];
 
-      keybindings = [{
-        key = "Cmd+Shift+I";
-        command = "editor.action.sourceAction";
-        # when = "config.workspaceKeybindings.importMissingDeps.enabled";
-        args = {
-          kind = "source.addMissingImports";
-          apply = "first";
-        };
-      }];
+      keybindings = [
+        {
+          key = "Cmd+Shift+I";
+          command = "editor.action.sourceAction";
+          # when = "config.workspaceKeybindings.importMissingDeps.enabled";
+          args = {
+            kind = "source.addMissingImports";
+            apply = "first";
+          };
+        }
+      ];
 
       userSettings = {
         # Neovim integration
@@ -157,12 +160,10 @@
         "typescript.inlayHints.parameterNames.enabled" = true;
         "typescript.inlayHints.functionLikeReturnTypes.enabled" = true;
         "typescript.inlayHints.parameterTypes.enabled" = true;
-        "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName" =
-          false;
+        "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName" = false;
         "typescript.inlayHints.variableTypes.enabled" = true;
         "typescript.inlayHints.propertyDeclarationTypes.enabled" = true;
-        "typescript.inlayHints.variableTypes.suppressWhenTypeMatchesName" =
-          false;
+        "typescript.inlayHints.variableTypes.suppressWhenTypeMatchesName" = false;
         "typescript.suggest.autoImports" = true;
 
         ## references / implementations

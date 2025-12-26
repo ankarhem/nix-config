@@ -33,9 +33,9 @@ in
     "${self}/presets/git.nix"
     "${self}/presets/gh.nix"
     "${self}/presets/neovim/default.nix"
+    "${self}/presets/vscode.nix"
     ./npm.nix
     ./ssh.nix
-    ./vscode.nix
     ./ghostty.nix
     inputs.nix-index-database.homeModules.nix-index
   ];

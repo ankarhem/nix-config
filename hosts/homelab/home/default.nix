@@ -18,6 +18,7 @@
     "${self}/presets/gh.nix"
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
+    "${self}/presets/vscode.nix"
     ./ssh.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
