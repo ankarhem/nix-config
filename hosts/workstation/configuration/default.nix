@@ -97,7 +97,7 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "colemak";
-    options = "caps:escape";
+    options = "caps:escape,lv3:rwin_switch";
   };
   console.useXkbConfig = true;
 
