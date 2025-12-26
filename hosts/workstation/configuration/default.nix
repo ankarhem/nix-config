@@ -12,6 +12,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./gpu.nix
     ./sops.nix
     ./fonts.nix
   ];
