@@ -66,6 +66,10 @@
     flake = "/home/${username}/nix-config/";
     clean.enable = true;
   };
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
