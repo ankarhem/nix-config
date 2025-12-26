@@ -25,7 +25,7 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
   # Enable the KDE Plasma Desktop Environment.
-  services.desktopManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # Enable CUPS to print documents.
@@ -33,7 +33,7 @@
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
-  services.rtkit.enable = true;
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
