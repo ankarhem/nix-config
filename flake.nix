@@ -148,6 +148,7 @@
               helpers = import ./helpers {
                 pkgs = import inputs.nixpkgs { inherit system; };
               };
+              scriptPkgs = inputs.scripts.packages.${system};
             };
 
             modules = [

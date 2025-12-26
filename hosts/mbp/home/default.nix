@@ -72,10 +72,9 @@ in
       yubikey-manager
       yubikey-personalization
 
-      azure-cli
-      git
       age
       alejandra
+      azure-cli
       bat
       bottom
       codex
@@ -83,6 +82,7 @@ in
       curl
       deno
       fd
+      git
       gitleaks
       grc
       htop

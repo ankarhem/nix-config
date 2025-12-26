@@ -2,6 +2,8 @@
   self,
   helpers,
   pkgs,
+  pkgs-unstable,
+  scriptPkgs,
   username,
   inputs,
   ...
@@ -41,39 +43,81 @@
       gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
     };
   };
+  modules.custom-scripts.enable = true;
 
   programs.nix-index-database = {
     comma.enable = true;
   };
   programs.nix-index.enable = true;
 
-  home.packages = with pkgs; [
-    yubikey-personalization
-    yubikey-manager
-    openssh
+  home.packages =
+    with pkgs;
+    [
+      yubikey-personalization
+      yubikey-manager
+      openssh
 
-    coreutils
-    wget
-    curl
-    git
-    htop
-    ripgrep
-    rm-improved
-    jq
-    grc
-    gitleaks
-    bottom
-    bat
-    tree
-    fd
-    nfs-utils
-    sops
+      age
+      alejandra
+      azure-cli
+      bat
+      bottom
+      coreutils
+      curl
+      deno
+      fd
+      git
+      gitleaks
+      grc
+      htop
+      imagemagick
+      jq
+      k9s
+      kubelogin
+      mitmproxy
+      newt
+      nfs-utils
+      ngrok
+      nodejs_22
+      pup
+      ripgrep
+      rm-improved
+      sops
+      tailscale
+      tree
+      uv
+      wget
 
-    alejandra
-  ];
+      bruno
+      slack
+      spotify
+      obsidian
+    ]
+    ++ (with pkgs-unstable; [
+      claude-code
+      mcp-nixos
+      element-desktop
+      jetbrains.rider
+      jetbrains.rust-rover
+      jetbrains.webstorm
+    ])
+    ++ (with scriptPkgs; [
+      yt-sub
+      summarize
+    ]);
 
   programs.zoxide = {
     enable = true;
   };
   programs.eza.enable = true;
+  programs.starship = {
+    enable = true;
+  };
+
+  programs.go = {
+    enable = true;
+    env = {
+      GOPATH = ".go";
+    };
+  };
 }
