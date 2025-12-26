@@ -131,7 +131,12 @@
     curl
     dig
     tree
+    wl-clipboard
   ];
+  environment.shellAliases = {
+    pbcopy = "wl-copy";
+    pbpaste = "wl-paste";
+  };
   programs.neovim = {
     enable = true;
     viAlias = true;
