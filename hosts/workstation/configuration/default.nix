@@ -13,6 +13,7 @@
   imports = [
     ./hardware-configuration.nix
     ./sops.nix
+    ./fonts.nix
   ];
 
   # Bootloader
