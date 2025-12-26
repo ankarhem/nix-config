@@ -93,6 +93,7 @@
       bitwarden-desktop
       slack
       spotify
+      teams-for-linux
       obsidian
     ]
     ++ (with pkgs-unstable; [
