@@ -58,6 +58,7 @@
       yubikey-manager
       openssh
 
+      _1password-cli
       age
       alejandra
       azure-cli
@@ -89,6 +90,7 @@
       uv
       wget
 
+      _1password-gui
       bruno
       bitwarden-desktop
       slack
