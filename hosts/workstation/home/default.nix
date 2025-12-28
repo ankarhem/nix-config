@@ -93,6 +93,7 @@
       _1password-gui
       bruno
       bitwarden-desktop
+      legcord
       slack
       spotify
       teams-for-linux
