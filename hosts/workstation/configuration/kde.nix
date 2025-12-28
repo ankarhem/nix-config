@@ -1,0 +1,15 @@
+{ pkgs, ... }:
+{
+  # You can disable this if you're only using the Wayland session.
+  services.xserver.enable = true;
+  # Enable the KDE Plasma Desktop Environment.
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  programs.kdeconnect.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    wl-clipboard
+    kdePackages.kate
+    kdePackages.kcalc
+  ];
+}
