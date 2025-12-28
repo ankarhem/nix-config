@@ -52,6 +52,7 @@
     lazyvim.url = "github:pfassina/lazyvim-nix";
 
     scripts.url = "github:ankarhem/scripts";
+    comfyui-nix.url = "github:utensils/comfyui-nix";
   };
 
   outputs =

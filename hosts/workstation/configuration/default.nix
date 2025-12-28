@@ -18,6 +18,7 @@
     ./fonts.nix
     ./gaming.nix
     ./kde.nix
+    ./comfyui.nix
   ];
 
   # Bootloader
