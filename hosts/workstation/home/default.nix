@@ -22,6 +22,7 @@
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
     "${self}/presets/vscode.nix"
+    ./runelite.nix
     ./ssh.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
@@ -107,7 +108,6 @@
       jetbrains.rider
       jetbrains.rust-rover
       jetbrains.webstorm
-      runelite
     ])
     ++ (with scriptPkgs; [
       yt-sub
