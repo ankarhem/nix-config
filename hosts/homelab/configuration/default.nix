@@ -1,7 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ self, modulesPath, pkgs, username, hostname, helpers, ... }: {
+{
+  self,
+  modulesPath,
+  pkgs,
+  username,
+  hostname,
+  helpers,
+  ...
+}:
+{
   imports = [
     "${self}/nixosModules/networking.nix"
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
@@ -19,8 +28,14 @@
   nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
-      trusted-users = [ "root" "@wheel" ];
-      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
   programs.nh = {
@@ -36,7 +51,9 @@
     addresses = true;
   };
 
-  proxmoxLXC = { manageNetwork = true; };
+  proxmoxLXC = {
+    manageNetwork = true;
+  };
   boot.isContainer = true;
   networking.hostName = hostname; # Define your hostname.
   time.timeZone = "Europe/Stockholm";
@@ -63,11 +80,16 @@
   users.users."${username}" = {
     isNormalUser = true;
     description = username;
-    extraGroups = [ "networkmanager" "wheel" "podman" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "podman"
+      "docker"
+    ];
     packages = [ ];
     openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys ({
       username = "ankarhem";
-      sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
+      sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
     });
   };
   services.openssh = {

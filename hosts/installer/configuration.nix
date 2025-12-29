@@ -3,8 +3,9 @@
   modulesPath,
   helpers,
   ...
-}: {
-  imports = ["${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"];
+}:
+{
+  imports = [ "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix" ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
@@ -21,7 +22,7 @@
   users.users.nixos = {
     openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys ({
       username = "ankarhem";
-      sha256 = "1kjsr54h01453ykm04df55pa3sxj2vrmkwb1p8fzgw5hzfzh3lg0";
+      sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
     });
   };
 }
