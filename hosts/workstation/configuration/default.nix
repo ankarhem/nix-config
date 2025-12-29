@@ -28,7 +28,12 @@
   hardware.enableAllFirmware = true;
 
   networking.hostName = hostname; # Define your hostname.
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openvpn
+    ];
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
