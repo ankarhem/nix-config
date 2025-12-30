@@ -100,7 +100,6 @@
       teams-for-linux
       thunderbird
       obsidian
-      openvpn3
     ]
     ++ (with pkgs-unstable; [
       claude-code
