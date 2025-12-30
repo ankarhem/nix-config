@@ -3,6 +3,12 @@ keys:
   - &admin_workstation age1ddzcc6q035lcwmaudfsn3edyym4rngzcu5gr4lsneqt60spcrgpqxuru6f
   - &server_homelab age1hg84p3jc5lvxm8j2qypec6kxr94599tvvfesjkm2rrsnhf0xhcpq3rxcdw
 creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+        - *admin_mbp
+        - *admin_workstation
+        - *server_homelab
   - path_regex: secrets/homelab/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:

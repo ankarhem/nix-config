@@ -102,7 +102,6 @@
       obsidian
     ]
     ++ (with pkgs-unstable; [
-      claude-code
       mcp-nixos
       element-desktop
       jetbrains.rider
