@@ -19,6 +19,7 @@
     ./gaming.nix
     ./kde.nix
     ./comfyui.nix
+    ./norcevpn.nix
   ];
 
   # Bootloader
@@ -34,8 +35,6 @@
       networkmanager-openvpn
     ];
   };
-
-  programs.openvpn3.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
