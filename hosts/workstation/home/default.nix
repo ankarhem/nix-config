@@ -107,6 +107,8 @@
       jetbrains.rider
       jetbrains.rust-rover
       jetbrains.webstorm
+      furmark
+      mprime
     ])
     ++ (with scriptPkgs; [
       yt-sub
