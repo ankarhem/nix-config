@@ -92,10 +92,10 @@ in
           type = "sse";
           url = "https://mcp.atlassian.com/v1/sse";
         };
-        github = {
-          type = "http";
-          url = "https://api.githubcopilot.com/mcp/";
-        };
+        # github = {
+        #   type = "http";
+        #   url = "https://api.githubcopilot.com/mcp";
+        # };
       };
     };
   };
