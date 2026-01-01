@@ -107,8 +107,7 @@
       jetbrains.rider
       jetbrains.rust-rover
       jetbrains.webstorm
-      furmark
-      mprime
+      phoronix-test-suite
     ])
     ++ (with scriptPkgs; [
       yt-sub
