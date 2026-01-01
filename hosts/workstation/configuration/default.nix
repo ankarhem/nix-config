@@ -28,6 +28,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.enableAllFirmware = true;
+  hardware.cpu.amd.updateMicrocode = true;
 
   networking.hostName = hostname; # Define your hostname.
   networking.networkmanager = {
