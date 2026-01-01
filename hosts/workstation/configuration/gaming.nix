@@ -20,9 +20,10 @@
       enableSessionWide = false;
 
       settings = {
-        no_display = false;
-        # toggle_hud = "Shift_R+F12";
-        # toggle_fps_limit = "Shift_R+F1";
+        no_display = true;
+        toggle_hud = "Shift_R+F12";
+        toggle_fps_limit = "Shift_R+F1";
+        reload_cfg = "Shift_R+F4";
 
         fps = true;
         show_fps_limit = true;
