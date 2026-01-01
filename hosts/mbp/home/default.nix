@@ -94,7 +94,7 @@ in
       mitmproxy
       newt
       ngrok
-      nodejs_22
+      nodejs_24
       pup
       ripgrep
       rm-improved

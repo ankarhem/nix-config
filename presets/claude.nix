@@ -6,24 +6,38 @@
   ...
 }:
 let
-  wrapped-claude = pkgs-unstable.writeShellApplication {
+  nodejs_lts = pkgs-unstable.nodejs_24;
+
+  claude-with-secrets = pkgs-unstable.writeShellApplication {
     name = "claude";
     runtimeInputs = [ pkgs-unstable.claude-code ];
     text = ''
-      ANTHROPIC_AUTH_TOKEN="$(cat ${config.sops.secrets.glm_token.path})"
-      export ANTHROPIC_AUTH_TOKEN
+      # shellcheck disable=SC1091
+      source ${config.sops.templates."claude.env".path}
       exec claude "$@"
     '';
   };
 in
 {
-  sops.secrets."glm_token" = {
-    owner = username;
-    sopsFile = "${self}/secrets/shared.yaml";
-    format = "yaml";
+  sops = {
+    secrets = {
+      "glm_token" = {
+        owner = username;
+        sopsFile = "${self}/secrets/shared.yaml";
+      };
+      "context7_token" = {
+        owner = username;
+        sopsFile = "${self}/secrets/shared.yaml";
+      };
+    };
+
+    templates."claude.env".content = ''
+      ANTHROPIC_AUTH_TOKEN=${config.sops.placeholder.glm_token}
+      CONTEXT7_TOKEN=${config.sops.placeholder.context7_token}
+    '';
   };
 
-  # until scripts have a module to pass stuff in to
+  # This is for summarize binary
   programs.fish.shellInit = ''
     set -x ANTHROPIC_AUTH_TOKEN "$(cat ${config.sops.secrets.glm_token.path})"
   '';
@@ -31,15 +45,53 @@ in
   home-manager.users."${username}" = {
     programs.claude-code = {
       enable = true;
-      package = wrapped-claude;
+      package = claude-with-secrets;
 
       settings = {
+        includeCoAuthoredBy = true;
         env = {
           ANTHROPIC_BASE_URL = "https://api.z.ai/api/anthropic";
           API_TIMEOUT_MS = "3000000";
           ANTHROPIC_DEFAULT_OPUS_MODEL = "GLM-4.7";
           ANTHROPIC_DEFAULT_SONNET_MODEL = "GLM-4.7";
           ANTHROPIC_DEFAULT_HAIKU_MODEL = "GLM-4.5-Air";
+        };
+      };
+      mcpServers = {
+        playwrite = {
+          type = "stdio";
+          command = "${nodejs_lts}/bin/npx";
+          args = [ "@playwright/mcp@latest" ];
+        };
+        sequential-thinking = {
+          type = "stdio";
+          command = "${nodejs_lts}/bin/npx";
+          args = [
+            "-y"
+            "@modelcontextprotocol/server-sequential-thinking"
+          ];
+        };
+        mcp-nixos = {
+          type = "stdio";
+          command = "nix";
+          args = [
+            "run"
+            "github:utensils/mcp-nixos"
+            "--"
+          ];
+        };
+        context7 = {
+          type = "http";
+          url = "https://mcp.context7.com/mcp";
+          headers.Authorization = "Bearer \${CONTEXT7_TOKEN}";
+        };
+        atlassian = {
+          type = "sse";
+          url = "https://mcp.atlassian.com/v1/sse";
+        };
+        github = {
+          type = "http";
+          url = "https://api.githubcopilot.com/mcp/";
         };
       };
     };

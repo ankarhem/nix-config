@@ -81,7 +81,7 @@
       newt
       nfs-utils
       ngrok
-      nodejs_22
+      nodejs_24
       pup
       ripgrep
       rm-improved
@@ -102,7 +102,6 @@
       obsidian
     ]
     ++ (with pkgs-unstable; [
-      mcp-nixos
       element-desktop
       jetbrains.rider
       jetbrains.rust-rover
