@@ -24,6 +24,7 @@
     "${self}/presets/vscode.nix"
     ./runelite.nix
     ./ssh.nix
+    ./vicinae.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
 
