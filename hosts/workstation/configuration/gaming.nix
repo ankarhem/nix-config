@@ -21,7 +21,7 @@
 
       settings = {
         # mangohud + keyd isn't working atm so cant rebind
-        no_display = false;
+        # no_display = false;
         # toggle_hud = "Shift_R+F12";
         # toggle_fps_limit = "Shift_R+F1";
         # reload_cfg = "Shift_R+F4";
