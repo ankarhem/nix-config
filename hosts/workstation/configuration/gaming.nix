@@ -17,12 +17,12 @@
   home-manager.users.${username} = {
     programs.mangohud = {
       enable = true;
-      enableSessionWide = true;
+      enableSessionWide = false;
 
       settings = {
-        no_display = true;
-        toggle_hud = "Shift_R+F12";
-        toggle_fps_limit = "Shift_R+F1";
+        no_display = false;
+        # toggle_hud = "Shift_R+F12";
+        # toggle_fps_limit = "Shift_R+F1";
 
         fps = true;
         show_fps_limit = true;
