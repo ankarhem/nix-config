@@ -31,10 +31,13 @@ in
       };
     };
 
-    templates."claude.env".content = ''
-      ANTHROPIC_AUTH_TOKEN=${config.sops.placeholder.glm_token}
-      CONTEXT7_TOKEN=${config.sops.placeholder.context7_token}
-    '';
+    templates."claude.env" = {
+      owner = username;
+      content = ''
+        ANTHROPIC_AUTH_TOKEN=${config.sops.placeholder.glm_token}
+        CONTEXT7_TOKEN=${config.sops.placeholder.context7_token}
+      '';
+    };
   };
 
   # This is for summarize binary
