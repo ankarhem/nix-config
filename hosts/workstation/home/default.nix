@@ -26,6 +26,7 @@
     ./ssh.nix
     ./vicinae.nix
     ./plasma.nix
+    ./konsole.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
 
