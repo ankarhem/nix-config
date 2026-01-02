@@ -51,7 +51,7 @@ in
       package = claude-with-secrets;
 
       settings = {
-        includeCoAuthoredBy = true;
+        alwaysThinkingEnabled = true;
         env = {
           ANTHROPIC_BASE_URL = "https://api.z.ai/api/anthropic";
           API_TIMEOUT_MS = "3000000";

@@ -29,14 +29,14 @@ in
   imports = [
     "${self}/homeManagerModules/scripts.nix"
     "${self}/presets/fish.nix"
-    "${self}/presets/gpg.nix"
-    "${self}/presets/git.nix"
     "${self}/presets/gh.nix"
+    "${self}/presets/git.nix"
+    "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
     "${self}/presets/vscode.nix"
+    ./ghostty.nix
     ./npm.nix
     ./ssh.nix
-    ./ghostty.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
 
@@ -116,7 +116,6 @@ in
       obsidian
     ])
     ++ (with pkgs-unstable; [
-      claude-code
       mcp-nixos
       element-desktop
       jetbrains.rider
