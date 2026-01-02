@@ -89,7 +89,6 @@ in
         firefox
         fuzzy-files
         it-tools
-        kde-system-settings
         nix
         port-killer
         power-profile
