@@ -20,7 +20,7 @@ in
         location = "top";
         screen = "all";
         widgets = [
-          "org.kde.plasma.marginseparator"
+          "org.kde.plasma.panelspacer"
           "org.kde.plasma.systemtray"
           "org.kde.plasma.digitalclock"
           "org.kde.plasma.showdesktop"
@@ -30,13 +30,15 @@ in
       # App Bar
       {
         alignment = "center";
-        height = 46;
+        height = 48;
         hiding = "none";
         lengthMode = "fit";
         location = "bottom";
         widgets = [
           "org.kde.plasma.kickoff"
           "org.kde.plasma.icontasks"
+          "org.kde.plasma.marginsseparator"
+          "org.kde.plasma.trashcan"
         ];
       }
     ];
