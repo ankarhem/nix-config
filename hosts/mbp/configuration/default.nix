@@ -25,31 +25,28 @@
   # backwards compat; don't change
   system.stateVersion = 5;
 
-  nix.enable = true;
-  nix.package = pkgs.nix;
   nixpkgs.config.allowUnfree = true;
+  nix = {
+    enable = true;
+    package = pkgs.nix;
 
-  # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 7d";
-  };
-  # nix.optimise = {
-  #   automatic = true;
-  # };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 7d";
+    };
+    settings = {
+      # nix settings for flake support
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      extra-platforms = [
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
-  nix.settings = {
-    # nix settings for flake support
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    extra-platforms = [
-      "x86_64-darwin"
-      "aarch64-darwin"
-    ];
-
-    trusted-users = [ "@admin" ];
+      trusted-users = [ "@admin" ];
+    };
   };
 
   # remove extra config to hit cache if building for the first time
