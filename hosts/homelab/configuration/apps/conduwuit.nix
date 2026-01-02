@@ -57,6 +57,9 @@ in
     };
   };
 
+  # Sops secrets for tuwunel
+  sops.secrets."tuwunel/registration_token" = { };
+
   # Tuwunel NixOS Module
   services.matrix-tuwunel = {
     enable = true;
@@ -69,7 +72,7 @@ in
 
         # Registration
         allow_registration = true;
-        registration_token = config.sops.placeholder."tuwunel/registration_token";
+        registration_token_file = config.sops.secrets."tuwunel/registration_token".path;
 
         # Features
         allow_encryption = true;
@@ -77,9 +80,6 @@ in
         max_request_size = 20971520;
         new_user_displayname_suffix = "👋";
         allow_check_for_updates = true;
-
-        # Admin
-        emergency_password = config.sops.placeholder."tuwunel/emergency_password";
 
         # Rooms
         auto_join_rooms = [ "#public:matrix.internetfeno.men" ];
