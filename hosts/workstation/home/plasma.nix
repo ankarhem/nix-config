@@ -1,11 +1,52 @@
-_: {
+_:
+let
+  swapMetaAndAlt = true;
+  cmdKey = if swapMetaAndAlt then "Alt" else "Meta";
+in
+{
   programs.plasma = {
     enable = true;
     overrideConfig = true; # Discard non declarative config
 
     powerdevil.AC.autoSuspend.action = "nothing";
+
+    panels = [
+      # Top Bar
+      {
+        alignment = "left";
+        height = 32;
+        hiding = "none";
+        lengthMode = "fill";
+        location = "top";
+        screen = "all";
+        widgets = [
+          "org.kde.plasma.marginseparator"
+          "org.kde.plasma.systemtray"
+          "org.kde.plasma.digitalclock"
+          "org.kde.plasma.showdesktop"
+        ];
+      }
+
+      # App Bar
+      {
+        alignment = "center";
+        height = 46;
+        hiding = "none";
+        lengthMode = "fit";
+        location = "bottom";
+        widgets = [
+          "org.kde.plasma.kickoff"
+          "org.kde.plasma.icontasks"
+        ];
+      }
+    ];
+
+    spectacle.shortcuts = {
+      captureEntireDesktop = "${cmdKey}+Shift+3";
+      captureRectangularRegion = "${cmdKey}+Shift+4";
+      captureWindowUnderCursor = "${cmdKey}+Shift+5";
+    };
     shortcuts = {
-      # kwin."Window Maximize" = "Meta+PgUp";
       "services/net.local.vicinae-2.desktop"._launch = "Ctrl+Alt+Space";
       "services/net.local.vicinae.desktop"._launch = "Alt+Space";
       "services/org.kde.krunner.desktop"._launch = [
