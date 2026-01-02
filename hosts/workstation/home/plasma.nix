@@ -20,6 +20,7 @@ in
         location = "top";
         screen = "all";
         widgets = [
+          "org.kde.plasma.globalmenu"
           "org.kde.plasma.panelspacer"
           "org.kde.plasma.systemtray"
           "org.kde.plasma.digitalclock"
