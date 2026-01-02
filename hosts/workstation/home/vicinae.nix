@@ -1,9 +1,44 @@
 {
+  config,
+  lib,
   inputs,
   pkgs,
   pkgs-unstable,
   ...
 }:
+let
+  mkRayCastExtension = (
+    {
+      name,
+      sha256,
+      rev,
+    }:
+    let
+      src =
+        pkgs.fetchgit {
+          inherit rev sha256;
+          url = "https://github.com/raycast/extensions";
+          sparseCheckout = [
+            "/extensions/${name}"
+          ];
+        }
+        + "/extensions/${name}";
+    in
+    (pkgs.buildNpmPackage {
+      inherit name src;
+      installPhase = ''
+        runHook preInstall
+
+        mkdir -p $out
+        cp -r /build/.config/raycast/extensions/${name}/* $out/
+
+        runHook postInstall
+      '';
+      npmDeps = pkgs.importNpmLock { npmRoot = src; };
+      npmConfigHook = pkgs.importNpmLock.npmConfigHook;
+    })
+  );
+in
 {
   imports = [
     inputs.vicinae.homeManagerModules.default
@@ -47,17 +82,25 @@
     };
 
     # https://github.com/vicinaehq/extensions/tree/main/extensions
-    extensions = with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
-      bluetooth
-      case-converter
-      firefox
-      fuzzy-files
-      it-tools
-      kde-system-settings
-      nix
-      port-killer
-      power-profile
-      spongebob-text-transformer
-    ];
+    extensions =
+      (with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
+        bluetooth
+        case-converter
+        firefox
+        fuzzy-files
+        it-tools
+        kde-system-settings
+        nix
+        port-killer
+        power-profile
+        spongebob-text-transformer
+      ])
+      ++ [
+        (mkRayCastExtension {
+          name = "gif-search";
+          sha256 = "NKmNqRqAnxtOXipFZFXOIgFlVzc0c3B5/Qr4DzKzAx4=";
+          rev = "3ec994afcd05b2b6258b3b71ab8b19d6b6f1e0e4";
+        })
+      ];
   };
 }
