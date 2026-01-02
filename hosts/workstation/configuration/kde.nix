@@ -18,5 +18,6 @@
     kdePackages.partitionmanager
     kdePackages.kolourpaint
     wl-clipboard
+    appmenu-glib-translator
   ];
 }
