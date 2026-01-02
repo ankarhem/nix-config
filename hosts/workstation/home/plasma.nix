@@ -2,6 +2,8 @@ _: {
   programs.plasma = {
     enable = true;
     overrideConfig = true; # Discard non declarative config
+
+    powerdevil.AC.autoSuspend.action = "nothing";
     shortcuts = {
       # kwin."Window Maximize" = "Meta+PgUp";
       "services/net.local.vicinae-2.desktop"._launch = "Ctrl+Alt+Space";
