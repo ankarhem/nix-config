@@ -101,7 +101,6 @@
       slack
       spotify
       teams-for-linux
-      thunderbird
       obsidian
     ]
     ++ (with pkgs-unstable; [

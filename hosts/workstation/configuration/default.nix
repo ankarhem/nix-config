@@ -180,7 +180,20 @@
   };
   environment.variables.EDITOR = "nvim";
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      "widget.gtk.global-menu.enabled" = true;
+      "widget.gtk.global-menu.wayland.enabled" = true;
+    };
+  };
+  programs.thunderbird = {
+    enable = true;
+    preferences = {
+      "widget.gtk.global-menu.enabled" = true;
+      "widget.gtk.global-menu.wayland.enabled" = true;
+    };
+  };
 
   system.stateVersion = "25.11"; # Did you read the comment?
 }
