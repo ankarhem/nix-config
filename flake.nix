@@ -52,8 +52,8 @@
     lazyvim.url = "github:pfassina/lazyvim-nix";
 
     scripts.url = "github:ankarhem/scripts";
-    comfyui-nix.url = "github:utensils/comfyui-nix";
 
+    comfyui-nix.url = "github:utensils/comfyui-nix";
     vicinae = {
       url = "github:vicinaehq/vicinae";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,6 +61,11 @@
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 
@@ -169,6 +174,10 @@
                 home-manager.extraSpecialArgs = specialArgs;
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+
+                home-manager.sharedModules = [
+                  inputs.plasma-manager.homeModules.plasma-manager
+                ];
 
                 home-manager.users.${specialArgs.username} =
                   import ./hosts/${specialArgs.hostname}/home/default.nix;
