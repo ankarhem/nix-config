@@ -52,6 +52,23 @@ in
           }
         ];
       };
+      "workstation" = {
+        hostname = "workstation.local";
+        user = "idealpink";
+        port = 22;
+        identitiesOnly = true;
+        identityFile = [
+          "~/.ssh/id_ed25519"
+          "~/.ssh/id_ed25519_sk"
+          "~/.ssh/id_ecdsa_sk"
+        ];
+        remoteForwards = [
+          {
+            bind.address = "/run/user/1000/gnupg/S.gpg-agent";
+            host.address = "/Users/ankarhem/.gnupg/S.gpg-agent";
+          }
+        ];
+      };
     };
   };
 }
