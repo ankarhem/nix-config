@@ -12,11 +12,11 @@
   programs.kdeconnect.enable = true;
 
   environment.systemPackages = with pkgs; [
-    wl-clipboard
     kdePackages.kate
     kdePackages.kcalc
     kdePackages.ktorrent
     kdePackages.partitionmanager
     kdePackages.kolourpaint
+    wl-clipboard
   ];
 }

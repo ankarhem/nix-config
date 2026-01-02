@@ -1,4 +1,4 @@
-_:
+{ pkgs, ... }:
 let
   swapMetaAndAlt = true;
   cmdKey = if swapMetaAndAlt then "Alt" else "Meta";
