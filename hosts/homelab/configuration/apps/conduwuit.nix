@@ -13,11 +13,10 @@ in
 
     extraConfig = ''
       listen 8448 ssl http2 default_server;
-
-      client_max_body_size 50M;
+      client_max_body_size 500M;
     '';
     locations."/" = {
-      proxyPass = "http://127.0.0.1:6167";
+      proxyPass = "http://unix:${config.matrix-tuwunel.settings.global.unix_socket_path}";
     };
   };
   services.nginx.virtualHosts."element.internetfeno.men" = {
@@ -58,17 +57,21 @@ in
   };
 
   # Sops secrets for tuwunel
-  sops.secrets."tuwunel/registration_token" = { };
+  sops.secrets."tuwunel/registration_token" = {
+    owner = "tuwunel";
+  };
 
   # Tuwunel NixOS Module
   services.matrix-tuwunel = {
     enable = true;
 
+    stateDirectory = "tuwunel";
     settings = {
       global = {
         server_name = "matrix.internetfeno.men";
-        port = [ 6167 ];
-        address = [ "127.0.0.1" ];
+        new_user_displayname_suffix = "👋";
+        unix_socket_path = "/run/tuwunel/tuwunel.sock";
+        unix_socket_perms = 660;
 
         # Registration
         allow_registration = true;
@@ -77,29 +80,22 @@ in
         # Features
         allow_encryption = true;
         allow_federation = true;
-        max_request_size = 20971520;
-        new_user_displayname_suffix = "👋";
-        allow_check_for_updates = true;
+        max_request_size = 104857600; # ~100 MB
+        require_auth_for_profile_requests = true;
+
+        # Federation
+        trusted_servers = [
+          "matrix.org"
+        ];
 
         # Rooms
-        auto_join_rooms = [ "#public:matrix.internetfeno.men" ];
         forbidden_usernames = [
           "administrator"
           "admin"
         ];
 
-        # Federation
-        trusted_servers = [ "matrix.org" ];
-
         # Backups
-        database_backup_path = "/backups";
-
-        # Well-known
-        well_known = {
-          client = "https://matrix.internetfeno.men";
-          server = "matrix.internetfeno.men:443";
-          support_email = "admin@internetfeno.men";
-        };
+        database_backup_path = "/mnt/DISKETTEN_drive/conduwuit/backups";
       };
     };
   };
