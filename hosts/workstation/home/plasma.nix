@@ -1,6 +1,7 @@
 _: {
   programs.plasma = {
     enable = true;
+    overrideConfig = true; # Discard non declarative config
     shortcuts = {
       # kwin."Window Maximize" = "Meta+PgUp";
       "services/net.local.vicinae-2.desktop"._launch = "Ctrl+Alt+Space";
