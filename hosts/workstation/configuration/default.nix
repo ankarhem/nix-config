@@ -21,6 +21,7 @@
     ./kde.nix
     ./comfyui.nix
     ./norcevpn.nix
+    ./neochat.nix
   ];
 
   # Bootloader
