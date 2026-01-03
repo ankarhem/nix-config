@@ -121,10 +121,12 @@ in
     settings = lib.recursiveUpdate defaultAppserviceConfig {
       bridge = {
         login_shared_secret_map."${domain}" = "as_token:$DOUBLEPUPPET_AS_TOKEN";
-        inherit encryption;
+        encryption = defaultAppserviceConfig.encryption;
       };
       appservice = {
         id = "telegram";
+        as_token = "$MAUTRIX_TELEGRAM_APPSERVICE_AS_TOKEN";
+        hs_token = "$MAUTRIX_TELEGRAM_APPSERVICE_HS_TOKEN";
         address = "http://127.0.0.1:29317";
         port = "29317";
         bot_username = "telegrambot";
@@ -143,10 +145,29 @@ in
           network.mode = "instagram";
           appservice = {
             id = "instagrambot";
+            as_token = "$MAUTRIX_INSTAGRAM_APPSERVICE_AS_TOKEN";
+            hs_token = "$MAUTRIX_INSTAGRAM_APPSERVICE_HS_TOKEN";
             bot = {
               username = "instagrambot";
               displayname = "Instagram bridge bot";
               avatar = "mxc://maunium.net/JxjlbZUlCPULEeHZSwleUXQv";
+            };
+          };
+        };
+      };
+      messenger = {
+        enable = true;
+        environmentFile = config.sops.secrets."mautrix-bridges.env".path;
+        settings = lib.recursiveUpdate defaultAppserviceConfig {
+          network.mode = "messenger";
+          appservice = {
+            id = "messengerbot";
+            as_token = "$MAUTRIX_MESSENGER_APPSERVICE_AS_TOKEN";
+            hs_token = "$MAUTRIX_MESSENGER_APPSERVICE_HS_TOKEN";
+            bot = {
+              username = "messengerbot";
+              displayname = "Messenger bridge bot";
+              avatar = "mxc://maunium.net/ygtkteZsXnGJLJHRchUwYWak";
             };
           };
         };
