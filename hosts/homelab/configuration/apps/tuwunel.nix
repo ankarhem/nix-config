@@ -1,31 +1,49 @@
-{ self, config, ... }:
+{ self, lib, config, ... }:
 let
   port = 6167;
   domain = "matrix.internetfeno.men";
 
   defaultAppserviceConfig = {
-    bot_username,
-    appservice_port
-    }: {
     homeserver = {
       address = "http://127.0.0.1:${toString port}";
       inherit domain;
     };
-    appservice = {
-      address = "http://127.0.0.1:${toString appservice_port}"; 
-      hostname = "127.0.0.1";
-      port = appservice_port;
-      bot_username = bot_username;
+    encryption = {
+      allow = true;
+      default = true;
+      require = true;
+      delete_keys = {
+        dont_store_outbound = true;
+        ratchet_on_decrypt = true;
+        delete_fully_used_on_decrypt = true;
+        delete_prev_on_new_session = true;
+        delete_on_device_delete = true;
+        periodically_delete_expired = true;
+        delete_outdated_inbound = true;
+      };
     };
     bridge = {
       permissions = {
-        "*" = "relaybot";
+        "*" = "relay";
         "matrix.org" = "user";
-        "${domain}" = "full";
+        "${domain}" = "user";
+        "@ankarhem:${domain}" = "admin";
         "@admin:${domain}" = "admin";
       };
+      login_shared_secret_map."${domain}" = "as_token:$DOUBLEPUPPET_AS_TOKEN";
     };
-    backfill.enabled = true;
+    # new syntax for login_shared_secret_map
+    double_puppet = {
+      servers = {};
+      allow_discovery = false;
+      secrets."${domain}" = "as_token:$DOUBLEPUPPET_AS_TOKEN";
+    };
+    backfill = {
+      enabled = true;
+      max_initial_messages = 50;
+      max_catchup_messages = 500;
+      # unread_hours_threshold = 720;
+    };
   };
 in
 {
@@ -89,10 +107,8 @@ in
     };
   };
 
-  sops.secrets."mautrix-telegram.env" = {
-    owner = "mautrix-telegram";
-    group = "mautrix-telegram";
-    sopsFile = "${self}/secrets/homelab/mautrix-telegram.env";
+  sops.secrets."mautrix-bridges.env" = {
+    sopsFile = "${self}/secrets/homelab/mautrix-bridges.env";
     format = "dotenv";
   };
 
@@ -102,10 +118,35 @@ in
   ];
   services.mautrix-telegram = {
     enable = true;
-    environmentFile = config.sops.secrets."mautrix-telegram.env".path;
-    settings = defaultAppserviceConfig {
-      bot_username = "telegrambot";
-      appservice_port = 29317; 
+    environmentFile = config.sops.secrets."mautrix-bridges.env".path;
+    settings = lib.recursiveUpdate defaultAppserviceConfig {
+      appservice = {
+        address = "http://127.0.0.1:29317";
+        port = "29317";
+        bot_username = "telegrambot";
+        bot_displayname = "Telegram bridge bot";
+        bot_avatar = "mxc://maunium.net/tJCRmUyJDsgRNgqhOgoiHWbX";
+      };
+    };
+  };
+
+  services.mautrix-meta = {
+    instances = {
+      instagram = {
+        enable = true;
+        environmentFile = config.sops.secrets."mautrix-bridges.env".path;
+        settings = lib.recursiveUpdate defaultAppserviceConfig {
+          network.mode = "instagram";
+          appservice = {
+            id = "instagrambot";
+            bot = {
+              username = "instagrambot";
+              displayname = "Instagram bridge bot";
+              avatar = "mxc://maunium.net/JxjlbZUlCPULEeHZSwleUXQv";
+            };
+          };
+        };
+      };
     };
   };
 }
