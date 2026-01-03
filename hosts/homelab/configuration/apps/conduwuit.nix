@@ -1,6 +1,6 @@
 { self, config, ... }:
 let
-  port = 8448;
+  port = 6167;
 in
 {
   # Nginx
