@@ -17,16 +17,17 @@
   imports = [
     "${self}/homeManagerModules/scripts.nix"
     "${self}/presets/fish.nix"
-    "${self}/presets/git.nix"
     "${self}/presets/gh.nix"
+    "${self}/presets/git.nix"
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
     "${self}/presets/vscode.nix"
+    ./konsole.nix
+    # ./nheko.nix
+    ./plasma.nix
     ./runelite.nix
     ./ssh.nix
     ./vicinae.nix
-    ./plasma.nix
-    ./konsole.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
 
