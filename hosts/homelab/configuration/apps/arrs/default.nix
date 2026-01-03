@@ -7,7 +7,7 @@
     ./recyclarr.nix
     ./sonarr.nix
     ./tautulli.nix
-    ./qbittorrent.nix
+    # ./qbittorrent.nix
     ./jellyseerr.nix
     # ./jellyfin.nix
     ./unpackerr.nix
