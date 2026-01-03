@@ -2,6 +2,31 @@
 let
   port = 6167;
   domain = "matrix.internetfeno.men";
+
+  defaultAppserviceConfig = {
+    bot_username,
+    appservice_port
+    }: {
+    homeserver = {
+      address = "http://127.0.0.1:${toString port}";
+      inherit domain;
+    };
+    appservice = {
+      address = "http://127.0.0.1:${toString appservice_port}"; 
+      hostname = "127.0.0.1";
+      port = appservice_port;
+      bot_username = bot_username;
+    };
+    bridge = {
+      permissions = {
+        "*" = "relaybot";
+        "matrix.org" = "user";
+        "${domain}" = "full";
+        "@admin:${domain}" = "admin";
+      };
+    };
+    backfill.enabled = true;
+  };
 in
 {
   # Nginx
@@ -78,28 +103,9 @@ in
   services.mautrix-telegram = {
     enable = true;
     environmentFile = config.sops.secrets."mautrix-telegram.env".path;
-    settings = {
-      homeserver = {
-        address = "http://127.0.0.1:${toString port}";
-        inherit domain;
-      };
-      appservice = {
-        address = "http://127.0.0.1:29317";
-        hostname = "127.0.0.1";
-        port = "29317";
-        bot_username = "telegrambot";
-      };
-      bridge = {
-        username_template = "telegram_{userid}";
-        alias_template = "telegram_{groupname}";
-        displayname_template = "{displayname} (Telegram)";
-        permissions = {
-          "*" = "relaybot";
-          "matrix.org" = "user";
-          "${domain}" = "full";
-          "@admin:${domain}" = "admin";
-        };
-      };
+    settings = defaultAppserviceConfig {
+      bot_username = "telegrambot";
+      appservice_port = 29317; 
     };
   };
 }
