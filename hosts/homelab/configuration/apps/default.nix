@@ -3,7 +3,7 @@
     "${self}/nixosModules/docker.nix"
     ./arrs/default.nix
     ./telemetry/default.nix
-    ./conduwuit.nix
+    ./tuwunel.nix
     ./omada.nix
     ./picoshare.nix
     ./seafile.nix
