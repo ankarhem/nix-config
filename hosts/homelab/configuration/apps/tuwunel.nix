@@ -12,6 +12,7 @@ let
       allow = true;
       default = true;
       require = true;
+      pickle_key = "$PICKLE_KEY";
       delete_keys = {
         dont_store_outbound = true;
         ratchet_on_decrypt = true;
@@ -150,7 +151,6 @@ in
             bot = {
               username = "instagrambot";
               displayname = "Instagram bridge bot";
-              avatar = "mxc://maunium.net/JxjlbZUlCPULEeHZSwleUXQv";
             };
           };
         };
@@ -167,9 +167,24 @@ in
             bot = {
               username = "messengerbot";
               displayname = "Messenger bridge bot";
-              avatar = "mxc://maunium.net/ygtkteZsXnGJLJHRchUwYWak";
             };
           };
+        };
+      };
+    };
+  };
+
+  services.mautrix-signal = {
+    enable = true;
+    environmentFile = config.sops.secrets."mautrix-bridges.env".path;
+    settings = lib.recursiveUpdate defaultAppserviceConfig {
+      appservice = {
+        id = "signalbot";
+        as_token = "$MAUTRIX_SIGNAL_APPSERVICE_AS_TOKEN";
+        hs_token = "$MAUTRIX_SIGNAL_APPSERVICE_HS_TOKEN";
+        bot = {
+          username = "signalbot";
+          displayname = "Signal bridge bot";
         };
       };
     };
