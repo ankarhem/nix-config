@@ -30,7 +30,6 @@ let
         "@ankarhem:${domain}" = "admin";
         "@admin:${domain}" = "admin";
       };
-      login_shared_secret_map."${domain}" = "as_token:$DOUBLEPUPPET_AS_TOKEN";
     };
     # new syntax for login_shared_secret_map
     double_puppet = {
@@ -120,7 +119,12 @@ in
     enable = true;
     environmentFile = config.sops.secrets."mautrix-bridges.env".path;
     settings = lib.recursiveUpdate defaultAppserviceConfig {
+      bridge = {
+        login_shared_secret_map."${domain}" = "as_token:$DOUBLEPUPPET_AS_TOKEN";
+        inherit encryption;
+      };
       appservice = {
+        id = "telegram";
         address = "http://127.0.0.1:29317";
         port = "29317";
         bot_username = "telegrambot";
