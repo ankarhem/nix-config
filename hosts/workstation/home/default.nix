@@ -23,7 +23,6 @@
     "${self}/presets/neovim/default.nix"
     "${self}/presets/vscode.nix"
     ./konsole.nix
-    # ./nheko.nix
     ./plasma.nix
     ./runelite.nix
     ./ssh.nix
