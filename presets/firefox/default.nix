@@ -99,7 +99,8 @@ in
           # New profile management
           "browser.profiles.enabled" = false;
 
-          "browser.uiCustomization.state" = builtins.readFile ./browser.uiCustomization.state.json;
+          # how to do this better?
+          # "browser.uiCustomization.state" = builtins.readFile ./browser.uiCustomization.state.json;
           "sidebar.verticalTabs" = true;
           "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
 
