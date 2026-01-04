@@ -13,6 +13,8 @@ let
       default = true;
       require = true;
       pickle_key = "$PICKLE_KEY";
+      appservice = false;
+      self_sign = true;
       delete_keys = {
         dont_store_outbound = true;
         ratchet_on_decrypt = true;
