@@ -233,6 +233,9 @@
               {
                 nixpkgs = {
                   config = nixpkgsConfig;
+                  overlays = [
+                    inputs.nur.overlays.default
+                  ];
                 };
 
                 home-manager.extraSpecialArgs = specialArgs;

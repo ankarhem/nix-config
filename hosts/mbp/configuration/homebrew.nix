@@ -37,7 +37,7 @@ in
       "betterdisplay"
       "bitwarden"
       "cursor"
-      "firefox"
+      # "firefox"
       "firefox@developer-edition"
       "ghostty"
       "google-chrome"
