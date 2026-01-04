@@ -94,7 +94,6 @@ in
           ];
         };
 
-        # diff prefs.js
         settings = {
           "app.shield.optoutstudies.enabled" = false;
           "browser.bookmarks.addedImportButton" = true;
