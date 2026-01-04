@@ -116,7 +116,7 @@ in
           "browser.shell.defaultBrowserCheckCount" = 1;
           "browser.startup.homepage" = "about:home";
           "browser.startup.homepage_override.mstone" = "ignore";
-          "browser.tabs.inTitlebar" = 0;
+          "browser.tabs.inTitlebar" = 2;
           "browser.theme.content-theme" = 2;
           "browser.theme.toolbar-theme" = 2;
           "browser.uitour.enabled" = false;
@@ -161,7 +161,7 @@ in
         in
         lib.recursiveUpdate default {
           id = 1;
-          name = "work";
+          name = "dev-edition-default";
           isDefault = false;
 
           bookmarks = {
