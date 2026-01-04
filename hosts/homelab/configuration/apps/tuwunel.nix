@@ -1,4 +1,4 @@
-{ self, lib, config, ... }:
+{ self, lib, config, pkgs-unstable, ... }:
 let
   port = 6167;
   domain = "matrix.internetfeno.men";
@@ -68,6 +68,7 @@ in
   };
   services.matrix-tuwunel = {
     enable = true;
+    package = pkgs-unstable.matrix-tuwunel;
 
     stateDirectory = "tuwunel";
     settings = {
