@@ -27,6 +27,7 @@
     ./runelite.nix
     ./ssh.nix
     ./vicinae.nix
+    ./ghostty.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
 
