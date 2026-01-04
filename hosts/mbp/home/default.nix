@@ -28,6 +28,7 @@ in
 
   imports = [
     "${self}/homeManagerModules/scripts.nix"
+    "${self}/presets/firefox/default.nix"
     "${self}/presets/fish.nix"
     "${self}/presets/gh.nix"
     "${self}/presets/git.nix"
@@ -116,7 +117,6 @@ in
       obsidian
     ])
     ++ (with pkgs-unstable; [
-      mcp-nixos
       element-desktop
       jetbrains.rider
       jetbrains.rust-rover

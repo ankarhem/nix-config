@@ -37,8 +37,6 @@ in
       "betterdisplay"
       "bitwarden"
       "cursor"
-      "firefox"
-      "firefox@developer-edition"
       "ghostty"
       "google-chrome"
       "legcord"

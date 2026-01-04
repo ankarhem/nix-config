@@ -71,6 +71,10 @@
       url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -229,6 +233,9 @@
               {
                 nixpkgs = {
                   config = nixpkgsConfig;
+                  overlays = [
+                    inputs.nur.overlays.default
+                  ];
                 };
 
                 home-manager.extraSpecialArgs = specialArgs;
