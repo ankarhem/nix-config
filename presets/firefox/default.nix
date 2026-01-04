@@ -17,6 +17,11 @@ in
     ];
 
     policies = {
+      DisableAccounts = true;
+      DisableFirefoxAccounts = true;
+      DisableFirefoxStudies = true;
+      DisablePocket = true;
+      DisableTelemetry = true;
       FirefoxHome = {
         SponsoredTopSites = false;
         SponsoredPocket = false;
