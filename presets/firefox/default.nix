@@ -91,23 +91,64 @@ in
 
         # diff prefs.js
         settings = {
-          "widget.gtk.global-menu.enabled" = true;
-          "widget.gtk.global-menu.wayland.enabled" = true;
-          "extensions.activeThemeID" = "default-theme@mozilla.org";
+          "app.shield.optoutstudies.enabled" = false;
+          "browser.bookmarks.addedImportButton" = true;
+          "browser.bookmarks.restore_default_bookmarks" = false;
+          "browser.disableResetPrompt" = true;
+          "browser.discovery.enabled" = false;
+          "browser.download.panel.shown" = true;
+          "browser.download.useDownloadDir" = false;
+          "browser.feeds.showFirstRunUI" = false;
+          "browser.messaging-system.whatsNewPanel.enabled" = false;
+          "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+          "browser.newtabpage.activity-stream.feeds.topsites" = false;
+          "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts" = false;
+          "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+          "browser.newtabpage.activity-stream.telemetry" = false;
+          "browser.ping-centre.telemetry" = false;
+          "browser.profiles.enabled" = false;
+          "browser.rights.3.shown" = true;
+          "browser.shell.checkDefaultBrowser" = false;
+          "browser.shell.defaultBrowserCheckCount" = 1;
+          "browser.startup.homepage" = "about:home";
+          "browser.startup.homepage_override.mstone" = "ignore";
+          "browser.tabs.inTitlebar" = 0;
           "browser.theme.content-theme" = 2;
           "browser.theme.toolbar-theme" = 2;
-          # New profile management
-          "browser.profiles.enabled" = false;
-
-          # how to do this better?
-          # "browser.uiCustomization.state" = builtins.readFile ./browser.uiCustomization.state.json;
-          "sidebar.verticalTabs" = true;
-          "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
-
-          "browser.bookmarks.addedImportButton" = true;
+          "browser.uitour.enabled" = false;
+          "datareporting.healthreport.service.enabled" = false;
+          "datareporting.healthreport.uploadEnabled" = false;
+          "datareporting.policy.dataSubmissionEnabled" = false;
+          "datareporting.sessions.current.clean" = true;
+          "devtools.onboarding.telemetry.logged" = false;
+          "dom.security.https_only_mode" = true;
+          "extensions.activeThemeID" = "default-theme@mozilla.org";
           "extensions.pocket.enabled" = false;
+          "identity.fxaccounts.enabled" = false;
           "privacy.trackingprotection.enabled" = true;
           "privacy.trackingprotection.socialtracking.enabled" = true;
+          "sidebar.revamp" = true;
+          "sidebar.verticalTabs" = true;
+          "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
+          "signon.rememberSignons" = false;
+          "startup.homepage_override_url" = "";
+          "toolkit.telemetry.archive.enabled" = false;
+          "toolkit.telemetry.bhrPing.enabled" = false;
+          "toolkit.telemetry.enabled" = false;
+          "toolkit.telemetry.firstShutdownPing.enabled" = false;
+          "toolkit.telemetry.hybridContent.enabled" = false;
+          "toolkit.telemetry.newProfilePing.enabled" = false;
+          "toolkit.telemetry.prompted" = 2;
+          "toolkit.telemetry.rejected" = true;
+          "toolkit.telemetry.reportingpolicy.firstRun" = false;
+          "toolkit.telemetry.server" = "";
+          "toolkit.telemetry.shutdownPingSender.enabled" = false;
+          "toolkit.telemetry.unified" = false;
+          "toolkit.telemetry.unifiedIsOptIn" = false;
+          "toolkit.telemetry.updatePing.enabled" = false;
+          "trailhead.firstrun.didSeeAboutWelcome" = true;
+          "widget.gtk.global-menu.enabled" = true;
+          "widget.gtk.global-menu.wayland.enabled" = true;
         };
       };
       work =
