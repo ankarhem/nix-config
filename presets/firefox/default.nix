@@ -45,7 +45,6 @@ in
                 }
               ];
             }
-            "separator"
             {
               name = "Thai (Beginner 0)";
               url = "https://www.youtube.com/playlist?list=PLgdZTyVWfUhlxVi68zFEL8Lu5Q0Bocgbp";
@@ -97,6 +96,8 @@ in
           "extensions.activeThemeID" = "default-theme@mozilla.org";
           "browser.theme.content-theme" = 2;
           "browser.theme.toolbar-theme" = 2;
+          # New profile management
+          "browser.profiles.enabled" = false;
 
           "browser.uiCustomization.state" = builtins.readFile ./browser.uiCustomization.state.json;
           "sidebar.verticalTabs" = true;
@@ -127,6 +128,7 @@ in
                 name = "Atlassian";
                 toolbar = true;
                 bookmarks = [
+                  "separator"
                   {
                     name = "Order Board";
                     url = "https://norce.atlassian.net/jira/software/c/projects/ORD/boards/48";
@@ -141,11 +143,11 @@ in
                   }
                 ];
               }
-              "separator"
               {
                 name = "Code";
                 toolbar = true;
                 bookmarks = [
+                  "separator"
                   {
                     name = "Norce Checkout";
                     url = "https://github.com/orgs/NorceTech/repositories?language=&q=checkout&sort=&type=all";

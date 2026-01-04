@@ -17,6 +17,7 @@
       "vertical-spacer",
       "_testpilot-containers-browser-action",
       "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action",
+      "_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action",
       "search_kagi_com-browser-action",
       "ublock0_raymondhill_net-browser-action",
       "unified-extensions-button"
@@ -36,7 +37,8 @@
     "7esoorv3_alefvanoon_anonaddy_me-browser-action",
     "_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action",
     "sponsorblocker_ajay_app-browser-action",
-    "ublock0_raymondhill_net-browser-action"
+    "ublock0_raymondhill_net-browser-action",
+    "_d634138d-c276-4fc8-924b-40a0ea21d284_-browser-action"
   ],
   "dirtyAreaCache": [
     "nav-bar",
@@ -46,5 +48,5 @@
     "unified-extensions-area"
   ],
   "currentVersion": 23,
-  "newElementCount": 10
+  "newElementCount": 11
 }

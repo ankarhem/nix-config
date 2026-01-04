@@ -39,7 +39,6 @@
         "${pkgs.vscode}/Applications/Visual Studio Code.app/"
         "/Applications/1Password.app/"
         "/Applications/Bitwarden.app/"
-        "/Applications/Firefox Developer Edition.app/"
         "${pkgs.firefox}/Applications/Firefox.app/"
         "/Applications/Ghostty.app/"
         "/Applications/Microsoft Excel.app/"
