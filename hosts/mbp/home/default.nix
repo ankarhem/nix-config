@@ -35,6 +35,7 @@ in
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
     "${self}/presets/vscode.nix"
+    "${self}/presets/azure-artifacts-credprovider.nix"
     ./ghostty.nix
     ./npm.nix
     ./ssh.nix
@@ -61,6 +62,7 @@ in
   };
 
   modules.custom-scripts.enable = true;
+  azure-artifacts-credprovider.enable = true;
 
   programs.nix-index-database = {
     comma.enable = true;
