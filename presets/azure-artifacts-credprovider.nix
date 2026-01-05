@@ -5,10 +5,12 @@
   ...
 }:
 let
-  version = "v1.3.0";
-  src = pkgs.fetchurl {
-    url = "https://github.com/microsoft/artifacts-credprovider/releases/download/${version}/Microsoft.NuGet.CredentialProvider.tar.gz";
-    hash = "sha256-fbpTsGm5gbUsIVPNU9UvmfXOmT9olkE2w+r4TpIhfDA=";
+  version = "v1.4.1";
+  src = pkgs.fetchFromGitHub {
+    owner = "microsoft";
+    repo = "artifacts-credprovider";
+    rev = version;
+    hash = "sha256-MYOl+UfRExeZsozcPJynWbx5JpYL0dxTADycAt6Wm7o=";
   };
 
   credentialProvider = pkgs.stdenv.mkDerivation {
