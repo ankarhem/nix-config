@@ -12,13 +12,14 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "happy-coder";
-  version = "0.13.0";
+  version = "0.13.0-nixos-fix";
 
+  # Patched by searching for claude in PATH + environment variable
   src = fetchFromGitHub {
-    owner = "slopus";
+    owner = "ankarhem";
     repo = "happy-cli";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-q4o8FHBhZsNL+D8rREjPzI1ky5+p3YNSxKc1OlA2pcs=";
+    rev = "d94c81e49260410366b12e495cf02e0c276a21b5";
+    hash = "sha256-iO0lf20SWZbITY/lEMoG4MbAQu1QzZbxpU16uw3WcLY=";
   };
 
   yarnOfflineCache = fetchYarnDeps {

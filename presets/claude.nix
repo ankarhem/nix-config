@@ -1,4 +1,6 @@
 {
+  lib,
+  pkgs,
   self,
   config,
   username,
@@ -17,6 +19,7 @@ let
       exec claude "$@"
     '';
   };
+  happy-coder = pkgs.callPackage "${self}/packages/happy-coder.nix" { };
 in
 {
   sops = {
@@ -46,6 +49,10 @@ in
   '';
 
   home-manager.users."${username}" = {
+    home.packages = [
+      happy-coder
+    ];
+
     programs.claude-code = {
       enable = true;
       package = claude-with-secrets;

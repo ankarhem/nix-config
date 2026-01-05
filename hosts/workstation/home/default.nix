@@ -8,9 +8,6 @@
   inputs,
   ...
 }:
-let
-  happy-coder = pkgs.callPackage "${self}/packages/happy-coder.nix" { };
-in
 {
   programs.home-manager.enable = true;
   home.username = username;
@@ -119,7 +116,6 @@ in
     ++ [
       scriptPkgs.yt-sub
       scriptPkgs.summarize
-      happy-coder
     ];
 
   programs.zoxide = {
