@@ -27,6 +27,7 @@ in
   };
 
   imports = [
+    "${self}/homeManagerModules/dotnet.nix"
     "${self}/homeManagerModules/scripts.nix"
     "${self}/presets/firefox/default.nix"
     "${self}/presets/fish.nix"
@@ -35,7 +36,6 @@ in
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
     "${self}/presets/vscode.nix"
-    "${self}/presets/dotnet.nix"
     ./ghostty.nix
     ./npm.nix
     ./ssh.nix

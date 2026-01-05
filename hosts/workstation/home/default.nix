@@ -15,6 +15,7 @@
   home.stateVersion = "25.11";
 
   imports = [
+    "${self}/homeManagerModules/dotnet.nix"
     "${self}/homeManagerModules/scripts.nix"
     "${self}/presets/firefox/default.nix"
     "${self}/presets/fish.nix"
@@ -52,6 +53,10 @@
   };
   modules.custom-scripts.enable = true;
 
+  programs.dotnet = {
+    enable = true;
+    enableAzureArtifactsCredProvider = true;
+  };
   programs.nix-index-database = {
     comma.enable = true;
   };

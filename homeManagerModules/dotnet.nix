@@ -26,9 +26,9 @@ let
   };
 
   defaultDotnetPackages = pkgs.dotnetCorePackages.combinePackages [
-    pkgs.dotnetCorePackages.dotnet-sdk
-    pkgs.dotnetCorePackages.dotnet-sdk_9
-    pkgs.dotnetCorePackages.dotnet-sdk_10
+    pkgs.dotnet-sdk_8
+    pkgs.dotnet-sdk_9
+    pkgs.dotnet-sdk_10
   ];
 in
 {
