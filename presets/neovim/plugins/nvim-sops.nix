@@ -1,5 +1,0 @@
-{
-  programs.lazyvim = {
-    plugins.
-  };
-}
