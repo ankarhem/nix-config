@@ -83,7 +83,7 @@
   };
 
   outputs =
-    inputs@{ self, ... }:
+    inputs@{ lib, self, ... }:
     let
       forAllSystems = inputs.nixpkgs.lib.genAttrs [
         "x86_64-linux"
@@ -91,6 +91,8 @@
       ];
     in
     {
+      packages = lib.packagesFromDirectoryRecursive ./packages;
+
       devShells = forAllSystems (
         system:
         let

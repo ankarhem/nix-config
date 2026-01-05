@@ -11,7 +11,6 @@
 }:
 {
   imports = [
-    "${self}/presets/claude.nix"
     ./hardware-configuration.nix
     ./bluetooth.nix
     ./gpu.nix

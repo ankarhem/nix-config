@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    "${self}/presets/claude.nix"
     ./environment.nix
     ./fonts.nix
     ./homebrew.nix

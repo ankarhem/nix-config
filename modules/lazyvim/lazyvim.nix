@@ -1,7 +1,7 @@
 { inputs, config, ... }:
 {
   flake.modules.homeManager.lazyvim =
-    { pkgs, pkgs-unstable, ... }:
+    { pkgs, ... }:
     {
       imports = [
         inputs.lazyvim.homeManagerModules.default
@@ -12,7 +12,7 @@
         let
           parsers = pkgs.symlinkJoin {
             name = "treesitter-parsers";
-            paths = pkgs-unstable.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+            paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
           };
         in
         lib.mkForce "${parsers}/parser";
@@ -29,7 +29,7 @@
 
         installCoreDependencies = true;
 
-        extraPackages = with pkgs-unstable; [
+        extraPackages = with pkgs; [
           gcc
           tree-sitter
         ];
