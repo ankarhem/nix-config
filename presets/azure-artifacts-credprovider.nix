@@ -18,8 +18,6 @@ let
     inherit version;
     inherit src;
 
-    nativeBuildInputs = with pkgs; [ unzip ];
-
     buildCommand = ''
       mkdir -p $out
       tar -xzf $src
@@ -29,7 +27,7 @@ let
 in
 {
   options = {
-    azure-artifacts-credprovider.enable = lib.mkEnableOption "Enable Azure Artifacts credential provider";
+    azure-artifacts-credprovider.enable = lib.mkEnableOption "Azure Artifacts credential provider";
   };
 
   config = lib.mkIf config.azure-artifacts-credprovider.enable {
