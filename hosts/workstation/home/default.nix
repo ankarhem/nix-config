@@ -8,6 +8,9 @@
   inputs,
   ...
 }:
+let
+  happy-coder = pkgs.callPackage "${self}/packages/happy-coder.nix" { };
+in
 {
   programs.home-manager.enable = true;
   home.username = username;
@@ -108,16 +111,16 @@
     ++ (with pkgs-unstable; [
       element-desktop
       firefox-devedition
-      happy-coder
       jetbrains.rider
       jetbrains.rust-rover
       jetbrains.webstorm
       phoronix-test-suite
     ])
-    ++ (with scriptPkgs; [
-      yt-sub
-      summarize
-    ]);
+    ++ [
+      scriptPkgs.yt-sub
+      scriptPkgs.summarize
+      happy-coder
+    ];
 
   programs.zoxide = {
     enable = true;
