@@ -34,9 +34,9 @@
 
     installCoreDependencies = true;
 
-    extraPackages = [
-      pkgs-unstable.gcc
-      pkgs-unstable.tree-sitter
+    extraPackages = with pkgs-unstable; [
+      gcc
+      tree-sitter
     ];
 
     extras = {
