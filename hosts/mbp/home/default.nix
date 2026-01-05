@@ -35,7 +35,7 @@ in
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
     "${self}/presets/vscode.nix"
-    "${self}/presets/azure-artifacts-credprovider.nix"
+    "${self}/presets/dotnet.nix"
     ./ghostty.nix
     ./npm.nix
     ./ssh.nix
@@ -62,7 +62,11 @@ in
   };
 
   modules.custom-scripts.enable = true;
-  azure-artifacts-credprovider.enable = true;
+
+  programs.dotnet = {
+    enable = true;
+    enableAzureArtifactsCredProvider = true;
+  };
 
   programs.nix-index-database = {
     comma.enable = true;
@@ -106,13 +110,6 @@ in
       tree
       uv # dependency for ddg-mcp
       wget
-      (dotnetCorePackages.combinePackages [
-        # dotnet-sdk_6
-        # dotnet-sdk_7
-        dotnet-sdk
-        dotnet-sdk_9
-        dotnet-sdk_10
-      ])
 
       bruno
       slack
