@@ -27,8 +27,6 @@ in
   };
 
   imports = [
-    "${self}/homeManagerModules/dotnet.nix"
-    "${self}/homeManagerModules/scripts.nix"
     ./ghostty.nix
     ./npm.nix
     ./ssh.nix

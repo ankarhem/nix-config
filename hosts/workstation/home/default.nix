@@ -15,13 +15,10 @@
   home.stateVersion = "25.11";
 
   imports = [
-    "${self}/homeManagerModules/dotnet.nix"
-    "${self}/homeManagerModules/scripts.nix"
     ./konsole.nix
     ./plasma.nix
     ./runelite.nix
     ./ssh.nix
-    ./vicinae.nix
     ./ghostty.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
