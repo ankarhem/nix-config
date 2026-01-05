@@ -12,18 +12,12 @@
 }:
 {
   imports = [
-    "${self}/nixosModules/networking.nix"
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
     ./apps/default.nix
     ./sops.nix
     ./tailscale.nix
     ./fail2ban.nix
   ];
-  networking.custom = {
-    homelabIp = "192.168.1.221";
-    synologyIp = "192.168.1.163";
-    lanNetwork = "192.168.1.0/24";
-  };
 
   nixpkgs.config.allowUnfree = true;
   nix = {
