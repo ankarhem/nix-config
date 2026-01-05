@@ -6,6 +6,7 @@
       "dearrow_ajay_app-browser-action",
       "gdpr_cavi_au_dk-browser-action",
       "7esoorv3_alefvanoon_anonaddy_me-browser-action",
+      "plasma-browser-integration_kde_org-browser-action",
       "_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action"
     ],
     "nav-bar": [
@@ -22,6 +23,7 @@
       "ublock0_raymondhill_net-browser-action",
       "unified-extensions-button"
     ],
+    "toolbar-menubar": ["menubar-items"],
     "TabsToolbar": [],
     "vertical-tabs": ["tabbrowser-tabs"],
     "PersonalToolbar": ["personal-bookmarks"]
@@ -35,6 +37,7 @@
     "_testpilot-containers-browser-action",
     "search_kagi_com-browser-action",
     "7esoorv3_alefvanoon_anonaddy_me-browser-action",
+    "plasma-browser-integration_kde_org-browser-action",
     "_a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad_-browser-action",
     "sponsorblocker_ajay_app-browser-action",
     "ublock0_raymondhill_net-browser-action",
@@ -45,6 +48,7 @@
     "TabsToolbar",
     "vertical-tabs",
     "PersonalToolbar",
+    "toolbar-menubar",
     "unified-extensions-area"
   ],
   "currentVersion": 23,
