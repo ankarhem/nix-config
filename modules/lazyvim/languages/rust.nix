@@ -1,21 +1,25 @@
-{ pkgs, ... }:
+{ lib, config, ... }:
 {
-  programs.lazyvim = {
-    extras = {
-      lang.rust = {
-        enable = true;
-        installDependencies = true;
-        installRuntimeDependencies = true;
+  flake.modules.homeManager.lazyvim =
+    { pkgs }:
+    {
+      programs.lazyvim = lib.mkIf config.programs.lazyvim.enable {
+        extras = {
+          lang.rust = {
+            enable = true;
+            installDependencies = true;
+            installRuntimeDependencies = true;
+          };
+        };
+
+        extraPackages = with pkgs; [
+          bacon
+          cargo
+          clippy
+          rust-analyzer
+          rustfmt
+          rustup
+        ];
       };
     };
-
-    extraPackages = with pkgs; [
-      bacon
-      cargo
-      clippy
-      rust-analyzer
-      rustfmt
-      rustup
-    ];
-  };
 }

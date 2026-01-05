@@ -67,52 +67,6 @@
             mini_hipatterns.enable = true;
           };
         };
-
-        plugins = {
-          colorscheme = ''
-            return {
-              {
-                "LazyVim/LazyVim",
-                opts = {
-                  colorscheme = "catppuccin",
-                },
-              },
-              {
-                "catppuccin/nvim",
-                name = "catppuccin",
-                opts = {
-                  flavour = "auto", -- latte, frappe, macchiato, mocha
-                  background = { -- :h background
-                    light = "latte",
-                    dark = "frappe",
-                  },
-                },
-              },
-            }
-          '';
-          nvim_sops = ''
-            return {
-              {
-                "lucidph3nx/nvim-sops",
-                event = { "BufEnter" },
-                keys = {
-                  { "<leader>fse", vim.cmd.SopsEncrypt, desc = "[S]ops [E]ncrypt" },
-                  { "<leader>fsd", vim.cmd.SopsDecrypt, desc = "[S]ops [D]ecrypt" },
-                },
-                opts = {
-                  -- enabled = true,
-                  -- debug = false,
-                  -- binPath = 'sops',
-                  defaults = {
-                    -- awsProfile = 'AWS_PROFILE',
-                    -- ageKeyFile = 'SOPS_AGE_KEY_FILE',
-                    -- gcpCredentialsFile = 'GOOGLE_APPLICATION_CREDENTIALS',
-                  },
-                },
-              },
-            }
-          '';
-        };
       };
     };
 }
