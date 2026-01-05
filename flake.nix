@@ -183,6 +183,13 @@
               inputs.sops-nix.nixosModules.sops
               inputs.home-manager.nixosModules.home-manager
               {
+                nixpkgs = {
+                  config = nixpkgsConfig;
+                  overlays = [
+                    inputs.nur.overlays.default
+                  ];
+                };
+
                 home-manager.extraSpecialArgs = specialArgs;
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
