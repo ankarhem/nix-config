@@ -48,7 +48,6 @@ in
       "openvpn-connect"
       "orbstack"
       "pairpods"
-      "raycast"
       "runelite"
       "sikarugir"
       "steam"
