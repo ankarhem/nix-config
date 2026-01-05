@@ -27,6 +27,7 @@ in
   };
 
   imports = [
+    "${self}/homeManagerModules/dotnet.nix"
     "${self}/homeManagerModules/scripts.nix"
     "${self}/presets/firefox/default.nix"
     "${self}/presets/fish.nix"
@@ -61,6 +62,11 @@ in
   };
 
   modules.custom-scripts.enable = true;
+
+  programs.dotnet = {
+    enable = true;
+    enableAzureArtifactsCredProvider = true;
+  };
 
   programs.nix-index-database = {
     comma.enable = true;
@@ -104,13 +110,6 @@ in
       tree
       uv # dependency for ddg-mcp
       wget
-      (dotnetCorePackages.combinePackages [
-        # dotnet-sdk_6
-        # dotnet-sdk_7
-        dotnet-sdk
-        dotnet-sdk_9
-        dotnet-sdk_10
-      ])
 
       bruno
       slack
