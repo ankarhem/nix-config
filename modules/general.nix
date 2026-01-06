@@ -1,6 +1,16 @@
 { inputs, config, ... }:
 {
-  flake.modules.darwin.dev =
+  flake.modules.nixos.general = {
+    programs.thunderbird = {
+      enable = true;
+      preferences = {
+        "widget.gtk.global-menu.enabled" = true;
+        "widget.gtk.global-menu.wayland.enabled" = true;
+      };
+    };
+  };
+
+  flake.modules.darwin.general =
     { pkgs, ... }:
     {
       system.defaults.dock.persistent-apps = [
@@ -36,7 +46,7 @@
       ];
     };
 
-  flake.modules.homeManager.dev =
+  flake.modules.homeManager.general =
     { lib, pkgs, ... }:
     {
       home.packages =

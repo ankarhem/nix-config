@@ -15,7 +15,6 @@
     "${self}/nixosModules/networking.nix"
     "${modulesPath}/virtualisation/proxmox-lxc.nix"
     ./apps/default.nix
-    ./sops.nix
     ./tailscale.nix
     ./fail2ban.nix
   ];
@@ -25,17 +24,13 @@
     lanNetwork = "192.168.1.0/24";
   };
 
+  networking.hostName = hostname; # Define your hostname.
   nixpkgs.config.allowUnfree = true;
-  nix = {
-    settings = {
-      trusted-users = [
-        "root"
-        "@wheel"
-      ];
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+
+  sops = {
+    defaultSopsFile = "${self}/secrets/homelab/secrets.yaml";
+    age = {
+      keyFile = "/home/idealpink/.config/sops/age/keys.txt";
     };
   };
   services.avahi.enable = true;
@@ -49,24 +44,6 @@
     manageNetwork = true;
   };
   boot.isContainer = true;
-  networking.hostName = hostname; # Define your hostname.
-  time.timeZone = "Europe/Stockholm";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "sv_SE.UTF-8";
-    LC_IDENTIFICATION = "sv_SE.UTF-8";
-    LC_MEASUREMENT = "sv_SE.UTF-8";
-    LC_MONETARY = "sv_SE.UTF-8";
-    LC_NAME = "sv_SE.UTF-8";
-    LC_NUMERIC = "sv_SE.UTF-8";
-    LC_PAPER = "sv_SE.UTF-8";
-    LC_TELEPHONE = "sv_SE.UTF-8";
-    LC_TIME = "sv_SE.UTF-8";
-  };
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "colemak";
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
