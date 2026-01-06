@@ -39,18 +39,15 @@ in
         "cursor"
         "ghostty"
         "google-chrome"
-        "legcord"
         "maccy"
         "microsoft-excel"
         "microsoft-remote-desktop"
-        "microsoft-teams"
         "mos"
         "orbstack"
         "pairpods"
         "runelite"
         "sikarugir"
         "steam"
-        "telegram"
         "tor-browser"
       ];
     };

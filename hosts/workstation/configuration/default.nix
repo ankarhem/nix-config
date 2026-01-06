@@ -74,15 +74,6 @@
       ];
     };
   };
-  programs.nh = {
-    enable = true;
-    flake = "/home/${username}/nix-config/";
-    clean.enable = true;
-  };
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
 
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
@@ -127,8 +118,6 @@
     };
   };
 
-  programs.fish.enable = true;
-  users.defaultUserShell = pkgs.fish;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
     isNormalUser = true;
@@ -140,27 +129,6 @@
       "docker"
     ];
   };
-
-  environment.systemPackages = with pkgs; [
-    # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    vim
-    git
-    wget
-    curl
-    dig
-    tree
-    wl-clipboard
-  ];
-  environment.shellAliases = {
-    pbcopy = "wl-copy";
-    pbpaste = "wl-paste";
-  };
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-  environment.variables.EDITOR = "nvim";
 
   programs.thunderbird = {
     enable = true;

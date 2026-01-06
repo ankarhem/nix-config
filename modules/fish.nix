@@ -1,5 +1,13 @@
 { lib, ... }:
-{
+let
+  defaultUserShell =
+    { pkgs, ... }:
+    {
+      programs.fish.enable = true;
+      users.defaultUserShell = pkgs.fish;
+    };
+  flake.modules.nixos.fish = defaultUserShell;
+  flake.modules.darwin.fish = defaultUserShell;
   flake.modules.homeManager.fish =
     { pkgs, ... }:
     {
@@ -32,4 +40,7 @@
       };
       programs.fzf.enable = true;
     };
+in
+{
+  inherit flake;
 }

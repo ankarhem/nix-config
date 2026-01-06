@@ -40,10 +40,4 @@ in
       summarize
     ])
     ++ [ spotify ];
-  programs.nh = {
-    enable = true;
-    flake = "/Users/${username}/nix-config";
-  };
-
-  programs.zsh.enable = true;
 }

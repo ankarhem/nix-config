@@ -1,5 +1,6 @@
 { inputs, config, ... }:
 let
+  username = "ankarhem";
   environment = {
     systemPackages = with pkgs; [ coreutils ];
     shells = with pkgs; [
@@ -11,9 +12,34 @@ let
       ls = "eza --color=auto -F";
     };
   };
+  programs = {
+    bash.enable = true;
+    zsh.enable = true;
+    fish.enable = true;
+  };
 
-  flake.modules.nixos.cli = { inherit environment; };
-  flake.modules.darwin.cli = { inherit environment; };
+  flake.modules.nixos.cli =
+    { pkgs, ... }:
+    {
+      inherit environment programs;
+      environment.systemPackages = with pkgs; [ wl-clipboard ];
+      environment.shellAliases = {
+        pbcopy = "wl-copy";
+        pbpaste = "wl-paste";
+      };
+      programs.nh = {
+        enable = true;
+        flake = "/home/${username}/nix-config/";
+        clean.enable = true;
+      };
+    };
+  flake.modules.darwin.cli = {
+    inherit environment programs;
+    programs.nh = {
+      enable = true;
+      flake = "/Users/${username}/nix-config/";
+    };
+  };
   flake.modules.homeManager.cli =
     { pkgs, ... }:
     {
@@ -45,6 +71,7 @@ let
         coreutils
         curl
         deno
+        dig
         fd
         git
         gitleaks
@@ -67,6 +94,7 @@ let
         tailscale
         tree
         uv
+        vim
         wget
       ];
     };

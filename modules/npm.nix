@@ -1,5 +1,5 @@
 {
-  flake.modules.homeModules.npm =
+  flake.modules.homeManager.npm =
     { config, ... }:
     {
       home.file.npmrc = {
