@@ -23,9 +23,6 @@
     shell = pkgs.fish;
   };
 
-  nix.settings.trusted-users = [ username ];
-  nix.settings.extra-trusted-users = [ username ];
-
   sops = {
     defaultSopsFile = "${self}/secrets/mbp/secrets.yaml";
     age = {

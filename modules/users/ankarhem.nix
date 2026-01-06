@@ -18,33 +18,36 @@ let
 
   username = "ankarhem";
 
-  users.users.${username} = {
-    isNormalUser = true;
-    description = "Jakob Ankarhem";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "podman"
-      "docker"
-    ];
-    openssh.authorizedKeys.keys = getGithubKeys {
-      inherit username;
-      sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
+  homeDirectory = { pkgs }: if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
+
+  shared =
+    { pkgs, ... }:
+    {
+      users.users.${username} = {
+        home = homeDirectory { inherit pkgs; };
+        isNormalUser = true;
+        description = "Jakob Ankarhem";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "podman"
+          "docker"
+        ];
+        openssh.authorizedKeys.keys = getGithubKeys {
+          inherit username;
+          sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
+        };
+      };
+      nix.settings.trusted-users = [ username ];
+      nix.settings.extra-trusted-users = [ username ];
     };
-  };
 
-  flake.modules.nixos.ankarhem = {
-    inherit users;
-  };
-
-  flake.modules.darwin.ankarhem = {
-    inherit users;
-  };
-
+  flake.modules.nixos.ankarhem = shared;
+  flake.modules.darwin.ankarhem = shared;
   flake.modules.home.ankarhem =
     { pkgs, ... }:
     let
-      homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
+      homeDirectory = homeDirectory { inherit pkgs; };
     in
     {
       home.username = username;
