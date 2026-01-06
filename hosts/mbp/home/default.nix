@@ -46,38 +46,6 @@ in
 
   home.packages =
     (with pkgs; [
-      age
-      alejandra
-      azure-cli
-      bat
-      bottom
-      codex
-      coreutils
-      curl
-      deno
-      fd
-      git
-      gitleaks
-      grc
-      htop
-      imagemagick
-      jq
-      k9s
-      kubelogin
-      mas
-      mitmproxy
-      newt
-      ngrok
-      nodejs_24
-      pup
-      ripgrep
-      rm-improved
-      sops
-      tailscale
-      tree
-      uv # dependency for ddg-mcp
-      wget
-
       bruno
       slack
       obsidian
