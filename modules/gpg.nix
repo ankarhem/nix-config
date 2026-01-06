@@ -33,6 +33,24 @@ let
         };
     in
     {
+      # TODO: Create this using pkgs.writeShellApplication instead
+      programs.fish.loginShellInit = ''
+        function secret
+          set output (string join . $argv[1] (date +%s) enc)
+          gpg --encrypt --armor --output $output -r ${environment.variables.KEYID} $argv[1]
+          and echo "$argv[1] -> $output"
+        end
+
+        function reveal
+          set output (echo $argv[1] | rev | cut -c16- | rev)
+          gpg --decrypt --output $output $argv[1]
+          and echo "$argv[1] -> $output"
+        end
+
+        function copy-term-info
+          infocmp -x | ssh $argv[1] -- tic -x -
+        end
+      '';
       programs.gpg = {
         enable = true;
 

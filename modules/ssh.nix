@@ -78,15 +78,15 @@ in
         };
       };
 
+      # TODO: Create this using pkgs.writeShellApplication instead
+      programs.fish.loginShellInit = ''
+        function copy-term-info
+          infocmp -x | ssh $argv[1] -- tic -x -
+        end
+      '';
       users.users.${username}.openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys {
         username = "ankarhem";
         sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
       };
-    };
-
-  perSystem =
-    { pkgs, ... }:
-    {
-      # custom packages taking advantage of ssh facilities, eg deployment-scripts.
     };
 }

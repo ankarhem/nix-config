@@ -21,21 +21,18 @@ let
         inputs.nix-index-database.homeModules.nix-index
       ];
 
+      programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+
       programs.nix-index-database = {
         comma.enable = true;
       };
       programs.nix-index.enable = true;
 
-      programs.go = {
-        enable = true;
-        env = {
-          GOPATH = ".go";
-        };
-      };
-
-      programs.zoxide = {
-        enable = true;
-      };
+      programs.go.enable = true;
+      programs.zoxide.enable = true;
       programs.eza.enable = true;
       home.packages = with pkgs; [
         _1password-cli
