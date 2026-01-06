@@ -15,7 +15,6 @@
     ./bluetooth.nix
     ./gpu.nix
     ./sops.nix
-    ./fonts.nix
     ./gaming.nix
     ./comfyui.nix
   ];
