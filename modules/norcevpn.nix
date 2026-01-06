@@ -22,5 +22,8 @@
     homebrew.casks = [
       "openvpn-connect"
     ];
+    system.defaults.dock.persistent-apps = [
+      "/Applications/OpenVPN Connect/OpenVPN Connect.app/"
+    ];
   };
 }

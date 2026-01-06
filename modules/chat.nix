@@ -5,16 +5,28 @@
   ...
 }:
 {
-  flake.modules.nixos.chat = {
-    # Linux config: setup OpenSSH server, firewall-ports, etc.
-  };
+  flake.modules.nixos.chat = { };
 
-  flake.modules.darwin.chat = {
-    homebrew.casks = [
-      "legcord"
-      "microsoft-teams"
-    ];
-  };
+  flake.modules.darwin.chat =
+    { pkgs, ... }:
+    {
+      homebrew.casks = [
+        "legcord"
+        "microsoft-teams"
+      ];
+
+      system.defaults = {
+        dock = {
+          persistent-apps = [
+            "${pkgs.element-desktop}/Applications/Element.app/"
+            "${pkgs.slack}/Applications/Slack.app/"
+            "/Applications/Microsoft Teams.app/"
+            "/Applications/legcord.app/"
+            "/System/Applications/Messages.app/"
+          ];
+        };
+      };
+    };
 
   flake.modules.homeManager.chat =
     { pkgs, ... }:

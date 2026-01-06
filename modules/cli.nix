@@ -40,6 +40,18 @@ let
       flake = "/Users/${username}/nix-config/";
     };
   };
+
+  nixpkgs.overlays = [
+    (
+      final: prev:
+      let
+        scriptPkgs = inputs.scripts.packages.${prev.system};
+      in
+      {
+        inherit scriptPkgs;
+      }
+    )
+  ];
   flake.modules.homeManager.cli =
     { pkgs, ... }:
     {
@@ -90,6 +102,8 @@ let
         pup
         ripgrep
         rm-improved
+        scriptPkgs.summarize
+        scriptPkgs.yt-sub
         sops
         tailscale
         tree

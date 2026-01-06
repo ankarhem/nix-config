@@ -6,6 +6,9 @@
       inherit (pkgs.nur.repos.rycee) firefox-addons;
     in
     {
+      home.packages = with pkgs; [
+        firefox-devedition
+      ];
       programs.firefox = {
         enable = true;
         package = pkgs.firefox;

@@ -1,6 +1,13 @@
 { inputs, config, ... }:
 {
-  flake.modules.homeManager.ssh =
+  flake.modules.darwin.terminal =
+    { pkgs, ... }:
+    {
+      system.defaults.dock.persistent-apps = [
+        "${pkgs.ghostty-bin}/Applications/Ghostty.app/"
+      ];
+    };
+  flake.modules.homeManager.terminal =
     { lib, pkgs, ... }:
     {
       programs.starship = {
@@ -8,6 +15,7 @@
       };
       programs.ghostty = {
         enable = true;
+        package = if pkgs.stdenv.isLinux then pkgs.ghostty else pkgs.ghostty-bin;
         enableFishIntegration = true;
 
         settings = {

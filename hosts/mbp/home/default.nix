@@ -22,22 +22,6 @@ in
   home.homeDirectory = "/Users/${username}";
   home.stateVersion = "23.11";
   home.sessionVariables = {
-    PATH = "$PATH:$GOPATH/bin";
     SOPS_AGE_KEY_FILE = "/Users/ankarhem/.config/sops/age/keys.txt";
   };
-
-  home.packages =
-    (with pkgs; [
-      bruno
-      slack
-      obsidian
-    ])
-    ++ (with pkgs-unstable; [
-      element-desktop
-    ])
-    ++ (with scriptPkgs; [
-      yt-sub
-      summarize
-    ])
-    ++ [ spotify ];
 }
