@@ -41,17 +41,5 @@
     addresses = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${username}" = {
-    isNormalUser = true;
-    description = "Jakob Ankarhem";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "podman"
-      "docker"
-    ];
-  };
-
   system.stateVersion = "25.11"; # Did you read the comment?
 }

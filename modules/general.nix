@@ -10,6 +10,24 @@
     };
   };
 
+  nixpkgs.overlays = [
+    (
+      final: prev:
+      let
+        pkgs = import inputs.nixpkgs {
+          inherit (prev) system config;
+        };
+      in
+      {
+        spotify = pkgs.spotify.overrideAttrs (oldAttrs: {
+          src = pkgs.fetchurl {
+            url = "https://web.archive.org/web/20251029235406/https://download.scdn.co/SpotifyARM64.dmg";
+            hash = "sha256-gEZxRBT7Jo2m6pirf+CreJiMeE2mhIkpe9Mv5t0RI58=";
+          };
+        });
+      }
+    )
+  ];
   flake.modules.darwin.general =
     { pkgs, ... }:
     {

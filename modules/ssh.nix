@@ -1,7 +1,4 @@
 { inputs, config, ... }:
-let
-  username = "ankarhem";
-in
 {
   flake.modules.nixos.ssh = {
     services.openssh = {
@@ -68,12 +65,6 @@ in
               "~/.ssh/id_ed25519_sk"
               "~/.ssh/id_ecdsa_sk"
             ];
-            remoteForwards = [
-              {
-                bind.address = "/run/user/1000/gnupg/S.gpg-agent";
-                host.address = "/Users/ankarhem/.gnupg/S.gpg-agent";
-              }
-            ];
           };
         };
       };
@@ -84,9 +75,5 @@ in
           infocmp -x | ssh $argv[1] -- tic -x -
         end
       '';
-      users.users.${username}.openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys {
-        username = "ankarhem";
-        sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
-      };
     };
 }
