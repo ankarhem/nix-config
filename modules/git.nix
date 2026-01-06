@@ -41,8 +41,28 @@
           echo "All repositories from $ORG_NAME have been processed. Check the '$FOLDER_NAME' folder."
         '';
       };
+      getGithubKeys =
+        { username, sha256 }:
+        let
+          authorizedKeysFile = builtins.fetchurl {
+            url = "https://github.com/${username}.keys";
+            inherit sha256;
+          };
+          keys = pkgs.lib.splitString "\n" (builtins.readFile authorizedKeysFile);
+        in
+        builtins.filter (s: s != "") keys;
     in
     {
+      home.file.".config/git/allowed_signers".text =
+        let
+          authorizedKeys = helpers.ssh.getGithubKeys {
+            username = "ankarhem";
+            sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
+          };
+          allowedSigners = builtins.concatStringsSep "\n" (builtins.map (key: "* ${key}") authorizedKeys);
+        in
+        allowedSigners;
+
       programs.git = {
         enable = true;
 

@@ -33,15 +33,6 @@ in
     inputs.nix-index-database.homeModules.nix-index
   ];
 
-  home.file.".config/git/allowed_signers".text =
-    let
-      authorizedKeys = helpers.ssh.getGithubKeys {
-        username = "ankarhem";
-        sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
-      };
-      allowedSigners = builtins.concatStringsSep "\n" (builtins.map (key: "* ${key}") authorizedKeys);
-    in
-    allowedSigners;
   programs.git = {
     signing = {
       key = "~/.ssh/id_ed25519.pub";

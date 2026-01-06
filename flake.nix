@@ -125,17 +125,6 @@
           };
         in
         {
-          installer = inputs.nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs;
-              inherit self;
-              helpers = import ./helpers {
-                pkgs = import inputs.nixpkgs { inherit system; };
-              };
-            };
-            modules = [ ./hosts/installer/configuration.nix ];
-          };
           homelab = inputs.nixpkgs.lib.nixosSystem rec {
             system = "x86_64-linux";
             specialArgs = {
