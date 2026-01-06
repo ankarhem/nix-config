@@ -7,7 +7,6 @@
 {
   imports = [
     ./environment.nix
-    ./homebrew.nix
     ./settings.nix
     ./sops.nix
     ./user.nix

@@ -27,7 +27,6 @@ in
   };
 
   imports = [
-    ./ghostty.nix
     ./npm.nix
     inputs.nix-index-database.homeModules.nix-index
   ];

@@ -1,5 +1,12 @@
 {
   flake.modules.darwin.mac = {
+    environment = {
+      pathsToLink = [ "/Applications" ]; # why is this here?
+      variables = {
+        LESS = "-r"; # Should this be set?
+      };
+    };
+
     security.pam.services.sudo_local.touchIdAuth = true;
     system.keyboard.enableKeyMapping = true;
     system.keyboard.remapCapsLockToEscape = true;

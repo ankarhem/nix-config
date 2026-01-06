@@ -11,7 +11,7 @@
         enableFishIntegration = true;
 
         settings = {
-          font-size = 12;
+          font-size = if pkgs.stdenv.isLinux then 16 else 12;
           theme = "dark:Catppuccin Frappe,light:Catppuccin Latte";
           shell-integration-features = "ssh-terminfo,ssh-env";
         };
