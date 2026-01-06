@@ -14,19 +14,11 @@
 
   networking.hostName = hostname;
   networking.computerName = hostname;
-  system.primaryUser = username;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${username}" = {
-    home = "/Users/${username}";
-    description = username;
-    shell = pkgs.fish;
-  };
 
   sops = {
     defaultSopsFile = "${self}/secrets/mbp/secrets.yaml";
     age = {
-      keyFile = "/Users/${username}/.config/sops/age/keys.txt";
+      keyFile = "/Users/ankarhem/.config/sops/age/keys.txt";
     };
   };
   # backwards compat; don't change

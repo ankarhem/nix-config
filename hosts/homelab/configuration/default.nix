@@ -4,10 +4,7 @@
 {
   self,
   modulesPath,
-  pkgs,
-  username,
   hostname,
-  helpers,
   ...
 }:
 {
@@ -33,29 +30,10 @@
       keyFile = "/home/idealpink/.config/sops/age/keys.txt";
     };
   };
-  services.avahi.enable = true;
-  services.avahi.nssmdns4 = true;
-  services.avahi.publish = {
-    enable = true;
-    addresses = true;
-  };
 
   proxmoxLXC = {
     manageNetwork = true;
   };
   boot.isContainer = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${username}" = {
-    isNormalUser = true;
-    description = username;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "podman"
-      "docker"
-    ];
-  };
-
   system.stateVersion = "24.05"; # Did you read the comment?
 }

@@ -23,22 +23,12 @@
   hardware.cpu.amd.updateMicrocode = true;
 
   networking.hostName = hostname; # Define your hostname.
-  networking.networkmanager.enable = true;
 
   sops = {
     defaultSopsFile = "${self}/secrets/workstation/secrets.yaml";
     age = {
       keyFile = "/home/idealpink/.config/sops/age/keys.txt";
     };
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.avahi.enable = true;
-  services.avahi.nssmdns4 = true;
-  services.avahi.publish = {
-    enable = true;
-    addresses = true;
   };
 
   system.stateVersion = "25.11"; # Did you read the comment?
