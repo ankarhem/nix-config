@@ -17,7 +17,6 @@ in
     enable = true;
     onActivation = {
       cleanup = "uninstall";
-      # this sucks, as the entire homebrew does. gah
       autoUpdate = true;
       upgrade = true;
     };
@@ -45,7 +44,6 @@ in
       "microsoft-remote-desktop"
       "microsoft-teams"
       "mos"
-      "openvpn-connect"
       "orbstack"
       "pairpods"
       "runelite"

@@ -17,10 +17,7 @@
     ./sops.nix
     ./fonts.nix
     ./gaming.nix
-    ./kde.nix
     ./comfyui.nix
-    ./norcevpn.nix
-    ./neochat.nix
   ];
 
   # Bootloader

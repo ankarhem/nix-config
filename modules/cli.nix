@@ -3,6 +3,26 @@
   flake.modules.homeManager.cli =
     { pkgs, ... }:
     {
+      imports = [
+        inputs.nix-index-database.homeModules.nix-index
+      ];
+
+      programs.nix-index-database = {
+        comma.enable = true;
+      };
+      programs.nix-index.enable = true;
+
+      programs.go = {
+        enable = true;
+        env = {
+          GOPATH = ".go";
+        };
+      };
+
+      programs.zoxide = {
+        enable = true;
+      };
+      programs.eza.enable = true;
       home.packages = with pkgs; [
         _1password-cli
         age

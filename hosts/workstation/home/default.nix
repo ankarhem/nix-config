@@ -15,17 +15,8 @@
   home.stateVersion = "25.11";
 
   imports = [
-    ./konsole.nix
-    ./plasma.nix
     ./runelite.nix
-    ./ghostty.nix
-    inputs.nix-index-database.homeModules.nix-index
   ];
-
-  programs.nix-index-database = {
-    comma.enable = true;
-  };
-  programs.nix-index.enable = true;
 
   home.packages =
     with pkgs;
@@ -48,19 +39,4 @@
       scriptPkgs.yt-sub
       scriptPkgs.summarize
     ];
-
-  programs.zoxide = {
-    enable = true;
-  };
-  programs.eza.enable = true;
-  programs.starship = {
-    enable = true;
-  };
-
-  programs.go = {
-    enable = true;
-    env = {
-      GOPATH = ".go";
-    };
-  };
 }
