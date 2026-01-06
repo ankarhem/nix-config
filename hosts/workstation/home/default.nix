@@ -103,9 +103,6 @@
     ++ (with pkgs-unstable; [
       element-desktop
       firefox-devedition
-      jetbrains.rider
-      jetbrains.rust-rover
-      jetbrains.webstorm
       phoronix-test-suite
     ])
     ++ [

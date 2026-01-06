@@ -108,9 +108,6 @@ in
     ])
     ++ (with pkgs-unstable; [
       element-desktop
-      jetbrains.rider
-      jetbrains.rust-rover
-      jetbrains.webstorm
     ])
     ++ (with scriptPkgs; [
       yt-sub
