@@ -13,25 +13,31 @@ let
       keys = lib.splitString "\n" (builtins.readFile authorizedKeysFile);
     in
     builtins.filter (s: s != "") keys;
-  shared = {
-    users.users.${username} = {
-      isNormalUser = true;
-      description = "Jakob Ankarhem";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "podman"
-        "docker"
-      ];
-      openssh.authorizedKeys.keys = getGithubKeys {
-        inherit username;
-        sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
+  shared =
+    { pkgs }:
+    let
+      homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
+    in
+    {
+      users.users.${username} = {
+        isNormalUser = true;
+        description = "Jakob Ankarhem";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "podman"
+          "docker"
+        ];
+        openssh.authorizedKeys.keys = getGithubKeys {
+          inherit username;
+          sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
+        };
+        shell = pkgs.fish;
       };
-      shell = pkgs.fish;
+      nix.settings.trusted-users = [ username ];
+      nix.settings.extra-trusted-users = [ username ];
+      age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
     };
-    nix.settings.trusted-users = [ username ];
-    nix.settings.extra-trusted-users = [ username ];
-  };
   createAdminUserModule =
     { username }:
     {

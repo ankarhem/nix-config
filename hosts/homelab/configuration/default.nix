@@ -24,12 +24,7 @@
   networking.hostName = hostname; # Define your hostname.
   nixpkgs.config.allowUnfree = true;
 
-  sops = {
-    defaultSopsFile = "${self}/secrets/homelab/secrets.yaml";
-    age = {
-      keyFile = "/home/idealpink/.config/sops/age/keys.txt";
-    };
-  };
+  sops.defaultSopsFile = "${self}/secrets/homelab/secrets.yaml";
 
   proxmoxLXC = {
     manageNetwork = true;

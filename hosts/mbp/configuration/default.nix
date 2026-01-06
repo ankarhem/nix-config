@@ -15,12 +15,7 @@
   networking.hostName = hostname;
   networking.computerName = hostname;
 
-  sops = {
-    defaultSopsFile = "${self}/secrets/mbp/secrets.yaml";
-    age = {
-      keyFile = "/Users/ankarhem/.config/sops/age/keys.txt";
-    };
-  };
+  sops.defaultSopsFile = "${self}/secrets/mbp/secrets.yaml";
   # backwards compat; don't change
   system.stateVersion = 5;
 }
