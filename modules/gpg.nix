@@ -1,4 +1,16 @@
-{
+_:
+let
+  environment.variables = {
+    GNUPGHOME = "~/.gnupg";
+    KEYID = "529972E4160200DF";
+  };
+
+  flake.modules.nixos.gpg = {
+    inherit environment;
+  };
+  flake.modules.darwin.gpg = {
+    inherit environment;
+  };
   flake.modules.homeManager.gpg =
     { pkgs, ... }:
     let
@@ -75,4 +87,7 @@
         };
       };
     };
+in
+{
+  inherit flake;
 }

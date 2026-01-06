@@ -1,5 +1,11 @@
 { inputs, config, ... }:
-{
+let
+  environment.variables = {
+    EDITOR = "nvim";
+  };
+
+  flake.modules.nixos.lazyvim = { inherit environment; };
+  flake.modules.darwin.lazyvim = { inherit environment; };
   flake.modules.homeManager.lazyvim =
     { pkgs, ... }:
     {
@@ -69,4 +75,7 @@
         };
       };
     };
+in
+{
+  inherit flake;
 }

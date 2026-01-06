@@ -1,5 +1,19 @@
 { inputs, config, ... }:
-{
+let
+  environment = {
+    systemPackages = with pkgs; [ coreutils ];
+    shells = with pkgs; [
+      bash
+      zsh
+      fish
+    ];
+    shellAliases = {
+      ls = "eza --color=auto -F";
+    };
+  };
+
+  flake.modules.nixos.cli = { inherit environment; };
+  flake.modules.darwin.cli = { inherit environment; };
   flake.modules.homeManager.cli =
     { pkgs, ... }:
     {
@@ -59,4 +73,7 @@
         wget
       ];
     };
+in
+{
+  inherit flake;
 }
