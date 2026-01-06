@@ -143,10 +143,6 @@
       "podman"
       "docker"
     ];
-    openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys ({
-      username = "ankarhem";
-      sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
-    });
   };
 
   environment.systemPackages = with pkgs; [

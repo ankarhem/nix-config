@@ -55,7 +55,7 @@
     {
       home.file.".config/git/allowed_signers".text =
         let
-          authorizedKeys = helpers.ssh.getGithubKeys {
+          authorizedKeys = getGithubKeys {
             username = "ankarhem";
             sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
           };
@@ -68,10 +68,12 @@
 
         signing = {
           signByDefault = true;
-          key = lib.mkDefault "0x529972E4160200DF";
+          key = lib.mkDefault "~/.ssh/id_ed25519.pub";
         };
 
         settings = {
+          gpg.format = "ssh";
+          gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
           user = {
             name = "Jakob Ankarhem";
             email = "jakob@ankarhem.dev";

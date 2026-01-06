@@ -29,19 +29,8 @@ in
   imports = [
     ./ghostty.nix
     ./npm.nix
-    ./ssh.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
-
-  programs.git = {
-    signing = {
-      key = "~/.ssh/id_ed25519.pub";
-    };
-    settings = {
-      gpg.format = "ssh";
-      gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
-    };
-  };
 
   modules.custom-scripts.enable = true;
 
@@ -57,10 +46,6 @@ in
 
   home.packages =
     (with pkgs; [
-      openssh
-      yubikey-manager
-      yubikey-personalization
-
       age
       alejandra
       azure-cli

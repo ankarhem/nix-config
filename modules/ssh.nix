@@ -1,4 +1,7 @@
 { inputs, config, ... }:
+let
+  username = "ankarhem";
+in
 {
   flake.modules.nixos.ssh = {
     services.openssh = {
@@ -14,61 +17,72 @@
   };
 
   flake.modules.darwin.ssh = {
-    # MacOS config: enable MacOS builtin ssh server, etc.
   };
 
-  flake.modules.homeManager.ssh = {
-    # setup ~/.ssh/config, authorized_keys, private keys secrets, etc.
-    programs.ssh = {
-      enable = true;
-      enableDefaultConfig = false;
+  flake.modules.homeManager.ssh =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        yubikey-personalization
+        yubikey-manager
+        openssh
+      ];
 
-      matchBlocks = {
-        "*" = {
-          identityFile = [ "~/.ssh/id_ed25519" ];
-        };
-        "github.com" = {
-          user = "git";
-          hostname = "github.com";
-          identitiesOnly = true;
-          identityFile = [ "~/.ssh/id_ed25519" ];
-          controlMaster = "auto";
-          controlPath = "~/.ssh/S.%r@%h:%p";
-          controlPersist = "60m";
-        };
-        "synology" = {
-          setEnv = {
-            TERM = "xterm-256color";
+      programs.ssh = {
+        enable = true;
+        enableDefaultConfig = false;
+
+        matchBlocks = {
+          "*" = {
+            identityFile = [ "~/.ssh/id_ed25519" ];
           };
-          hostname = "disketten.local";
-          user = "idealpink";
-          port = 1337;
-          identitiesOnly = true;
-          identityFile = [
-            "~/.ssh/id_ed25519_sk"
-            "~/.ssh/id_ecdsa_sk"
-          ];
-        };
-        "homelab" = {
-          hostname = "homelab.local";
-          user = "idealpink";
-          port = 22;
-          identitiesOnly = true;
-          identityFile = [
-            "~/.ssh/id_ed25519"
-            "~/.ssh/id_ed25519_sk"
-            "~/.ssh/id_ecdsa_sk"
-          ];
-          remoteForwards = [
-            {
-              bind.address = "/run/user/1000/gnupg/S.gpg-agent";
-              host.address = "/Users/ankarhem/.gnupg/S.gpg-agent";
-            }
-          ];
+          "github.com" = {
+            user = "git";
+            hostname = "github.com";
+            identitiesOnly = true;
+            identityFile = [ "~/.ssh/id_ed25519" ];
+            controlMaster = "auto";
+            controlPath = "~/.ssh/S.%r@%h:%p";
+            controlPersist = "60m";
+          };
+          "synology" = {
+            setEnv = {
+              TERM = "xterm-256color";
+            };
+            hostname = "disketten.local";
+            user = "idealpink";
+            port = 1337;
+            identitiesOnly = true;
+            identityFile = [
+              "~/.ssh/id_ed25519_sk"
+              "~/.ssh/id_ecdsa_sk"
+            ];
+          };
+          "homelab" = {
+            hostname = "homelab.local";
+            user = "idealpink";
+            port = 22;
+            identitiesOnly = true;
+            identityFile = [
+              "~/.ssh/id_ed25519"
+              "~/.ssh/id_ed25519_sk"
+              "~/.ssh/id_ecdsa_sk"
+            ];
+            remoteForwards = [
+              {
+                bind.address = "/run/user/1000/gnupg/S.gpg-agent";
+                host.address = "/Users/ankarhem/.gnupg/S.gpg-agent";
+              }
+            ];
+          };
         };
       };
+
+      users.users.${username}.openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys {
+        username = "ankarhem";
+        sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
+      };
     };
-  };
 
   perSystem =
     { pkgs, ... }:

@@ -18,26 +18,10 @@
     ./konsole.nix
     ./plasma.nix
     ./runelite.nix
-    ./ssh.nix
     ./ghostty.nix
     inputs.nix-index-database.homeModules.nix-index
   ];
 
-  programs.git = {
-    signing = {
-      key = "~/.ssh/id_ed25519.pub";
-    };
-    settings = {
-      gpg.format = "ssh";
-      gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
-    };
-  };
-  modules.custom-scripts.enable = true;
-
-  programs.dotnet = {
-    enable = true;
-    enableAzureArtifactsCredProvider = true;
-  };
   programs.nix-index-database = {
     comma.enable = true;
   };
@@ -46,10 +30,6 @@
   home.packages =
     with pkgs;
     [
-      yubikey-personalization
-      yubikey-manager
-      openssh
-
       _1password-cli
       age
       alejandra
