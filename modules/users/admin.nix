@@ -1,11 +1,8 @@
 {
   lib,
-  inputs,
-  config,
   ...
 }:
 let
-  username = "ankarhem";
   getGithubKeys =
     { username, sha256 }:
     let
@@ -16,7 +13,6 @@ let
       keys = lib.splitString "\n" (builtins.readFile authorizedKeysFile);
     in
     builtins.filter (s: s != "") keys;
-
   shared = {
     users.users.${username} = {
       isNormalUser = true;
@@ -36,25 +32,34 @@ let
     nix.settings.trusted-users = [ username ];
     nix.settings.extra-trusted-users = [ username ];
   };
-
-  flake.modules.nixos.ankarhem = shared;
-  flake.modules.darwin.ankarhem = {
-    imports = [ shared ];
-    system.primaryUser = username;
-  };
-  flake.modules.home.ankarhem =
-    { pkgs, ... }:
-    let
-      homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
-    in
+  createAdminUserModule =
+    { username }:
     {
-      home.username = username;
-      home.homeDirectory = homeDirectory;
-      home.sessionVariables = {
-        SOPS_AGE_KEY_FILE = "${homeDirectory}/.config/sops/age/keys.txt";
+      flake.modules.nixos.${username} = shared;
+      flake.modules.darwin.${username} = {
+        imports = [ shared ];
+        system.primaryUser = username;
       };
+      flake.modules.home.${username} =
+        { pkgs, ... }:
+        let
+          homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
+        in
+        {
+          home.username = username;
+          home.homeDirectory = homeDirectory;
+          home.sessionVariables = {
+            SOPS_AGE_KEY_FILE = "${homeDirectory}/.config/sops/age/keys.txt";
+          };
+        };
     };
+
 in
 {
-  inherit flake;
+  imports = [
+    createAdminUserModule
+    { username = "ankarhem"; }
+    createAdminUserModule
+    { username = "idealpink"; }
+  ];
 }
