@@ -3,15 +3,11 @@
   flake.modules.darwin.dev =
     { pkgs, ... }:
     {
-      system.defaults = {
-        dock = {
-          persistent-apps = [
-            "${pkgs.jetbrains.rider}/Applications/Rider.app/"
-            "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
-            "${pkgs.jetbrains.webstorm}/Applications/WebStorm.app/"
-          ];
-        };
-      };
+      system.defaults.dock.persistent-apps = [
+        "${pkgs.jetbrains.rider}/Applications/Rider.app/"
+        "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
+        "${pkgs.jetbrains.webstorm}/Applications/WebStorm.app/"
+      ];
     };
 
   flake.modules.homeManager.dev =

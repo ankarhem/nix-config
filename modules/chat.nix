@@ -15,17 +15,13 @@
         "microsoft-teams"
       ];
 
-      system.defaults = {
-        dock = {
-          persistent-apps = [
-            "${pkgs.element-desktop}/Applications/Element.app/"
-            "${pkgs.slack}/Applications/Slack.app/"
-            "/Applications/Microsoft Teams.app/"
-            "/Applications/legcord.app/"
-            "/System/Applications/Messages.app/"
-          ];
-        };
-      };
+      system.defaults.dock.persistent-apps = [
+        "${pkgs.element-desktop}/Applications/Element.app/"
+        "${pkgs.slack}/Applications/Slack.app/"
+        "/Applications/Microsoft Teams.app/"
+        "/Applications/legcord.app/"
+        "/System/Applications/Messages.app/"
+      ];
     };
 
   flake.modules.homeManager.chat =

@@ -1,5 +1,13 @@
 { inputs, lib, ... }:
 {
+
+  flake.modules.darwin.firefox = {
+    system.defaults.dock.persistent-apps = [
+      "${pkgs.firefox}/Applications/Element.app/"
+      "${pkgs.firefox-devedition}/Applications/Slack.app/"
+    ];
+  };
+
   flake.modules.homeManager.firefox =
     { pkgs, ... }:
     let
