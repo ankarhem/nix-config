@@ -52,6 +52,7 @@ in
       "runelite"
       "sikarugir"
       "steam"
+      "tailscale-app"
       "telegram"
       "tor-browser"
     ];

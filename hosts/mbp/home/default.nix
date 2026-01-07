@@ -106,7 +106,6 @@ in
       ripgrep
       rm-improved
       sops
-      tailscale
       tree
       uv # dependency for ddg-mcp
       wget
