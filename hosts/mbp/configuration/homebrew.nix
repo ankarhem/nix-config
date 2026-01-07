@@ -29,6 +29,7 @@ in
 
     brews = [ "pinentry-mac" ];
 
+    greedyCasks = true;
     caskArgs.no_quarantine = true;
     casks = [
       "1password"
