@@ -3,7 +3,7 @@ _: {
     target = ".config/ghostty/config";
     text = ''
       font-size = 16
-      theme = dark:catppuccin-frappe,light:catppuccin-latte
+      theme = dark:Catppuccin Frappe,light:Catppuccin Latte
       shell-integration-features = ssh-terminfo,ssh-env
     '';
   };
