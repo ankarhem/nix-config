@@ -75,184 +75,206 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     inputs@{ self, ... }:
-    let
-      forAllSystems = inputs.nixpkgs.lib.genAttrs [
-        "x86_64-linux"
-        "aarch64-darwin"
-      ];
-    in
-    {
-      devShells = forAllSystems (
-        system:
-        let
-          pkgs = import inputs.nixpkgs { inherit system; };
-          pre-commit-hooks = inputs.git-hooks.lib.${system}.run {
-            src = ./.;
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{
+        config,
+        withSystem,
+        moduleWithSystem,
+        ...
+      }:
+      {
+        imports = [
+          inputs.git-hooks.flakeModule
+        ];
+        flake =
+          let
+            forAllSystems = inputs.nixpkgs.lib.genAttrs [
+              "x86_64-linux"
+              "aarch64-darwin"
+            ];
+          in
+          {
+            nixosConfigurations =
+              let
+                nixpkgsConfig = {
+                  allowUnfree = true;
+                  # temporary allow olm-3.2.16 as insecure package
+                  permittedInsecurePackages = [
+                    "olm-3.2.16"
+                  ];
+                };
+              in
+              {
+                installer = inputs.nixpkgs.lib.nixosSystem rec {
+                  system = "x86_64-linux";
+                  specialArgs = {
+                    inherit inputs;
+                    inherit self;
+                    helpers = import ./helpers {
+                      pkgs = import inputs.nixpkgs { inherit system; };
+                    };
+                  };
+                  modules = [ ./hosts/installer/configuration.nix ];
+                };
+                homelab = inputs.nixpkgs.lib.nixosSystem rec {
+                  system = "x86_64-linux";
+                  specialArgs = {
+                    pkgs-unstable = import inputs.nixpkgs-unstable {
+                      inherit system;
+                      config = nixpkgsConfig;
+                    };
+                    inherit inputs;
+                    inherit self;
+                    username = "idealpink";
+                    hostname = "homelab";
+                    helpers = import ./helpers {
+                      pkgs = import inputs.nixpkgs { inherit system; };
+                    };
+                  };
 
-            hooks = {
+                  modules = [
+                    ./hosts/${specialArgs.hostname}/configuration/default.nix
+                    inputs.sops-nix.nixosModules.sops
+                    inputs.home-manager.nixosModules.home-manager
+                    {
+                      home-manager.extraSpecialArgs = specialArgs;
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+
+                      home-manager.users.${specialArgs.username} =
+                        import ./hosts/${specialArgs.hostname}/home/default.nix;
+                    }
+                  ];
+                };
+                workstation = inputs.nixpkgs.lib.nixosSystem rec {
+                  system = "x86_64-linux";
+                  specialArgs = {
+                    pkgs-unstable = import inputs.nixpkgs-unstable {
+                      inherit system;
+                      config = nixpkgsConfig;
+                    };
+                    inherit inputs;
+                    inherit self;
+                    username = "idealpink";
+                    hostname = "workstation";
+                    helpers = import ./helpers {
+                      pkgs = import inputs.nixpkgs { inherit system; };
+                    };
+                    scriptPkgs = inputs.scripts.packages.${system};
+                  };
+
+                  modules = [
+                    ./hosts/${specialArgs.hostname}/configuration/default.nix
+                    inputs.sops-nix.nixosModules.sops
+                    inputs.home-manager.nixosModules.home-manager
+                    {
+                      nixpkgs = {
+                        config = nixpkgsConfig;
+                        overlays = [
+                          inputs.nur.overlays.default
+                        ];
+                      };
+
+                      home-manager.extraSpecialArgs = specialArgs;
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+
+                      home-manager.sharedModules = [
+                        inputs.plasma-manager.homeModules.plasma-manager
+                      ];
+
+                      home-manager.users.${specialArgs.username} =
+                        import ./hosts/${specialArgs.hostname}/home/default.nix;
+                    }
+                  ];
+                };
+              };
+
+            darwinConfigurations =
+              let
+                nixpkgsConfig = {
+                  allowUnfree = true;
+                };
+              in
+              {
+                mbp = inputs.darwin.lib.darwinSystem rec {
+                  system = "aarch64-darwin";
+                  specialArgs = {
+                    pkgs-unstable = import inputs.nixpkgs-unstable {
+                      inherit system;
+                      config = nixpkgsConfig;
+                    };
+                    pkgs-darwin = import inputs.nixpkgs-darwin {
+                      inherit system;
+                      config = nixpkgsConfig;
+                    };
+                    inherit inputs;
+                    inherit self;
+                    username = "ankarhem";
+                    hostname = "mbp";
+                    helpers = import ./helpers {
+                      pkgs = import inputs.nixpkgs { inherit system; };
+                    };
+                    scriptPkgs = inputs.scripts.packages.${system};
+                  };
+                  modules = [
+                    ./hosts/${specialArgs.hostname}/configuration/default.nix
+                    inputs.sops-nix.darwinModules.sops
+                    inputs.nix-homebrew.darwinModules.nix-homebrew
+                    inputs.home-manager.darwinModules.home-manager
+                    {
+                      nixpkgs = {
+                        config = nixpkgsConfig;
+                        overlays = [
+                          inputs.nur.overlays.default
+                        ];
+                      };
+
+                      home-manager.extraSpecialArgs = specialArgs;
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+                      home-manager.users.${specialArgs.username} =
+                        import ./hosts/${specialArgs.hostname}/home/default.nix;
+                    }
+                  ];
+                };
+              };
+
+          };
+        systems = [
+          "x86_64-linux"
+          "aarch64-darwin"
+        ];
+        perSystem =
+          {
+            config,
+            pkgs,
+            system,
+            ...
+          }:
+          {
+            _module.args.pkgs-unstable = import inputs.nixpkgs-unstable {
+              inherit (config.nixpkgs) config;
+              inherit system;
+            };
+
+            pre-commit.settings.hooks = {
               ripsecrets.enable = true;
               nixfmt-rfc-style.enable = true;
             };
-          };
-        in
-        {
-          default = pkgs.mkShell {
-            buildInputs = [ pre-commit-hooks.enabledPackages ];
-            shellHook = ''
-              ${pre-commit-hooks.shellHook}
-            '';
-          };
-        }
-      );
-
-      nixosConfigurations =
-        let
-          nixpkgsConfig = {
-            allowUnfree = true;
-            # temporary allow olm-3.2.16 as insecure package
-            permittedInsecurePackages = [
-              "olm-3.2.16"
-            ];
-          };
-        in
-        {
-          installer = inputs.nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs;
-              inherit self;
-              helpers = import ./helpers {
-                pkgs = import inputs.nixpkgs { inherit system; };
-              };
+            devShells.default = pkgs.mkShell {
+              packages = [ config.pre-commit.settings.enabledPackages ];
+              shellHook = ''
+                ${config.pre-commit.shellHook}
+              '';
             };
-            modules = [ ./hosts/installer/configuration.nix ];
           };
-          homelab = inputs.nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            specialArgs = {
-              pkgs-unstable = import inputs.nixpkgs-unstable {
-                inherit system;
-                config = nixpkgsConfig;
-              };
-              inherit inputs;
-              inherit self;
-              username = "idealpink";
-              hostname = "homelab";
-              helpers = import ./helpers {
-                pkgs = import inputs.nixpkgs { inherit system; };
-              };
-            };
-
-            modules = [
-              ./hosts/${specialArgs.hostname}/configuration/default.nix
-              inputs.sops-nix.nixosModules.sops
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager.extraSpecialArgs = specialArgs;
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-
-                home-manager.users.${specialArgs.username} =
-                  import ./hosts/${specialArgs.hostname}/home/default.nix;
-              }
-            ];
-          };
-          workstation = inputs.nixpkgs.lib.nixosSystem rec {
-            system = "x86_64-linux";
-            specialArgs = {
-              pkgs-unstable = import inputs.nixpkgs-unstable {
-                inherit system;
-                config = nixpkgsConfig;
-              };
-              inherit inputs;
-              inherit self;
-              username = "idealpink";
-              hostname = "workstation";
-              helpers = import ./helpers {
-                pkgs = import inputs.nixpkgs { inherit system; };
-              };
-              scriptPkgs = inputs.scripts.packages.${system};
-            };
-
-            modules = [
-              ./hosts/${specialArgs.hostname}/configuration/default.nix
-              inputs.sops-nix.nixosModules.sops
-              inputs.home-manager.nixosModules.home-manager
-              {
-                nixpkgs = {
-                  config = nixpkgsConfig;
-                  overlays = [
-                    inputs.nur.overlays.default
-                  ];
-                };
-
-                home-manager.extraSpecialArgs = specialArgs;
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-
-                home-manager.sharedModules = [
-                  inputs.plasma-manager.homeModules.plasma-manager
-                ];
-
-                home-manager.users.${specialArgs.username} =
-                  import ./hosts/${specialArgs.hostname}/home/default.nix;
-              }
-            ];
-          };
-        };
-
-      darwinConfigurations =
-        let
-          nixpkgsConfig = {
-            allowUnfree = true;
-          };
-        in
-        {
-          mbp = inputs.darwin.lib.darwinSystem rec {
-            system = "aarch64-darwin";
-            specialArgs = {
-              pkgs-unstable = import inputs.nixpkgs-unstable {
-                inherit system;
-                config = nixpkgsConfig;
-              };
-              pkgs-darwin = import inputs.nixpkgs-darwin {
-                inherit system;
-                config = nixpkgsConfig;
-              };
-              inherit inputs;
-              inherit self;
-              username = "ankarhem";
-              hostname = "mbp";
-              helpers = import ./helpers {
-                pkgs = import inputs.nixpkgs { inherit system; };
-              };
-              scriptPkgs = inputs.scripts.packages.${system};
-            };
-            modules = [
-              ./hosts/${specialArgs.hostname}/configuration/default.nix
-              inputs.sops-nix.darwinModules.sops
-              inputs.nix-homebrew.darwinModules.nix-homebrew
-              inputs.home-manager.darwinModules.home-manager
-              {
-                nixpkgs = {
-                  config = nixpkgsConfig;
-                  overlays = [
-                    inputs.nur.overlays.default
-                  ];
-                };
-
-                home-manager.extraSpecialArgs = specialArgs;
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.${specialArgs.username} =
-                  import ./hosts/${specialArgs.hostname}/home/default.nix;
-              }
-            ];
-          };
-        };
-    };
+      }
+    );
 }
