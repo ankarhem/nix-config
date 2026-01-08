@@ -1,9 +1,10 @@
 { config, lib, ... }:
-let cfg = config.virtualisation.oci-containers.autoUpdater;
-in {
+let
+  cfg = config.virtualisation.oci-containers.autoUpdater;
+in
+{
   options.virtualisation.oci-containers.autoUpdater = {
-    enable =
-      lib.mkEnableOption "Enable Watchtower auto-updates for OCI containers";
+    enable = lib.mkEnableOption "Enable Watchtower auto-updates for OCI containers";
 
     interval = lib.mkOption {
       type = lib.types.int;
@@ -14,10 +15,14 @@ in {
     };
 
     containers = lib.mkOption {
-      type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
-        options.enable =
-          lib.mkEnableOption "Enable auto-update for this container";
-      }));
+      type = lib.types.attrsOf (
+        lib.types.submodule (
+          { name, ... }:
+          {
+            options.enable = lib.mkEnableOption "Enable auto-update for this container";
+          }
+        )
+      );
       default = { };
       description = "Per-container auto-update flags keyed by container name.";
     };
@@ -40,7 +45,9 @@ in {
             "--interval=${toString cfg.interval}"
           ];
           # Do not update watchtower itself unless explicitly opted-in:
-          labels = { "com.centurylinklabs.watchtower.enable" = "false"; };
+          labels = {
+            "com.centurylinklabs.watchtower.enable" = "false";
+          };
           autoStart = true;
         }
         (lib.mkIf (config.virtualisation.oci-containers.backend == "docker") {
@@ -53,11 +60,16 @@ in {
     })
 
     {
-      virtualisation.oci-containers.containers = lib.mkAfter (lib.mapAttrs
-        (name: containerCfg:
+      virtualisation.oci-containers.containers = lib.mkAfter (
+        lib.mapAttrs (
+          name: containerCfg:
           lib.mkIf containerCfg.enable {
-            labels = { "com.centurylinklabs.watchtower.enable" = "true"; };
-          }) cfg.containers);
+            labels = {
+              "com.centurylinklabs.watchtower.enable" = "true";
+            };
+          }
+        ) cfg.containers
+      );
     }
   ];
 }

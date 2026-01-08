@@ -1,11 +1,15 @@
 { ... }:
-let port = "4002";
-in {
+let
+  port = "4002";
+in
+{
   services.nginx.virtualHosts."swerdle.ankarhem.dev" = {
     forceSSL = true;
     enableACME = true;
     serverAliases = [ "swerdle.internetfeno.men" ];
-    locations."/" = { proxyPass = "http://127.0.0.1:${port}"; };
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${port}";
+    };
   };
   virtualisation.oci-containers.containers = {
     swerdle = {
@@ -15,4 +19,3 @@ in {
     };
   };
 }
-

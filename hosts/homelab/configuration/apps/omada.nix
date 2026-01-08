@@ -18,17 +18,22 @@ let
     rtty = "29816";
   };
 
-  udpPorts = [ ports.app-discovery ports.discovery ];
-  tcpPorts = builtins.filter (port: !builtins.elem port udpPorts)
-    (builtins.attrValues ports);
-in {
+  udpPorts = [
+    ports.app-discovery
+    ports.discovery
+  ];
+  tcpPorts = builtins.filter (port: !builtins.elem port udpPorts) (builtins.attrValues ports);
+in
+{
   networking.firewall.allowedTCPPorts = map toInt tcpPorts;
   networking.firewall.allowedUDPPorts = map toInt udpPorts;
 
   services.nginx.virtualHosts."omada.internal.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internal.internetfeno.men";
-    locations."/" = { proxyPass = "https://127.0.0.1:${ports.https}"; };
+    locations."/" = {
+      proxyPass = "https://127.0.0.1:${ports.https}";
+    };
   };
 
   virtualisation.oci-containers.containers."omada-controller" = {
@@ -50,7 +55,8 @@ in {
       "SHOW_SERVER_LOGS" = "true";
       "TZ" = "Europe/Stockholm";
     };
-    ports = (builtins.map (port: "${port}:${port}") tcpPorts)
+    ports =
+      (builtins.map (port: "${port}:${port}") tcpPorts)
       ++ (builtins.map (port: "${port}:${port}/udp") udpPorts);
     volumes = [
       "/var/lib/omada/data:/opt/tplink/EAPController/data:rw"

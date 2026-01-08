@@ -1,6 +1,8 @@
 { config, ... }:
-let port = "8080";
-in {
+let
+  port = "8080";
+in
+{
   sops.secrets.qbittorrent_env = {
     sopsFile = ../../../../../secrets/homelab/qbittorrent.env;
     format = "dotenv";
@@ -9,7 +11,9 @@ in {
   services.nginx.virtualHosts."qbittorrent.internal.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internal.internetfeno.men";
-    locations."/" = { proxyPass = "http://127.0.0.1:${port}"; };
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${port}";
+    };
   };
 
   virtualisation.oci-containers.containers."qbittorrent" = {
@@ -18,8 +22,7 @@ in {
       "DEBUG" = "false";
       "ENABLE_PRIVOXY" = "yes";
       "LAN_NETWORK" = config.networking.custom.lanNetwork;
-      "NAME_SERVERS" =
-        "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1";
+      "NAME_SERVERS" = "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1";
       # "PGID" = "1000";
       # "PUID" = "1000";
       "STRICT_PORT_FORWARD" = "yes";
@@ -36,7 +39,9 @@ in {
       "/mnt/DISKETTEN_media/downloads/:/data:rw"
       "/var/lib/qbittorrent/config:/config:rw"
     ];
-    extraOptions =
-      [ "--privileged" "--sysctl=net.ipv4.conf.all.src_valid_mark=1" ];
+    extraOptions = [
+      "--privileged"
+      "--sysctl=net.ipv4.conf.all.src_valid_mark=1"
+    ];
   };
 }

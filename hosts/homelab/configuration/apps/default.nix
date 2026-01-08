@@ -1,4 +1,5 @@
-{ self, config, ... }: {
+{ self, config, ... }:
+{
   imports = [
     "${self}/nixosModules/docker.nix"
     ./arrs/default.nix
@@ -26,7 +27,10 @@
   };
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [
+      80
+      443
+    ];
   };
 
   sops.secrets.cloudflare_credentials_env = {
@@ -75,12 +79,22 @@
   };
   users.users.nginx.extraGroups = [ "acme" ];
 
-  networking.nameservers =
-    [ "127.0.0.1" "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
+  networking.nameservers = [
+    "127.0.0.1"
+    "1.1.1.1"
+    "1.0.0.1"
+    "8.8.8.8"
+    "8.8.4.4"
+  ];
   networking.useHostResolvConf = false;
   services.resolved = {
     enable = true;
-    fallbackDns = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
+    fallbackDns = [
+      "1.1.1.1"
+      "1.0.0.1"
+      "8.8.8.8"
+      "8.8.4.4"
+    ];
     extraConfig = ''
       DNS=127.0.0.1
       DNSStubListener=no
@@ -126,6 +140,8 @@
     enable = false;
     autoPrune.enable = true;
     dockerCompat = true;
-    defaultNetwork.settings = { dns_enabled = true; };
+    defaultNetwork.settings = {
+      dns_enabled = true;
+    };
   };
 }

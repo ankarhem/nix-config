@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   virtualisation.oci-containers.containers = {
     kometa = {
       image = "kometateam/kometa:nightly";

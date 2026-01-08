@@ -1,10 +1,15 @@
-{ pkgs, pkgs-unstable, ... }: {
+{ pkgs, pkgs-unstable, ... }:
+{
   hardware.enableRedistributableFirmware = true;
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [ intel-media-driver ];
   };
-  environment.systemPackages = with pkgs; [ mesa libva libva-utils ];
+  environment.systemPackages = with pkgs; [
+    mesa
+    libva
+    libva-utils
+  ];
 
   services.plex = {
     enable = true;

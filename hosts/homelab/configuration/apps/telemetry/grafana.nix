@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   services.grafana = {
     enable = true;
     settings = {
@@ -9,15 +10,12 @@
       };
     };
   };
-  services.nginx.virtualHosts.${config.services.grafana.settings.server.domain} =
-    {
-      forceSSL = true;
-      useACMEHost = "internal.internetfeno.men";
-      locations."/" = {
-        proxyWebsockets = true;
-        proxyPass = "http://127.0.0.1:${
-            toString config.services.grafana.settings.server.http_port
-          }";
-      };
+  services.nginx.virtualHosts.${config.services.grafana.settings.server.domain} = {
+    forceSSL = true;
+    useACMEHost = "internal.internetfeno.men";
+    locations."/" = {
+      proxyWebsockets = true;
+      proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
     };
+  };
 }

@@ -1,4 +1,10 @@
-{ pkgs, username, hostname, ... }: {
+{
+  pkgs,
+  username,
+  hostname,
+  ...
+}:
+{
   networking.hostName = hostname;
   networking.computerName = hostname;
 

@@ -1,7 +1,11 @@
 { ... }:
-let port = "7878";
-in {
-  services.radarr = { enable = true; };
+let
+  port = "7878";
+in
+{
+  services.radarr = {
+    enable = true;
+  };
   services.nginx.virtualHosts."radarr.internal.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internal.internetfeno.men";

@@ -1,4 +1,10 @@
-{ config, pkgs-unstable, inputs, ... }: {
+{
+  config,
+  pkgs-unstable,
+  inputs,
+  ...
+}:
+{
   sops.secrets.radarr_api_key = { };
   sops.secrets.sonarr_api_key = { };
 

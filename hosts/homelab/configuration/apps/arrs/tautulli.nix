@@ -1,6 +1,8 @@
 { ... }:
-let port = 8181;
-in {
+let
+  port = 8181;
+in
+{
   services.tautulli = {
     enable = true;
     inherit port;
@@ -15,4 +17,3 @@ in {
     };
   };
 }
-

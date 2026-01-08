@@ -1,7 +1,9 @@
 { config, lib, ... }:
 with lib;
-let cfg = config.darwin.settings;
-in {
+let
+  cfg = config.darwin.settings;
+in
+{
   options = {
     darwin.settings = {
       enable = mkEnableOption "my macOS settings";
@@ -63,8 +65,7 @@ in {
 
       linkHomeManagerApps = mkOption {
         type = types.bool;
-        description =
-          mdDoc "Linkup ~/Applications/Home Manager Apps to /Applications";
+        description = mdDoc "Linkup ~/Applications/Home Manager Apps to /Applications";
         default = true;
       };
     };
@@ -99,9 +100,13 @@ in {
       "com.apple.symbolichotkeys" = {
         AppleSymbolicHotKeys = {
           # Disable spotlight with cmd+space
-          "64" = { enabled = cfg.hotkeys.spotlight.enable; };
+          "64" = {
+            enabled = cfg.hotkeys.spotlight.enable;
+          };
           # Disable language switching with ctrl+space
-          "60" = { enabled = cfg.hotkeys.languageSwitch.enable; };
+          "60" = {
+            enabled = cfg.hotkeys.languageSwitch.enable;
+          };
         };
       };
     };

@@ -4,7 +4,8 @@ let
     grpc = 4317;
     http = 4318;
   };
-in {
+in
+{
   environment.systemPackages = [
     pkgs.bat
     (pkgs.writers.writeBashBin "opentelemetry-show-config" ''
@@ -12,11 +13,13 @@ in {
     '')
   ];
 
-  networking.firewall.allowedTCPPorts = [ ports.grpc ports.http ];
+  networking.firewall.allowedTCPPorts = [
+    ports.grpc
+    ports.http
+  ];
   services.opentelemetry-collector = {
     enable = true;
-    package =
-      pkgs.opentelemetry-collector-contrib; # compiled with extra exporters
+    package = pkgs.opentelemetry-collector-contrib; # compiled with extra exporters
   };
 
   services.opentelemetry-collector.settings = {
@@ -28,7 +31,9 @@ in {
     service.pipelines.metrics.receivers = [ "otlp" ];
     service.pipelines.traces.receivers = [ "otlp" ];
 
-    processors = { batch = { }; };
+    processors = {
+      batch = { };
+    };
     service.pipelines.logs.processors = [ "batch" ];
     service.pipelines.metrics.processors = [ "batch" ];
     service.pipelines.traces.processors = [ "batch" ];

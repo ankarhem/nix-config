@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./kometa.nix
     ./plex.nix
@@ -15,4 +16,3 @@
     ./plex-auto-languages.nix
   ];
 }
-

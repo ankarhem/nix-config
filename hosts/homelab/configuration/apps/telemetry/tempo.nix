@@ -4,10 +4,10 @@ let
     grpc = 14317;
     http = 14318;
   };
-in {
+in
+{
   services.opentelemetry-collector.settings = {
-    exporters."otlphttp/tempo".endpoint =
-      "http://127.0.0.1:${toString otlp_ports.http}";
+    exporters."otlphttp/tempo".endpoint = "http://127.0.0.1:${toString otlp_ports.http}";
     service.pipelines.traces.exporters = [ "otlphttp/tempo" ];
   };
   services.tempo = {
@@ -21,8 +21,12 @@ in {
         receivers = {
           otlp = {
             protocols = {
-              http = { endpoint = "127.0.0.1:${toString otlp_ports.http}"; };
-              grpc = { endpoint = "127.0.0.1:${toString otlp_ports.grpc}"; };
+              http = {
+                endpoint = "127.0.0.1:${toString otlp_ports.http}";
+              };
+              grpc = {
+                endpoint = "127.0.0.1:${toString otlp_ports.grpc}";
+              };
             };
           };
         };
@@ -32,21 +36,25 @@ in {
         local.path = "/var/lib/tempo/traces";
         wal.path = "/var/lib/tempo/wal";
       };
-      ingester = { lifecycler.address = "127.0.0.1"; };
+      ingester = {
+        lifecycler.address = "127.0.0.1";
+      };
     };
   };
   services.grafana.provision.datasources.settings = {
-    datasources = [{
-      name = "Tempo";
-      type = "tempo";
-      url = "http://127.0.0.1:${
-          toString config.services.tempo.settings.server.http_listen_port
-        }";
-      orgId = 1;
-    }];
-    deleteDatasources = [{
-      name = "Tempo";
-      orgId = 1;
-    }];
+    datasources = [
+      {
+        name = "Tempo";
+        type = "tempo";
+        url = "http://127.0.0.1:${toString config.services.tempo.settings.server.http_listen_port}";
+        orgId = 1;
+      }
+    ];
+    deleteDatasources = [
+      {
+        name = "Tempo";
+        orgId = 1;
+      }
+    ];
   };
 }

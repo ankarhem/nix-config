@@ -5,7 +5,7 @@
 
     signing = {
       signByDefault = true;
-      key = lib.mkDefault "0x529972E4160200DF";
+      key = lib.mkDefault "0x529972E4160200DF"; # pragma: allowlist secret
     };
 
     settings = {

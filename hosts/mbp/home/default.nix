@@ -1,11 +1,10 @@
 {
   self,
+  library,
   pkgs,
   pkgs-unstable,
-  scriptPkgs,
   inputs,
   username,
-  helpers,
   ...
 }:
 let
@@ -44,7 +43,7 @@ in
 
   home.file.".config/git/allowed_signers".text =
     let
-      authorizedKeys = helpers.ssh.getGithubKeys {
+      authorizedKeys = library.getGithubKeys {
         username = "ankarhem";
         sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
       };
@@ -120,7 +119,7 @@ in
       jetbrains.rust-rover
       jetbrains.webstorm
     ])
-    ++ (with scriptPkgs; [
+    ++ (with pkgs.scriptPkgs; [
       yt-sub
       summarize
     ])

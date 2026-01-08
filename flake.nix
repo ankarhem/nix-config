@@ -76,7 +76,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-parts.inputs.nixpkgs.follows = "nixpkgs";
+    import-tree.url = "github:vic/import-tree";
   };
 
   outputs =
@@ -91,6 +91,7 @@
       {
         imports = [
           inputs.git-hooks.flakeModule
+          (inputs.import-tree ./modules)
         ];
         flake.nixosConfigurations =
           let
@@ -176,55 +177,55 @@
               ];
             };
           };
-        flake.darwinConfigurations =
-          let
-            nixpkgsConfig = {
-              allowUnfree = true;
-            };
-          in
-          {
-            mbp = inputs.darwin.lib.darwinSystem rec {
-              system = "aarch64-darwin";
-              specialArgs = {
-                pkgs-unstable = import inputs.nixpkgs-unstable {
-                  inherit system;
-                  config = nixpkgsConfig;
-                };
-                pkgs-darwin = import inputs.nixpkgs-darwin {
-                  inherit system;
-                  config = nixpkgsConfig;
-                };
-                inherit inputs;
-                inherit self;
-                username = "ankarhem";
-                hostname = "mbp";
-                helpers = import ./helpers {
-                  pkgs = import inputs.nixpkgs { inherit system; };
-                };
-                scriptPkgs = inputs.scripts.packages.${system};
-              };
-              modules = [
-                ./hosts/${specialArgs.hostname}/configuration/default.nix
-                inputs.sops-nix.darwinModules.sops
-                inputs.nix-homebrew.darwinModules.nix-homebrew
-                inputs.home-manager.darwinModules.home-manager
-                {
-                  nixpkgs = {
-                    config = nixpkgsConfig;
-                    overlays = [
-                      inputs.nur.overlays.default
-                    ];
-                  };
-
-                  home-manager.extraSpecialArgs = specialArgs;
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users.${specialArgs.username} =
-                    import ./hosts/${specialArgs.hostname}/home/default.nix;
-                }
-              ];
-            };
-          };
+        # flake.darwinConfigurations =
+        #   let
+        #     nixpkgsConfig = {
+        #       allowUnfree = true;
+        #     };
+        #   in
+        #   {
+        #     mbp = inputs.darwin.lib.darwinSystem rec {
+        #       system = "aarch64-darwin";
+        #       specialArgs = {
+        #         pkgs-unstable = import inputs.nixpkgs-unstable {
+        #           inherit system;
+        #           config = nixpkgsConfig;
+        #         };
+        #         pkgs-darwin = import inputs.nixpkgs-darwin {
+        #           inherit system;
+        #           config = nixpkgsConfig;
+        #         };
+        #         inherit inputs;
+        #         inherit self;
+        #         username = "ankarhem";
+        #         hostname = "mbp";
+        #         helpers = import ./helpers {
+        #           pkgs = import inputs.nixpkgs { inherit system; };
+        #         };
+        #         scriptPkgs = inputs.scripts.packages.${system};
+        #       };
+        #       modules = [
+        #         ./hosts/${specialArgs.hostname}/configuration/default.nix
+        #         inputs.sops-nix.darwinModules.sops
+        #         inputs.nix-homebrew.darwinModules.nix-homebrew
+        #         inputs.home-manager.darwinModules.home-manager
+        #         {
+        #           nixpkgs = {
+        #             config = nixpkgsConfig;
+        #             overlays = [
+        #               inputs.nur.overlays.default
+        #             ];
+        #           };
+        #
+        #           home-manager.extraSpecialArgs = specialArgs;
+        #           home-manager.useGlobalPkgs = true;
+        #           home-manager.useUserPackages = true;
+        #           home-manager.users.${specialArgs.username} =
+        #             import ./hosts/${specialArgs.hostname}/home/default.nix;
+        #         }
+        #       ];
+        #     };
+        #   };
         systems = [
           "x86_64-linux"
           "aarch64-darwin"
@@ -239,20 +240,6 @@
             ...
           }:
           {
-            _module.args.pkgs = import inputs.nixpkgs {
-              inherit system;
-              overlays = lib.attrValues self.overlays;
-              config = {
-                allowUnfree = true;
-                permittedInsecurePackages = [
-                  "olm-3.2.16"
-                ];
-              };
-            };
-            _module.args.pkgs-unstable = import inputs.nixpkgs-unstable {
-              inherit system;
-              inherit (config.nixpkgs) config;
-            };
             packages = lib.packagesFromDirectoryRecursive {
               inherit (pkgs) callPackage;
               directory = ./packages;
@@ -261,6 +248,7 @@
               ripsecrets.enable = true;
               nixfmt-rfc-style.enable = true;
             };
+            formatter = pkgs.nixfmt-tree;
             devShells.default = pkgs.mkShell {
               packages = [ config.pre-commit.settings.enabledPackages ];
               shellHook = ''

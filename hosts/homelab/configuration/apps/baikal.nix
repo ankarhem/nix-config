@@ -1,6 +1,8 @@
 { ... }:
-let domain = "baikal.internetfeno.men";
-in {
+let
+  domain = "baikal.internetfeno.men";
+in
+{
   services.baikal = {
     enable = false;
     virtualHost = "${domain}";

@@ -1,7 +1,9 @@
 { config, ... }:
-let domain = "photos.ankarhem.dev";
+let
+  domain = "photos.ankarhem.dev";
 
-in {
+in
+{
   sops.secrets = {
     "immich/db_password" = { };
     "immich/redis_password" = { };
@@ -26,7 +28,9 @@ in {
         enabled = false;
         from = "admin@ankarhem.dev";
         replyTo = "noreply@ankarhem.dev";
-        transport = { host = "smtp.mail.me.com"; };
+        transport = {
+          host = "smtp.mail.me.com";
+        };
       };
       ffmpeg = {
         accel = "qsv";

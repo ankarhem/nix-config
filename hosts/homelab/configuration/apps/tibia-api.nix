@@ -1,11 +1,15 @@
 { ... }:
-let port = "7032";
-in {
+let
+  port = "7032";
+in
+{
   services.nginx.virtualHosts."tibia.ankarhem.dev" = {
     forceSSL = true;
     enableACME = true;
     serverAliases = [ "api.tibiacenter.com" ];
-    locations."/" = { proxyPass = "http://127.0.0.1:${port}"; };
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${port}";
+    };
   };
   virtualisation.oci-containers.containers = {
     tibia-api = {
@@ -22,4 +26,3 @@ in {
     };
   };
 }
-

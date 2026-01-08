@@ -1,18 +1,22 @@
 { config, pkgs, ... }:
 let
-  realIpsFromList =
-    pkgs.lib.strings.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};");
+  realIpsFromList = pkgs.lib.strings.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};");
   fileToList = x: pkgs.lib.strings.splitString "\n" (builtins.readFile x);
 
-  cfipv4 = fileToList (builtins.fetchurl {
-    url = "https://www.cloudflare.com/ips-v4";
-    sha256 = "0ywy9sg7spafi3gm9q5wb59lbiq0swvf0q3iazl0maq1pj1nsb7h";
-  });
-  cfipv6 = fileToList (builtins.fetchurl {
-    url = "https://www.cloudflare.com/ips-v6";
-    sha256 = "1ad09hijignj6zlqvdjxv7rjj8567z357zfavv201b9vx3ikk7cy";
-  });
-in {
+  cfipv4 = fileToList (
+    builtins.fetchurl {
+      url = "https://www.cloudflare.com/ips-v4";
+      sha256 = "0ywy9sg7spafi3gm9q5wb59lbiq0swvf0q3iazl0maq1pj1nsb7h";
+    }
+  );
+  cfipv6 = fileToList (
+    builtins.fetchurl {
+      url = "https://www.cloudflare.com/ips-v6";
+      sha256 = "1ad09hijignj6zlqvdjxv7rjj8567z357zfavv201b9vx3ikk7cy";
+    }
+  );
+in
+{
   services.nginx.appendHttpConfig = ''
     ${realIpsFromList cfipv4}
     ${realIpsFromList cfipv6}
@@ -70,13 +74,13 @@ in {
 
   environment.etc = {
     # Defines a filter that detects URL probing by reading the Nginx access log
-    "fail2ban/filter.d/nginx-bruteforce.local".text = pkgs.lib.mkDefault
-      (pkgs.lib.mkAfter ''
+    "fail2ban/filter.d/nginx-bruteforce.local".text = pkgs.lib.mkDefault (
+      pkgs.lib.mkAfter ''
         [Definition]
         failregex = ^<HOST>.*(GET /(wp-|admin|boaform|phpmyadmin|\.env|\.git)|\.(dll|so|cfm|asp)|(\?|&)(=PHPB8B5F2A0-3C92-11d3-A3A9-4C7B08C10000|=PHPE9568F36-D428-11d2-A769-00AA001ACF42|=PHPE9568F35-D428-11d2-A769-00AA001ACF42|=PHPE9568F34-D428-11d2-A769-00AA001ACF42)|\\x[0-9a-zA-Z]{2})
-      '');
+      ''
+    );
 
-    "fail2ban/action.d/cf.conf".source =
-      config.sops.templates."cloudflare-action.conf".path;
+    "fail2ban/action.d/cf.conf".source = config.sops.templates."cloudflare-action.conf".path;
   };
 }

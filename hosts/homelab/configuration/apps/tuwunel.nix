@@ -1,4 +1,10 @@
-{ self, lib, config, pkgs-unstable, ... }:
+{
+  self,
+  lib,
+  config,
+  pkgs-unstable,
+  ...
+}:
 let
   port = 6167;
   domain = "matrix.internetfeno.men";
@@ -36,7 +42,7 @@ let
     };
     # new syntax for login_shared_secret_map
     double_puppet = {
-      servers = {};
+      servers = { };
       allow_discovery = false;
       secrets."${domain}" = "as_token:$DOUBLEPUPPET_AS_TOKEN";
     };

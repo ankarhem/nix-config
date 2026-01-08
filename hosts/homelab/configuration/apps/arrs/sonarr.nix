@@ -1,7 +1,11 @@
 { ... }:
-let port = "8989";
-in {
-  services.sonarr = { enable = true; };
+let
+  port = "8989";
+in
+{
+  services.sonarr = {
+    enable = true;
+  };
   services.nginx.virtualHosts."sonarr.internal.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internal.internetfeno.men";

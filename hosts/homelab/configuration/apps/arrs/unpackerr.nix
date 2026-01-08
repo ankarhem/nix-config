@@ -1,6 +1,8 @@
 { config, ... }:
-let port = 5656;
-in {
+let
+  port = 5656;
+in
+{
   services.nginx.virtualHosts."unpackerr.internal.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internal.internetfeno.men";
@@ -55,7 +57,6 @@ in {
       "UN_WEBSERVER_UPSTREAMS" = "";
       "UN_WEBSERVER_URLBASE" = "/";
     };
-    volumes =
-      [ "/mnt/DISKETTEN_media/downloads:/mnt/DISKETTEN_media/downloads:rw" ];
+    volumes = [ "/mnt/DISKETTEN_media/downloads:/mnt/DISKETTEN_media/downloads:rw" ];
   };
 }

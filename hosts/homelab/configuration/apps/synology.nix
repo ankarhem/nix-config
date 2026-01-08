@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   services.nginx.virtualHosts."synology.internal.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internal.internetfeno.men";

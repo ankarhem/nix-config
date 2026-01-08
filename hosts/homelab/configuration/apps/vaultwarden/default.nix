@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   domain = "vault.ankarhem.dev";
   port = 8222;
@@ -6,13 +11,20 @@ let
   backupGpgHomePath = "/var/lib/backup/.gnupg";
   backupScript = pkgs.writeShellApplication {
     name = "vaultwarden-backup";
-    runtimeInputs = [ pkgs.sqlite pkgs.busybox pkgs.gnupg ];
+    runtimeInputs = [
+      pkgs.sqlite
+      pkgs.busybox
+      pkgs.gnupg
+    ];
     text = (builtins.readFile ./backup.sh);
   };
 
   syncScript = pkgs.writeShellApplication {
     name = "vaultwarden-sync";
-    runtimeInputs = [ pkgs.rsync pkgs.openssh ];
+    runtimeInputs = [
+      pkgs.rsync
+      pkgs.openssh
+    ];
     text = ''
       #!/usr/bin/env bash
       set -euo pipefail
@@ -41,13 +53,15 @@ let
       echo "Successfully synced Vaultwarden backups to Fileshare."
     '';
   };
-in {
+in
+{
   environment.systemPackages = [ backupScript ];
 
   sops.secrets = {
     "smtp/username" = { };
     "smtp/password" = { };
     "vaultwarden/admin_token" = { };
+    "vaultwarden/fileshare_known_hosts_file" = { };
     "vaultwarden/installation_id" = { };
     "vaultwarden/installation_key" = { };
     "vaultwarden/symmetric_key" = {
@@ -71,12 +85,8 @@ in {
       PUSH_ENABLED=true
       PUSH_RELAY_URI=https://api.bitwarden.eu
       PUSH_IDENTITY_URI=https://identity.bitwarden.eu
-      PUSH_INSTALLATION_ID=${
-        config.sops.placeholder."vaultwarden/installation_id"
-      }
-      PUSH_INSTALLATION_KEY=${
-        config.sops.placeholder."vaultwarden/installation_key"
-      }
+      PUSH_INSTALLATION_ID=${config.sops.placeholder."vaultwarden/installation_id"}
+      PUSH_INSTALLATION_KEY=${config.sops.placeholder."vaultwarden/installation_key"}
     '';
   };
 
@@ -94,23 +104,16 @@ in {
     };
   };
 
-  environment.etc."ssh/fileshare-known-hosts".text = ''
-    [fileshare.se]:9023 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILpJC74ZxcYzh+AFt3FrM/Wj/OoOWv4S86PKXOiNvOKY
-    [fileshare.se]:9023 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBOWurI5ivrpz+YYK/8hC4qtBxap2laFnDR2wwQEbAM6r754aFlxnVNG5ml8/W9nbnUb1zSQOHux4NS0eFBbKr2E=
-    [fileshare.se]:9023 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDAOHPDPlAO8jqqAtZpw1aknDSH7gePCMHlmKCTEoBxH+XVUGSNqK8WxMlyxD3IOGC2OXwQHKCWO20FJUpPTjykidCPc8zt7SP2LFKt0eQ9NAvNoQCkd7dwcbdkkVBWXKBtxwj50GB7YKTr3+gskE7Bc5/UPCTg0Eyt1IdNvYKkjDThEyvsUdgQwtQS6/KgO7daaTX3nbB3YKeGblM2A0Y7lbcSeRYkqiMx1O7I1S6fUQHcmJhr9MYclY81ZhAHjLts2uXg7WNOL4ZMNo3+Vbl+O8jP09h0+D4R3OVH0ARM/yg0L0gFFrAU0686chddHmBtDEF7laKsjtGBqa5OAbpNdY6g0D4iFMrA4PhfaC0PlKrJtbfh83Kh7MtEH4ZLemCRwE90BCPpZZkXa6KxyF61gOBra/T2ktaeMdP44LtXEgkmg30CBiADe1pDv6yHncvwEMXGk28FrvuS3ioUbYD7yespaltmUvqAnJOWpXFIjluhAaIAOhmOWgei6D2BpiM=
-  '';
   ## Override the backup script, and make it more frequent
   systemd.services.backup-vaultwarden = {
     environment = {
       GNUPGHOME = backupGpgHomePath;
       PASSWORD_FILE = config.sops.secrets."vaultwarden/symmetric_key".path;
-      KNOWN_HOSTS_FILE = "/etc/ssh/fileshare-known-hosts";
+      KNOWN_HOSTS_FILE = config.sops.secrets."vaultwarden/fileshare_known_hosts_file".path;
     };
     serviceConfig = {
-      ExecStart = lib.mkForce
-        "${pkgs.bash}/bin/bash ${backupScript}/bin/${backupScript.name}";
-      ExecStartPost =
-        "${pkgs.bash}/bin/bash ${syncScript}/bin/${syncScript.name}";
+      ExecStart = lib.mkForce "${pkgs.bash}/bin/bash ${backupScript}/bin/${backupScript.name}";
+      ExecStartPost = "${pkgs.bash}/bin/bash ${syncScript}/bin/${syncScript.name}";
     };
   };
   systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "hourly";
@@ -157,33 +160,36 @@ in {
     };
   };
   environment.etc = {
-    "fail2ban/filter.d/vaultwarden.local".text = pkgs.lib.mkDefault
-      (pkgs.lib.mkAfter ''
+    "fail2ban/filter.d/vaultwarden.local".text = pkgs.lib.mkDefault (
+      pkgs.lib.mkAfter ''
         [INCLUDES]
         before = common.conf
 
         [Definition]
         failregex = ^.*?Username or password is incorrect\. Try again\. IP: <ADDR>\. Username:.*$
         ignoreregex =
-      '');
-    "fail2ban/filter.d/vaultwarden-admin.local".text = pkgs.lib.mkDefault
-      (pkgs.lib.mkAfter ''
+      ''
+    );
+    "fail2ban/filter.d/vaultwarden-admin.local".text = pkgs.lib.mkDefault (
+      pkgs.lib.mkAfter ''
         [INCLUDES]
         before = common.conf
 
         [Definition]
         failregex = ^.*Invalid admin token\. IP: <ADDR>.*$
         ignoreregex =
-      '');
-    "fail2ban/filter.d/vaultwarden-totp.local".text = pkgs.lib.mkDefault
-      (pkgs.lib.mkAfter ''
+      ''
+    );
+    "fail2ban/filter.d/vaultwarden-totp.local".text = pkgs.lib.mkDefault (
+      pkgs.lib.mkAfter ''
         [INCLUDES]
         before = common.conf
 
         [Definition]
         failregex = ^.*\[ERROR\] Invalid TOTP code! Server time: (.*) UTC IP: <ADDR>$
         ignoreregex =
-      '');
+      ''
+    );
   };
 
   systemd.tmpfiles.rules = [

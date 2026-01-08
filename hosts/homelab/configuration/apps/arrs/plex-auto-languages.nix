@@ -95,7 +95,8 @@ let
   };
 
   pal_config_file = (pkgs.formats.yaml { }).generate "config.yaml" pal_config;
-in {
+in
+{
   sops.secrets."plex/token" = { };
 
   sops.templates."plex_auto_languages.env" = {
@@ -107,9 +108,10 @@ in {
     plex-auto-languages = {
       image = "remirigal/plex-auto-languages:latest";
       volumes = [ "${pal_config_file}:/config/config.yaml:ro" ];
-      environment = { "TZ" = "Europe/Stockholm"; };
-      environmentFiles =
-        [ config.sops.templates."plex_auto_languages.env".path ];
+      environment = {
+        "TZ" = "Europe/Stockholm";
+      };
+      environmentFiles = [ config.sops.templates."plex_auto_languages.env".path ];
     };
   };
 }

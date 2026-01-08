@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [ tailscale ];
 
   sops.secrets.tailscale_auth_key = { };

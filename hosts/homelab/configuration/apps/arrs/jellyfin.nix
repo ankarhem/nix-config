@@ -1,6 +1,8 @@
 { config, ... }:
-let port = 8096;
-in {
+let
+  port = 8096;
+in
+{
   services.nginx.virtualHosts."jellyfin.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internetfeno.men";

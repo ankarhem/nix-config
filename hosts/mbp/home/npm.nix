@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   home.file.npmrc = {
     target = ".npmrc";
     enable = true;

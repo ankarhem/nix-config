@@ -1,4 +1,5 @@
-{ config, pkgs-unstable, ... }: {
+{ config, pkgs-unstable, ... }:
+{
   # redirect overseerr to jellyseerr
   services.nginx.virtualHosts."overseerr.internetfeno.men" = {
     forceSSL = true;
@@ -11,8 +12,7 @@
     forceSSL = true;
     useACMEHost = "internetfeno.men";
     locations."/" = {
-      proxyPass =
-        "http://127.0.0.1:${toString config.services.jellyseerr.port}";
+      proxyPass = "http://127.0.0.1:${toString config.services.jellyseerr.port}";
     };
   };
 

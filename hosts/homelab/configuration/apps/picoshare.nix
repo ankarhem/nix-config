@@ -1,6 +1,8 @@
 { self, config, ... }:
-let port = "4001";
-in {
+let
+  port = "4001";
+in
+{
   sops.secrets.picoshare_env = {
     sopsFile = "${self}/secrets/homelab/picoshare.env";
     format = "dotenv";
@@ -12,17 +14,23 @@ in {
     extraConfig = ''
       client_max_body_size 100M;
     '';
-    locations."/" = { proxyPass = "http://127.0.0.1:${port}"; };
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${port}";
+    };
   };
   virtualisation.oci-containers.containers = {
     picoshare = {
       image = "mtlynch/picoshare:latest";
       ports = [ "127.0.0.1:${port}:${port}" ];
       volumes = [ "/mnt/DISKETTEN_drive/picoshare:/data" ];
-      environment = { PORT = port; };
+      environment = {
+        PORT = port;
+      };
       environmentFiles = [ config.sops.secrets.picoshare_env.path ];
-      cmd = [ "-db" "/data/store.db" ];
+      cmd = [
+        "-db"
+        "/data/store.db"
+      ];
     };
   };
 }
-

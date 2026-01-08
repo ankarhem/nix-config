@@ -1,5 +1,11 @@
-{pkgs, ...}:let
-  fetchKey = { key, hash, keyserver ? "keys.openpgp.org" }:
+{ pkgs, ... }:
+let
+  fetchKey =
+    {
+      key,
+      hash,
+      keyserver ? "keys.openpgp.org",
+    }:
     let
       validKeyservers = [ "keys.openpgp.org" ];
       url =
@@ -8,10 +14,11 @@
         else
           abort "Invalid keyserver. Must be one of: ${builtins.toString validKeyservers}";
     in
-      pkgs.fetchurl {
-        inherit url hash;
-      };
-in {
+    pkgs.fetchurl {
+      inherit url hash;
+    };
+in
+{
   programs.gpg = {
     enable = true;
 
@@ -20,14 +27,14 @@ in {
     publicKeys = [
       {
         source = fetchKey {
-          key = "529972E4160200DF";
+          key = "529972E4160200DF"; # pragma: allowlist secret
           hash = "sha256-Hgr7+Uze9Hlr3cobKwwsrU9OS4luL6LzLVOoZBNrPtw=0";
         };
         trust = 5;
       }
       {
         source = fetchKey {
-          key = "304CB5F9C479DFFA";
+          key = "304CB5F9C479DFFA"; # pragma: allowlist secret
           hash = "sha256-JyH3kUJiNMAF49RM0H3Zjs75BJfYl0BlF0gsfeeQT+s=";
         };
         trust = 3;
