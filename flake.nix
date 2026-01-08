@@ -134,48 +134,6 @@
                 }
               ];
             };
-            workstation = inputs.nixpkgs.lib.nixosSystem rec {
-              system = "x86_64-linux";
-              specialArgs = {
-                pkgs-unstable = import inputs.nixpkgs-unstable {
-                  inherit system;
-                  config = nixpkgsConfig;
-                };
-                inherit inputs;
-                inherit self;
-                username = "idealpink";
-                hostname = "workstation";
-                helpers = import ./helpers {
-                  pkgs = import inputs.nixpkgs { inherit system; };
-                };
-                scriptPkgs = inputs.scripts.packages.${system};
-              };
-
-              modules = [
-                ./hosts/${specialArgs.hostname}/configuration/default.nix
-                inputs.sops-nix.nixosModules.sops
-                inputs.home-manager.nixosModules.home-manager
-                {
-                  nixpkgs = {
-                    config = nixpkgsConfig;
-                    overlays = [
-                      inputs.nur.overlays.default
-                    ];
-                  };
-
-                  home-manager.extraSpecialArgs = specialArgs;
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-
-                  home-manager.sharedModules = [
-                    inputs.plasma-manager.homeModules.plasma-manager
-                  ];
-
-                  home-manager.users.${specialArgs.username} =
-                    import ./hosts/${specialArgs.hostname}/home/default.nix;
-                }
-              ];
-            };
           };
         # flake.darwinConfigurations =
         #   let
