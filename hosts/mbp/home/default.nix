@@ -30,7 +30,7 @@ in
     "${self}/homeManagerModules/scripts.nix"
     "${self}/presets/firefox/default.nix"
     "${self}/presets/fish.nix"
-    "${self}/presets/gh.nix"
+    "${self}/home-manager-modules/gh.nix"
     "${self}/presets/git.nix"
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"

@@ -15,7 +15,7 @@
   imports = [
     "${self}/presets/fish.nix"
     "${self}/presets/git.nix"
-    "${self}/presets/gh.nix"
+    "${self}/home-manager-modules/gh.nix"
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
     ./ssh.nix
