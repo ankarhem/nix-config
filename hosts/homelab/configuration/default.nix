@@ -7,7 +7,7 @@
   pkgs,
   username,
   hostname,
-  helpers,
+  library,
   ...
 }:
 {
@@ -87,7 +87,7 @@
       "docker"
     ];
     packages = [ ];
-    openssh.authorizedKeys.keys = helpers.ssh.getGithubKeys ({
+    openssh.authorizedKeys.keys = library.getGithubKeys ({
       username = "ankarhem";
       sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
     });
