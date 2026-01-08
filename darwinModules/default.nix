@@ -1,1 +1,7 @@
-{ ... }: { imports = [ ./settings.nix ]; }
+{ ... }:
+{
+  imports = [
+    ./settings.nix
+    ./linear-mouse.nix
+  ];
+}

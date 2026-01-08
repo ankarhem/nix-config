@@ -57,6 +57,9 @@
     screensaver.askForPasswordDelay = 10;
     screencapture.location = "~/Pictures/screenshots";
 
+    ".GlobalPreferences"."com.apple.mouse.scaling" = 1.25;
+    ".GlobalPreferences"."com.apple.mouse.linear" = true;
+
     NSGlobalDomain = {
       AppleShowAllExtensions = true;
       # show hidden files
