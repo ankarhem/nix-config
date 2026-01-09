@@ -32,6 +32,10 @@ in
         owner = username;
         sopsFile = "${self}/secrets/shared.yaml";
       };
+      "devin_token" = {
+        owner = username;
+        sopsFile = "${self}/secrets/shared.yaml";
+      };
     };
 
     templates."claude.env" = {
@@ -39,6 +43,7 @@ in
       content = ''
         ANTHROPIC_AUTH_TOKEN=${config.sops.placeholder.glm_token}
         CONTEXT7_TOKEN=${config.sops.placeholder.context7_token}
+        DEVIN_TOKEN=${config.sops.placeholder.devin_token}
       '';
     };
   };
@@ -102,6 +107,11 @@ in
         atlassian = {
           type = "sse";
           url = "https://mcp.atlassian.com/v1/sse";
+        };
+        devin-wiki = {
+          type = "http";
+          url = "https://mcp.devin.ai/mcp";
+          headers.Authorization = "Bearer \${DEVIN_TOKEN}";
         };
         # github = {
         #   type = "http";
