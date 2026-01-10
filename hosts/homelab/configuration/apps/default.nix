@@ -3,19 +3,19 @@
   imports = [
     "${self}/nixosModules/docker.nix"
     ./arrs/default.nix
-    ./telemetry/default.nix
-    ./tuwunel.nix
+    ./baikal.nix
+    ./dokploy.nix
+    ./hitster.nix
+    ./immich.nix
     ./omada.nix
     ./picoshare.nix
     ./seafile.nix
     ./swerdle.nix
     ./synology.nix
+    ./telemetry/default.nix
     ./tibia-api.nix
-    ./dokploy.nix
+    ./tuwunel.nix
     ./vaultwarden/default.nix
-    ./hitster.nix
-    ./immich.nix
-    ./baikal.nix
   ];
 
   services.nginx = {
