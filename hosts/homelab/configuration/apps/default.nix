@@ -7,6 +7,7 @@
     ./dokploy.nix
     ./hitster.nix
     ./immich.nix
+    ./obsidian-livesync.nix
     ./omada.nix
     ./picoshare.nix
     ./seafile.nix
