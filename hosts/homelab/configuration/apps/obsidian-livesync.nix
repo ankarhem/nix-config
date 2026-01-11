@@ -1,6 +1,5 @@
 { config, ... }:
 {
-
   services.nginx.virtualHosts."obsidian-livesync.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "internetfeno.men";
@@ -8,16 +7,6 @@
       client_max_body_size 100M;
       proxy_redirect off;
       proxy_buffering off;
-
-      # Allow only specific origins
-      if ($http_origin ~* ^(app://obsidian\.md|capacitor://localhost|http://localhost)$) {
-        add_header Access-Control-Allow-Origin "$http_origin" always;
-        add_header Access-Control-Allow-Methods "GET, PUT, POST, HEAD, DELETE" always;
-        add_header Access-Control-Allow-Headers "accept, authorization, content-type, origin, referer" always;
-        add_header Access-Control-Allow-Credentials "true" always;
-        add_header Access-Control-Max-Age "3600" always;
-        add_header Vary "Origin" always;
-      }
     '';
     locations."/" = {
       proxyPass = "http://127.0.0.1:${toString config.services.couchdb.port}";
@@ -36,7 +25,6 @@
     owner = config.services.couchdb.user;
     group = config.services.couchdb.group;
     mode = "440";
-    sopsFile = ./secrets.yaml;
   };
 
   services.couchdb = {
