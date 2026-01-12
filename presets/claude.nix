@@ -19,6 +19,17 @@ let
       exec claude "$@"
     '';
   };
+  glm-with-secrets = pkgs.writeShellApplication {
+    name = "claude-glm";
+    runtimeInputs = [ pkgs-unstable.claude-code ];
+    text = ''
+      # shellcheck disable=SC1091
+      source ${config.sops.templates."claude.env".path}
+      # shellcheck disable=SC1091
+      source ${config.sops.templates."glm.env".path}
+      exec claude "$@"
+    '';
+  };
   happy-coder = pkgs.callPackage "${self}/packages/happy-coder.nix" { };
 in
 {
@@ -41,9 +52,19 @@ in
     templates."claude.env" = {
       owner = username;
       content = ''
-        ANTHROPIC_AUTH_TOKEN=${config.sops.placeholder.glm_token}
         CONTEXT7_TOKEN=${config.sops.placeholder.context7_token}
         DEVIN_TOKEN=${config.sops.placeholder.devin_token}
+      '';
+    };
+
+    templates."glm.env" = {
+      owner = username;
+      content = ''
+        ANTHROPIC_AUTH_TOKEN=${config.sops.placeholder.glm_token}
+        ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic"
+        ANTHROPIC_DEFAULT_OPUS_MODEL="GLM-4.7"
+        ANTHROPIC_DEFAULT_SONNET_MODEL="GLM-4.7"
+        ANTHROPIC_DEFAULT_HAIKU_MODEL="GLM-4.5-Air"
       '';
     };
   };
@@ -56,6 +77,7 @@ in
   home-manager.users."${username}" = {
     home.packages = [
       happy-coder
+      glm-with-secrets
     ];
 
     programs.claude-code = {
@@ -65,11 +87,7 @@ in
       settings = {
         alwaysThinkingEnabled = true;
         env = {
-          ANTHROPIC_BASE_URL = "https://api.z.ai/api/anthropic";
           API_TIMEOUT_MS = "3000000";
-          ANTHROPIC_DEFAULT_OPUS_MODEL = "GLM-4.7";
-          ANTHROPIC_DEFAULT_SONNET_MODEL = "GLM-4.7";
-          ANTHROPIC_DEFAULT_HAIKU_MODEL = "GLM-4.5-Air";
         };
       };
       mcpServers = {
