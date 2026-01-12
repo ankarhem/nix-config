@@ -14,8 +14,11 @@ let
     name = "claude";
     runtimeInputs = [ pkgs-unstable.claude-code ];
     text = ''
+      set -a
       # shellcheck disable=SC1091
       source ${config.sops.templates."claude.env".path}
+      unset ANTHROPIC_AUTH_TOKEN
+      set +a
       exec claude "$@"
     '';
   };
@@ -23,10 +26,12 @@ let
     name = "claude-glm";
     runtimeInputs = [ pkgs-unstable.claude-code ];
     text = ''
+      set -a
       # shellcheck disable=SC1091
       source ${config.sops.templates."claude.env".path}
       # shellcheck disable=SC1091
       source ${config.sops.templates."glm.env".path}
+      set +a
       exec claude "$@"
     '';
   };
