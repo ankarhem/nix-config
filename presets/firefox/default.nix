@@ -51,6 +51,17 @@ in
               ];
             }
             {
+              name = "Personal Toolbar";
+              toolbar = true;
+              bookmarks = [
+                "separator"
+                {
+                  name = "Kagi News";
+                  url = "https://news.kagi.com/";
+                }
+              ];
+            }
+            {
               name = "Thai (Beginner 0)";
               url = "https://www.youtube.com/playlist?list=PLgdZTyVWfUhlxVi68zFEL8Lu5Q0Bocgbp";
             }
