@@ -95,6 +95,7 @@ in
             consent-o-matic
             dearrow
             dont-track-me-google1
+            istilldontcareaboutcookies
             kagi-search
             libredirect
             multi-account-containers
