@@ -22,6 +22,10 @@ let
       exec claude "$@"
     '';
   };
+
+  mcpConfig = (pkgs.formats.json { }).generate "claude-code-mcp-config.json" {
+    inherit (config.home-manager.users.${username}.programs.claude-code) mcpServers;
+  };
   glm-with-secrets = pkgs.writeShellApplication {
     name = "claude-glm";
     runtimeInputs = [ pkgs-unstable.claude-code ];
@@ -32,7 +36,8 @@ let
       # shellcheck disable=SC1091
       source ${config.sops.templates."glm.env".path}
       set +a
-      exec claude "$@"
+      # We need to inject the mcp configuration (as is done internally for the package passed to programs.claude-code).
+      exec claude --mcp-config ${mcpConfig} "$@"
     '';
   };
   happy-coder = pkgs.callPackage "${self}/packages/happy-coder.nix" { };
