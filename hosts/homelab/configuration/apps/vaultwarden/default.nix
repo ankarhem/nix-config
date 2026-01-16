@@ -46,7 +46,9 @@ let
       echo "Successfully synced Vaultwarden backups to Synology NAS."
       rsync -avh --delete --no-owner --no-group -e 'ssh -p 9023 -i ${
         config.sops.secrets."vaultwarden/ssh_key".path
-      } -o UserKnownHostsFile=${config.sops.secrets."vaultwarden/fileshare_known_hosts_file".path} ' "$BACKUP_FOLDER/" internetfenomen-openssh-server@fileshare.se:"$FILESHARE_PATH/" || {
+      } -o UserKnownHostsFile=${
+        config.sops.secrets."vaultwarden/fileshare_known_hosts_file".path
+      } ' "$BACKUP_FOLDER/" internetfenomen-openssh-server@fileshare.se:"$FILESHARE_PATH/" || {
         echo "Error: failed to sync Vaultwarden backup to Fileshare." >&2
         exit 1
       }
