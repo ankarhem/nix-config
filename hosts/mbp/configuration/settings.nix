@@ -60,7 +60,19 @@
     ".GlobalPreferences"."com.apple.mouse.scaling" = 1.25;
     ".GlobalPreferences"."com.apple.mouse.linear" = true;
 
+    CustomUserPreferences = {
+      "com.apple.symbolichotkeys" = {
+        AppleSymbolicHotKeys = {
+          # Disable siri shortcut
+          "176" = {
+            enabled = 0;
+          };
+        };
+      };
+    };
+
     NSGlobalDomain = {
+      "com.apple.mouse.linear" = true;
       AppleShowAllExtensions = true;
       # show hidden files
       AppleShowAllFiles = true;
