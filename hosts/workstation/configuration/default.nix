@@ -146,7 +146,7 @@
     ];
     openssh.authorizedKeys.keys = library.getGithubKeys ({
       username = "ankarhem";
-      sha256 = "1i0zyn1jbndfi8hqwwhmbn3b6akbibxkjlwrrg7w2988gs9c96gi";
+      sha256 = "0by0paqz05n41firv21i2izy0mk6sxqh2nn6wkcbwsy9n3wf537w";
     });
   };
   services.openssh = {
