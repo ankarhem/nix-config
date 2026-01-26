@@ -12,16 +12,6 @@
     ./plugins/default.nix
   ];
 
-  # https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
-  xdg.configFile."nvim/parser".source =
-    let
-      parsers = pkgs.symlinkJoin {
-        name = "treesitter-parsers";
-        paths = pkgs-unstable.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
-      };
-    in
-    lib.mkForce "${parsers}/parser";
-
   programs.neovim = {
     viAlias = true;
     vimAlias = true;
@@ -33,6 +23,8 @@
     pluginSource = "nixpkgs";
 
     installCoreDependencies = true;
+
+    treesitterParsers = pkgs-unstable.vimPlugins.nvim-treesitter.allGrammars;
 
     extraPackages = [
       pkgs-unstable.gcc
