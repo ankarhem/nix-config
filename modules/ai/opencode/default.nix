@@ -3,7 +3,6 @@
   flake.modules.homeManager.opencode = {
     imports = [
       (inputs.import-tree ./_plugins)
-      # ./_plugins/opencode-antigravity-auth.nix
     ];
 
     programs.opencode = {

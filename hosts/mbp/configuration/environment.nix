@@ -13,7 +13,6 @@
   environment.shells = with pkgs; [
     bash
     zsh
-    fish
   ];
   environment.shellAliases = {
     ls = "eza --color=auto -F";

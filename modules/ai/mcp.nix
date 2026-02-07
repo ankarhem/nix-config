@@ -1,46 +1,34 @@
 {
   self,
-  inputs,
-  config,
   ...
 }:
-let
-  sops = {
-    secrets = {
-      "mcp_tokens.context7" = {
-        format = "json";
-        sopsFile = "${self}/secrets.json";
-      };
-      "mcp_tokens.devin" = {
-        format = "json";
-        sopsFile = "${self}/secrets.json";
-      };
-      "mcp_tokens.glm" = {
-        format = "json";
-        sopsFile = "${self}/secrets.json";
-      };
-      "mcp_tokens.jira" = {
-        format = "json";
-        sopsFile = "${self}/secrets.json";
-      };
-    };
-  };
-  generic = {
-    inherit sops;
-    home-manager.sharedModules = [
-      inputs.self.modules.homeManager.mcp
-    ];
-  };
-in
 {
-  flake.modules.nixos.mcp = generic;
-  flake.modules.darwin.mcp = generic;
   flake.modules.homeManager.mcp =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     let
       nodejs_lts = pkgs.nodejs_24;
     in
     {
+      sops = {
+        secrets = {
+          "mcp_tokens.context7" = {
+            format = "json";
+            sopsFile = "${self}/secrets.json";
+          };
+          "mcp_tokens.devin" = {
+            format = "json";
+            sopsFile = "${self}/secrets.json";
+          };
+          "mcp_tokens.glm" = {
+            format = "json";
+            sopsFile = "${self}/secrets.json";
+          };
+          "mcp_tokens.jira" = {
+            format = "json";
+            sopsFile = "${self}/secrets.json";
+          };
+        };
+      };
       programs.mcp = {
         enable = true;
         servers = {

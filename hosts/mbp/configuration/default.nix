@@ -23,7 +23,6 @@
 
   programs = {
     zsh.enable = true;
-    fish.enable = true;
   };
 
   # backwards compat; don't change

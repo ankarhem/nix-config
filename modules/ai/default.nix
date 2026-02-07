@@ -1,4 +1,7 @@
-{ inputs, ... }:
+{
+  inputs,
+  ...
+}:
 {
   flake.modules.nixos.ai = {
     imports = with inputs.self.modules.nixos; [

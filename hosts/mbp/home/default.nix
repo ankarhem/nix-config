@@ -29,7 +29,6 @@ in
     "${self}/homeManagerModules/dotnet.nix"
     "${self}/homeManagerModules/scripts.nix"
     "${self}/presets/firefox/default.nix"
-    "${self}/presets/fish.nix"
     "${self}/presets/gh.nix"
     "${self}/presets/git.nix"
     "${self}/presets/gpg.nix"
@@ -135,27 +134,6 @@ in
   };
 
   programs.zsh.enable = true;
-  programs.fish = {
-    loginShellInit = ''
-      fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /nix/var/nix/profiles/default/bin /run/current-system/sw/bin
-
-      function secret
-        set output (string join . $argv[1] (date +%s) enc)
-        gpg --encrypt --armor --output $output -r $KEYID $argv[1]
-        and echo "$argv[1] -> $output"
-      end
-
-      function reveal
-        set output (echo $argv[1] | rev | cut -c16- | rev)
-        gpg --decrypt --output $output $argv[1]
-        and echo "$argv[1] -> $output"
-      end
-
-      function copy-term-info
-        infocmp -x | ssh $argv[1] -- tic -x -
-      end
-    '';
-  };
   programs.zoxide = {
     enable = true;
   };

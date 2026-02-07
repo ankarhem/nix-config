@@ -13,7 +13,6 @@
   home.stateVersion = "24.05";
 
   imports = [
-    "${self}/presets/fish.nix"
     "${self}/presets/git.nix"
     "${self}/presets/gh.nix"
     "${self}/presets/gpg.nix"

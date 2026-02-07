@@ -1,8 +1,14 @@
-{ inputs, ... }:
 {
-  flake.modules.darwin.mbp = {
-    imports = with inputs.self.modules.darwin; [
-      ai
-    ];
-  };
+  inputs,
+  ...
+}:
+{
+  flake.modules.darwin.mbp =
+    { config, ... }:
+    {
+      imports = with inputs.self.modules.darwin; [
+        ai
+        fish
+      ];
+    };
 }
