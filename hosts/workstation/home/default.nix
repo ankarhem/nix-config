@@ -16,12 +16,10 @@
   imports = [
     "${self}/homeManagerModules/dotnet.nix"
     "${self}/homeManagerModules/scripts.nix"
-    "${self}/presets/firefox/default.nix"
     "${self}/presets/gh.nix"
     "${self}/presets/git.nix"
     "${self}/presets/gpg.nix"
     "${self}/presets/neovim/default.nix"
-    "${self}/presets/vscode.nix"
     ./konsole.nix
     ./plasma.nix
     ./runelite.nix
@@ -100,13 +98,11 @@
       wget
 
       _1password-gui
-      bruno
       bitwarden-desktop
       spotify
       obsidian
     ]
     ++ (with pkgs-unstable; [
-      firefox-devedition
       phoronix-test-suite
     ])
     ++ (with pkgs.scriptPkgs; [

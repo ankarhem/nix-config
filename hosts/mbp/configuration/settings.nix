@@ -23,8 +23,6 @@
         # "${pkgs.spotify}/Applications/Spotify.app/"
         "/Applications/1Password.app/"
         "/Applications/Bitwarden.app/"
-        "${pkgs.firefox-devedition}/Applications/Firefox Developer Edition.app/"
-        "${pkgs.firefox}/Applications/Firefox.app/"
         "/Applications/Ghostty.app/"
         "/Applications/Microsoft Excel.app/"
         "/Applications/OpenVPN Connect/OpenVPN Connect.app/"

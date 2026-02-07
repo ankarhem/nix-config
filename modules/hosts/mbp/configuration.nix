@@ -11,6 +11,7 @@
         fish
         chat
         colemak
+        firefox
       ];
     };
 }
