@@ -12,6 +12,7 @@
         chat
         colemak
         firefox
+        norcevpn
       ];
     };
 }
