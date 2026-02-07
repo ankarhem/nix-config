@@ -109,11 +109,9 @@ in
       wget
 
       bruno
-      slack
       obsidian
     ])
     ++ (with pkgs-unstable; [
-      element-desktop
       jetbrains.rider
       jetbrains.rust-rover
       jetbrains.webstorm

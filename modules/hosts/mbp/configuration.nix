@@ -9,6 +9,7 @@
       imports = with inputs.self.modules.darwin; [
         ai
         fish
+        chat
       ];
     };
 }

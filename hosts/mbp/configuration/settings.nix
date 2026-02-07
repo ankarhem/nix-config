@@ -28,13 +28,11 @@
       mru-spaces = false;
 
       persistent-apps = [
-        "${pkgs-unstable.element-desktop}/Applications/Element.app/"
         "${pkgs-unstable.jetbrains.rider}/Applications/Rider.app/"
         "${pkgs-unstable.jetbrains.rust-rover}/Applications/RustRover.app/"
         "${pkgs-unstable.jetbrains.webstorm}/Applications/WebStorm.app/"
         "${pkgs.bruno}/Applications/Bruno.app/"
         "${pkgs.obsidian}/Applications/Obsidian.app/"
-        "${pkgs.slack}/Applications/Slack.app/"
         # "${pkgs.spotify}/Applications/Spotify.app/"
         "${pkgs.vscode}/Applications/Visual Studio Code.app/"
         "/Applications/1Password.app/"
@@ -43,12 +41,9 @@
         "${pkgs.firefox}/Applications/Firefox.app/"
         "/Applications/Ghostty.app/"
         "/Applications/Microsoft Excel.app/"
-        "/Applications/Microsoft Teams.app/"
         "/Applications/OpenVPN Connect/OpenVPN Connect.app/"
-        "/Applications/legcord.app/"
         "/System/Applications/Calendar.app/"
         "/System/Applications/Mail.app/"
-        "/System/Applications/Messages.app/"
         "/System/Applications/Notes.app/"
         "/System/Applications/Photos.app/"
         "/System/Applications/System Settings.app/"

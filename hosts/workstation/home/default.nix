@@ -102,14 +102,10 @@
       _1password-gui
       bruno
       bitwarden-desktop
-      legcord
-      slack
       spotify
-      teams-for-linux
       obsidian
     ]
     ++ (with pkgs-unstable; [
-      element-desktop
       firefox-devedition
       jetbrains.rider
       jetbrains.rust-rover
