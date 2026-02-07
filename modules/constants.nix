@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake.modules.generic.constants =
     { lib, ... }:
@@ -8,6 +9,7 @@
       };
 
       config.constants = {
+        email = "jakob@ankarhem.dev";
         # adminEmail = "admin@internetfeno.men";
       };
     };

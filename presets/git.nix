@@ -5,10 +5,11 @@
 
     signing = {
       signByDefault = true;
-      key = lib.mkDefault "0x529972E4160200DF"; # pragma: allowlist secret
+      key = lib.mkDefault "~/.ssh/id_ed25519.pub";
     };
 
     settings = {
+      gpg.format = "ssh";
       user = {
         name = "Jakob Ankarhem";
         email = "jakob@ankarhem.dev";

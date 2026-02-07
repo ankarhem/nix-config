@@ -1,7 +1,6 @@
 {
   inputs,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -15,15 +14,17 @@ in
       inputs.self.modules.homeManager.firefox
     ];
   };
-  flake.modules.darwin.firefox = {
-    home-manager.sharedModules = [
-      inputs.self.modules.homeManager.firefox
-    ];
-    system.defaults.dock.persistent-apps = [
-      "${pkgs.firefox}/Applications/Element.app/"
-      "${pkgs.firefox-devedition}/Applications/Slack.app/"
-    ];
-  };
+  flake.modules.darwin.firefox =
+    { pkgs, ... }:
+    {
+      home-manager.sharedModules = [
+        inputs.self.modules.homeManager.firefox
+      ];
+      system.defaults.dock.persistent-apps = [
+        "${pkgs.firefox}/Applications/Element.app/"
+        "${pkgs.firefox-devedition}/Applications/Slack.app/"
+      ];
+    };
 
   flake.modules.homeManager.firefox =
     { pkgs, ... }:

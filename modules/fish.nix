@@ -8,7 +8,6 @@ let
         pkgs.fish
       ];
 
-      users.defaultUserShell = pkgs.fish;
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.fish
       ];
