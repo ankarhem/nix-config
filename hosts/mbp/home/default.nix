@@ -111,11 +111,6 @@ in
       bruno
       obsidian
     ])
-    ++ (with pkgs-unstable; [
-      jetbrains.rider
-      jetbrains.rust-rover
-      jetbrains.webstorm
-    ])
     ++ (with pkgs.scriptPkgs; [
       yt-sub
       summarize

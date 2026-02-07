@@ -107,9 +107,6 @@
     ]
     ++ (with pkgs-unstable; [
       firefox-devedition
-      jetbrains.rider
-      jetbrains.rust-rover
-      jetbrains.webstorm
       phoronix-test-suite
     ])
     ++ (with pkgs.scriptPkgs; [
