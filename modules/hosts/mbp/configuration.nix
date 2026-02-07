@@ -10,6 +10,7 @@
         ai
         fish
         chat
+        colemak
       ];
     };
 }

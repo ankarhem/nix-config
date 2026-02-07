@@ -9,15 +9,6 @@
   darwin.settings.enable = true;
 
   security.pam.services.sudo_local.touchIdAuth = true;
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = true;
-  system.keyboard.userKeyMapping = [
-    {
-      # Right Command to Option
-      HIDKeyboardModifierMappingSrc = 30064771303;
-      HIDKeyboardModifierMappingDst = 30064771302;
-    }
-  ];
 
   system.defaults = {
     finder.AppleShowAllExtensions = true;

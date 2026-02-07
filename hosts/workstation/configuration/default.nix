@@ -110,27 +110,6 @@
     LC_TELEPHONE = "sv_SE.UTF-8";
     LC_TIME = "sv_SE.UTF-8";
   };
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "colemak";
-  };
-  services.keyd = {
-    enable = true;
-    keyboards = {
-      default = {
-        ids = [ "*" ];
-        settings = {
-          main = {
-            capslock = "escape";
-            leftalt = "leftmeta";
-            leftmeta = "leftalt";
-            rightalt = "rightmeta";
-            rightmeta = "rightalt";
-          };
-        };
-      };
-    };
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
