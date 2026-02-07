@@ -8,22 +8,24 @@
 let
   username = "ankarhem";
   hostname = "mbp";
+  system = "aarch64-darwin";
 
-  flake.darwinConfigurations.mbp = inputs.darwin.lib.darwinSystem rec {
-    system = "aarch64-darwin";
-    specialArgs = {
-      inherit
-        self
-        inputs
-        library
-        ;
-      pkgs-unstable = import inputs.nixpkgs-unstable {
-        inherit system config;
-      };
-      username = "ankarhem";
-      hostname = "mbp";
+  specialArgs = {
+    inherit
+      self
+      inputs
+      library
+      ;
+    pkgs-unstable = import inputs.nixpkgs-unstable {
+      inherit system config;
     };
+    username = "ankarhem";
+    hostname = "mbp";
+  };
+  flake.darwinConfigurations.mbp = inputs.darwin.lib.darwinSystem {
+    inherit system specialArgs;
     modules = [
+      inputs.self.modules.darwin.mbp
       {
 
         nixpkgs.config = config;
