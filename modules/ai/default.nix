@@ -2,17 +2,18 @@
   inputs,
   ...
 }:
+let
+  home-manager.sharedModules = with inputs.self.modules.homeManager; [
+    claude
+    mcp
+    opencode
+  ];
+in
 {
   flake.modules.nixos.ai = {
-    imports = with inputs.self.modules.nixos; [
-      opencode
-      mcp
-    ];
+    inherit home-manager;
   };
   flake.modules.darwin.ai = {
-    imports = with inputs.self.modules.darwin; [
-      opencode
-      mcp
-    ];
+    inherit home-manager;
   };
 }
