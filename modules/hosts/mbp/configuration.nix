@@ -21,6 +21,7 @@
           norcevpn
           secrets
           sshd
+          lazyvim
         ]
         ++ (with inputs.self.modules.generic; [
           constants
