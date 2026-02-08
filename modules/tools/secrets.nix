@@ -4,8 +4,8 @@ let
     inputs.self.modules.homeManager.secrets
   ];
   sops = {
-    defaultSopsFile = "${self}/secrets.json";
-    defaultSopsFormat = "json";
+    defaultSopsFile = "${self}/secrets.yaml";
+    defaultSopsFormat = "yaml";
     age.generateKey = true;
   };
 in

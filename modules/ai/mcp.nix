@@ -11,21 +11,13 @@
     {
       sops = {
         secrets = {
-          "mcp_tokens.context7" = {
-            format = "json";
-            sopsFile = "${self}/secrets.json";
+          "mcp_tokens/context7" = {
           };
-          "mcp_tokens.devin" = {
-            format = "json";
-            sopsFile = "${self}/secrets.json";
+          "mcp_tokens/devin" = {
           };
-          "mcp_tokens.glm" = {
-            format = "json";
-            sopsFile = "${self}/secrets.json";
+          "mcp_tokens/glm" = {
           };
-          "mcp_tokens.jira" = {
-            format = "json";
-            sopsFile = "${self}/secrets.json";
+          "mcp_tokens/jira" = {
           };
         };
       };
@@ -61,7 +53,7 @@
           context7 = {
             type = "http";
             url = "https://mcp.context7.com/mcp";
-            headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens.context7".path}}";
+            headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens/context7".path}}";
           };
           atlassian = {
             type = "sse";
@@ -70,12 +62,12 @@
           devin-wiki = {
             type = "http";
             url = "https://mcp.devin.ai/mcp";
-            headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens.devin".path}}";
+            headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens/devin".path}}";
           };
           zai-websearch = {
             type = "http";
             url = "https://api.z.ai/api/mcp/web_search_prime/mcp";
-            headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens.glm".path}}";
+            headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens/glm".path}}";
           };
           zai-vision = {
             type = "stdio";
@@ -86,7 +78,7 @@
             ];
             environment = {
               Z_AI_MODE = "ZAI";
-              Z_AI_API_KEY = "{file:${config.sops.secrets."mcp_tokens.glm".path}}";
+              Z_AI_API_KEY = "{file:${config.sops.secrets."mcp_tokens/glm".path}}";
             };
           };
         };

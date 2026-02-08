@@ -16,12 +16,14 @@
           dev-tools
           firefox
           fish
+          gh
+          gpg
           home-manager
+          lazyvim
           nix
           norcevpn
           secrets
           sshd
-          lazyvim
         ]
         ++ (with inputs.self.modules.generic; [
           constants
@@ -32,7 +34,6 @@
         inputs.self.modules.homeManager.mbp
       ];
 
-      # backwards compat; don't change
       system.stateVersion = 5;
     };
   flake.modules.homeManager.mbp = {

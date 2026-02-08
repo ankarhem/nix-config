@@ -4,14 +4,29 @@
   ...
 }:
 let
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = lib.attrValues inputs.self.overlays;
+  config = {
+    allowUnfree = true;
   };
+  overlays = lib.attrValues inputs.self.overlays ++ [
+    (
+      final: prev:
+      let
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit (prev) system config;
+        };
+        pkgs-darwin = import inputs.nixpkgs-unstable {
+          inherit (prev) system config;
+        };
+      in
+      {
+        _unstable = pkgs-unstable;
+        _darwin = pkgs-darwin;
+      }
+    )
+  ];
   nixBaseModule =
     { pkgs, ... }:
     {
-      inherit nixpkgs;
       nix = {
         enable = true;
         package = pkgs.nix;
@@ -40,10 +55,18 @@ let
         };
       };
     };
-  flake.modules.nixos.nix = nixBaseModule;
+  flake.modules.nixos.nix = {
+    imports = [ nixBaseModule ];
+    nixpkgs = {
+      inherit config overlays;
+    };
+  };
   flake.modules.darwin.nix =
     { pkgs, ... }:
     {
+      nixpkgs = {
+        inherit config overlays;
+      };
       imports = [ nixBaseModule ];
       nix.settings.extra-platforms = [
         "x86_64-darwin"
