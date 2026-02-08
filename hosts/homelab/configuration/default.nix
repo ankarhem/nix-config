@@ -55,7 +55,6 @@
     manageNetwork = true;
   };
   boot.isContainer = true;
-  networking.hostName = hostname; # Define your hostname.
   time.timeZone = "Europe/Stockholm";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {

@@ -13,14 +13,10 @@
   imports = [
     "${self}/presets/claude.nix"
     ./hardware-configuration.nix
-    ./bluetooth.nix
     ./gpu.nix
-    ./sops.nix
     ./fonts.nix
     ./gaming.nix
     ./kde.nix
-    ./comfyui.nix
-    ./norcevpn.nix
     ./neochat.nix
   ];
 

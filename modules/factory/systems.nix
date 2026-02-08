@@ -9,7 +9,10 @@
       ${name} = inputs.nixpkgs.lib.nixosSystem {
         modules = [
           inputs.self.modules.nixos.${name}
-          { nixpkgs.hostPlatform = lib.mkDefault system; }
+          {
+            nixpkgs.hostPlatform = lib.mkDefault system;
+            networking.hostName = name;
+          }
         ];
       };
     };
@@ -17,7 +20,11 @@
       ${name} = inputs.nix-darwin.lib.darwinSystem {
         modules = [
           inputs.self.modules.darwin.${name}
-          { nixpkgs.hostPlatform = lib.mkDefault system; }
+          {
+            nixpkgs.hostPlatform = lib.mkDefault system;
+            networking.hostName = name;
+            networking.computerName = name;
+          }
         ];
       };
     };
