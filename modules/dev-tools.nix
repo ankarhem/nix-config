@@ -2,14 +2,14 @@
 {
   flake.modules.nixos.dev-tools = {
     home-manager.sharedModules = [
-      inputs.self.modules.homeManager.ide
+      inputs.self.modules.homeManager.dev-tools
     ];
   };
   flake.modules.darwin.dev-tools =
     { pkgs, ... }:
     {
       home-manager.sharedModules = [
-        inputs.self.modules.homeManager.ide
+        inputs.self.modules.homeManager.dev-tools
       ];
       system.defaults.dock.persistent-apps = [
         "${pkgs.bruno}/Applications/Bruno.app/"

@@ -18,8 +18,8 @@
         settings = {
           gpg.format = "ssh";
           user = {
-            name = "Jakob Ankarhem";
-            inherit (config.constants) email;
+            name = lib.mkDefault "Jakob Ankarhem";
+            email = lib.mkDefault config.constants.email;
           };
           init.defaultBranch = "main";
           # Configure Git to ensure line endings in files you checkout are correct for macOS

@@ -6,19 +6,21 @@
   flake.modules.darwin.mbp =
     { config, ... }:
     {
-      nixpkgs.config = {
-        allowUnfree = true;
-      };
       imports =
         with inputs.self.modules.darwin;
         [
           ai
-          fish
+          ankarhem
           chat
           colemak
+          dev-tools
           firefox
-          norcevpn
+          fish
           home-manager
+          nix
+          norcevpn
+          secrets
+          sshd
         ]
         ++ (with inputs.self.modules.generic; [
           constants
@@ -26,9 +28,13 @@
 
       home-manager.sharedModules = [
         inputs.self.modules.generic.constants
+        inputs.self.modules.homeManager.mbp
       ];
 
       # backwards compat; don't change
       system.stateVersion = 5;
     };
+  flake.modules.homeManager.mbp = {
+    home.stateVersion = "23.11";
+  };
 }

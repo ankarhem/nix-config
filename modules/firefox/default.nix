@@ -10,6 +10,7 @@ let
 in
 {
   flake.modules.nixos.firefox = {
+    inherit nixpkgs;
     home-manager.sharedModules = [
       inputs.self.modules.homeManager.firefox
     ];
@@ -17,6 +18,7 @@ in
   flake.modules.darwin.firefox =
     { pkgs, ... }:
     {
+      inherit nixpkgs;
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.firefox
       ];
@@ -32,7 +34,6 @@ in
       inherit (pkgs.nur.repos.rycee) firefox-addons;
     in
     {
-      inherit nixpkgs;
       home.packages = with pkgs; [
         firefox-devedition
       ];
