@@ -89,7 +89,9 @@
           "x86_64-linux"
           "aarch64-darwin"
         ];
-        flake.overlays.default = final: prev: self.packages;
+        flake.overlays.default = final: prev: {
+          local = self.packages.${prev.system};
+        };
         perSystem =
           {
             lib,

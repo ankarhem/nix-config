@@ -8,7 +8,7 @@
     }:
     {
       home.packages = [
-        pkgs.happy-coder
+        pkgs.local.happy-coder
       ];
 
       programs.claude-code = {

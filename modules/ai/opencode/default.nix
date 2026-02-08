@@ -13,7 +13,7 @@
         tui = {
           scroll_acceleration = true;
         };
-        instructions = [ ./additional-instructions.txt ];
+        instructions = [ ./additional_instructions.md ];
         plugin = [
           "@simonwjackson/opencode-direnv@latest"
           "@tarquinen/opencode-dcp@latest"
