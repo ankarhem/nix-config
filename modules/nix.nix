@@ -1,10 +1,12 @@
-{ inputs, self, ... }:
+{
+  inputs,
+  lib,
+  ...
+}:
 let
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [
-      self.overlays.default
-    ];
+    overlays = lib.attrValues inputs.self.overlays;
   };
   nixBaseModule =
     { pkgs, ... }:
