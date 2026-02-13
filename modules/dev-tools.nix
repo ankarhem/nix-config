@@ -23,7 +23,10 @@
     { pkgs, ... }:
     {
       programs.zed-editor.enable = true;
+      programs.go.enable = true;
       home.packages = with pkgs; [
+        azure-cli
+        mitmproxy
         bruno
         jetbrains.rider
         jetbrains.rust-rover

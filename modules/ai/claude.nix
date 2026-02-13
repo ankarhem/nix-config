@@ -6,6 +6,20 @@
       pkgs,
       ...
     }:
+    let
+      transformedMcpServers = lib.optionalAttrs (config.programs.mcp.enable) (
+        lib.mapAttrs (
+          name: server:
+          (removeAttrs server [ "disabled" ])
+          // (lib.optionalAttrs (server ? url) { type = "http"; })
+          // (lib.optionalAttrs (server ? command) { type = "stdio"; })
+          // {
+            enabled = !(server.disabled or false);
+          }
+        ) config.programs.mcp.servers
+      );
+    in
+
     {
       home.packages = [
         pkgs.local.happy-coder
@@ -27,7 +41,7 @@
             "typescript-lsp@claude-plugins-official"
           ] (_: true);
         };
-        mcpServers = lib.mkIf config.programs.mcp.enable config.programs.mcp.servers;
+        mcpServers = transformedMcpServers;
       };
     };
 }

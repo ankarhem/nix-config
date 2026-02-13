@@ -39,6 +39,7 @@ in
         imports =
           (with inputs.self.modules.homeManager; [
             git
+            ghostty
           ])
           ++ [
             sopsKeyModule

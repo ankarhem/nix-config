@@ -4,11 +4,18 @@
   ...
 }:
 {
-  flake.modules.nixos.chat = {
-    home-manager.sharedModules = [
-      inputs.self.modules.homeManager.chat
-    ];
-  };
+  flake.modules.nixos.chat =
+    { pkgs, ... }:
+    {
+      home-manager.sharedModules = [
+        inputs.self.modules.homeManager.chat
+        {
+          home.packages = with pkgs; [
+            neochat
+          ];
+        }
+      ];
+    };
   flake.modules.darwin.chat =
     { pkgs, ... }:
     {
@@ -19,9 +26,12 @@
         "legcord"
         "microsoft-teams"
       ];
+      homebrew.masApps = {
+        "FluffyChat" = 1551469600;
+      };
       system.defaults.dock.persistent-apps = [
-        "${pkgs.element-desktop}/Applications/Element.app/"
         "${pkgs.slack}/Applications/Slack.app/"
+        "/Applications/FluffyChat.app/"
         "/Applications/Microsoft Teams.app/"
         "/Applications/legcord.app/"
         "/System/Applications/Messages.app/"
@@ -35,7 +45,6 @@
         with pkgs;
         [
           slack
-          element-desktop
         ]
         ++ lib.optionals pkgs.stdenv.isLinux [
           legcord

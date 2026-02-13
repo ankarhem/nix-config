@@ -24,6 +24,7 @@
           norcevpn
           secrets
           sshd
+          cli
         ]
         ++ (with inputs.self.modules.generic; [
           constants

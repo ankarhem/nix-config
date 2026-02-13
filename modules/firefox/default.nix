@@ -113,7 +113,7 @@ in
                   ];
                   definedAliases = [ "@k" ];
                 };
-                "Google".metaData.alias = "@g";
+                "google".metaData.alias = "@g";
               };
               order = [
                 "Kagi"
