@@ -35,7 +35,7 @@
       home.file.".nuget/plugins".source = pkgs.symlinkJoin {
         name = "dotnet-plugins";
         paths = [
-          "${pkgs.local.artifacts-credprovider}/plugins"
+          pkgs.local.artifacts-credprovider
         ];
       };
 
