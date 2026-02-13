@@ -6,7 +6,6 @@
 }:
 let
   username = "ankarhem";
-
   sopsKeyModule =
     { pkgs, ... }:
     {
@@ -36,6 +35,9 @@ in
         ];
       };
       homeManager.${username} = {
+        home.sessionVariables = {
+          SOPS_AGE_KEY_FILE = "~/.config/sops/age/age.key";
+        };
         imports =
           (with inputs.self.modules.homeManager; [
             git
