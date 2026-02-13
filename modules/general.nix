@@ -93,6 +93,7 @@ in
         "runelite"
         "sikarugir"
         "steam"
+        "tailscale-app"
         "tor-browser"
       ];
 

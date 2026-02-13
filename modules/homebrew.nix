@@ -30,6 +30,7 @@ in
         global.autoUpdate = false;
         global.brewfile = true;
 
+        greedyCasks = true;
         caskArgs.no_quarantine = true;
         casks = [
           "1password"
