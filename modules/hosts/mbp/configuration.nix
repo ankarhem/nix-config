@@ -26,6 +26,7 @@
           sshd
           cli
           fonts
+          general
         ]
         ++ (with inputs.self.modules.generic; [
           constants
