@@ -11,7 +11,9 @@
       settings = {
         theme = "catppuccin";
         tui = {
-          scroll_acceleration = true;
+          scroll_acceleration = {
+            enabled = true;
+          };
         };
         instructions = [ ./additional_instructions.md ];
         plugin = [
