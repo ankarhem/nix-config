@@ -46,13 +46,15 @@ in
         "/System/Applications/System Settings.app/"
       ];
 
+      homebrew.brews = [
+        "pinentry-mac"
+      ];
       homebrew.casks = [
         "1password"
         "1password-cli"
         "azure-data-studio"
         "betterdisplay"
         "bitwarden"
-        "cursor"
         "google-chrome"
         "maccy"
         "microsoft-excel"

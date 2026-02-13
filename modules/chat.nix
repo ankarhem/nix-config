@@ -27,7 +27,7 @@
         "microsoft-teams"
       ];
       homebrew.masApps = {
-        "FluffyChat" = 1551469600;
+        # "FluffyChat" = 1551469600;
       };
       system.defaults.dock.persistent-apps = [
         "${pkgs.slack}/Applications/Slack.app/"

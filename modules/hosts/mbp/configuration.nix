@@ -27,6 +27,7 @@
           cli
           fonts
           general
+          homebrew
         ]
         ++ (with inputs.self.modules.generic; [
           constants
