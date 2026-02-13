@@ -44,6 +44,16 @@ in
       LC_TELEPHONE = "sv_SE.UTF-8";
       LC_TIME = "sv_SE.UTF-8";
     };
+
+    networking.networkmanager.enable = true;
+    # Enable CUPS to print documents.
+    services.printing.enable = true;
+    services.avahi.enable = true;
+    services.avahi.nssmdns4 = true;
+    services.avahi.publish = {
+      enable = true;
+      addresses = true;
+    };
   };
 
   flake.modules.darwin.general =

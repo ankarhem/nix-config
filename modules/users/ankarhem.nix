@@ -40,6 +40,7 @@ in
           (with inputs.self.modules.homeManager; [
             git
             ghostty
+            npm
           ])
           ++ [
             sopsKeyModule
