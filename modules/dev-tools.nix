@@ -21,16 +21,34 @@
 
   flake.modules.homeManager.dev-tools =
     { pkgs, ... }:
+    let
+      combinedDotnet = pkgs.dotnetCorePackages.combinePackages [
+        pkgs.dotnet-sdk_8
+        pkgs.dotnet-sdk_9
+        pkgs.dotnet-sdk_10
+      ];
+    in
     {
       programs.zed-editor.enable = true;
       programs.go.enable = true;
-      home.packages = with pkgs; [
-        azure-cli
-        mitmproxy
-        bruno
-        jetbrains.rider
-        jetbrains.rust-rover
-        jetbrains.webstorm
-      ];
+
+      home.file.".nuget/plugins".source = pkgs.symlinkJoin {
+        name = "dotnet-plugins";
+        paths = [
+          "${pkgs.local.artifacts-credprovider}/plugins"
+        ];
+      };
+
+      home.packages =
+        with pkgs;
+        [
+          azure-cli
+          mitmproxy
+          bruno
+          jetbrains.rider
+          jetbrains.rust-rover
+          jetbrains.webstorm
+        ]
+        ++ [ combinedDotnet ];
     };
 }

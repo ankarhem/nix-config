@@ -25,6 +25,7 @@
           secrets
           sshd
           cli
+          fonts
         ]
         ++ (with inputs.self.modules.generic; [
           constants
