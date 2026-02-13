@@ -12,6 +12,17 @@
         "raycast"
       ];
 
+      system.defaults.CustomUserPreferences = {
+        "com.apple.symbolichotkeys" = {
+          AppleSymbolicHotKeys = {
+            # Disable spotlight with cmd+space
+            "64" = {
+              enabled = false;
+            };
+          };
+        };
+      };
+
       system.activationScripts = {
         # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
         postActivation.text = ''
