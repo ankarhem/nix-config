@@ -41,6 +41,7 @@ in
             git
             ghostty
             npm
+            ssh
           ])
           ++ [
             sopsKeyModule
