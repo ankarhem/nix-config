@@ -28,6 +28,7 @@
           fonts
           general
           homebrew
+          launcher
         ]
         ++ (with inputs.self.modules.generic; [
           constants
