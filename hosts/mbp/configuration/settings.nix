@@ -5,11 +5,6 @@
   ...
 }:
 {
-  imports = [ "${self}/darwinModules/default.nix" ];
-  darwin.settings.enable = true;
-
-  security.pam.services.sudo_local.touchIdAuth = true;
-
   system.defaults = {
     finder.AppleShowAllExtensions = true;
     finder._FXShowPosixPathInTitle = true;

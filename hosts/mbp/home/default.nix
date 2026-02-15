@@ -7,70 +7,10 @@
   username,
   ...
 }:
-let
-  spotify = pkgs.spotify.overrideAttrs (oldAttrs: {
-    src = pkgs.fetchurl {
-      url = "https://web.archive.org/web/20251029235406/https://download.scdn.co/SpotifyARM64.dmg";
-      hash = "sha256-gEZxRBT7Jo2m6pirf+CreJiMeE2mhIkpe9Mv5t0RI58=";
-    };
-  });
-in
 {
-  programs.home-manager.enable = true;
-  home.username = username;
-  home.homeDirectory = "/Users/${username}";
-  home.stateVersion = "23.11";
-  home.sessionVariables = {
-    PATH = "$PATH:$GOPATH/bin";
-    SOPS_AGE_KEY_FILE = "/Users/ankarhem/.config/sops/age/keys.txt";
-  };
-
-  imports = [
-    "${self}/homeManagerModules/dotnet.nix"
-    "${self}/homeManagerModules/scripts.nix"
-    "${self}/presets/gh.nix"
-    "${self}/presets/git.nix"
-    "${self}/presets/gpg.nix"
-    "${self}/presets/neovim/default.nix"
-    ./ghostty.nix
-    ./npm.nix
-    ./ssh.nix
-    inputs.nix-index-database.homeModules.nix-index
-  ];
-
-  home.file.".config/git/allowed_signers".text =
-    let
-      authorizedKeys = library.getGithubKeys {
-        username = "ankarhem";
-        sha256 = "0by0paqz05n41firv21i2izy0mk6sxqh2nn6wkcbwsy9n3wf537w";
-      };
-      allowedSigners = builtins.concatStringsSep "\n" (builtins.map (key: "* ${key}") authorizedKeys);
-    in
-    allowedSigners;
-  programs.git = {
-    signing = {
-      key = "~/.ssh/id_ed25519.pub";
-    };
-    settings = {
-      gpg.format = "ssh";
-      gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
-    };
-  };
-
-  modules.custom-scripts.enable = true;
-
-  programs.dotnet = {
-    enable = true;
-    enableAzureArtifactsCredProvider = true;
-  };
-
-  programs.nix-index-database = {
-    comma.enable = true;
-  };
-  programs.nix-index.enable = true;
-
-  home.packages =
-    (with pkgs; [
+  home.packages = (
+    with pkgs;
+    [
       openssh
       yubikey-manager
       yubikey-personalization
@@ -107,35 +47,6 @@ in
       wget
 
       obsidian
-    ])
-    ++ (with pkgs.scriptPkgs; [
-      yt-sub
-      summarize
-    ])
-    ++ [ spotify ];
-  programs.nh = {
-    enable = true;
-    flake = "/Users/${username}/nix-config";
-  };
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-
-  programs.zsh.enable = true;
-  programs.zoxide = {
-    enable = true;
-  };
-  programs.eza.enable = true;
-  programs.starship = {
-    enable = true;
-  };
-
-  programs.go = {
-    enable = true;
-    env = {
-      GOPATH = ".go";
-    };
-  };
+    ]
+  );
 }
