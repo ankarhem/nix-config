@@ -3,10 +3,12 @@ let
   port = "8080";
 in
 {
-  sops.secrets.qbittorrent_env = {
-    sopsFile = ../../../../../secrets/homelab/qbittorrent.env;
-    format = "dotenv";
-  };
+  sops.secrets."pia/username" = { };
+  sops.secrets."pia/password" = { };
+  sops.templates."qbittorrent.env".content = ''
+    VPN_USER=${config.sops.placeholder."pia/username"}
+    VPN_PASS=${config.sops.placeholder."pia/password"}
+  '';
 
   services.nginx.virtualHosts."qbittorrent.internal.internetfeno.men" = {
     forceSSL = true;
@@ -33,7 +35,7 @@ in
       "WEBUI_PORT" = port;
     };
     ports = [ "127.0.0.1:${port}:${port}" ];
-    environmentFiles = [ config.sops.secrets.qbittorrent_env.path ];
+    environmentFiles = [ config.sops.templates."qbittorrent.env".path ];
     volumes = [
       "/etc/localtime:/etc/localtime:ro"
       "/mnt/DISKETTEN_media/downloads/:/data:rw"

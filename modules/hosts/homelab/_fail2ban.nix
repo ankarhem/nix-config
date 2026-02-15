@@ -47,8 +47,8 @@ in
     };
   };
 
-  sops.secrets.cloudflare_global_api_key = { };
-  sops.secrets.cloudflare_username = { };
+  sops.secrets."cloudflare/global_api_key" = { };
+  sops.secrets."cloudflare/username" = { };
   sops.templates."cloudflare-action.conf".content = ''
     [Definition]
 
@@ -68,8 +68,8 @@ in
           'https://api.cloudflare.com/client/v4/user/firewall/access_rules/rules?mode=block&configuration_target=ip&configuration_value=&page=1&per_page=1' | tr -d '\n' | cut -d'"' -f6)
 
     [Init]
-    cftoken = ${config.sops.placeholder.cloudflare_global_api_key}
-    cfuser = ${config.sops.placeholder.cloudflare_username}
+    cftoken = ${config.sops.placeholder."cloudflare/global_api_key"}
+    cfuser = ${config.sops.placeholder."cloudflare/username"}
   '';
 
   environment.etc = {

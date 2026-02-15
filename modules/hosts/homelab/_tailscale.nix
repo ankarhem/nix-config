@@ -2,11 +2,11 @@
 {
   environment.systemPackages = with pkgs; [ tailscale ];
 
-  sops.secrets.tailscale_auth_key = { };
+  sops.secrets."tailscale/auth_key" = { };
   services.tailscale = {
     enable = true;
     openFirewall = true;
-    authKeyFile = config.sops.secrets.tailscale_auth_key.path;
+    authKeyFile = config.sops.secrets."tailscale/auth_key".path;
     useRoutingFeatures = "both";
     extraUpFlags = [
       "--advertise-exit-node"

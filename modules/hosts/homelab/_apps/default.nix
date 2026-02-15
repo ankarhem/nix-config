@@ -34,10 +34,10 @@
     ];
   };
 
-  sops.secrets.cloudflare_credentials_env = {
-    sopsFile = "${self}/secrets/homelab/cloudflare_credentials.env";
-    format = "dotenv";
-  };
+  sops.secrets."cloudflare/dns_token" = { };
+  sops.templates."cloudflare.env".content = ''
+    CF_DNS_API_TOKEN=${config.sops.placeholder."cloudflare/dns_token"}
+  '';
   security.acme = {
     acceptTerms = true;
     defaults.email = "admin@internetfeno.men";
@@ -48,7 +48,7 @@
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
-      environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
+      environmentFile = config.sops.templates."cloudflare.env".path;
     };
     certs."internal.ankarhem.dev" = {
       domain = "internal.ankarhem.dev";
@@ -57,7 +57,7 @@
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
-      environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
+      environmentFile = config.sops.templates."cloudflare.env".path;
     };
     certs."internetfeno.men" = {
       domain = "internetfeno.men";
@@ -66,7 +66,7 @@
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
-      environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
+      environmentFile = config.sops.templates."cloudflare.env".path;
     };
     certs."internal.internetfeno.men" = {
       domain = "internal.internetfeno.men";
@@ -75,7 +75,7 @@
       dnsProvider = "cloudflare";
       dnsResolver = "1.1.1.1:53";
       dnsPropagationCheck = true;
-      environmentFile = config.sops.secrets.cloudflare_credentials_env.path;
+      environmentFile = config.sops.templates."cloudflare.env".path;
     };
   };
   users.users.nginx.extraGroups = [ "acme" ];

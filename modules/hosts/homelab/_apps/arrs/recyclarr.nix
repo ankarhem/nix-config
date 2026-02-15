@@ -4,12 +4,12 @@
   ...
 }:
 {
-  sops.secrets.radarr_api_key = { };
-  sops.secrets.sonarr_api_key = { };
+  sops.secrets."arr_tokens/radarr" = { };
+  sops.secrets."arr_tokens/sonarr" = { };
 
   systemd.services.recyclarr.serviceConfig.LoadCredential = [
-    "radarr_api_key:${config.sops.secrets.radarr_api_key.path}"
-    "sonarr_api_key:${config.sops.secrets.sonarr_api_key.path}"
+    "radarr_api_key:${config.sops.secrets."arr_tokens/radarr".path}"
+    "sonarr_api_key:${config.sops.secrets."arr_tokens/sonarr".path}"
   ];
 
   services.recyclarr = {

@@ -1,12 +1,12 @@
-{ self, config, ... }:
+{ config, ... }:
 let
   port = "4001";
 in
 {
-  sops.secrets.picoshare_env = {
-    sopsFile = "${self}/secrets/homelab/picoshare.env";
-    format = "dotenv";
-  };
+  sops.secrets."picoshare/shared_secret" = { };
+  sops.templates."picoshare.env".content = ''
+    PS_SHARED_SECRET=${config.sops.placeholder."picoshare/shared_secret"}
+  '';
 
   services.nginx.virtualHosts."pico.ankarhem.dev" = {
     forceSSL = true;
@@ -26,7 +26,7 @@ in
       environment = {
         PORT = port;
       };
-      environmentFiles = [ config.sops.secrets.picoshare_env.path ];
+      environmentFiles = [ config.sops.templates."picoshare.env".path ];
       cmd = [
         "-db"
         "/data/store.db"
