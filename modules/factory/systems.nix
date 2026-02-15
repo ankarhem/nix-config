@@ -14,6 +14,11 @@
             networking.hostName = name;
           }
         ];
+        specialArgs = {
+          inherit inputs;
+          library = inputs.self.lib;
+          inherit (inputs) self;
+        };
       };
     };
     darwin = system: name: {
