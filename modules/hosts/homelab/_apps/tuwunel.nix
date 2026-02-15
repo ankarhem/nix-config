@@ -116,9 +116,21 @@ in
     };
   };
 
-  sops.secrets."mautrix-bridges.env" = {
-    sopsFile = "${self}/secrets/homelab/mautrix-bridges.env";
-    format = "dotenv";
+  sops.templates."mautrix-bridges.env" = {
+    content = ''
+      DOUBLEPUPPET_AS_TOKEN=${config.sops.placeholder."matrix/doublepuppet_as_token"}
+      PICKLE_KEY=${config.sops.placeholder."matrix/pickle_key"}
+      MAUTRIX_TELEGRAM_APPSERVICE_AS_TOKEN=${config.sops.placeholder."matrix/telegram/as_token"}
+      MAUTRIX_TELEGRAM_APPSERVICE_HS_TOKEN=${config.sops.placeholder."matrix/telegram/hs_token"}
+      MAUTRIX_TELEGRAM_TELEGRAM_API_ID=${config.sops.placeholder."matrix/telegram/api_id"}
+      MAUTRIX_TELEGRAM_TELEGRAM_API_HASH=${config.sops.placeholder."matrix/telegram/api_hash"}
+      MAUTRIX_INSTAGRAM_APPSERVICE_AS_TOKEN=${config.sops.placeholder."matrix/instagram/as_token"}
+      MAUTRIX_INSTAGRAM_APPSERVICE_HS_TOKEN=${config.sops.placeholder."matrix/instagram/hs_token"}
+      MAUTRIX_MESSENGER_APPSERVICE_AS_TOKEN=${config.sops.placeholder."matrix/messenger/as_token"}
+      MAUTRIX_MESSENGER_APPSERVICE_HS_TOKEN=${config.sops.placeholder."matrix/messenger/hs_token"}
+      MAUTRIX_SIGNAL_APPSERVICE_AS_TOKEN=${config.sops.placeholder."matrix/signal/as_token"}
+      MAUTRIX_SIGNAL_APPSERVICE_HS_TOKEN=${config.sops.placeholder."matrix/signal/hs_token"}
+    '';
   };
 
   # temporary allow olm-3.2.16 as insecure package
@@ -127,7 +139,7 @@ in
   ];
   services.mautrix-telegram = {
     enable = true;
-    environmentFile = config.sops.secrets."mautrix-bridges.env".path;
+    environmentFile = config.sops.templates."mautrix-bridges.env".path;
     settings = lib.recursiveUpdate defaultAppserviceConfig {
       bridge = {
         login_shared_secret_map."${domain}" = "as_token:$DOUBLEPUPPET_AS_TOKEN";
@@ -150,7 +162,7 @@ in
     instances = {
       instagram = {
         enable = true;
-        environmentFile = config.sops.secrets."mautrix-bridges.env".path;
+        environmentFile = config.sops.templates."mautrix-bridges.env".path;
         settings = lib.recursiveUpdate defaultAppserviceConfig {
           network.mode = "instagram";
           appservice = {
@@ -166,7 +178,7 @@ in
       };
       messenger = {
         enable = true;
-        environmentFile = config.sops.secrets."mautrix-bridges.env".path;
+        environmentFile = config.sops.templates."mautrix-bridges.env".path;
         settings = lib.recursiveUpdate defaultAppserviceConfig {
           network.mode = "messenger";
           appservice = {
@@ -185,7 +197,7 @@ in
 
   services.mautrix-signal = {
     enable = true;
-    environmentFile = config.sops.secrets."mautrix-bridges.env".path;
+    environmentFile = config.sops.templates."mautrix-bridges.env".path;
     settings = lib.recursiveUpdate defaultAppserviceConfig {
       appservice = {
         id = "signalbot";
