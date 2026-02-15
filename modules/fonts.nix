@@ -1,17 +1,18 @@
 { inputs, ... }:
 let
-  appleFonts =
+  appleFontsModule =
     { pkgs, ... }:
-    with inputs.apple-fonts.packages.${pkgs.system};
-    [
-      sf-pro
-      sf-pro-nerd
-      sf-mono
-      sf-mono-nerd
-      ny
-      ny-nerd
-    ];
-  fontPackages =
+    {
+      fonts.packages = with inputs.apple-fonts.packages.${pkgs.system}; [
+        sf-pro
+        sf-pro-nerd
+        sf-mono
+        sf-mono-nerd
+        ny
+        ny-nerd
+      ];
+    };
+  fontPackagesModule =
     { pkgs, ... }:
     {
       fonts.packages = with pkgs; [
@@ -24,44 +25,46 @@ let
       ];
     };
 
-  flake.modules.nixos.fonts = {
-    imports = [
-      appleFonts
-      fontPackages
-    ];
+  flake.modules.nixos.fonts =
+    { pkgs, ... }:
+    {
+      imports = [
+        appleFontsModule
+        fontPackagesModule
+      ];
 
-    fonts = {
-      enableDefaultPackages = true;
-      fontconfig = {
-        enable = true;
-        subpixel = {
-          rgba = "rgb";
-        };
-        hinting = {
+      fonts = {
+        enableDefaultPackages = true;
+        fontconfig = {
           enable = true;
-          style = "slight";
-        };
-        antialias = true;
+          subpixel = {
+            rgba = "rgb";
+          };
+          hinting = {
+            enable = true;
+            style = "slight";
+          };
+          antialias = true;
 
-        defaultFonts = {
-          serif = [
-            "NewYork Nerd Font"
-            "DejaVu Serif"
-          ];
-          sansSerif = [
-            "SFProDisplay Nerd Font"
-            "DejaVu Sans"
-          ];
-          monospace = [
-            "SFMono Nerd Font"
-            "DejaVu Sans Mono"
-          ];
+          defaultFonts = {
+            serif = [
+              "NewYork Nerd Font"
+              "DejaVu Serif"
+            ];
+            sansSerif = [
+              "SFProDisplay Nerd Font"
+              "DejaVu Sans"
+            ];
+            monospace = [
+              "SFMono Nerd Font"
+              "DejaVu Sans Mono"
+            ];
+          };
         };
       };
     };
-  };
 
-  flake.modules.darwin.fonts = fontPackages;
+  flake.modules.darwin.fonts = fontPackagesModule;
 in
 {
   inherit flake;
