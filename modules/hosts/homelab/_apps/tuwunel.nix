@@ -2,7 +2,7 @@
   self,
   lib,
   config,
-  pkgs-unstable,
+  pkgs,
   ...
 }:
 let
@@ -74,7 +74,7 @@ in
   };
   services.matrix-tuwunel = {
     enable = true;
-    package = pkgs-unstable.matrix-tuwunel;
+    package = pkgs._unstable.matrix-tuwunel;
 
     stateDirectory = "tuwunel";
     settings = {

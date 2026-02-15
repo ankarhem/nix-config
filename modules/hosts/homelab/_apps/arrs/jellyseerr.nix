@@ -1,4 +1,4 @@
-{ config, pkgs-unstable, ... }:
+{ config, pkgs, ... }:
 {
   # redirect overseerr to jellyseerr
   services.nginx.virtualHosts."overseerr.internetfeno.men" = {
@@ -19,6 +19,6 @@
   services.jellyseerr = {
     enable = true;
     port = 5055;
-    package = pkgs-unstable.jellyseerr;
+    package = pkgs._unstable.jellyseerr;
   };
 }
