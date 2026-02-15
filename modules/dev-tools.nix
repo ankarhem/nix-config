@@ -46,6 +46,7 @@
         with pkgs;
         [
           azure-cli
+          pkgs.local.clone_org
           mitmproxy
           bruno
           jetbrains.rider
