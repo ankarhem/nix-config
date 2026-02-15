@@ -32,26 +32,6 @@ in
 
         greedyCasks = true;
         caskArgs.no_quarantine = true;
-        casks = [
-          "1password"
-          "1password-cli"
-          "azure-data-studio"
-          "betterdisplay"
-          "bitwarden"
-          "cursor"
-          "ghostty"
-          "google-chrome"
-          "maccy"
-          "microsoft-excel"
-          "microsoft-remote-desktop"
-          "mos"
-          "orbstack"
-          "pairpods"
-          "runelite"
-          "sikarugir"
-          "steam"
-          "tor-browser"
-        ];
       };
 
       nix-homebrew = {

@@ -11,6 +11,9 @@
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.dev-tools
       ];
+      homebrew.casks = [
+        "cursor"
+      ];
       system.defaults.dock.persistent-apps = [
         "${pkgs.bruno}/Applications/Bruno.app/"
         "${pkgs.jetbrains.rider}/Applications/Rider.app/"
