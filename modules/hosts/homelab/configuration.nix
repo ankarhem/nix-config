@@ -45,6 +45,7 @@
       boot.isContainer = true;
       proxmoxLXC.manageNetwork = true;
 
+      networking.networkmanager.enable = lib.mkForce false;
       # Custom Networking
       networking.custom.homelabIp = "192.168.1.221";
       networking.custom.synologyIp = "192.168.1.5";
