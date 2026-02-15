@@ -39,6 +39,9 @@
         inputs.self.modules.homeManager.mbp
       ];
 
+      # Disable mouse acceleration (linear movement)
+      system.defaults.".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+
       system.stateVersion = 5;
     };
   flake.modules.homeManager.mbp = {
