@@ -21,15 +21,15 @@
           "@tarquinen/opencode-dcp@latest"
         ];
 
-        model = "zai-coding-plan/glm-4.7";
+        model = "zai-coding-plan/glm-5";
         small_model = "zai-coding-plan/glm-4.7-flash";
 
         provider = {
           "zai-coding-plan" = {
             options.timeout = false;
             models = {
-              "glm-4.7" = {
-                name = "GLM 4.7";
+              "glm-5" = {
+                name = "GLM 5";
                 options = {
                   reasoningEffort = "high";
                   reasoningSummary = "auto";

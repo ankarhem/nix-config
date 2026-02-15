@@ -6,6 +6,9 @@ let
       let
         pkgs = import inputs.nixpkgs {
           inherit (prev) system;
+          config = {
+            allowUnfree = true;
+          };
         };
       in
       {
