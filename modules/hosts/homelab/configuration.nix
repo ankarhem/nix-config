@@ -31,7 +31,6 @@
         gh
         gpg
         home-manager
-        homebrew
         idealpink
         launcher
         lazyvim
