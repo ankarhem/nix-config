@@ -35,6 +35,9 @@ in
     };
 
   flake.modules.homeManager.kde = {
+    imports = [
+      inputs.plasma-manager.homeModules.plasma-manager
+    ];
     programs.plasma = {
       enable = true;
       overrideConfig = true; # Discard non declarative config

@@ -11,7 +11,7 @@
         inputs.self.modules.homeManager.chat
         {
           home.packages = with pkgs; [
-            neochat
+            kdePackages.neochat
           ];
         }
       ];

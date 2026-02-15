@@ -20,7 +20,7 @@
         general
         gh
         gpg
-        gpu-nvidia
+        # gpu-nvidia
         home-manager
         kde
         launcher
