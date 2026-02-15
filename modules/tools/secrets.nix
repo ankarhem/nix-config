@@ -10,14 +10,12 @@ let
   };
 in
 {
-  flake.modules.nixos.secrets =
-    { config, ... }:
-    {
-      imports = [
-        inputs.sops-nix.nixosModules.sops
-      ];
-      inherit home-manager sops;
-    };
+  flake.modules.nixos.secrets = {
+    imports = [
+      inputs.sops-nix.nixosModules.sops
+    ];
+    inherit home-manager sops;
+  };
   flake.modules.darwin.secrets = {
     imports = [
       inputs.sops-nix.darwinModules.sops

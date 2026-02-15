@@ -1,11 +1,11 @@
-{ inputs, config, ... }:
+{ inputs, ... }:
 let
   nixpkgs.overlays = [
     (
       final: prev:
       let
         pkgs = import inputs.nixpkgs {
-          inherit (prev) system config;
+          inherit (prev) system;
         };
       in
       {

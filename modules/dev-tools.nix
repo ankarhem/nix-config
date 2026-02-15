@@ -1,4 +1,4 @@
-{ inputs, config, ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.dev-tools = {
     home-manager.sharedModules = [

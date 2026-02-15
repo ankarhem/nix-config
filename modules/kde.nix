@@ -1,7 +1,5 @@
 {
-  self,
   inputs,
-  pkgs,
   ...
 }:
 let
@@ -9,30 +7,32 @@ let
   cmdKey = if swapMetaAndAlt then "Alt" else "Meta";
 in
 {
-  flake.modules.nixos.kde = {
-    services.xserver.enable = true;
-    services.displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      autoNumlock = true;
+  flake.modules.nixos.kde =
+    { pkgs, ... }:
+    {
+      services.xserver.enable = true;
+      services.displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+        autoNumlock = true;
+      };
+      services.desktopManager.plasma6.enable = true;
+      programs.kdeconnect.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        kdePackages.kate
+        kdePackages.kcalc
+        kdePackages.ktorrent
+        kdePackages.partitionmanager
+        kdePackages.kolourpaint
+        wl-clipboard
+        appmenu-glib-translator
+      ];
+
+      home-manager.sharedModules = [
+        inputs.self.modules.homeManager.kde
+      ];
     };
-    services.desktopManager.plasma6.enable = true;
-    programs.kdeconnect.enable = true;
-
-    environment.systemPackages = with pkgs; [
-      kdePackages.kate
-      kdePackages.kcalc
-      kdePackages.ktorrent
-      kdePackages.partitionmanager
-      kdePackages.kolourpaint
-      wl-clipboard
-      appmenu-glib-translator
-    ];
-
-    home-manager.sharedModules = [
-      inputs.self.modules.homeManager.kde
-    ];
-  };
 
   flake.modules.homeManager.kde = {
     programs.plasma = {

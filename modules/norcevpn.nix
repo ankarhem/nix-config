@@ -1,4 +1,4 @@
-{ inputs, config, ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.norcevpn = {
     # Download profile from https://jetshop.openvpn.com/devices
