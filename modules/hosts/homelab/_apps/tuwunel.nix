@@ -116,6 +116,19 @@ in
     };
   };
 
+  sops.secrets."matrix/doublepuppet_as_token" = { };
+  sops.secrets."matrix/pickle_key" = { };
+  sops.secrets."matrix/telegram/as_token" = { };
+  sops.secrets."matrix/telegram/hs_token" = { };
+  sops.secrets."matrix/telegram/api_id" = { };
+  sops.secrets."matrix/telegram/api_hash" = { };
+  sops.secrets."matrix/instagram/as_token" = { };
+  sops.secrets."matrix/instagram/hs_token" = { };
+  sops.secrets."matrix/messenger/as_token" = { };
+  sops.secrets."matrix/messenger/hs_token" = { };
+  sops.secrets."matrix/signal/as_token" = { };
+  sops.secrets."matrix/signal/hs_token" = { };
+
   sops.templates."mautrix-bridges.env" = {
     content = ''
       DOUBLEPUPPET_AS_TOKEN=${config.sops.placeholder."matrix/doublepuppet_as_token"}
