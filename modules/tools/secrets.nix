@@ -1,10 +1,15 @@
-{ inputs, self, ... }:
+{
+  inputs,
+  self,
+  lib,
+  ...
+}:
 let
   home-manager.sharedModules = [
     inputs.self.modules.homeManager.secrets
   ];
   sops = {
-    defaultSopsFile = "${self}/secrets.yaml";
+    defaultSopsFile = lib.mkDefault "${self}/secrets.yaml";
     defaultSopsFormat = "yaml";
     age.generateKey = true;
   };

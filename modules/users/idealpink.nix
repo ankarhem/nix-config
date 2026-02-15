@@ -9,6 +9,7 @@ let
   sopsKeyModule =
     { pkgs, ... }:
     {
+      sops.defaultSopsFile = lib.mkDefault "${self}/secrets/homelab/secrets.yaml";
       sops.age.keyFile =
         if pkgs.stdenv.isLinux then
           "/home/${username}/.config/sops/age/age.key"
