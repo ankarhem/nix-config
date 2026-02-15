@@ -23,8 +23,8 @@ in
         inputs.self.modules.homeManager.firefox
       ];
       system.defaults.dock.persistent-apps = [
-        "${pkgs.firefox}/Applications/Element.app/"
-        "${pkgs.firefox-devedition}/Applications/Slack.app/"
+        "${pkgs.firefox}/Applications/Firefox.app/"
+        "${pkgs.firefox-devedition}/Applications/Firefox Developer Edition.app/"
       ];
     };
 
