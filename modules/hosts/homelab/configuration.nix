@@ -32,7 +32,6 @@
         gpg
         home-manager
         idealpink
-        launcher
         lazyvim
         nix
         secrets
