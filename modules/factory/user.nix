@@ -53,9 +53,11 @@
           system.primaryUser = lib.mkIf isAdmin "${username}";
         };
 
-      homeManager."${username}" = {
-        home.username = "${username}";
-        home.homeDirectory = "/home/${username}";
-      };
+      homeManager."${username}" =
+        { pkgs, ... }:
+        {
+          home.username = "${username}";
+          home.homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
+        };
     };
 }

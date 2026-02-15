@@ -3,7 +3,7 @@ let
   appleFontsModule =
     { pkgs, ... }:
     {
-      fonts.packages = with inputs.apple-fonts.packages.${pkgs.system}; [
+      fonts.packages = with inputs.apple-fonts.packages.${pkgs.stdenv.hostPlatform.system}; [
         sf-pro
         sf-pro-nerd
         sf-mono
