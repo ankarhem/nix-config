@@ -153,6 +153,10 @@ in
               "60" = {
                 enabled = false;
               };
+              # Disable Siri shortcut
+              "176" = {
+                enabled = false;
+              };
             };
           };
         };
