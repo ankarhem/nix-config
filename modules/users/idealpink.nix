@@ -30,7 +30,7 @@ in
         ];
         users.users.${username} = {
           extraGroups = [ "podman" ];
-          openssh.authorizedKeys.keys = inputs.flake.lib.getGithubKeys {
+          openssh.authorizedKeys.keys = self.lib.getGithubKeys {
             username = "ankarhem";
             sha256 = "0by0paqz05n41firv21i2izy0mk6sxqh2nn6wkcbwsy9n3wf537w";
           };
