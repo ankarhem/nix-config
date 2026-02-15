@@ -11,12 +11,12 @@ in
     };
   };
 
-  sops.secrets.radarr_api_key = { };
-  sops.secrets.sonarr_api_key = { };
+  sops.secrets."arr_tokens/radarr" = { };
+  sops.secrets."arr_tokens/sonarr" = { };
 
   sops.templates."unpackerr.env".content = ''
-    UN_RADARR_0_API_KEY=${config.sops.placeholder.radarr_api_key}
-    UN_SONARR_0_API_KEY=${config.sops.placeholder.sonarr_api_key}
+    UN_RADARR_0_API_KEY=${config.sops.placeholder."arr_tokens/radarr"}
+    UN_SONARR_0_API_KEY=${config.sops.placeholder."arr_tokens/sonarr"}
   '';
 
   virtualisation.oci-containers.containers."unpackerr" = {
