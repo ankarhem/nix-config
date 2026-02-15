@@ -61,7 +61,7 @@ in
       };
       programs.nh = {
         enable = true;
-        flake = "~/nix-config/";
+        flake = "$HOME/nix-config/";
         clean.enable = true;
       };
       programs.direnv = {

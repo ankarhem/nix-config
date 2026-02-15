@@ -44,7 +44,7 @@ in
       };
       homeManager.${username} = {
         home.sessionVariables = {
-          SOPS_AGE_KEY_FILE = "~/.config/sops/age/age.key";
+          SOPS_AGE_KEY_FILE = "$HOME/.config/sops/age/age.key";
         };
         imports =
           (with inputs.self.modules.homeManager; [
