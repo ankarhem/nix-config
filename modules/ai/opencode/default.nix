@@ -26,6 +26,12 @@
 
           model = "zai-coding-plan/glm-5";
           small_model = "zai-coding-plan/glm-4.7-flash";
+          agent = {
+            plan.model = "openai/gpt-5.3-codex";
+            explore.model = "zai-coding-plan/glm-4.7-flash";
+            general.model = "zai-coding-plan/glm-5";
+            compaction.model = "zai-coding-plan/glm-4.7-flash";
+          };
 
           provider = {
             "zai-coding-plan" = {
