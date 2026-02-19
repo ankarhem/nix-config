@@ -1,7 +1,7 @@
 ---
 name: jira-skill
 license: GPL-3.0
-description: A skill to use when creating or updating branches, commits or github prs in the context of a mentioned jira ticket (e.g. "PROJ-1234") or has a jira ticket in the branch name (such as ORD-2774-map-cart-reference-to-paypal).
+description: A skill to use when creating or updating branches, commits or github prs in the context of a mentioned jira ticket (e.g. "PROJ-1234") or has a jira ticket in the branch name (such as ORD-2774-map-cart-reference-to-paypal). Trigger on keywords such as "jira", "ticket", "branch", "commit", "pr", "pull request" and the like.
 ---
 
 # Jira Skill
