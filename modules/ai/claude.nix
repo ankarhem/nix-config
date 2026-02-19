@@ -42,6 +42,7 @@
           ] (_: true);
         };
         mcpServers = transformedMcpServers;
+        skills = ./skills;
       };
     };
 }
