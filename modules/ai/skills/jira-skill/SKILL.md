@@ -20,11 +20,11 @@ description: A skill to use when creating or updating branches, commits or githu
 
 ### Creating a Jira ticket
 
-See [CREATE_TICKET.md](CREATE_TICKET.md) for details about what to do when asked to create a jira ticket.
+See [CREATE_TICKET.md](references/CREATE_TICKET.md) for details about what to do when asked to create a jira ticket.
 
 ### Start working on a jira ticket
 
-See [START_TASK.md](START_TASK.md) for details about what to do when asked to start working on a jira ticket.
+See [START_TASK.md](references/START_TASK.md) for details about what to do when asked to start working on a jira ticket.
 
 ### Committing
 
@@ -32,4 +32,4 @@ Use the `git-commit` skill when creating commits.
 
 ### Creating or updating a Pull Request
 
-See [PULL_REQUEST.md](PULL_REQUEST.md).
+See [PULL_REQUEST.md](references/PULL_REQUEST.md).

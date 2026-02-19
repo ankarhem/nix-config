@@ -1,6 +1,6 @@
 # Creating or updating a Pull Request
 
-If there are any unstaged changes, start by applying the [commit logic](COMMIT.md) and then push the branch to the remote `git push`.
+If there are any unstaged changes, start by applying the commit logic (use `git-commit` skill) and then push the branch to the remote `git push`.
 If it errors due to an upstream branch not being set, warn the user and exit.
 
 If the jira mcp is available:

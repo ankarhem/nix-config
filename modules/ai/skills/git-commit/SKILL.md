@@ -85,7 +85,6 @@ EOF
 - One logical change per commit
 - Present tense: "add" not "added"
 - Imperative mood: "fix bug" not "fixes bug"
-- Reference issues: `Closes #123`, `Refs #456`
 - Keep description under 72 characters
 
 ## Git Safety Protocol
