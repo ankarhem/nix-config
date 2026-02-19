@@ -1,10 +1,10 @@
 ---
 name: jira-skill
 license: GPL-3.0
-description: A skill to use when creating or updating branches, commits or github prs in the context of a mentioned jira ticket or has a jira ticket in the branch name (such as ORD-2774-map-cart-reference-to-paypal).
+description: A skill to use when creating or updating branches, commits or github prs in the context of a mentioned jira ticket (e.g. "PROJ-1234") or has a jira ticket in the branch name (such as ORD-2774-map-cart-reference-to-paypal).
 ---
 
-# Jira Skills
+# Jira Skill
 
 ## Prerequisites
 
@@ -14,13 +14,13 @@ description: A skill to use when creating or updating branches, commits or githu
 
 ## Naming conventions
 
-- Branch: `<PROJECT-1234>-{terse-description-in-kebab-case}` max 50–60 chars.
+- Branch: `<PROJ-1234>-{terse-description-in-kebab-case}` max 50–60 chars.
 - Commit: `type: {terse description of commit}`. type follows semantic commit types such as `feat`, `fix`, `docs`, etc.
-- PR title: `<PROJECT-1234> | {description}` summarizing the full diff.
+- PR title: `<PROJ-1234> | {description}` summarizing the full diff.
 
-### Branch
+### Creating a Jira ticket
 
-Check the default branch `git symbolic-ref --short refs/remotes/origin/HEAD`. This will output something like `origin/main` or `origin/master`.
+See [CREATE_TICKET.md](CREATE_TICKET.md) for details about what to do when asked to create a jira ticket.
 
 ### Start working on a jira ticket
 

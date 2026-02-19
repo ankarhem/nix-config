@@ -9,7 +9,7 @@ If the jira mcp is available:
 
 #### Creating a pull request
 
-Use the `gh` cli to create a pull request with the naming convention. `gh pr create --title "<PROJECT-1234> | {description}" --body "{full description}"`.
+Use the `gh` cli to create a pull request with the naming convention. `gh pr create --title "<PROJ-1234> | {description}" --body "{full description}"`.
 
 If the jira mcp is available:
 
