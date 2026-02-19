@@ -71,16 +71,17 @@ These environment variables help prevent interactive prompts:
 
 ### Git Operations
 
-| Action     | Interactive (BAD)           | Non-Interactive (GOOD)                         |
-| ---------- | --------------------------- | ---------------------------------------------- |
-| **Commit** | `git commit`                | `git commit -m "msg"`                          |
-| **Merge**  | `git merge branch`          | `git merge --no-edit branch`                   |
-| **Pull**   | `git pull`                  | `git pull --no-edit`                           |
-| **Rebase** | `git rebase -i`             | `git rebase` (non-interactive)                 |
-| **Add**    | `git add -p`                | `git add .` or `git add <file>`                |
-| **Stash**  | `git stash pop` (conflicts) | `git stash pop` or handle manually             |
-| **Log**    | `git log` (pager)           | `git log --no-pager` or `git log -n 10`        |
-| **Diff**   | `git diff` (pager)          | `git diff --no-pager` or `git --no-pager diff` |
+| Action              | Interactive (BAD)           | Non-Interactive (GOOD)                              |
+| ------------------- | --------------------------- | --------------------------------------------------- |
+| **Commit**          | `git commit`                | `git commit -m "msg"`                               |
+| **Merge**           | `git merge branch`          | `git merge --no-edit branch`                        |
+| **Pull**            | `git pull`                  | `git pull --no-edit`                                |
+| **Rebase**          | `git rebase -i`             | `git rebase` (non-interactive)                      |
+| **Rebase continue** | `git rebase --continue`     | `git rebase --continue --no-edit` (non-interactive) |
+| **Add**             | `git add -p`                | `git add .` or `git add <file>`                     |
+| **Stash**           | `git stash pop` (conflicts) | `git stash pop` or handle manually                  |
+| **Log**             | `git log` (pager)           | `git log --no-pager` or `git log -n 10`             |
+| **Diff**            | `git diff` (pager)          | `git diff --no-pager` or `git --no-pager diff`      |
 
 ### System & Files
 
