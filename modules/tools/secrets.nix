@@ -1,0 +1,36 @@
+{
+  inputs,
+  self,
+  lib,
+  ...
+}:
+let
+  home-manager.sharedModules = [
+    inputs.self.modules.homeManager.secrets
+  ];
+  sops = {
+    defaultSopsFile = lib.mkDefault "${self}/secrets.yaml";
+    defaultSopsFormat = "yaml";
+    age.generateKey = true;
+  };
+in
+{
+  flake.modules.nixos.secrets = {
+    imports = [
+      inputs.sops-nix.nixosModules.sops
+    ];
+    inherit home-manager sops;
+  };
+  flake.modules.darwin.secrets = {
+    imports = [
+      inputs.sops-nix.darwinModules.sops
+    ];
+    inherit home-manager sops;
+  };
+  flake.modules.homeManager.secrets = {
+    imports = [
+      inputs.sops-nix.homeManagerModules.sops
+    ];
+    inherit sops;
+  };
+}

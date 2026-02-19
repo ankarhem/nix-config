@@ -2,8 +2,10 @@
   description = "MacOS System Configuration flake";
 
   inputs = {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,16 +14,13 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
-    darwin = {
+    nix-darwin = {
       url = "github:LnL7/nix-darwin/nix-darwin-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
@@ -42,17 +41,9 @@
       url = "github:Sikarugir-App/homebrew-sikarugir";
       flake = false;
     };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     git-hooks.url = "github:cachix/git-hooks.nix";
     lazyvim.url = "github:pfassina/lazyvim-nix";
-
     scripts.url = "github:ankarhem/scripts";
-
     comfyui-nix.url = "github:utensils/comfyui-nix";
     vicinae = {
       url = "github:vicinaehq/vicinae";
@@ -77,6 +68,8 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
+    opencode.url = "github:anomalyco/opencode";
+    opencode.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs =
@@ -91,13 +84,16 @@
       {
         imports = [
           inputs.git-hooks.flakeModule
+          inputs.flake-parts.flakeModules.modules
           (inputs.import-tree ./modules)
         ];
         systems = [
           "x86_64-linux"
           "aarch64-darwin"
         ];
-        flake.overlays.default = final: prev: self.packages;
+        flake.overlays.default = final: prev: {
+          local = self.packages.${prev.system};
+        };
         perSystem =
           {
             lib,
