@@ -49,6 +49,7 @@
           pkgs.local.clone_org
           mitmproxy
           bruno
+          jira-cli-go
           jetbrains.rider
           jetbrains.rust-rover
           jetbrains.webstorm
