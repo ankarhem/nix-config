@@ -26,12 +26,9 @@
         "legcord"
         "microsoft-teams"
       ];
-      homebrew.masApps = {
-        # "FluffyChat" = 1551469600;
-      };
       system.defaults.dock.persistent-apps = [
         "${pkgs.slack}/Applications/Slack.app/"
-        "/Applications/FluffyChat.app/"
+        "${pkgs.cinny-desktop}/Applications/Cinny.app/"
         "/Applications/Microsoft Teams.app/"
         "/Applications/legcord.app/"
         "/System/Applications/Messages.app/"
@@ -49,6 +46,9 @@
         ++ lib.optionals pkgs.stdenv.isLinux [
           legcord
           teams-for-linux
+        ]
+        ++ lib.optionals pkgs.stdenv.isDarwin [
+          cinny-desktop
         ];
     };
 }
