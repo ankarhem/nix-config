@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   domain = "ai.ankarhem.dev";
 in
@@ -9,29 +9,29 @@ in
   };
 
   sops.templates."open-webui.env".content = ''
-    WEBUI_ADMIN_EMAIL = "jakob@ankarhem.dev";
     WEBUI_ADMIN_PASSWORD=${config.sops.placeholder."open-webui/admin_password"}
-
-    # 1. GLM (z.ai) semicolon separated list
-    OPENAI_API_BASE_URLS = "https://api.z.ai/api/coding/paas/v4";
     OPENAI_API_KEYS=${config.sops.placeholder."mcp_tokens/glm"}
   '';
 
   services.open-webui = {
     enable = true;
+    package = pkgs._unstable.open-webui;
     host = "127.0.0.1";
-    port = 8080;
+    port = 15867;
     environment = {
       # Core settings
       WEBUI_URL = "https://${domain}";
       WEBUI_NAME = "AI Chat";
       ENV = "prod";
-      DATA_DIR = "/mnt/DISKETTEN_drive/open-webui/data";
+      # DATA_DIR = "/mnt/DISKETTEN_drive/open-webui";
 
+      OPENAI_API_BASE_URLS = "https://api.z.ai/api/coding/paas/v4";
       ENABLE_WEB_SEARCH = "True";
       WEB_SEARCH_ENGINE = "searxng";
 
       # Auth settings
+      WEBUI_ADMIN_NAME = "Jakob Ankarhem";
+      WEBUI_ADMIN_EMAIL = "jakob@ankarhem.dev";
       ENABLE_SIGNUP = "False";
 
       # Privacy
