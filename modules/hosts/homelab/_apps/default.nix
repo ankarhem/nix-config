@@ -6,6 +6,7 @@
     ./baikal.nix
     ./dokploy.nix
     ./hitster.nix
+    ./open-webui.nix
     ./immich.nix
     ./obsidian-livesync.nix
     ./omada.nix
