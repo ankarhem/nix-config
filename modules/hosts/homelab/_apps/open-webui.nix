@@ -21,12 +21,12 @@ in
     enable = true;
     host = "127.0.0.1";
     port = 8080;
-    stateDir = "/mnt/DISKETTEN_drive/open-webui";
     environment = {
       # Core settings
       WEBUI_URL = "https://${domain}";
       WEBUI_NAME = "AI Chat";
       ENV = "prod";
+      DATA_DIR = "/mnt/DISKETTEN_drive/open-webui/data";
 
       # Auth settings
       ENABLE_SIGNUP = "False";
