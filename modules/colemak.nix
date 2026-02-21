@@ -5,23 +5,23 @@
       layout = "us";
       variant = "colemak";
     };
-    services.keyd = {
-      enable = true;
-      keyboards = {
-        default = {
-          ids = [ "*" ];
-          settings = {
-            main = {
-              capslock = "escape";
-              leftalt = "leftmeta";
-              leftmeta = "leftalt";
-              rightalt = "rightmeta";
-              rightmeta = "rightalt";
-            };
-          };
-        };
-      };
-    };
+    # services.keyd = {
+    #   enable = true;
+    #   keyboards = {
+    #     default = {
+    #       ids = [ "*" ];
+    #       settings = {
+    #         main = {
+    #           capslock = "escape";
+    #           leftalt = "leftmeta";
+    #           leftmeta = "leftalt";
+    #           rightalt = "rightmeta";
+    #           rightmeta = "rightalt";
+    #         };
+    #       };
+    #     };
+    #   };
+    # };
   };
 
   flake.modules.darwin.colemak = {
