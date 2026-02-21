@@ -28,6 +28,9 @@ in
       ENV = "prod";
       DATA_DIR = "/mnt/DISKETTEN_drive/open-webui/data";
 
+      ENABLE_WEB_SEARCH = "True";
+      WEB_SEARCH_ENGINE = "searxng";
+
       # Auth settings
       ENABLE_SIGNUP = "False";
 
