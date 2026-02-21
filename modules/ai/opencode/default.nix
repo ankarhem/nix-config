@@ -21,7 +21,8 @@
           instructions = [ ./additional_instructions.md ];
           plugin = [
             "@simonwjackson/opencode-direnv@latest"
-            "@tarquinen/opencode-dcp@latest"
+            # "@tarquinen/opencode-dcp@latest"
+            "oh-my-opencode"
           ];
 
           model = "zai-coding-plan/glm-5";
