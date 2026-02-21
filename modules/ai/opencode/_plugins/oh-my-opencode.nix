@@ -1,4 +1,13 @@
-_: {
+_:
+let
+  gptCodex = "openai/gpt-5.3-codex";
+  gpt = "openai/gpt-5.3";
+  gptNano = "openai/gpt-5-nano";
+
+  glm = "zai-coding-plan/glm-5";
+  glmFlash = "zai-coding-plan/glm-4.7-flash";
+in
+{
   programs.opencode.settings = {
     plugin = [
       "oh-my-opencode"
@@ -14,60 +23,27 @@ _: {
       default_max_iterations = 25;
     };
     agents = {
-      sisyphus = {
-        model = "anthropic/claude-sonnet-4-6";
-        variant = "max";
-        ultrawork = {
-          model = "anthropic/claude-opus-4-6";
-          variant = "max";
-        };
-      };
-      hephaestus = {
-        model = "openai/gpt-5.3-codex";
-        variant = "medium";
-      };
-      oracle = {
-        model = "openai/gpt-5.2";
-        variant = "high";
-      };
-      librarian.model = "zai-coding-plan/glm-4.7";
-      explore.model = "anthropic/claude-haiku-4-5";
-      multimodal-looker.model = "google/gemini-3-flash";
-      prometheus = {
-        model = "anthropic/claude-opus-4-6";
-        variant = "max";
-      };
-      metis = {
-        model = "anthropic/claude-opus-4-6";
-        variant = "max";
-      };
-      momus = {
-        model = "openai/gpt-5.2";
-        variant = "medium";
-      };
-      atlas.model = "anthropic/claude-sonnet-4-6";
+      sisyphus.model = glm;
+      sisyphys-junior.model = glm;
+      hephaestus.model = gptCodex;
+      oracle.model = gpt;
+      librarian.model = glm;
+      explore.model = gptNano;
+      multimodal-looker.model = gpt;
+      prometheus.model = gptCodex;
+      metis.model = gpt;
+      momus.model = gpt;
+      atlas.model = gptCodex;
     };
     categories = {
-      visual-engineering = {
-        model = "google/gemini-3-pro";
-        variant = "high";
-      };
-      ultrabrain = {
-        model = "openai/gpt-5.3-codex";
-        variant = "xhigh";
-      };
-      deep = {
-        model = "openai/gpt-5.3-codex";
-        variant = "medium";
-      };
-      artistry = {
-        model = "google/gemini-3-pro";
-        variant = "high";
-      };
-      quick.model = "anthropic/claude-haiku-4-5";
-      unspecified-low.model = "anthropic/claude-sonnet-4-6";
-      unspecified-high.model = "anthropic/claude-sonnet-4-6";
-      writing.model = "google/gemini-3-flash";
+      visual-engineering.model = gptCodex;
+      ultrabrain.model = gptCodex;
+      deep.model = gptCodex;
+      artistry.model = gptCodex;
+      quick.model = gptNano;
+      unspecified-low.model = glm;
+      unspecified-high.model = gptCodex;
+      writing.model = glm;
     };
   };
 }
