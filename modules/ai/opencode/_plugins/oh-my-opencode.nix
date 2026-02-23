@@ -2,7 +2,6 @@ _:
 let
   gptCodex = "openai/gpt-5.3-codex";
   gpt = "openai/gpt-5.3";
-  gptNano = "openai/gpt-5-nano";
 
   glm = "zai-coding-plan/glm-5";
   glmFlash = "zai-coding-plan/glm-4.7-flash";
@@ -28,7 +27,7 @@ in
       hephaestus.model = gptCodex;
       oracle.model = gpt;
       librarian.model = glm;
-      explore.model = gptNano;
+      explore.model = glmFlash;
       multimodal-looker.model = gpt;
       prometheus.model = gptCodex;
       metis.model = gpt;
@@ -40,7 +39,7 @@ in
       ultrabrain.model = gptCodex;
       deep.model = gptCodex;
       artistry.model = gptCodex;
-      quick.model = gptNano;
+      quick.model = glmFlash;
       unspecified-low.model = glm;
       unspecified-high.model = gptCodex;
       writing.model = glm;
