@@ -86,7 +86,58 @@ git log origin/main..HEAD --format=%s
 - Scope: Which package/area is affected?
 - Summary: What does the change do?
 
-4. **Create PR with appropriate title format and body**:
+4. **If PR type is `fix` (bug fix), prompt user for regression analysis**:
+
+Ask the user:
+
+> "This is a bug fix PR. Would you like me to find which commit introduced the regression?"
+>
+> Options:
+>
+> 1. **Yes, using git bisect** — Load the `git-bisect` skill to automatically find the regression commit
+> 2. **Find likely culprit using git log** — I'll analyze recent commits to identify the most probable cause
+> 3. **No** — Skip regression analysis
+
+### Option 1: Git Bisect
+
+Load the `git-bisect` skill and follow its workflow to find the regression commit.
+
+### Option 2: Git Log Analysis
+
+Analyze recent commits to find likely culprits:
+
+```bash
+# Show recent commits in affected files/areas
+git log --oneline -20 -- <scope-path>
+
+# Look for commits mentioning relevant keywords
+git log --oneline --grep="bug\|fix\|issue\|<scope>" -20
+
+# Show commits that touched specific files
+git log -p --oneline -10 -- <affected-files>
+```
+
+Based on commit messages and changes, identify the most likely regression commit.
+
+### After Finding the Regression Commit
+
+Once the regression commit is identified (via either method):
+
+- **Add comment to Jira ticket** (if ticket exists):
+
+Load the `jira` skill and follow the instructions to add a comment:
+
+> Bug introduced in [hash](link-to-commit).
+
+- **Include in PR body** under a new "Regression" section:
+
+```markdown
+## Regression
+
+This bug was introduced in [<sha>](commit-url): <commit message>
+```
+
+5. **Create PR with appropriate title format and body**:
 
 ```bash
 # If Jira ticket found (e.g., TICKET-1234):
