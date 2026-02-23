@@ -1,4 +1,4 @@
-_:
+{ lib, pkgs, ... }:
 let
   gptCodex = "openai/gpt-5.3-codex";
   gpt = "openai/gpt-5.3";
@@ -43,6 +43,16 @@ in
       unspecified-low.model = glm;
       unspecified-high.model = gptCodex;
       writing.model = glm;
+    };
+    lsp = {
+      omnisharp = {
+        command = [
+          (lib.getExe pkgs.omnisharp-roslyn)
+        ];
+        extensions = [ ".cs" ];
+        priority = 100;
+        initializationOptions = { };
+      };
     };
   };
 }
