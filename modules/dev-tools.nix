@@ -23,7 +23,7 @@
     };
 
   flake.modules.homeManager.dev-tools =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     let
       combinedDotnet = pkgs.dotnetCorePackages.combinePackages [
         pkgs.dotnet-sdk_8
@@ -40,6 +40,11 @@
         paths = [
           "${pkgs.local.artifacts-credprovider}/plugins"
         ];
+      };
+
+      sops.secrets."mcp_tokens/jira" = { };
+      home.sessionVariables = {
+        JIRA_API_TOKEN = "$(cat ${config.sops.secrets."mcp_tokens/jira".path})";
       };
 
       home.packages =
