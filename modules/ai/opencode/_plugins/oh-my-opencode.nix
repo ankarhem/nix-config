@@ -49,9 +49,38 @@ in
         command = [
           (lib.getExe pkgs.omnisharp-roslyn)
         ];
-        extensions = [ ".cs" ];
+        args = [
+          "--languageserver"
+        ];
+        extensions = [
+          ".cs"
+          ".csx"
+        ];
+        transport = "stdio";
         priority = 100;
         initializationOptions = { };
+        settings = { };
+        maxRestarts = 3;
+      };
+      typescript = {
+        command = [
+          (lib.getExe pkgs.vtsls)
+        ];
+        args = [
+          "--stdio"
+        ];
+        extensionsToLanguageId = {
+          ".ts" = "typescript";
+          ".tsx" = "typescriptreact";
+          ".js" = "javascript";
+          ".jsx" = "javascriptreact";
+          ".mjs" = "javascript";
+          ".cjs" = "javascript";
+        };
+        transport = "stdio";
+        initializationOptions = { };
+        settings = { };
+        maxRestarts = 3;
       };
     };
   };
