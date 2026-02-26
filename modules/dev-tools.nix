@@ -51,6 +51,7 @@
         with pkgs;
         [
           azure-cli
+          argocd
           pkgs.local.clone_org
           mitmproxy
           bruno
