@@ -17,8 +17,6 @@
           };
           "mcp_tokens/glm" = {
           };
-          "mcp_tokens/jira" = {
-          };
         };
       };
       programs.mcp = {
@@ -54,10 +52,6 @@
             type = "http";
             url = "https://mcp.context7.com/mcp";
             headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens/context7".path}}";
-          };
-          atlassian = {
-            type = "sse";
-            url = "https://mcp.atlassian.com/v1/sse";
           };
           devin-wiki = {
             type = "http";
