@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 let
   gptCodex = "openai/gpt-5.3-codex";
-  gpt = "openai/gpt-5.3";
+  gpt = "openai/gpt-5.2";
 
   glm = "zai-coding-plan/glm-5";
   glmFlash = "zai-coding-plan/glm-4.7-flash";
