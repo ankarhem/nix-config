@@ -40,8 +40,9 @@ in
         };
         imports =
           (with inputs.self.modules.homeManager; [
-            git
             ghostty
+            git
+            happier-cli
             npm
             ssh
           ])
