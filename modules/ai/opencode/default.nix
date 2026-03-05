@@ -31,9 +31,9 @@
             plan.model = "openai/gpt-5.3-codex";
             general.model = "zai-coding-plan/glm-5";
             explore.model = "zai-coding-plan/glm-4.7-flash";
-            compaction.model = "zai-coding-plan/glm-4.7-flash";
+            compaction.model = "zai-coding-plan/glm-5";
             title.model = "zai-coding-plan/glm-4.7-flash";
-            summary.model = "zai-coding-plan/glm-4.7-flash";
+            summary.model = "zai-coding-plan/glm-5";
           };
 
           provider = {
