@@ -28,7 +28,7 @@
       ];
       system.defaults.dock.persistent-apps = [
         "${pkgs.slack}/Applications/Slack.app/"
-        "${pkgs.cinny-desktop}/Applications/Cinny.app/"
+        "${pkgs._unstable.cinny-desktop}/Applications/Cinny.app/"
         "/Applications/Microsoft Teams.app/"
         "/Applications/legcord.app/"
         "/System/Applications/Messages.app/"
@@ -48,7 +48,7 @@
           teams-for-linux
         ]
         ++ lib.optionals pkgs.stdenv.isDarwin [
-          cinny-desktop
+          _unstable.cinny-desktop
         ];
     };
 }
