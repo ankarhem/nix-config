@@ -39,7 +39,7 @@ in
       ultrabrain.model = gptCodex;
       deep.model = gptCodex;
       artistry.model = gptCodex;
-      quick.model = glmFlash;
+      quick.model = glm;
       unspecified-low.model = glm;
       unspecified-high.model = gptCodex;
       writing.model = glm;
