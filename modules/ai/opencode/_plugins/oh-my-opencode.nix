@@ -23,7 +23,9 @@ in
     };
     agents = {
       sisyphus.model = glm;
+      Sisyphus.model = glm; # this shouldn't be necessary
       sisyphys-junior.model = glm;
+      Sisyphys-Junior.model = glm; # this shouldn't be necessary
       hephaestus.model = gptCodex;
       oracle.model = gpt;
       librarian.model = glm;
