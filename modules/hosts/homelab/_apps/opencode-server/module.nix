@@ -8,6 +8,7 @@
 with lib;
 let
   cfg = config.services.opencode-server;
+  corsOption = if cfg.domain != null then "--cors ${cfg.domain}" else "";
 in
 {
   options.services.opencode-server = {
@@ -41,6 +42,12 @@ in
       description = "User to run OpenCode server as";
     };
 
+    domain = mkOption {
+      type = types.nullOr types.str;
+      description = "Domain when used behind a reverse proxy";
+      default = null;
+    };
+
     environmentFiles = mkOption {
       type = types.listOf types.path;
       description = "List of environment files to load for OpenCode server";
@@ -72,19 +79,9 @@ in
         User = cfg.user;
         Group = "users";
         WorkingDirectory = cfg.workingDir;
-        ExecStart = "${cfg.package}/bin/opencode web --port ${toString cfg.port} --hostname ${cfg.hostname}";
+        ExecStart = "${cfg.package}/bin/opencode web --port ${toString cfg.port} --hostname ${cfg.hostname} ${corsOption}";
         Restart = "on-failure";
         RestartSec = 5;
-
-        # Security hardening
-        NoNewPrivileges = true;
-        ProtectSystem = "strict";
-        ProtectHome = "read-only";
-        ReadWritePaths = [
-          cfg.workingDir
-          "/home/${cfg.user}/.local/share/opencode"
-          "/home/${cfg.user}/.config/opencode"
-        ];
         EnvironmentFile = cfg.environmentFiles;
       };
     };
