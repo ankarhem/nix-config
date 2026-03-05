@@ -70,6 +70,8 @@
     import-tree.url = "github:vic/import-tree";
     opencode.url = "github:anomalyco/opencode";
     opencode.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # nix-happier.url = "github.com:happier-dev/nix-happier";
+    nix-happier.url = "github:das-monki/nix-happier";
   };
 
   outputs =
