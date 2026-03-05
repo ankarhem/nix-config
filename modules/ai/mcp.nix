@@ -7,6 +7,7 @@
     { config, pkgs, ... }:
     let
       nodejs_lts = pkgs.nodejs_24;
+      nixPkg = config.nix.package;
     in
     {
       sops = {
@@ -37,7 +38,7 @@
           };
           mcp-nixos = {
             type = "stdio";
-            command = "nix";
+            command = "${nixPkg}/bin/nix";
             args = [
               "run"
               "github:utensils/mcp-nixos"
