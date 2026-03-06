@@ -93,6 +93,7 @@ in
           grc
           htop
           imagemagick
+          jira-cli-go
           jq
           k9s
           kubelogin
@@ -102,8 +103,6 @@ in
           pup
           ripgrep
           rm-improved
-          # scriptPkgs.summarize
-          # scriptPkgs.yt-sub
           sops
           tailscale
           tree
