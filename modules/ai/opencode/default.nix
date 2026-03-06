@@ -1,4 +1,9 @@
 { inputs, ... }:
+let
+  glm = "zai-coding-plan/glm-5";
+  glmFlash = "zai-coding-plan/glm-4.7-flash";
+  gpt = "openai/gpt-5.4";
+in
 {
   flake.modules.homeManager.opencode =
     { pkgs, ... }:
@@ -24,32 +29,16 @@
             # "@tarquinen/opencode-dcp@latest"
           ];
 
-          model = "zai-coding-plan/glm-5";
-          small_model = "zai-coding-plan/glm-4.7-flash";
+          model = glm;
+          small_model = glmFlash;
           agent = {
-            build.model = "zai-coding-plan/glm-5";
-            plan.model = "openai/gpt-5.3-codex";
-            general.model = "zai-coding-plan/glm-5";
-            explore.model = "zai-coding-plan/glm-4.7-flash";
-            compaction.model = "zai-coding-plan/glm-5";
-            title.model = "zai-coding-plan/glm-4.7-flash";
-            summary.model = "zai-coding-plan/glm-5";
-          };
-
-          provider = {
-            "zai-coding-plan" = {
-              options.timeout = false;
-              models = {
-                "glm-5" = {
-                  name = "GLM 5";
-                  options = {
-                    reasoningEffort = "high";
-                    reasoningSummary = "auto";
-                    textVerbosity = "low";
-                  };
-                };
-              };
-            };
+            build.model = glm;
+            plan.model = gpt;
+            general.model = gpt;
+            explore.model = glmFlash;
+            compaction.model = glm;
+            title.model = glmFlash;
+            summary.model = glm;
           };
         };
       };
