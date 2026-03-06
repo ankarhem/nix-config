@@ -25,8 +25,8 @@
         ];
       in
       [
-        bat
         bash
+        bat
         bottom
         coreutils
         curl
@@ -41,6 +41,7 @@
         htop
         jira-cli-go
         jq
+        local.clone_org
         nix
         nodejs_24
         pup
