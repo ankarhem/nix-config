@@ -31,7 +31,7 @@ in
           extraGroups = [ "podman" ];
           openssh.authorizedKeys.keys = self.lib.getGithubKeys {
             username = "ankarhem";
-            sha256 = "0by0paqz05n41firv21i2izy0mk6sxqh2nn6wkcbwsy9n3wf537w";
+            sha256 = "0wqcmrsff263md06nksm8zrgiyd53vh4gxyv5rqgbz9kdb0fb0zh";
           };
         };
       };
