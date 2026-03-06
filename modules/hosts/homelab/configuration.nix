@@ -30,7 +30,6 @@
         general
         gh
         gpg
-        happier-server
         home-manager
         idealpink
         lazyvim

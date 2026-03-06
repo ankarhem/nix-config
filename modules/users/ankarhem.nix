@@ -42,7 +42,6 @@ in
           (with inputs.self.modules.homeManager; [
             ghostty
             git
-            happier-cli
             npm
             ssh
           ])
