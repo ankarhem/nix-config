@@ -53,6 +53,12 @@ in
       description = "List of environment files to load for OpenCode server";
       default = [ ];
     };
+
+    runtimeDependencies = mkOption {
+      type = types.listOf types.package;
+      description = "Additional runtime dependencies for OpenCode server";
+      default = [ ];
+    };
   };
 
   config = mkIf cfg.enable {
@@ -73,6 +79,7 @@ in
       description = "OpenCode server - remote coding agent backend";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
+      path = cfg.runtimeDependencies;
 
       serviceConfig = {
         Type = "simple";

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./module.nix
@@ -15,6 +15,39 @@
     environmentFiles = [ config.sops.templates."happier-server.env".path ];
     workingDir = "/home/idealpink/repos";
     domain = "https://opencode.internal.internetfeno.men";
+    runtimeDependencies =
+      with pkgs;
+      let
+        dotnet = dotnetCorePackages.combinePackages [
+          pkgs.dotnet-sdk_8
+          pkgs.dotnet-sdk_9
+          pkgs.dotnet-sdk_10
+        ];
+      in
+      [
+        bat
+        bash
+        bottom
+        coreutils
+        curl
+        deno
+        dig
+        dotnet
+        fd
+        gh
+        git
+        gitleaks
+        grc
+        htop
+        jira-cli-go
+        jq
+        nix
+        nodejs_24
+        pup
+        ripgrep
+        uv
+        wget
+      ];
   };
 
   services.nginx.virtualHosts."opencode.internal.internetfeno.men" = {
