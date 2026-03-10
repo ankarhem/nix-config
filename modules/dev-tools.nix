@@ -60,6 +60,7 @@
           pkgs.local.clone_org
           mitmproxy
           bruno
+          bun
           jira-cli-go
           jetbrains.rider
           jetbrains.rust-rover
