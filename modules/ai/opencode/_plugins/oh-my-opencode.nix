@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   # gptCodex = "openai/gpt-5.3-codex";
   gptCodex = "openai/gpt-5.4";
@@ -45,45 +45,6 @@ in
       unspecified-low.model = glm;
       unspecified-high.model = gptCodex;
       writing.model = glm;
-    };
-    lsp = {
-      omnisharp = {
-        command = [
-          (lib.getExe pkgs.omnisharp-roslyn)
-        ];
-        args = [
-          "--languageserver"
-        ];
-        extensions = [
-          ".cs"
-          ".csx"
-        ];
-        transport = "stdio";
-        priority = 100;
-        initializationOptions = { };
-        settings = { };
-        maxRestarts = 3;
-      };
-      typescript = {
-        command = [
-          (lib.getExe pkgs.vtsls)
-        ];
-        args = [
-          "--stdio"
-        ];
-        extensionsToLanguageId = {
-          ".ts" = "typescript";
-          ".tsx" = "typescriptreact";
-          ".js" = "javascript";
-          ".jsx" = "javascriptreact";
-          ".mjs" = "javascript";
-          ".cjs" = "javascript";
-        };
-        transport = "stdio";
-        initializationOptions = { };
-        settings = { };
-        maxRestarts = 3;
-      };
     };
   };
 }
