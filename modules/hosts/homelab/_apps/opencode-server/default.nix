@@ -44,8 +44,10 @@
         local.clone_org
         nix
         nodejs_24
+        openssh
         pup
         ripgrep
+        tree
         uv
         wget
       ];
