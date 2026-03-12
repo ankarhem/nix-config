@@ -46,7 +46,9 @@
         nodejs_24
         openssh
         pup
+        python3
         ripgrep
+        strace
         tree
         uv
         wget
