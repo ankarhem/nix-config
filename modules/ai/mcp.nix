@@ -1,13 +1,20 @@
 {
+  inputs,
   self,
   ...
 }:
 {
   flake.modules.homeManager.mcp =
-    { config, pkgs, ... }:
+    {
+      lib,
+      config,
+      pkgs,
+      ...
+    }:
     let
       nodejs_lts = pkgs.nodejs_24;
       nixPkg = config.nix.package;
+      truesight = inputs.truesight.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
       sops = {
@@ -23,6 +30,13 @@
       programs.mcp = {
         enable = true;
         servers = {
+          truesight = {
+            type = "stdio";
+            command = "${lib.getExe truesight}";
+            args = [
+              "mcp"
+            ];
+          };
           playwrite = {
             type = "stdio";
             command = "${nodejs_lts}/bin/npx";
