@@ -30,6 +30,15 @@
       programs.mcp = {
         enable = true;
         servers = {
+          angular = {
+            type = "stdio";
+            command = "${nodejs_lts}/bin/npx";
+            args = [
+              "-y"
+              "@angular/cli"
+              "mcp"
+            ];
+          };
           truesight = {
             type = "stdio";
             command = "${lib.getExe truesight}";
@@ -40,7 +49,7 @@
           playwrite = {
             type = "stdio";
             command = "${nodejs_lts}/bin/npx";
-            args = [ "@playwright/mcp@latest" ];
+            args = [ "@playwright/mcp" ];
           };
           sequential-thinking = {
             type = "stdio";
