@@ -1136,11 +1136,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1773349686,
-        "narHash": "sha256-jrshQUS0G64uTQCYu8B4meTTBg3sNiP6J8dCAHNGuuk=",
+        "lastModified": 1773609808,
+        "narHash": "sha256-i1N5M92BIU2QItjXO/qbjBxvXzKyK2axDvbKaykXo5I=",
         "owner": "ankarhem",
         "repo": "truesight",
-        "rev": "67dd7a1221a78101371a1540ca4d42a80520e943",
+        "rev": "02d10099c33ee49d6783d4e77c77029451b2354c",
         "type": "github"
       },
       "original": {
