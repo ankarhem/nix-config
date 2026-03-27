@@ -1,12 +1,10 @@
 { pkgs, ... }:
 let
-  # gptCodex = "openai/gpt-5.3-codex";
   gptCodex = "openai/gpt-5.4";
-  # gpt = "openai/gpt-5.2";
   gpt = "openai/gpt-5.4";
 
-  glm = "zai-coding-plan/glm-5";
-  glmFlash = "zai-coding-plan/glm-4.7-flash";
+  glm = "zai-coding-plan/glm-5.1";
+  glmFlash = "zai-coding-plan/glm-5-turbo";
 in
 {
   programs.opencode.settings = {

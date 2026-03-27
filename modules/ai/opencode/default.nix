@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  glm = "zai-coding-plan/glm-5";
+  glm = "zai-coding-plan/glm-5.1";
   glmFlash = "zai-coding-plan/glm-5-turbo";
   gpt = "openai/gpt-5.4";
 in
