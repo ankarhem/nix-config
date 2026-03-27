@@ -78,18 +78,6 @@
             url = "https://api.z.ai/api/mcp/web_search_prime/mcp";
             headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens/glm".path}}";
           };
-          zai-vision = {
-            type = "stdio";
-            command = "${nodejs_lts}/bin/npx";
-            args = [
-              "-y"
-              "@z_ai/mcp-server"
-            ];
-            environment = {
-              Z_AI_MODE = "ZAI";
-              Z_AI_API_KEY = "{file:${config.sops.secrets."mcp_tokens/glm".path}}";
-            };
-          };
         };
       };
     };
