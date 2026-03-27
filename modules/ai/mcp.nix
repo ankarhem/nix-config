@@ -46,11 +46,6 @@
               "mcp"
             ];
           };
-          playwrite = {
-            type = "stdio";
-            command = "${nodejs_lts}/bin/npx";
-            args = [ "@playwright/mcp" ];
-          };
           sequential-thinking = {
             type = "stdio";
             command = "${nodejs_lts}/bin/npx";

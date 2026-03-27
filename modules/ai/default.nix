@@ -7,6 +7,7 @@ let
     claude
     mcp
     opencode
+    skills
   ];
 in
 {

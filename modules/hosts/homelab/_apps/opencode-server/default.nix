@@ -1,4 +1,52 @@
-{ config, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
+let
+  deps =
+    with pkgs;
+    let
+      dotnet = dotnetCorePackages.combinePackages [
+        pkgs.dotnet-sdk_8
+        pkgs.dotnet-sdk_9
+        pkgs.dotnet-sdk_10
+      ];
+    in
+    [
+      bash
+      bat
+      bottom
+      coreutils
+      curl
+      deno
+      dig
+      dotnet
+      fd
+      gh
+      git
+      gitleaks
+      grc
+      htop
+      jira-cli-go
+      jq
+      local.clone_org
+      nix
+      nodejs_24
+      openssh
+      pup
+      python3
+      ripgrep
+      strace
+      tree
+      uv
+      wget
+    ]
+    ++ [
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
+    ];
+in
 {
   imports = [
     ./module.nix
@@ -15,44 +63,7 @@
     environmentFiles = [ config.sops.templates."happier-server.env".path ];
     workingDir = "/home/idealpink/repos";
     domain = "https://opencode.internal.internetfeno.men";
-    runtimeDependencies =
-      with pkgs;
-      let
-        dotnet = dotnetCorePackages.combinePackages [
-          pkgs.dotnet-sdk_8
-          pkgs.dotnet-sdk_9
-          pkgs.dotnet-sdk_10
-        ];
-      in
-      [
-        bash
-        bat
-        bottom
-        coreutils
-        curl
-        deno
-        dig
-        dotnet
-        fd
-        gh
-        git
-        gitleaks
-        grc
-        htop
-        jira-cli-go
-        jq
-        local.clone_org
-        nix
-        nodejs_24
-        openssh
-        pup
-        python3
-        ripgrep
-        strace
-        tree
-        uv
-        wget
-      ];
+    runtimeDependencies = deps;
   };
 
   services.nginx.virtualHosts."opencode.internal.internetfeno.men" = {

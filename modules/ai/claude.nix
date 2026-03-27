@@ -18,12 +18,6 @@
           }
         ) config.programs.mcp.servers
       );
-
-      readSkillsFrom =
-        dir:
-        lib.mapAttrs (name: _: dir + "/${name}") (
-          lib.filterAttrs (_: type: type == "directory") (builtins.readDir dir)
-        );
     in
 
     {
@@ -48,7 +42,6 @@
           ] (_: true);
         };
         mcpServers = transformedMcpServers;
-        skills = readSkillsFrom ./skills;
       };
     };
 }
