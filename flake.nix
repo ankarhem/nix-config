@@ -68,7 +68,7 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-    opencode.url = "github:anomalyco/opencode";
+    opencode.url = "github:anomalyco/opencode/0d6c60136562cca785b428aed446428d61f42616";
     opencode.inputs.nixpkgs.follows = "nixpkgs-unstable";
     truesight.url = "github:ankarhem/truesight";
     truesight.inputs.nixpkgs.follows = "nixpkgs";
