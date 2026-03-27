@@ -68,10 +68,6 @@
               "--"
             ];
           };
-          ms-learn = {
-            type = "http";
-            url = "https://learn.microsoft.com/api/mcp";
-          };
           context7 = {
             type = "http";
             url = "https://mcp.context7.com/mcp";
