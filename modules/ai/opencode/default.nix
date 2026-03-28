@@ -25,7 +25,6 @@ in
           };
           instructions = [
             ./non_interactivity.md
-            ./truesight.md
           ];
           plugin = [
             "@simonwjackson/opencode-direnv@latest"
