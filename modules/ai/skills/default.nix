@@ -27,6 +27,7 @@ in
     {
       home.packages = [
         inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.ck
       ];
 
       home.file.".agents/skills".source =

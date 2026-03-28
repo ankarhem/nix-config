@@ -14,7 +14,7 @@
     let
       nodejs_lts = pkgs.nodejs_24;
       nixPkg = config.nix.package;
-      truesight = inputs.truesight.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      # truesight = inputs.truesight.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
       sops = {
@@ -39,13 +39,13 @@
               "mcp"
             ];
           };
-          truesight = {
-            type = "stdio";
-            command = "${lib.getExe truesight}";
-            args = [
-              "mcp"
-            ];
-          };
+          # truesight = {
+          #   type = "stdio";
+          #   command = "${lib.getExe truesight}";
+          #   args = [
+          #     "mcp"
+          #   ];
+          # };
           sequential-thinking = {
             type = "stdio";
             command = "${nodejs_lts}/bin/npx";
