@@ -10,4 +10,9 @@ in
       proxyPass = "http://dokploy.local:${port}";
     };
   };
+  services.nginx.virtualHosts."*.traefik.me" = {
+    locations."/" = {
+      proxyPass = "http://dokploy.local";
+    };
+  };
 }
