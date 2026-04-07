@@ -15,6 +15,7 @@ let
       ];
     in
     [
+      _unstable.rtk
       bash
       bat
       bottom
