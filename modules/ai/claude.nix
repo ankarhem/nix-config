@@ -21,10 +21,6 @@
     in
 
     {
-      home.packages = [
-        pkgs.local.happy-coder
-      ];
-
       programs.claude-code = {
         enable = true;
 

@@ -10,11 +10,6 @@
     {
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.dev-tools
-        {
-          home.packages = with pkgs; [
-            local.openchamber-desktop
-          ];
-        }
       ];
       homebrew.casks = [
         "cursor"

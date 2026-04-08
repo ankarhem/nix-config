@@ -31,7 +31,7 @@ in
         global.brewfile = true;
 
         greedyCasks = true;
-        caskArgs.no_quarantine = true;
+        # caskArgs.no_quarantine = true;
       };
 
       nix-homebrew = {
