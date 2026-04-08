@@ -22,8 +22,12 @@ in
         environmentFile = config.sops.templates."attic.env".path;
 
         settings = {
-          listen = "[::]:${toString port}";
+          storage = {
+            type = "local";
+            path = "/mnt/DISKETTEN_drive/attic";
+          };
 
+          listen = "[::]:${toString port}";
           jwt = { };
 
           # Data chunking
