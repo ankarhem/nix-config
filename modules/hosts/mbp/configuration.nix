@@ -10,6 +10,7 @@
         with inputs.self.modules.darwin;
         [
           ai
+          attic-client
           ankarhem
           chat
           colemak
