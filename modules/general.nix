@@ -93,7 +93,7 @@ in
         "mos"
         "orbstack"
         "pairpods"
-        "runelite"
+        # "runelite"
         "sikarugir"
         "steam"
         "tailscale-app"
