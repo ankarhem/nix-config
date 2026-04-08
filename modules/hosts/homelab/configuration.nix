@@ -23,6 +23,7 @@
       ]
       ++ (with inputs.self.modules.nixos; [
         ai
+        attic
         cli
         colemak
         fish

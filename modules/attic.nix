@@ -12,7 +12,7 @@ in
 
       sops.secrets."attic/server_token" = { };
       sops.templates."attic.env".content = ''
-        ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64=${config.sops.placeholders."attic/server_token"}
+        ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64=${config.sops.placeholder."attic/server_token"}
       '';
 
       services.atticd = {
