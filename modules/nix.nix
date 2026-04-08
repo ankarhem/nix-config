@@ -24,6 +24,9 @@ let
       {
         _unstable = pkgs-unstable;
         _darwin = pkgs-darwin;
+        direnv = prev.direnv.overrideAttrs (_: {
+          doCheck = false;
+        });
       }
     )
   ];
