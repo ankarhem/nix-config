@@ -65,7 +65,7 @@ in
         clean.enable = true;
       };
       programs.direnv = {
-        enable = true;
+        enable = false;
         nix-direnv.enable = true;
       };
 
