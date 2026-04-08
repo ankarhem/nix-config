@@ -1,3 +1,4 @@
+{ inputs, ... }:
 let
   cacheServerName = "homelab";
   cacheName = "main";
@@ -35,22 +36,13 @@ in
     {
       imports = [ sharedModule ];
 
-      systemd.services.attic-watch-store = {
-        description = "Watch the Nix store and push new paths to Attic";
-        after = [ "network-online.target" ];
-        wants = [ "network-online.target" ];
-        wantedBy = [ "multi-user.target" ];
-
-        serviceConfig = {
-          Type = "simple";
-          User = "root";
-          Restart = "always";
-          RestartSec = "5s";
-          ExecStart =
+      systemd.services.attic-watch-store =
+        let
+          watchStoreScript =
             let
               atticBin = "${pkgs.attic-client}/bin/attic";
             in
-            ''
+            pkgs.writeShellScript "attic-watch-store" ''
               ${atticBin} login --set-default ${cacheServerName} ${cacheUrl} $(cat ${
                 config.sops.secrets."attic/client_token".path
               }) || true
@@ -58,8 +50,21 @@ in
               ${atticBin} cache info ${cacheName}
               ${atticBin} watch-store ${cacheName}
             '';
+        in
+        {
+          description = "Watch the Nix store and push new paths to Attic";
+          after = [ "network-online.target" ];
+          wants = [ "network-online.target" ];
+          wantedBy = [ "multi-user.target" ];
+
+          serviceConfig = {
+            Type = "simple";
+            User = "root";
+            Restart = "always";
+            RestartSec = "5s";
+            ExecStart = watchStoreScript;
+          };
         };
-      };
     };
   flake.modules.darwin.attic-client =
     {
@@ -79,7 +84,7 @@ in
           ''
             ${atticBin} login --set-default ${cacheServerName} ${cacheUrl} $(cat ${
               config.sops.secrets."attic/client_token".path
-            }) || true
+            })
             ${atticBin} cache create ${cacheName} || true
             ${atticBin} cache info ${cacheName}
             ${atticBin} watch-store ${cacheName}

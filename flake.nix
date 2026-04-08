@@ -73,7 +73,6 @@
     truesight.url = "github:ankarhem/truesight";
     truesight.inputs.nixpkgs.follows = "nixpkgs";
     llm-agents.url = "github:numtide/llm-agents.nix";
-    attic.url = "github:zhaofengli/attic";
   };
 
   outputs =
