@@ -25,6 +25,7 @@ let
 in
 stdenv.mkDerivation {
   inherit pname version;
+  meta.mainProgram = "sonar";
 
   src = fetchurl {
     url = "https://binaries.sonarsource.com/Distribution/sonarqube-cli/${version}/${binary.os}/sonarqube-cli-${version}-${binary.platform}.exe";
