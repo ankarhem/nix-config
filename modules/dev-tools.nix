@@ -48,9 +48,17 @@
       };
 
       home.packages =
+        let
+          az = pkgs.azure-cli.withExtensions (
+            with pkgs.azure-cli.extensions;
+            [
+              azure-devops
+            ]
+          );
+        in
         with pkgs;
         [
-          azure-cli
+          az
           argocd
           pkgs.local.clone_org
           mitmproxy
