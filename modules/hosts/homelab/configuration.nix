@@ -36,6 +36,7 @@
         idealpink
         lazyvim
         nix
+        redlib
         secrets
         sshd
       ])
