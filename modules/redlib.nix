@@ -4,11 +4,12 @@ let
 in
 {
   flake.modules.nixos.redlib =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       services.redlib = {
         enable = true;
         address = "127.0.0.1";
+        package = pkgs.local.redlib;
         inherit port;
 
         settings = {
