@@ -40,6 +40,8 @@ jobs:
         env:
           OMO_AGENT_SIGNING_KEY: ${{ secrets.OMO_AGENT_SIGNING_KEY }}
         run: |
+          [[ -n "$OMO_AGENT_SIGNING_KEY" ]] || { echo "::error::OMO_AGENT_SIGNING_KEY is empty"; exit 1; }
+
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
 
