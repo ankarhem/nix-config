@@ -35,10 +35,24 @@ jobs:
           token: ${{ secrets.OMO_AGENT_PAT }}
           fetch-depth: 0
 
-      - name: Configure Git as omo-agent
+      - name: Configure commit signing
+        shell: bash
+        env:
+          OMO_AGENT_SIGNING_KEY: ${{ secrets.OMO_AGENT_SIGNING_KEY }}
         run: |
-          git config user.name "omo-agent"
-          git config user.email "omo-agent@users.noreply.github.com"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          printf '%s\n' "$OMO_AGENT_SIGNING_KEY" > ~/.ssh/omo-agent-signing
+          chmod 600 ~/.ssh/omo-agent-signing
+
+          git config --global user.name "omo-agent"
+          git config --global user.email "omo-agent@users.noreply.github.com"
+
+          git config --global gpg.format ssh
+          git config --global user.signingkey ~/.ssh/omo-agent-signing
+          git config --global commit.gpgsign true
+          git config --global tag.gpgSign true
 
       - name: Authenticate gh CLI as omo-agent
         env:
