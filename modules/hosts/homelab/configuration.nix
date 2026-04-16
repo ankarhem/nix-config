@@ -29,6 +29,7 @@
         colemak
         fish
         fonts
+        forgejo
         general
         gh
         gpg
