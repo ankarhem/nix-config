@@ -25,6 +25,7 @@
         ai
         attic
         attic-client
+        auto-upgrade
         cli
         colemak
         fish
@@ -44,6 +45,8 @@
       ++ (with inputs.self.modules.generic; [
         constants
       ]);
+
+      services.auto-upgrade.enable = true;
 
       boot.isContainer = true;
       proxmoxLXC.manageNetwork = true;

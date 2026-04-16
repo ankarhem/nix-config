@@ -7,6 +7,7 @@
         ai
         ankarhem
         audio
+        auto-upgrade
         bluetooth
         chat
         cli
@@ -38,6 +39,8 @@
       inputs.self.modules.generic.constants
       inputs.self.modules.homeManager.workstation
     ];
+
+    services.auto-upgrade.enable = true;
 
     # Bootloader
     boot.loader.systemd-boot.enable = true;
