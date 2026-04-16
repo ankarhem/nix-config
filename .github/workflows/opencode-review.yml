@@ -28,8 +28,6 @@ jobs:
       cancel-in-progress: true
     permissions:
       contents: read
-      pull-requests: write
-      issues: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -187,7 +185,7 @@ jobs:
             TITLE=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json title --jq '.title')
             echo "title=$TITLE" >> $GITHUB_OUTPUT
             AUTHOR="${{ github.event.pull_request.user.login }}"
-          elif [[ "$EVENT_NAME" == "issue_comment" || "$EVENT_NAME" == "pull_request_review_comment" ]]; then
+          elif [[ "$EVENT_NAME" == "issue_comment" ]]; then
             ISSUE_NUM="$ISSUE_NUMBER"
             AUTHOR="$COMMENT_AUTHOR"
             COMMENT_ID="$COMMENT_ID_VAL"
@@ -245,6 +243,7 @@ jobs:
           fi
 
       - name: Run oh-my-opencode
+        timeout-minutes: 10
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
