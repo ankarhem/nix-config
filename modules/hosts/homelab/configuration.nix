@@ -25,7 +25,6 @@
         ai
         attic
         attic-client
-        auto-upgrade
         cli
         colemak
         fish
@@ -46,7 +45,17 @@
         constants
       ]);
 
-      services.auto-upgrade.enable = true;
+      system.autoUpgrade = {
+        enable = self ? rev;
+        flake = "github:ankarhem/nix-config";
+        flags = [
+          "--no-update-lock-file"
+          "-L"
+        ];
+        dates = "05:00";
+        allowReboot = false;
+        operation = "switch";
+      };
 
       boot.isContainer = true;
       proxmoxLXC.manageNetwork = true;

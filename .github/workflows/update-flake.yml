@@ -21,6 +21,8 @@ jobs:
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            extra-substituters = https://attic.internetfeno.men/main
+            extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
 
       - name: Configure git
         run: |
@@ -29,6 +31,16 @@ jobs:
 
       - name: Update flake inputs
         run: nix flake update
+
+      - name: Push to attic cache
+        if: secrets.ATTIC_TOKEN != ''
+        env:
+          ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+        run: |
+          nix profile install nixpkgs#attic-client
+          attic login --set-default ci https://attic.internetfeno.men "$ATTIC_TOKEN"
+          attic cache create main || true
+          nix path-info --all -r | attic push main
 
       - name: Check for changes
         id: check

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 {
   flake.modules.nixos.workstation = {
     imports =
@@ -7,7 +7,6 @@
         ai
         ankarhem
         audio
-        auto-upgrade
         bluetooth
         chat
         cli
@@ -40,7 +39,17 @@
       inputs.self.modules.homeManager.workstation
     ];
 
-    services.auto-upgrade.enable = true;
+    system.autoUpgrade = {
+      enable = self ? rev;
+      flake = "github:ankarhem/nix-config";
+      flags = [
+        "--no-update-lock-file"
+        "-L"
+      ];
+      dates = "05:00";
+      allowReboot = false;
+      operation = "switch";
+    };
 
     # Bootloader
     boot.loader.systemd-boot.enable = true;
