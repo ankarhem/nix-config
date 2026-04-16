@@ -161,8 +161,10 @@ jobs:
           )
           jq --arg append "$PROMPT_APPEND" '.agents.Sisyphus.prompt_append = $append' "$OMO_JSON" > /tmp/omo.json && mv /tmp/omo.json "$OMO_JSON"
 
-          # Configure unspecified-low category to use GLM 5.1
           jq '.categories["unspecified-low"] = { "model": "zai-coding-plan/glm-5.1" }' "$OMO_JSON" > /tmp/omo.json && mv /tmp/omo.json "$OMO_JSON"
+
+          OPENCODE_JSON=~/.config/opencode/config.json
+          jq '.model = "zai-coding-plan/glm-5.1"' "$OPENCODE_JSON" > /tmp/oc.json && mv /tmp/oc.json "$OPENCODE_JSON"
 
       # Collect context
       - name: Collect Context
