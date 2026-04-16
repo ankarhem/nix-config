@@ -15,9 +15,10 @@ on:
 
 jobs:
   opencode:
-    # @omo-agent mention only (maintainers, exclude self)
+    # @omo-agent mention (maintainers, exclude self) or pull_request events
     if: >-
       github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'pull_request' ||
       (github.event_name == 'issue_comment' &&
        contains(github.event.comment.body || '', '@omo-agent') &&
        (github.event.comment.user.login || '') != 'omo-agent' &&
@@ -171,7 +172,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          COMMENT_BODY: ${{ github.event.comment.body }}
+          COMMENT_BODY: ${{ github.event.comment.body || 're-review the updated pr' }}
           COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
           COMMENT_ID_VAL: ${{ github.event.comment.id }}
           REPO: ${{ github.repository }}
