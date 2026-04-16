@@ -42,9 +42,9 @@ jobs:
 
       - name: Authenticate gh CLI as omo-agent
         env:
-          GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
+          OMO_AGENT_PAT: ${{ secrets.OMO_AGENT_PAT }}
         run: |
-          echo "$GITHUB_TOKEN" | gh auth login --with-token
+          echo ${OMO_AGENT_PAT} | gh auth login --with-token
           gh auth status
 
       - name: Setup Bun
