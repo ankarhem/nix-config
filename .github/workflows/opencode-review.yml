@@ -1,0 +1,374 @@
+name: opencode
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: "Custom prompt"
+        required: false
+  issue_comment:
+    types: [created]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  opencode:
+    # @omo-agent mention (maintainers, exclude self) or pull_request events
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' &&
+       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')) ||
+      (github.event_name == 'issue_comment' &&
+       contains(github.event.comment.body || '', '@omo-agent') &&
+       (github.event.comment.user.login || '') != 'omo-agent' &&
+       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association || ''))
+    runs-on: ubuntu-latest
+    concurrency:
+      group: opencode-${{ github.event.pull_request.number || github.event.issue.number }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.OMO_AGENT_PAT }}
+          fetch-depth: 0
+
+      - name: Configure Git as omo-agent
+        run: |
+          git config user.name "omo-agent"
+          git config user.email "omo-agent@users.noreply.github.com"
+
+      - name: Authenticate gh CLI as omo-agent
+        env:
+          OMO_AGENT_PAT: ${{ secrets.OMO_AGENT_PAT }}
+        run: |
+          echo ${OMO_AGENT_PAT} | gh auth login --with-token
+          gh auth status
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install OpenCode CLI
+        run: |
+          curl -fsSL https://opencode.ai/install | bash
+          export PATH="$HOME/.opencode/bin:$PATH"
+          opencode --version
+
+      - name: Install oh-my-openagent plugin
+        run: bunx oh-my-opencode install --no-tui --claude=no --gemini=no --copilot=no --openai=no --opencode-go=no --opencode-zen=no --zai-coding-plan=yes --kimi-for-coding=no --vercel-ai-gateway=no --skip-auth
+
+      - name: Configure agent prompts
+        run: |
+          OMO_JSON=~/.config/opencode/oh-my-openagent.json
+          PROMPT_APPEND=$(cat << 'PROMPT_EOF'
+          <ultrawork-mode>
+          [CODE RED] Maximum precision required. Ultrathink before acting.
+
+          YOU MUST LEVERAGE ALL AVAILABLE AGENTS TO THEIR FULLEST POTENTIAL.
+          TELL THE USER WHAT AGENTS YOU WILL LEVERAGE NOW TO SATISFY USER'S REQUEST.
+
+          ## AGENT UTILIZATION PRINCIPLES (by capability, not by name)
+          - **Codebase Exploration**: Spawn exploration agents using BACKGROUND TASKS for file patterns, internal implementations, project structure
+          - **Documentation & References**: Use librarian-type agents via BACKGROUND TASKS for API references, examples, external library docs
+          - **Planning & Strategy**: For implementation tasks, spawn a dedicated planning agent for work breakdown (not needed for simple questions/investigations)
+          - **High-IQ Reasoning**: Leverage specialized agents for architecture decisions, code review, strategic planning
+          - **Frontend/UI Tasks**: Delegate to UI-specialized agents for design and implementation
+
+          ## EXECUTION RULES
+          - **TODO**: Track EVERY step. Mark complete IMMEDIATELY after each.
+          - **PARALLEL**: Fire independent agent calls simultaneously via background_task - NEVER wait sequentially.
+          - **BACKGROUND FIRST**: Use background_task for exploration/research agents (10+ concurrent if needed).
+          - **VERIFY**: Re-read request after completion. Check ALL requirements met before reporting done.
+          - **DELEGATE**: Don't do everything yourself - orchestrate specialized agents for their strengths.
+
+          ## WORKFLOW
+          1. Analyze the request and identify required capabilities
+          2. Spawn exploration/librarian agents via background_task in PARALLEL (10+ if needed)
+          3. Always Use Plan agent with gathered context to create detailed work breakdown
+          4. Execute with continuous verification against original requirements
+
+          ## ZERO TOLERANCE FAILURES
+          - **NO Scope Reduction**: Never make "demo", "skeleton", "simplified", "basic" versions - deliver FULL implementation
+          - **NO Partial Completion**: Never stop at 60-80% saying "you can extend this..." - finish 100%
+          - **NO Premature Stopping**: Never declare done until ALL TODOs are completed and verified
+          - **NO TEST DELETION**: Never delete or skip failing tests to make the build pass. Fix the code, not the tests.
+
+          THE USER ASKED FOR X. DELIVER EXACTLY X. NOT A SUBSET. NOT A DEMO. NOT A STARTING POINT.
+
+          </ultrawork-mode>
+
+          ---
+
+          [analyze-mode]
+          ANALYSIS MODE. Gather context before diving deep:
+
+          CONTEXT GATHERING (parallel):
+          - 1-2 explore agents (codebase patterns, implementations)
+          - 1-2 librarian agents (if external library involved)
+          - Direct tools: Grep, AST-grep, LSP for targeted searches
+
+          IF COMPLEX (architecture, multi-system, debugging after 2+ failures):
+          - Consult oracle for strategic guidance
+
+          SYNTHESIZE findings before proceeding.
+
+          ---
+
+          ## GitHub Actions Environment
+
+          You are `omo-agent` in GitHub Actions.
+
+          ### CRITICAL: GitHub Comments = Your ONLY Output
+
+          User CANNOT see console. Post everything via `gh issue comment` or `gh pr comment`.
+
+          ### Comment Formatting (CRITICAL)
+
+          **ALWAYS use heredoc syntax for comments containing code references, backticks, or multiline content:**
+
+          ```bash
+          gh issue comment <number> --body "$(cat <<'EOF'
+          Your comment with `backticks` and code references preserved here.
+          Multiple lines work perfectly.
+          EOF
+          )"
+          ```
+
+          **NEVER use direct quotes with backticks** (shell will interpret them as command substitution):
+          ```bash
+          # WRONG - backticks disappear:
+          gh issue comment 123 --body "text with `code`"
+
+          # CORRECT - backticks preserved:
+          gh issue comment 123 --body "$(cat <<'EOF'
+          text with `code`
+          EOF
+          )"
+          ```
+
+          ### Rules
+          - EVERY response = GitHub comment (use heredoc for proper escaping)
+          - Code changes = PR (never push main/master)
+          - Setup: bun install first
+          - Acknowledge immediately, report when done
+
+          ### Git Config
+          - user.name: omo-agent
+          - user.email: omo-agent@users.noreply.github.com
+          PROMPT_EOF
+          )
+          jq --arg append "$PROMPT_APPEND" '.agents.Sisyphus.prompt_append = $append' "$OMO_JSON" > /tmp/omo.json && mv /tmp/omo.json "$OMO_JSON"
+
+          jq '.categories["unspecified-low"] = { "model": "zai-coding-plan/glm-5.1" }' "$OMO_JSON" > /tmp/omo.json && mv /tmp/omo.json "$OMO_JSON"
+
+          OPENCODE_JSON=~/.config/opencode/opencode.json
+          jq '.model = "zai-coding-plan/glm-5.1"' "$OPENCODE_JSON" > /tmp/oc.json && mv /tmp/oc.json "$OPENCODE_JSON"
+
+      # Collect context
+      - name: Collect Context
+        id: context
+        env:
+          GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
+          EVENT_NAME: ${{ github.event_name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          COMMENT_BODY: ${{ github.event.comment.body || github.event.inputs.prompt || 're-review the updated pr' }}
+          COMMENT_AUTHOR: ${{ github.event.comment.user.login }}
+          COMMENT_ID_VAL: ${{ github.event.comment.id }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            echo "type=pr" >> $GITHUB_OUTPUT
+            echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
+            TITLE=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json title --jq '.title')
+            echo "title=$TITLE" >> $GITHUB_OUTPUT
+            AUTHOR="${{ github.event.pull_request.user.login }}"
+          elif [[ "$EVENT_NAME" == "issue_comment" ]]; then
+            ISSUE_NUM="$ISSUE_NUMBER"
+            AUTHOR="$COMMENT_AUTHOR"
+            COMMENT_ID="$COMMENT_ID_VAL"
+
+            ISSUE_DATA=$(gh api "repos/$REPO/issues/${ISSUE_NUM}")
+            TITLE=$(echo "$ISSUE_DATA" | jq -r '.title')
+            if echo "$ISSUE_DATA" | jq -e '.pull_request' > /dev/null; then
+              echo "type=pr" >> $GITHUB_OUTPUT
+            else
+              echo "type=issue" >> $GITHUB_OUTPUT
+            fi
+            echo "number=${ISSUE_NUM}" >> $GITHUB_OUTPUT
+            echo "title=${TITLE}" >> $GITHUB_OUTPUT
+            echo "comment_id=$COMMENT_ID" >> $GITHUB_OUTPUT
+          fi
+
+          echo "comment<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMENT_BODY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "author=$AUTHOR" >> $GITHUB_OUTPUT
+
+      # Add :eyes: reaction
+      - name: Add eyes reaction
+        if: steps.context.outputs.comment_id != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
+          REPOSITORY: ${{ github.repository }}
+          COMMENT_ID: ${{ steps.context.outputs.comment_id }}
+        run: |
+          gh api "/repos/${REPOSITORY}/issues/comments/${COMMENT_ID}/reactions" \
+            -X POST -f content="eyes" || true
+
+      - name: Add working label
+        if: steps.context.outputs.number != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
+          REPOSITORY: ${{ github.repository }}
+          CONTEXT_TYPE: ${{ steps.context.outputs.type }}
+          CONTEXT_NUMBER: ${{ steps.context.outputs.number }}
+        run: |
+          gh label create "omo-agent: working" \
+            --repo "$REPOSITORY" \
+            --color "fcf2e1" \
+            --description "omo-agent is currently working on this" \
+            --force || true
+
+          if [[ "$CONTEXT_TYPE" == "pr" ]]; then
+            gh pr edit "$CONTEXT_NUMBER" \
+              --repo "$REPOSITORY" \
+              --add-label "omo-agent: working" || true
+          else
+            gh issue edit "$CONTEXT_NUMBER" \
+              --repo "$REPOSITORY" \
+              --add-label "omo-agent: working" || true
+          fi
+
+      - name: Run oh-my-opencode
+        timeout-minutes: 10
+        env:
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
+          USER_COMMENT: ${{ steps.context.outputs.comment }}
+          COMMENT_AUTHOR: ${{ steps.context.outputs.author }}
+          CONTEXT_TYPE: ${{ steps.context.outputs.type }}
+          CONTEXT_NUMBER: ${{ steps.context.outputs.number }}
+          CONTEXT_TITLE: ${{ steps.context.outputs.title }}
+          REPO_NAME: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          export PATH="$HOME/.opencode/bin:$PATH"
+
+          PROMPT=$(cat <<'PROMPT_EOF'
+          [analyze-mode]
+          ANALYSIS MODE. Gather context before diving deep:
+
+          CONTEXT GATHERING (parallel):
+          - 1-2 explore agents (codebase patterns, implementations)
+          - 1-2 librarian agents (if external library involved)
+          - Direct tools: Grep, AST-grep, LSP for targeted searches
+
+          IF COMPLEX (architecture, multi-system, debugging after 2+ failures):
+          - Consult oracle for strategic guidance
+
+          SYNTHESIZE findings before proceeding.
+
+          ---
+
+          Your username is @omo-agent, mentioned by @AUTHOR_PLACEHOLDER in REPO_PLACEHOLDER.
+
+          ## Context
+          - Title: TITLE_PLACEHOLDER
+          - Type: TYPE_PLACEHOLDER
+          - Number: #NUMBER_PLACEHOLDER
+          - Repository: REPO_PLACEHOLDER
+          - Default Branch: BRANCH_PLACEHOLDER
+
+          ## User's Request
+          COMMENT_PLACEHOLDER
+
+          ---
+
+          ## CRITICAL: First Steps (MUST DO BEFORE ANYTHING ELSE)
+
+          ### [CODE RED] MANDATORY CONTEXT READING - ZERO EXCEPTIONS
+
+          **YOU MUST READ ALL CONTENT. NOT SOME. NOT MOST. ALL.**
+
+          1. **READ FULL CONVERSATION** - Execute ALL commands below before ANY other action:
+             - **Issues**: `gh issue view NUMBER_PLACEHOLDER --comments`
+             - **PRs**: Use ALL THREE commands to get COMPLETE context:
+               ```bash
+               gh pr view NUMBER_PLACEHOLDER --comments
+               gh api repos/REPO_PLACEHOLDER/pulls/NUMBER_PLACEHOLDER/comments
+               gh api repos/REPO_PLACEHOLDER/pulls/NUMBER_PLACEHOLDER/reviews
+               ```
+
+             **WHAT TO EXTRACT FROM THE CONVERSATION:**
+             - The ORIGINAL issue/PR description (first message) - this is often the TRUE requirement
+             - ALL previous attempts and their outcomes
+             - ALL decisions made and their reasoning
+             - ALL feedback, criticism, and rejection reasons
+             - ANY linked issues, PRs, or external references
+             - The EXACT ask from the user who mentioned you
+
+             **FAILURE TO READ EVERYTHING = GUARANTEED FAILURE**
+             You WILL make wrong assumptions. You WILL repeat past mistakes. You WILL miss critical context.
+
+          2. **CREATE TODOS IMMEDIATELY**: Right after reading, create your todo list using todo tools.
+             - First todo: "Summarize issue/PR context and requirements"
+             - Break down ALL work into atomic, verifiable steps
+             - **GIT WORKFLOW (MANDATORY for implementation tasks)**: ALWAYS include these final todos:
+               - "Create new branch from origin/BRANCH_PLACEHOLDER (NEVER push directly to BRANCH_PLACEHOLDER)"
+               - "Commit changes"
+               - "Create PR to BRANCH_PLACEHOLDER branch"
+             - Plan everything BEFORE starting any work
+
+          ---
+
+          Plan everything using todo tools.
+          Then investigate and satisfy the request. Only if user requested to you to work explicitly, then use plan agent to plan, todo obsessively then create a PR to `BRANCH_PLACEHOLDER` branch.
+          When done, report the result to the issue/PR with `gh issue comment NUMBER_PLACEHOLDER` or `gh pr comment NUMBER_PLACEHOLDER`.
+          PROMPT_EOF
+          )
+
+          PROMPT="${PROMPT//AUTHOR_PLACEHOLDER/$COMMENT_AUTHOR}"
+          PROMPT="${PROMPT//REPO_PLACEHOLDER/$REPO_NAME}"
+          PROMPT="${PROMPT//TYPE_PLACEHOLDER/$CONTEXT_TYPE}"
+          PROMPT="${PROMPT//NUMBER_PLACEHOLDER/$CONTEXT_NUMBER}"
+          PROMPT="${PROMPT//TITLE_PLACEHOLDER/$CONTEXT_TITLE}"
+          PROMPT="${PROMPT//BRANCH_PLACEHOLDER/$DEFAULT_BRANCH}"
+          PROMPT="${PROMPT//COMMENT_PLACEHOLDER/$USER_COMMENT}"
+
+          bunx oh-my-opencode run "$PROMPT"
+
+      # Update reaction and remove label
+      - name: Update reaction and remove label
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
+          REPOSITORY: ${{ github.repository }}
+          COMMENT_ID: ${{ steps.context.outputs.comment_id }}
+          CONTEXT_NUMBER: ${{ steps.context.outputs.number }}
+          CONTEXT_TYPE: ${{ steps.context.outputs.type }}
+        run: |
+          if [[ -n "$COMMENT_ID" ]]; then
+            REACTION_ID=$(gh api "/repos/${REPOSITORY}/issues/comments/${COMMENT_ID}/reactions" \
+              --jq '.[] | select(.content == "eyes" and .user.login == "omo-agent") | .id' | head -1)
+            if [[ -n "$REACTION_ID" ]]; then
+              gh api -X DELETE "/repos/${REPOSITORY}/reactions/${REACTION_ID}" || true
+            fi
+
+            gh api "/repos/${REPOSITORY}/issues/comments/${COMMENT_ID}/reactions" \
+              -X POST -f content="+1" || true
+          fi
+
+          if [[ -n "$CONTEXT_NUMBER" ]]; then
+            if [[ "$CONTEXT_TYPE" == "pr" ]]; then
+              gh pr edit "$CONTEXT_NUMBER" \
+                --repo "$REPOSITORY" \
+                --remove-label "omo-agent: working" || true
+            else
+              gh issue edit "$CONTEXT_NUMBER" \
+                --repo "$REPOSITORY" \
+                --remove-label "omo-agent: working" || true
+            fi
+          fi
