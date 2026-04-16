@@ -259,7 +259,7 @@ jobs:
           fi
 
       - name: Run oh-my-opencode
-        timeout-minutes: 10
+        timeout-minutes: 60
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
