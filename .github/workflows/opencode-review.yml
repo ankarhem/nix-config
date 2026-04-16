@@ -34,75 +34,26 @@ jobs:
       - name: Install oh-my-openagent plugin
         run: bunx oh-my-opencode install --no-tui --claude=no --gemini=no --copilot=no --openai=no --opencode-go=no --opencode-zen=no --zai-coding-plan=yes --kimi-for-coding=no --vercel-ai-gateway=no --skip-auth
 
-      - name: Build PR context
-        id: pr_context
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          pr_number="${{ github.event.pull_request.number }}"
-          repo="${{ github.repository }}"
-
-          {
-            echo "content<<EOF"
-
-            gh pr view "$pr_number" \
-              --repo "$repo" \
-              --json title,body,author,state,isDraft,baseRefName,headRefName,labels,files,reviews,comments \
-              --template '
-          # {{.title}}
-
-          {{if .body}}{{.body}}{{else}}(no description){{end}}
-
-          ## Metadata
-          author: {{.author.login}}
-          state: {{.state}}{{if .isDraft}} (draft){{end}}
-          base: {{.baseRefName}}
-          head: {{.headRefName}}
-          labels: {{range .labels}}{{.name}} {{end}}
-
-          ## Files changed
-          {{range .files}}- {{.path}}
-          {{end}}
-
-          ## Reviews
-          {{range .reviews}}- {{.author.login}}: {{.state}}
-          {{if .body}}{{.body}}{{end}}
-
-          {{end}}
-
-          ## Comments
-          {{range .comments}}- {{.author.login}}:
-          {{.body}}
-
-          {{end}}
-          '
-
-            echo
-            echo "## Inline review comments"
-
-            gh api \
-              -H "Accept: application/vnd.github+json" \
-              "/repos/$repo/pulls/$pr_number/comments" \
-              --paginate \
-              --jq '.[] | "- \(.user.login) on \(.path):\(.line // .original_line // "n/a"):\n\(.body)\n"'
-
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
-
       - name: Run opencode
         uses: anomalyco/opencode/github@latest
         env:
           PR_CONTEXT: ${{ steps.pr_context.outputs.content }}
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+          REPO_NAME: ${{ github.event.repository.name }}
         with:
           model: zai-coding-plan/glm-5.1
           share: false
           prompt: |
-            <context>
-              ${{ env.PR_CONTEXT }}
-            </context>
-
             Review this PR carefully and stay grounded in the actual diff and surrounding context.
+
+            Gather context from the PR using gh cli:
+
+            gh pr view ${PR_NUMBER} --title,description,comments
+            gh api repos/${REPO_NAME}/pulls/${PR_NUMBER}/comments
+            gh api repos/${REPO_NAME}/pulls/${PR_NUMBER}/reviews
+
+            Spawn atleast 3 subagents or more if needed.
 
             Evaluate from these perspectives:
             - correctness
@@ -124,6 +75,7 @@ jobs:
             - Distinguish clearly between blocking issues and non-blocking suggestions.
             - Prefer concrete, minimal fixes over broad rewrites.
             - Use GitHub suggestion blocks only when proposing a small, directly applicable code change.
+            - Do not reiterate issues that have been flagged during previous runs.
 
             For each finding, provide:
             1. Severity: blocking / non-blocking
