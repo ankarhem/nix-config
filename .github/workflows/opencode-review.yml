@@ -22,7 +22,7 @@ jobs:
        contains(github.event.comment.body || '', '@omo-agent') &&
        (github.event.comment.user.login || '') != 'omo-agent' &&
        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association || ''))
-    runs-on: ubuntu-latest
+    runs-on: homelab-nix
     concurrency:
       group: opencode-${{ github.event.pull_request.number || github.event.issue.number }}
       cancel-in-progress: true
