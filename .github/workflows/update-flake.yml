@@ -1,0 +1,126 @@
+name: Update Flake
+
+on:
+  schedule:
+    - cron: "0 4 * * *" # Daily at 04:00 UTC — one hour before hosts auto-upgrade
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.OMO_AGENT_PAT }}
+          fetch-depth: 0
+
+      - name: Configure commit signing
+        shell: bash
+        env:
+          OMO_AGENT_SIGNING_KEY: ${{ secrets.OMO_AGENT_SIGNING_KEY }}
+        run: |
+          [[ -n "$OMO_AGENT_SIGNING_KEY" ]] || { echo "::error::OMO_AGENT_SIGNING_KEY is empty"; exit 1; }
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          printf '%s\n' "$OMO_AGENT_SIGNING_KEY" > ~/.ssh/omo-agent-signing
+          chmod 600 ~/.ssh/omo-agent-signing
+
+          git config --global user.name "omo-agent"
+          git config --global user.email "omo-agent@users.noreply.github.com"
+
+          git config --global gpg.format ssh
+          git config --global user.signingkey ~/.ssh/omo-agent-signing
+          git config --global commit.gpgsign true
+          git config --global tag.gpgSign true
+
+      - name: Authenticate gh CLI as omo-agent
+        env:
+          OMO_AGENT_PAT: ${{ secrets.OMO_AGENT_PAT }}
+        run: |
+          echo "${OMO_AGENT_PAT}" | gh auth login --with-token
+          gh auth status
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            extra-substituters = https://attic.internetfeno.men/main
+            extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
+
+      - name: Login to attic cache
+        if: secrets.ATTIC_TOKEN != ''
+        env:
+          ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+        run: |
+          nix profile install nixpkgs#attic-client
+          attic login --set-default ci https://attic.internetfeno.men "$ATTIC_TOKEN"
+
+      - name: Update flake inputs
+        run: nix flake update
+
+      - name: Check for changes
+        run: |
+          if git diff --quiet flake.lock; then
+            echo "No flake.lock changes detected."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+        id: check_changes
+
+      - name: Build NixOS configurations
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          for host in $(nix eval --json .#nixosConfigurations --apply builtins.attrNames | jq -r '.[]'); do
+            nix build ".#${host}"
+          done
+
+      - name: Push to attic cache
+        if: steps.check_changes.outputs.has_changes == 'true' && secrets.ATTIC_TOKEN != ''
+        run: |
+          attic cache create main || true
+          nix path-info --all -r | attic push main
+
+      - name: Create or update PR
+        if: steps.check_changes.outputs.has_changes == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
+        run: |
+          BRANCH="auto/update-flake"
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="chore: update flake.lock ($DATE)"
+          BODY=$(cat <<'BODY_EOF'
+          Automated flake.lock update.
+
+          Built and cached all NixOS configurations.
+          BODY_EOF
+          )
+
+          git checkout -B "$BRANCH"
+          git add flake.lock
+          git commit -m "chore: update flake.lock ($DATE)"
+          git push origin "$BRANCH" --force
+
+          EXISTING_PR=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number')
+
+          if [[ -n "$EXISTING_PR" ]]; then
+            echo "Updating existing PR #$EXISTING_PR"
+            gh pr edit "$EXISTING_PR" --title "$TITLE" --body "$BODY"
+          else
+            gh label create automated --color 0075ca --description "Automated PR" --force || true
+            gh label create dependencies --color 0366d6 --description "Dependency updates" --force || true
+            gh pr create \
+              --title "$TITLE" \
+              --body "$BODY" \
+              --head "$BRANCH" \
+              --base main \
+              --label automated \
+              --label dependencies
+          fi

@@ -7,6 +7,7 @@
         ai
         ankarhem
         audio
+        auto-upgrade
         bluetooth
         chat
         cli

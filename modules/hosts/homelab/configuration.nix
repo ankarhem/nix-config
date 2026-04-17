@@ -25,6 +25,7 @@
         ai
         attic
         attic-client
+        auto-upgrade
         cli
         colemak
         fish
