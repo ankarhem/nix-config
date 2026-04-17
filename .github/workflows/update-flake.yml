@@ -15,6 +15,37 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.OMO_AGENT_PAT }}
+          fetch-depth: 0
+
+      - name: Configure commit signing
+        shell: bash
+        env:
+          OMO_AGENT_SIGNING_KEY: ${{ secrets.OMO_AGENT_SIGNING_KEY }}
+        run: |
+          [[ -n "$OMO_AGENT_SIGNING_KEY" ]] || { echo "::error::OMO_AGENT_SIGNING_KEY is empty"; exit 1; }
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          printf '%s\n' "$OMO_AGENT_SIGNING_KEY" > ~/.ssh/omo-agent-signing
+          chmod 600 ~/.ssh/omo-agent-signing
+
+          git config --global user.name "omo-agent"
+          git config --global user.email "omo-agent@users.noreply.github.com"
+
+          git config --global gpg.format ssh
+          git config --global user.signingkey ~/.ssh/omo-agent-signing
+          git config --global commit.gpgsign true
+          git config --global tag.gpgSign true
+
+      - name: Authenticate gh CLI as omo-agent
+        env:
+          OMO_AGENT_PAT: ${{ secrets.OMO_AGENT_PAT }}
+        run: |
+          echo "${OMO_AGENT_PAT}" | gh auth login --with-token
+          gh auth status
 
       - name: Install Nix
         uses: cachix/install-nix-action@v31
@@ -24,42 +55,63 @@ jobs:
             extra-substituters = https://attic.internetfeno.men/main
             extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
 
-      - name: Configure git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Update flake inputs
-        run: nix flake update
-
-      - name: Push to attic cache
+      - name: Login to attic cache
         if: secrets.ATTIC_TOKEN != ''
         env:
           ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
         run: |
           nix profile install nixpkgs#attic-client
           attic login --set-default ci https://attic.internetfeno.men "$ATTIC_TOKEN"
+
+      - name: Update flake inputs
+        run: nix flake update
+
+      - name: Build NixOS configurations
+        run: |
+          nix build .#nixosConfigurations.homelab.config.system.build.toplevel
+          nix build .#nixosConfigurations.workstation.config.system.build.toplevel
+
+      - name: Push to attic cache
+        if: secrets.ATTIC_TOKEN != ''
+        run: |
           attic cache create main || true
           nix path-info --all -r | attic push main
 
-      - name: Check for changes
-        id: check
+      - name: Create or update PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.OMO_AGENT_PAT }}
         run: |
           if git diff --quiet flake.lock; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No flake.lock changes detected."
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
 
-      - name: Create Pull Request
-        if: steps.check.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          title: "chore: update flake.lock"
-          commit-message: "chore: update flake.lock"
-          branch: auto/update-flake
-          delete-branch: true
-          labels: |
-            automated
-            dependencies
+          BRANCH="auto/update-flake"
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="chore: update flake.lock ($DATE)"
+          BODY=$(cat <<'BODY_EOF'
+          Automated flake.lock update.
+
+          Built and cached NixOS configurations: `homelab`, `workstation`.
+          BODY_EOF
+          )
+
+          git checkout -b "$BRANCH"
+          git add flake.lock
+          git commit -m "chore: update flake.lock ($DATE)"
+          git push origin "$BRANCH" --force
+
+          EXISTING_PR=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number')
+
+          if [[ -n "$EXISTING_PR" ]]; then
+            echo "Updating existing PR #$EXISTING_PR"
+            gh pr edit "$EXISTING_PR" --title "$TITLE" --body "$BODY"
+          else
+            gh pr create \
+              --title "$TITLE" \
+              --body "$BODY" \
+              --head "$BRANCH" \
+              --base main \
+              --label automated \
+              --label dependencies
+          fi
