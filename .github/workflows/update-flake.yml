@@ -53,8 +53,16 @@ jobs:
         with:
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            netrc-file = /home/runner/.config/nix/netrc
             extra-substituters = https://attic.internetfeno.men/main
             extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
+
+      - name: Configure attic cache auth
+        if: env.ATTIC_TOKEN != ''
+        run: |
+          mkdir -p ~/.config/nix
+          printf 'machine attic.internetfeno.men\npassword %s\n' "$ATTIC_TOKEN" > ~/.config/nix/netrc
+          chmod 600 ~/.config/nix/netrc
 
       - name: Login to attic cache
         if: env.ATTIC_TOKEN != ''

@@ -6,7 +6,7 @@ let
   cachePublicKey = "9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA="; # pragma: allowlist secret
 
   sharedModule =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
         attic-client
@@ -19,9 +19,18 @@ let
         trusted-public-keys = [
           "${cacheName}:${cachePublicKey}"
         ];
+
+        netrc-file = config.sops.templates."nix-netrc".path;
       };
 
       sops.secrets."attic/client_token" = { };
+
+      sops.templates."nix-netrc" = {
+        content = ''
+          machine attic.internetfeno.men
+          password ${config.sops.placeholder."attic/client_token"}
+        '';
+      };
     };
 
 in
