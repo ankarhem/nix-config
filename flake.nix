@@ -116,7 +116,7 @@
             };
             formatter = pkgs.nixfmt-tree;
             devShells.default = pkgs.mkShell {
-              packages = [ config.pre-commit.settings.enabledPackages ];
+              packages = [ pkgs.act ] ++ config.pre-commit.settings.enabledPackages;
               shellHook = ''
                 ${config.pre-commit.shellHook}
               '';

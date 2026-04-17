@@ -11,6 +11,8 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -55,9 +57,7 @@ jobs:
             extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
 
       - name: Login to attic cache
-        if: secrets.ATTIC_TOKEN != ''
-        env:
-          ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+        if: env.ATTIC_TOKEN != ''
         run: |
           nix profile install nixpkgs#attic-client
           attic login --set-default ci https://attic.internetfeno.men "$ATTIC_TOKEN"
@@ -83,7 +83,7 @@ jobs:
           done
 
       - name: Push to attic cache
-        if: steps.check_changes.outputs.has_changes == 'true' && secrets.ATTIC_TOKEN != ''
+        if: steps.check_changes.outputs.has_changes == 'true' && env.ATTIC_TOKEN != ''
         run: |
           attic cache create main || true
           nix path-info --all -r | attic push main
