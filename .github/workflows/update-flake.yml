@@ -94,7 +94,7 @@ jobs:
         if: steps.check_changes.outputs.has_changes == 'true' && env.ATTIC_TOKEN != ''
         run: |
           attic cache create main || true
-          nix path-info --all -r | attic push main
+          nix path-info --all | grep --invert '\.drv$' | attic push main --stdin
 
       - name: Create or update PR
         if: steps.check_changes.outputs.has_changes == 'true'
