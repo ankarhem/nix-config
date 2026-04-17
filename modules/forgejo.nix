@@ -19,7 +19,7 @@ in
         secrets.mailer.PASSWD = config.sops.secrets."smtp/password".path;
         secrets.mailer.USER = config.sops.secrets."smtp/username".path;
         settings = {
-          # service.DISABLE_REGISTRATION = true;
+          service.DISABLE_REGISTRATION = true;
           DEFAULT.APP_NAME = "forgejo";
           log.LEVEL = "Debug";
           federation.ENABLED = true;
