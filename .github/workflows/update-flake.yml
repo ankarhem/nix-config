@@ -92,6 +92,7 @@ jobs:
 
       - name: Push to attic cache
         if: steps.check_changes.outputs.has_changes == 'true' && env.ATTIC_TOKEN != ''
+        continue-on-error: true
         run: |
           attic cache create main || true
           nix path-info --all | grep --invert '\.drv$' | attic push main --stdin
