@@ -14,7 +14,7 @@ in
 
       programs.opencode = {
         enable = true;
-        package = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
         enableMcpIntegration = true;
         settings = {
           theme = "catppuccin";

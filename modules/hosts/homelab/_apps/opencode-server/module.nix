@@ -16,7 +16,7 @@ in
 
     package = mkOption {
       type = types.package;
-      default = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      default = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
       description = "OpenCode server package";
     };
 
