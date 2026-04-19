@@ -12,6 +12,7 @@
           ai
           attic-client
           ankarhem
+          auto-upgrade
           chat
           colemak
           dev-tools
