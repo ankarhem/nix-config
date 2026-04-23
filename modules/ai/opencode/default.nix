@@ -2,7 +2,8 @@
 let
   glm = "zai-coding-plan/glm-5.1";
   glmFlash = "zai-coding-plan/glm-5-turbo";
-  gpt = "openai/gpt-5.4";
+  # gpt = "openai/gpt-5.4";
+  opus = "anthropic/claude-opus-4-7";
 in
 {
   flake.modules.homeManager.opencode =
@@ -27,8 +28,8 @@ in
             ./non_interactivity.md
           ];
           plugin = [
-            "@simonwjackson/opencode-direnv@latest"
-            # "@tarquinen/opencode-dcp@latest"
+            "@simonwjackson/opencode-direnv"
+            "@ex-machina/opencode-anthropic-auth"
           ];
 
           model = glm;
