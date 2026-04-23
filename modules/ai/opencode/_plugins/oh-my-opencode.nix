@@ -5,6 +5,7 @@ let
 
   glm = "zai-coding-plan/glm-5.1";
   glmFlash = "zai-coding-plan/glm-5-turbo";
+  glmVision = "zai-coding-plan/glm-5v-turbo";
 in
 {
   programs.opencode.settings = {
@@ -35,7 +36,7 @@ in
       atlas.model = gptCodex;
     };
     categories = {
-      visual-engineering.model = gptCodex;
+      visual-engineering.model = glmVision;
       ultrabrain.model = gptCodex;
       deep.model = gptCodex;
       artistry.model = gptCodex;
