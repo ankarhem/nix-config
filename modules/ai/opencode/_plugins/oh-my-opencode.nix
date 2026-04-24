@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  gpt = "openai/gpt-5.4";
+  gpt = "openai/gpt-5.5";
 
   glm = "zai-coding-plan/glm-5.1";
   glmFlash = "zai-coding-plan/glm-5-turbo";
