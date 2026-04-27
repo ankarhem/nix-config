@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: homelab-nix
     env:
       ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
     steps:
