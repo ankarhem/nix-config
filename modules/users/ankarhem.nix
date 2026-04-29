@@ -44,6 +44,7 @@ in
             git
             npm
             ssh
+            zed
           ])
           ++ [
             sopsKeyModule

@@ -10,27 +10,27 @@
         with inputs.self.modules.darwin;
         [
           ai
-          attic-client
           ankarhem
+          attic-client
           auto-upgrade
           chat
+          cli
           colemak
           dev-tools
           firefox
           fish
+          fonts
+          general
           gh
           gpg
           home-manager
+          homebrew
+          launcher
           lazyvim
           nix
           norcevpn
           secrets
           sshd
-          cli
-          fonts
-          general
-          homebrew
-          launcher
         ]
         ++ (with inputs.self.modules.generic; [
           constants
