@@ -7,10 +7,16 @@
         "csharp"
         "just"
         "nix"
-        "opencode"
         "svelte"
       ];
       userSettings = {
+        agent_servers = {
+          OpenCode = {
+            type = "custom";
+            command = "opencode";
+            args = [ "acp" ];
+          };
+        };
         agent = {
           always_allow_tool_actions = true;
           model_parameters = [ ];
