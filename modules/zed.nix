@@ -8,6 +8,7 @@
         "just"
         "nix"
         "svelte"
+        "catppuccin-icons"
       ];
       userSettings = {
         agent_servers = {
