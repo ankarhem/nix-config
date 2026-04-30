@@ -4,19 +4,44 @@
     {
       programs.zed-editor = {
         enable = true;
+        installRemoteServer = true;
         extensions = [
           "angular"
+          "basher"
+          "catppuccin-icons"
           "csharp"
+          "discord-presence"
+          "dockerfile"
+          "go"
+          "html"
+          "jsonnet"
           "just"
           "nix"
+          "sql"
           "svelte"
-          "catppuccin-icons"
+          "toml"
         ];
         extraPackages = with pkgs; [
+          delve
+          docker-compose-language-service
+          gopls
+          jsonnet-language-server
           nil
           nixd
+          omnisharp-roslyn
+          svelte-language-server
+          tailwindcss-language-server
+          vscode-js-debug
+          vtsls
+          yaml-language-server
         ];
         userSettings = {
+          languages = {
+            CSharp.language_servers = [
+              "omnisharp"
+              # "!roslyn"
+            ];
+          };
           agent_servers = {
             OpenCode = {
               type = "custom";
