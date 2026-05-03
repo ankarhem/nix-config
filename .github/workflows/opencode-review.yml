@@ -14,9 +14,11 @@ on:
 jobs:
   opencode:
     # @omo-agent mention (maintainers, exclude self) or pull_request events
+    # Skip automated PRs from auto/* branches (e.g. flake updates)
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' &&
+       !startsWith(github.event.pull_request.head.ref, 'auto/') &&
        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')) ||
       (github.event_name == 'issue_comment' &&
        contains(github.event.comment.body || '', '@omo-agent') &&
