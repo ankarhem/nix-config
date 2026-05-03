@@ -26,6 +26,7 @@ in
           };
           instructions = [
             ./non_interactivity.md
+            ./language.md
           ];
           plugin = [
             "@simonwjackson/opencode-direnv"
