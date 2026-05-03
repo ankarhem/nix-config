@@ -63,6 +63,25 @@ jobs:
           echo ${OMO_AGENT_PAT} | gh auth login --with-token
           gh auth status
 
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            netrc-file = /home/runner/.config/nix/netrc
+            extra-substituters = https://attic.internetfeno.men/main
+            extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
+
+      - name: Configure attic cache auth
+        env:
+          ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+        run: |
+          if [[ -n "$ATTIC_TOKEN" ]]; then
+            mkdir -p ~/.config/nix
+            printf 'machine attic.internetfeno.men\npassword %s\n' "$ATTIC_TOKEN" > ~/.config/nix/netrc
+            chmod 600 ~/.config/nix/netrc
+          fi
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
