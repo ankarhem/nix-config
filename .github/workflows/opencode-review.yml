@@ -14,16 +14,15 @@ on:
 jobs:
   opencode:
     # @omo-agent mention (maintainers, exclude self) or pull_request events
-    # Skip automated PRs authored by omo-agent (e.g. flake updates)
+    # Skip automated PRs from auto/* branches (e.g. flake updates)
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'pull_request' &&
-       (github.event.pull_request.user.login || '') != 'omo-agent' &&
+       !startsWith(github.event.pull_request.head.ref, 'auto/') &&
        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')) ||
       (github.event_name == 'issue_comment' &&
        contains(github.event.comment.body || '', '@omo-agent') &&
        (github.event.comment.user.login || '') != 'omo-agent' &&
-       (github.event.issue.user.login || '') != 'omo-agent' &&
        contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association || ''))
     runs-on: ubuntu-latest
     concurrency:
