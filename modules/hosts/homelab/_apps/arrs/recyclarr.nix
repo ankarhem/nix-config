@@ -7,18 +7,13 @@
   sops.secrets."arr_tokens/radarr" = { };
   sops.secrets."arr_tokens/sonarr" = { };
 
-  systemd.services.recyclarr.serviceConfig.LoadCredential = [
-    "radarr_api_key:${config.sops.secrets."arr_tokens/radarr".path}"
-    "sonarr_api_key:${config.sops.secrets."arr_tokens/sonarr".path}"
-  ];
-
   services.recyclarr = {
     enable = true;
 
     configuration = {
       radarr.movies = {
         base_url = "https://radarr.internal.internetfeno.men";
-        api_key._secret = "/run/credentials/recyclarr.service/radarr_api_key";
+        api_key._secret = config.sops.secrets."arr_tokens/radarr".path;
 
         delete_old_custom_formats = true;
         replace_existing_custom_formats = true;
@@ -40,7 +35,7 @@
       };
       sonarr.tv = {
         base_url = "https://sonarr.internal.internetfeno.men";
-        api_key._secret = "/run/credentials/recyclarr.service/sonarr_api_key";
+        api_key._secret = config.sops.secrets."arr_tokens/sonarr".path;
 
         delete_old_custom_formats = true;
         replace_existing_custom_formats = true;
