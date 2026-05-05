@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "agent-browser": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777477152,
+        "narHash": "sha256-bTYekrFtUtbyJXudjQYe7sH0FTuhcGzcSDCN7qRciv8=",
+        "owner": "vercel-labs",
+        "repo": "agent-browser",
+        "rev": "7ada3384e2afb5f3c43d9106389da86d8f807dca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vercel-labs",
+        "repo": "agent-browser",
+        "type": "github"
+      }
+    },
     "apple-fonts": {
       "inputs": {
         "nixpkgs": [
@@ -912,6 +928,22 @@
         "type": "github"
       }
     },
+    "norce-agent-instructions": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777979461,
+        "narHash": "sha256-nxB93Bw5S//gwUziajYjFdZzZ8uNSSzdEGruDpRuD/0=",
+        "owner": "NorceTech",
+        "repo": "agent-instructions",
+        "rev": "e079889643ae6f2c33f934cdfdd541a6b116de38",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NorceTech",
+        "repo": "agent-instructions",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts_4",
@@ -970,6 +1002,7 @@
     },
     "root": {
       "inputs": {
+        "agent-browser": "agent-browser",
         "apple-fonts": "apple-fonts",
         "comfyui-nix": "comfyui-nix",
         "flake-parts": "flake-parts_2",
@@ -988,6 +1021,7 @@
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "norce-agent-instructions": "norce-agent-instructions",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
         "scripts": "scripts",

@@ -64,7 +64,7 @@
           mitmproxy
           bruno
           bun
-          jira-cli-go
+          local.acli
           jetbrains.rider
           jetbrains.rust-rover
           jetbrains.webstorm

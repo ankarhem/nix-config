@@ -30,7 +30,7 @@ let
       gitleaks
       grc
       htop
-      jira-cli-go
+      local.acli
       jq
       local.clone_org
       nix

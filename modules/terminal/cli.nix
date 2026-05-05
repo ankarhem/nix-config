@@ -93,7 +93,7 @@ in
           grc
           htop
           imagemagick
-          jira-cli-go
+          local.acli
           jq
           k9s
           kubelogin

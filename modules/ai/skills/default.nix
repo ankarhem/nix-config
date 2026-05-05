@@ -16,13 +16,8 @@ in
     { lib, pkgs, ... }:
     let
       localSkills = readSkillsFrom ./.;
-      agentBrowser = pkgs.fetchFromGitHub {
-        owner = "vercel-labs";
-        repo = "agent-browser";
-        rev = "a95bc0f75a45560f953594b155cc1ff57f1a0170";
-        hash = "sha256-8WWq9HJVIEb7C+pr6OYv8+2LbvCMFQSnDzUmy6lNptg=";
-      };
-      agentBrowserSkills = readSkillsFrom "${agentBrowser}/skills";
+      agentBrowserSkills = readSkillsFrom "${inputs.agent-browser}/skills";
+      norceSkills = readSkillsFrom "${inputs.norce-agent-instructions}/skills";
     in
     {
       home.packages = [
@@ -35,10 +30,18 @@ in
         let
           skills =
             localSkills
-            // lib.getAttrs [
+            // (lib.getAttrs [
               "agent-browser"
-              "dogfood"
-            ] agentBrowserSkills;
+            ] agentBrowserSkills)
+            // (lib.getAttrs [
+              "checkout-config"
+              "ck"
+              "commit"
+              "create-pr"
+              "git-bisect"
+              "jira"
+              "using-git-worktrees"
+            ] norceSkills);
         in
         pkgs.linkFarm "merged-skills" skills;
     };
