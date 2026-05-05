@@ -71,6 +71,7 @@
     truesight.url = "github:ankarhem/truesight";
     truesight.inputs.nixpkgs.follows = "nixpkgs";
     llm-agents.url = "github:numtide/llm-agents.nix";
+    graylog-cli.url = "github:norcetech/graylog-cli";
 
     norce-agent-instructions.url = "github:NorceTech/agent-instructions";
     norce-agent-instructions.flake = false;

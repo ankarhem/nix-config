@@ -60,7 +60,7 @@
         [
           az
           argocd
-          pkgs.local.clone_org
+          local.clone_org
           mitmproxy
           bruno
           bun
@@ -68,6 +68,7 @@
           jetbrains.rider
           jetbrains.rust-rover
           jetbrains.webstorm
+          inputs.graylog-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
         ]
         ++ [ combinedDotnet ];
     };

@@ -18,6 +18,7 @@ in
       localSkills = readSkillsFrom ./.;
       agentBrowserSkills = readSkillsFrom "${inputs.agent-browser}/skills";
       norceSkills = readSkillsFrom "${inputs.norce-agent-instructions}/skills";
+      graylogCliSkills = readSkillsFrom "${inputs.graylog-cli}/skills";
     in
     {
       home.packages = [
@@ -41,7 +42,10 @@ in
               "git-bisect"
               "jira"
               "using-git-worktrees"
-            ] norceSkills);
+            ] norceSkills)
+            // (lib.getAttrs [
+              "graylog-cli"
+            ] graylogCliSkills);
         in
         pkgs.linkFarm "merged-skills" skills;
     };
