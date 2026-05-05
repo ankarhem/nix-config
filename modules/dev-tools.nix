@@ -64,7 +64,7 @@
           mitmproxy
           bruno
           bun
-          local.acli
+          _unstable.acli
           jetbrains.rider
           jetbrains.rust-rover
           jetbrains.webstorm

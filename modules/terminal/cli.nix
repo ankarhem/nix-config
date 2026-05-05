@@ -93,7 +93,7 @@ in
           grc
           htop
           imagemagick
-          local.acli
+          _unstable.acli
           jq
           k9s
           kubelogin

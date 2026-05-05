@@ -30,7 +30,7 @@ let
       gitleaks
       grc
       htop
-      local.acli
+      _unstable.acli
       jq
       local.clone_org
       nix
