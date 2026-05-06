@@ -68,6 +68,7 @@ in
       inherit nixpkgs;
 
       homebrew.casks = [
+        "azure-data-studio"
         "microsoft-excel"
         "microsoft-remote-desktop"
         "pairpods"
@@ -160,7 +161,6 @@ in
         [
           _1password-cli
           _1password-gui
-          azuredatastudio
           bitwarden-desktop
           google-chrome
           obsidian
@@ -171,6 +171,7 @@ in
         ++ lib.optionals pkgs.stdenv.isLinux (
           with pkgs;
           [
+            azuredatastudio
             phoronix-test-suite
             runelite
             bolt-launcher

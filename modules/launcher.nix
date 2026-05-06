@@ -8,12 +8,12 @@
   flake.modules.darwin.launcher =
     { config, pkgs, ... }:
     {
+      environment.systemPackages = [
+        pkgs.raycast
+      ];
+
       home-manager.sharedModules = [
-        {
-          home.packages = [
-            pkgs.raycast
-          ];
-        }
+        inputs.self.modules.homeManager.launcher
       ];
 
       system.defaults.CustomUserPreferences = {
