@@ -6,10 +6,10 @@
     ];
   };
   flake.modules.darwin.launcher =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
-      homebrew.casks = [
-        "raycast"
+      environment.systemPackages = [
+        pkgs.raycast
       ];
 
       system.defaults.CustomUserPreferences = {
