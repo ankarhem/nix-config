@@ -99,7 +99,7 @@
           "aarch64-darwin"
         ];
         flake.overlays.default = final: prev: {
-          local = self.packages.${prev.system};
+          local = self.packages.${prev.stdenv.hostPlatform.system};
         };
         perSystem =
           {

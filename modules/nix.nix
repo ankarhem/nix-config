@@ -15,10 +15,12 @@ let
       final: prev:
       let
         pkgs-unstable = import inputs.nixpkgs-unstable {
-          inherit (prev) system config;
+          system = prev.stdenv.hostPlatform.system;
+          inherit config;
         };
         pkgs-darwin = import inputs.nixpkgs-unstable {
-          inherit (prev) system config;
+          system = prev.stdenv.hostPlatform.system;
+          inherit config;
         };
       in
       {

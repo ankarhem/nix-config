@@ -5,7 +5,7 @@ let
       final: prev:
       let
         pkgs = import inputs.nixpkgs {
-          inherit (prev) system;
+          system = prev.stdenv.hostPlatform.system;
           config = {
             allowUnfree = true;
           };

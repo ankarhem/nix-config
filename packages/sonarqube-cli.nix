@@ -1,7 +1,6 @@
 {
   stdenv,
   fetchurl,
-  system,
 }:
 
 let
@@ -21,7 +20,7 @@ let
     };
   };
 
-  binary = binaries.${system};
+  binary = binaries.${stdenv.hostPlatform.system};
 in
 stdenv.mkDerivation {
   inherit pname version;
