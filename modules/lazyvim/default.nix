@@ -50,23 +50,23 @@ let
           };
           editor = {
             fzf.enable = true;
-            inc_rename.enable = true;
+            inc-rename.enable = true;
             overseer.enable = true;
             telescope.enable = true;
             dial.enable = true;
-            snacks_picker.enable = true;
-            neo_tree.enable = true;
+            snacks-picker.enable = true;
+            neo-tree.enable = true;
           };
           formatting.prettier.enable = true;
           linting.eslint.enable = true;
           lsp.none-ls.enable = true;
           test.core.enable = true;
-          ui.treesitter_context.enable = true;
+          ui.treesitter-context.enable = true;
           util = {
             dot.enable = true;
             gitui.enable = true;
             gh.enable = true;
-            mini_hipatterns.enable = true;
+            mini-hipatterns.enable = true;
           };
         };
       };
