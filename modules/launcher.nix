@@ -12,10 +12,6 @@
         pkgs.raycast
       ];
 
-      home-manager.sharedModules = [
-        inputs.self.modules.homeManager.launcher
-      ];
-
       system.defaults.CustomUserPreferences = {
         "com.apple.symbolichotkeys" = {
           AppleSymbolicHotKeys = {
