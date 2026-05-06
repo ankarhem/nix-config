@@ -50,10 +50,12 @@
             };
           };
           agent = {
+            dock = "right";
             always_allow_tool_actions = true;
             model_parameters = [ ];
           };
-          theme = "One Dark";
+          icon_theme = "Catppuccin Frappé";
+          theme = "Ayu Mirage";
           session.trust_all_worktrees = true;
           vim_mode = true;
           base_keymap = "VSCode";
