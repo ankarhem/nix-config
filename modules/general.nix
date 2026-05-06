@@ -66,38 +66,14 @@ in
         pathsToLink = [ "/Applications" ];
       };
       inherit nixpkgs;
-      system.defaults.dock.persistent-apps = [
-        "${pkgs.obsidian}/Applications/Obsidian.app/"
-        "${pkgs.spotify}/Applications/Spotify.app/"
-        "/Applications/1Password.app/"
-        "/Applications/Bitwarden.app/"
-        "/Applications/Microsoft Excel.app/"
-        "/System/Applications/Calendar.app/"
-        "/System/Applications/Mail.app/"
-        "/System/Applications/System Settings.app/"
-      ];
 
-      homebrew.brews = [
-        "pinentry-mac"
-      ];
       homebrew.casks = [
-        "1password"
-        "1password-cli"
-        "azure-data-studio"
-        "betterdisplay"
-        "bitwarden"
-        "google-chrome"
-        "maccy"
         "microsoft-excel"
         "microsoft-remote-desktop"
-        "mos"
-        "orbstack"
         "pairpods"
         # "runelite"
         "sikarugir"
         "steam"
-        "tailscale-app"
-        "tor-browser"
       ];
 
       security.pam.services.sudo_local.touchIdAuth = true;
@@ -109,6 +85,16 @@ in
           autohide = false;
           # Don’t rearrange spaces based on the most recent use
           mru-spaces = false;
+          persistent-apps = [
+            "${pkgs.obsidian}/Applications/Obsidian.app/"
+            "${pkgs.spotify}/Applications/Spotify.app/"
+            "${pkgs._1password-gui}/Applications/1Password.app/"
+            "${pkgs.bitwarden-desktop}/Applications/Bitwarden.app/"
+            "/Applications/Microsoft Excel.app/"
+            "/System/Applications/Calendar.app/"
+            "/System/Applications/Mail.app/"
+            "/System/Applications/System Settings.app/"
+          ];
         };
         screensaver.askForPasswordDelay = 10;
         screencapture.location = "~/Pictures/screenshots";
@@ -172,18 +158,33 @@ in
       home.packages =
         with pkgs;
         [
+          _1password-cli
+          _1password-gui
+          azuredatastudio
+          bitwarden-desktop
+          google-chrome
           obsidian
           slack
           spotify
+          tor-browser
         ]
         ++ lib.optionals pkgs.stdenv.isLinux (
           with pkgs;
           [
-            _1password-gui
-            bitwarden-desktop
             phoronix-test-suite
             runelite
             bolt-launcher
+          ]
+        )
+        ++ lib.optionals pkgs.stdenv.isDarwin (
+          with pkgs;
+          [
+            betterdisplay
+            maccy
+            mos
+            orbstack
+            pinentry_mac
+            _unstable.tailscale-gui
           ]
         );
     };
