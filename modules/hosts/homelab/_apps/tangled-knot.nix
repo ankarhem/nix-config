@@ -12,14 +12,13 @@ in
   services.tangled.knot = {
     enable = true;
     package = inputs.tangled.packages.${config.nixpkgs.hostPlatform.system}.knot;
-    stateDir = "/mnt/DISKETTEN_drive/tangled";
+    stateDir = "/var/lib/tangled-knot";
     repo.scanPath = "/mnt/DISKETTEN_drive/tangled/repos";
     server = {
       listenAddr = "127.0.0.1:${publicPort}";
       internalListenAddr = "127.0.0.1:${internalPort}";
       hostname = domain;
       owner = "did:plc:freiumm55hanqgziwfajvhn6";
-      dbPath = "/mnt/DISKETTEN_drive/tangled/knotserver.db";
     };
     openFirewall = false;
   };
