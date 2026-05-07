@@ -77,6 +77,10 @@
     norce-agent-instructions.flake = false;
     agent-browser.url = "github:vercel-labs/agent-browser";
     agent-browser.flake = false;
+
+    tangled.url = "git+https://tangled.org/tangled.org/core";
+    tangled.inputs.nixpkgs.follows = "nixpkgs";
+    tangled.inputs.flake-compat.url = "github:edolstra/flake-compat";
   };
 
   outputs =
