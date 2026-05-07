@@ -19,6 +19,7 @@
     ./tibia-api.nix
     ./tuwunel.nix
     ./vaultwarden/default.nix
+    ./tangled-knot.nix
   ];
 
   services.nginx = {
