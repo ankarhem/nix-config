@@ -80,6 +80,7 @@
 
     tangled.url = "git+https://tangled.org/tangled.org/core";
     tangled.inputs.nixpkgs.follows = "nixpkgs";
+    tangled.inputs.flake-compat.url = "github:edolstra/flake-compat";
   };
 
   outputs =
