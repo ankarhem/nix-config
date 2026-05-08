@@ -1,30 +1,6 @@
-{ inputs, ... }:
-let
-  nixpkgs.overlays = [
-    (
-      final: prev:
-      let
-        pkgs = import inputs.nixpkgs {
-          system = prev.stdenv.hostPlatform.system;
-          config = {
-            allowUnfree = true;
-          };
-        };
-      in
-      {
-        spotify = pkgs.spotify.overrideAttrs (oldAttrs: {
-          src = pkgs.fetchurl {
-            url = "https://web.archive.org/web/20251029235406/https://download.scdn.co/SpotifyARM64.dmg";
-            hash = "sha256-gEZxRBT7Jo2m6pirf+CreJiMeE2mhIkpe9Mv5t0RI58=";
-          };
-        });
-      }
-    )
-  ];
-in
+{ ... }:
 {
   flake.modules.nixos.general = {
-    inherit nixpkgs;
     programs.thunderbird = {
       enable = true;
       preferences = {
@@ -65,7 +41,6 @@ in
       environment = {
         pathsToLink = [ "/Applications" ];
       };
-      inherit nixpkgs;
 
       homebrew.casks = [
         "azure-data-studio"
@@ -88,7 +63,7 @@ in
           mru-spaces = false;
           persistent-apps = [
             "${pkgs.obsidian}/Applications/Obsidian.app/"
-            "${pkgs.spotify}/Applications/Spotify.app/"
+            "${pkgs._unstable.spotify}/Applications/Spotify.app/"
             "${pkgs._1password-gui}/Applications/1Password.app/"
             "${pkgs.bitwarden-desktop}/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
@@ -165,10 +140,10 @@ in
           google-chrome
           obsidian
           slack
-          spotify
+          _unstable.spotify
           tor-browser
         ]
-        ++ lib.optionals pkgs.stdenv.isLinux (
+        ++ (lib.optionals pkgs.stdenv.isLinux (
           with pkgs;
           [
             azuredatastudio
@@ -176,8 +151,8 @@ in
             runelite
             bolt-launcher
           ]
-        )
-        ++ lib.optionals pkgs.stdenv.isDarwin (
+        ))
+        ++ (lib.optionals pkgs.stdenv.isDarwin (
           with pkgs;
           [
             betterdisplay
@@ -187,6 +162,6 @@ in
             pinentry_mac
             _unstable.tailscale-gui
           ]
-        );
+        ));
     };
 }

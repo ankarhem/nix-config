@@ -83,51 +83,42 @@
 
   outputs =
     inputs@{ self, ... }:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
-      top@{
-        config,
-        withSystem,
-        moduleWithSystem,
-        ...
-      }:
-      {
-        imports = [
-          inputs.git-hooks.flakeModule
-          inputs.flake-parts.flakeModules.modules
-          (inputs.import-tree ./modules)
-        ];
-        systems = [
-          "x86_64-linux"
-          "aarch64-darwin"
-        ];
-        flake.overlays.default = final: prev: {
-          local = self.packages.${prev.stdenv.hostPlatform.system};
-        };
-        perSystem =
-          {
-            lib,
-            config,
-            pkgs,
-            system,
-            ...
-          }:
-          {
-            packages = lib.packagesFromDirectoryRecursive {
-              inherit (pkgs) callPackage;
-              directory = ./packages;
-            };
-            pre-commit.settings.hooks = {
-              ripsecrets.enable = true;
-              nixfmt-rfc-style.enable = true;
-            };
-            formatter = pkgs.nixfmt-tree;
-            devShells.default = pkgs.mkShell {
-              packages = [ pkgs.act ] ++ config.pre-commit.settings.enabledPackages;
-              shellHook = ''
-                ${config.pre-commit.shellHook}
-              '';
-            };
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.git-hooks.flakeModule
+        inputs.flake-parts.flakeModules.modules
+        (inputs.import-tree ./modules)
+      ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+      flake.overlays.default = final: prev: {
+        local = self.packages.${prev.stdenv.hostPlatform.system};
+      };
+      perSystem =
+        {
+          lib,
+          config,
+          pkgs,
+          ...
+        }:
+        {
+          packages = lib.packagesFromDirectoryRecursive {
+            inherit (pkgs) callPackage;
+            directory = ./packages;
           };
-      }
-    );
+          pre-commit.settings.hooks = {
+            ripsecrets.enable = true;
+            nixfmt-rfc-style.enable = true;
+          };
+          formatter = pkgs.nixfmt-tree;
+          devShells.default = pkgs.mkShell {
+            packages = [ pkgs.act ] ++ config.pre-commit.settings.enabledPackages;
+            shellHook = ''
+              ${config.pre-commit.shellHook}
+            '';
+          };
+        };
+    };
 }
