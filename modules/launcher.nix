@@ -42,7 +42,7 @@
     };
 
   flake.modules.homeManager.launcher =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     let
       mkRayCastExtension =
         {

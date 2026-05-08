@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 let
   cacheServerName = "homelab";
   cacheName = "main";
@@ -38,7 +38,6 @@ in
   flake.modules.nixos.attic-client =
     {
       config,
-      lib,
       pkgs,
       ...
     }:
@@ -78,7 +77,6 @@ in
   flake.modules.darwin.attic-client =
     {
       config,
-      lib,
       pkgs,
       ...
     }:

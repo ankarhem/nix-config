@@ -3,7 +3,7 @@ let
   glm = "zai-coding-plan/glm-5.1";
   glmFlash = "zai-coding-plan/glm-5-turbo";
   gpt = "openai/gpt-5.5";
-  opus = "anthropic/claude-opus-4-7";
+  # opus = "anthropic/claude-opus-4-7";
 in
 {
   flake.modules.homeManager.opencode =

@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.general = {
     programs.thunderbird = {
@@ -33,6 +33,10 @@
       enable = true;
       addresses = true;
     };
+
+    home-manager.sharedModules = [
+      inputs.self.modules.homeManager.general
+    ];
   };
 
   flake.modules.darwin.general =
@@ -50,6 +54,7 @@
         # "runelite"
         "sikarugir"
         "steam"
+        "tor-browser"
       ];
 
       security.pam.services.sudo_local.touchIdAuth = true;
@@ -126,6 +131,10 @@
           };
         };
       };
+
+      home-manager.sharedModules = [
+        inputs.self.modules.homeManager.general
+      ];
     };
 
   flake.modules.homeManager.general =
@@ -141,7 +150,6 @@
           obsidian
           slack
           _unstable.spotify
-          tor-browser
         ]
         ++ (lib.optionals pkgs.stdenv.isLinux (
           with pkgs;
@@ -150,6 +158,7 @@
             phoronix-test-suite
             runelite
             bolt-launcher
+            tor-browser
           ]
         ))
         ++ (lib.optionals pkgs.stdenv.isDarwin (

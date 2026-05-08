@@ -6,10 +6,7 @@
 {
   flake.modules.nixos.homelab =
     {
-      pkgs,
       lib,
-      config,
-      library,
       modulesPath,
       ...
     }:

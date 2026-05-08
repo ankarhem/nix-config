@@ -104,12 +104,14 @@ in
           ripgrep
           rm-improved
           sops
-          tailscale
           tree
           uv
           vim
           wget
         ]
-        ++ lib.optionals pkgs.stdenv.isLinux [ nfs-utils ];
+        ++ lib.optionals pkgs.stdenv.isLinux [
+          tailscale
+          nfs-utils
+        ];
     };
 }
