@@ -9,7 +9,7 @@
     { config, pkgs, ... }:
     {
       environment.systemPackages = [
-        pkgs.raycast
+        pkgs._unstable.raycast
       ];
 
       system.defaults.CustomUserPreferences = {

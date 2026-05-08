@@ -29,7 +29,6 @@
       ];
     in
     {
-      programs.zed-editor.enable = true;
       programs.go.enable = true;
 
       home.file.".nuget/plugins".source = pkgs.symlinkJoin {

@@ -77,6 +77,8 @@
     norce-agent-instructions.flake = false;
     agent-browser.url = "github:vercel-labs/agent-browser";
     agent-browser.flake = false;
+    temporalio-skill.url = "github:temporalio/skill-temporal-developer";
+    temporalio-skill.flake = false;
   };
 
   outputs =

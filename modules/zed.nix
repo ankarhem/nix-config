@@ -4,6 +4,7 @@
     {
       programs.zed-editor = {
         enable = true;
+        package = pkgs._unstable.zed-editor;
         installRemoteServer = true;
         extensions = [
           "angular"
@@ -36,22 +37,19 @@
           yaml-language-server
         ];
         userSettings = {
+          project_panel.dock = "left";
+          outline_panel.dock = "left";
+          collaboration_panel.dock = "left";
+          git_panel.dock = "left";
           languages = {
             CSharp.language_servers = [
               "omnisharp"
               # "!roslyn"
             ];
           };
-          agent_servers = {
-            OpenCode = {
-              type = "custom";
-              command = "opencode";
-              args = [ "acp" ];
-            };
-          };
           agent = {
             dock = "right";
-            always_allow_tool_actions = true;
+            tool_permissions.default = "allow";
             model_parameters = [ ];
           };
           icon_theme = "Catppuccin Frappé";

@@ -45,7 +45,10 @@ in
             ] norceSkills)
             // (lib.getAttrs [
               "graylog-cli"
-            ] graylogCliSkills);
+            ] graylogCliSkills)
+            // {
+              "temporal-developer" = inputs.temporalio-skill;
+            };
         in
         pkgs.linkFarm "merged-skills" skills;
     };
