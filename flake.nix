@@ -2,83 +2,53 @@
   description = "MacOS System Configuration flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    agent-browser.flake = false;
+    agent-browser.url = "github:vercel-labs/agent-browser";
+    apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
+    apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+    comfyui-nix.url = "github:utensils/comfyui-nix";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    git-hooks.url = "github:cachix/git-hooks.nix";
+    graylog-cli.url = "github:norcetech/graylog-cli";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    homebrew-bundle.flake = false;
+    homebrew-bundle.url = "github:homebrew/homebrew-bundle";
+    homebrew-cask.flake = false;
+    homebrew-cask.url = "github:homebrew/homebrew-cask";
+    homebrew-core.flake = false;
+    homebrew-core.url = "github:homebrew/homebrew-core";
+    homebrew-sikarugir.flake = false;
+    homebrew-sikarugir.url = "github:Sikarugir-App/homebrew-sikarugir";
+    import-tree.url = "github:vic/import-tree";
+    lazyvim.url = "github:pfassina/lazyvim-nix";
+    llm-agents.url = "github:numtide/llm-agents.nix";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
+    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database.url = "github:nix-community/nix-index-database";
     nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
-    };
-    nix-homebrew = {
-      url = "github:zhaofengli-wip/nix-homebrew";
-    };
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-    homebrew-sikarugir = {
-      url = "github:Sikarugir-App/homebrew-sikarugir";
-      flake = false;
-    };
-    git-hooks.url = "github:cachix/git-hooks.nix";
-    lazyvim.url = "github:pfassina/lazyvim-nix";
-    scripts.url = "github:ankarhem/scripts";
-    comfyui-nix.url = "github:utensils/comfyui-nix";
-    vicinae = {
-      url = "github:vicinaehq/vicinae";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    vicinae-extensions = {
-      url = "github:vicinaehq/extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-    apple-fonts = {
-      url = "github:Lyndeno/apple-fonts.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    import-tree.url = "github:vic/import-tree";
-    truesight.url = "github:ankarhem/truesight";
-    truesight.inputs.nixpkgs.follows = "nixpkgs";
-    llm-agents.url = "github:numtide/llm-agents.nix";
-    graylog-cli.url = "github:norcetech/graylog-cli";
-
-    norce-agent-instructions.url = "github:NorceTech/agent-instructions";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     norce-agent-instructions.flake = false;
-    agent-browser.url = "github:vercel-labs/agent-browser";
-    agent-browser.flake = false;
-    temporalio-skill.url = "github:temporalio/skill-temporal-developer";
+    norce-agent-instructions.url = "github:NorceTech/agent-instructions";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = "github:nix-community/NUR";
+    plasma-manager.inputs.home-manager.follows = "home-manager";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.url = "github:nix-community/plasma-manager";
+    scripts.url = "github:ankarhem/scripts";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
     temporalio-skill.flake = false;
+    temporalio-skill.url = "github:temporalio/skill-temporal-developer";
+    truesight.inputs.nixpkgs.follows = "nixpkgs";
+    truesight.url = "github:ankarhem/truesight";
+    vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
+    vicinae-extensions.url = "github:vicinaehq/extensions";
+    vicinae.inputs.nixpkgs.follows = "nixpkgs";
+    vicinae.url = "github:vicinaehq/vicinae";
   };
 
   outputs =
