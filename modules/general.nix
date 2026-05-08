@@ -183,7 +183,7 @@ in
             betterdisplay
             maccy
             mos
-            orbstack
+            _unstable.orbstack
             pinentry_mac
             _unstable.tailscale-gui
           ]
