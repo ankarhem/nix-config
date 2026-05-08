@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  gpt = "openai/gpt-5.5";
+  gpt = "openai/gpt-5.5-fast";
 
   glm = "zai-coding-plan/glm-5.1";
   glmFlash = "zai-coding-plan/glm-5-turbo";
@@ -28,30 +28,30 @@ in
       sisyphys-junior.model = glm;
       hephaestus.model = gpt;
       oracle.model = gpt;
-      # oracle.variant = "max";
+      oracle.variant = "xhigh";
       librarian.model = glm;
       explore.model = glmFlash;
       multimodal-looker.model = glmVision;
       prometheus.model = gpt;
-      # prometheus.variant = "max";
+      prometheus.variant = "xhigh";
       metis.model = gpt;
-      # metis.variant = "max";
+      metis.variant = "xhigh";
       momus.model = gpt;
-      # momus.variant = "max";
+      momus.variant = "xhigh";
       atlas.model = gpt;
-      # atlas.variant = "xhigh";
+      atlas.variant = "xhigh";
     };
     categories = {
       visual-engineering.model = glmVision;
       ultrabrain.model = gpt;
-      # ultrabrain.variant = "xhigh";
+      ultrabrain.variant = "xhigh";
       deep.model = gpt;
-      # deep.variant = "xhigh";
+      deep.variant = "xhigh";
       artistry.model = glm;
       quick.model = glmFlash;
       unspecified-low.model = glm;
       unspecified-high.model = glm;
-      # unspecified-high.variant = "xhigh";
+      unspecified-high.variant = "xhigh";
       writing.model = glm;
     };
   };
