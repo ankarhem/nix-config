@@ -27,6 +27,7 @@
           docker-compose-language-service
           gopls
           jsonnet-language-server
+          just-lsp
           nil
           nixd
           omnisharp-roslyn
