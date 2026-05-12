@@ -34,6 +34,7 @@ in
               "agent-browser"
             ] agentBrowserSkills)
             // (lib.getAttrs [
+              "argue"
               "checkout-config"
               "ck"
               "commit"
