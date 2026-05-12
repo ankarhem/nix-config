@@ -47,6 +47,8 @@
       };
 
       homebrew.casks = [
+        "1password"
+        "1password-cli"
         "azure-data-studio"
         "microsoft-excel"
         "microsoft-remote-desktop"
@@ -69,7 +71,7 @@
           persistent-apps = [
             "${pkgs.obsidian}/Applications/Obsidian.app/"
             "${pkgs._unstable.spotify}/Applications/Spotify.app/"
-            "${pkgs._1password-gui}/Applications/1Password.app/"
+            "/Applications/1Password.app/"
             "${pkgs.bitwarden-desktop}/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
             "/System/Applications/Calendar.app/"
@@ -143,8 +145,6 @@
       home.packages =
         with pkgs;
         [
-          _1password-cli
-          _1password-gui
           bitwarden-desktop
           google-chrome
           obsidian
@@ -154,6 +154,8 @@
         ++ (lib.optionals pkgs.stdenv.isLinux (
           with pkgs;
           [
+            _1password-cli
+            _1password-gui
             azuredatastudio
             phoronix-test-suite
             runelite

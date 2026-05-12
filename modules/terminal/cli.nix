@@ -78,7 +78,6 @@ in
       home.packages =
         with pkgs;
         [
-          _1password-cli
           age
           alejandra
           bat
@@ -110,6 +109,7 @@ in
           wget
         ]
         ++ lib.optionals pkgs.stdenv.isLinux [
+          _1password-cli
           tailscale
           nfs-utils
         ];
