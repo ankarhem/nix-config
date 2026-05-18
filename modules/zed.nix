@@ -13,6 +13,7 @@
           "csharp"
           "discord-presence"
           "dockerfile"
+          "git-firefly"
           "go"
           "html"
           "jsonnet"
