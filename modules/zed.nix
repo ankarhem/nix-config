@@ -19,6 +19,7 @@
           "jsonnet"
           "just"
           "nix"
+          "scss"
           "sql"
           "svelte"
           "toml"
