@@ -36,6 +36,7 @@
           gopls
           jsonnet-language-server
           just-lsp
+          nginx-language-server
           nil
           nixd
           omnisharp-roslyn
