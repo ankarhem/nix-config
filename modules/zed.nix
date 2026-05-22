@@ -12,6 +12,7 @@
           "cargo-tom"
           "catppuccin-icons"
           "codebook"
+          "color-highlight"
           "csharp"
           "discord-presence"
           "dockerfile"
