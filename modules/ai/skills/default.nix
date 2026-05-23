@@ -35,6 +35,7 @@ in
             ] agentBrowserSkills)
             // (lib.getAttrs [
               "argue"
+              "checkout-domain"
               "checkout-config"
               "ck"
               "commit"
