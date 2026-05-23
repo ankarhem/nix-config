@@ -1,9 +1,9 @@
 { inputs, ... }:
 let
-  glm = "zai-coding-plan/glm-5.1";
+  glm = "synthetic/hf:zai-org/GLM-5.1";
   glmFlash = "zai-coding-plan/glm-5-turbo";
-  gpt = "openai/gpt-5.5-fast";
-  # opus = "anthropic/claude-opus-4-7";
+  # gpt = "openai/gpt-5.5-fast";
+  opus = "anthropic/claude-opus-4-7";
 in
 {
   flake.modules.homeManager.opencode =
@@ -37,14 +37,12 @@ in
           small_model = glmFlash;
           agent = {
             build.model = glm;
-            plan.model = gpt;
-            plan.variant = "xhigh";
-            general.model = gpt;
-            general.variant = "xhigh";
+            plan.model = opus;
+            general.model = opus;
             explore.model = glmFlash;
-            compaction.model = glm;
+            compaction.model = glmFlash;
             title.model = glmFlash;
-            summary.model = glm;
+            summary.model = glmFlash;
           };
           lsp = {
             nixd = {
