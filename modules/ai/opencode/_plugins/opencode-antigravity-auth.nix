@@ -30,6 +30,30 @@ _: {
             };
           };
 
+          "antigravity-gemini-3.1-pro" = {
+            name = "Gemini 3.1 Pro (Antigravity)";
+            limit = {
+              context = 1048576;
+              output = 65535;
+            };
+            modalities = {
+              input = [
+                "text"
+                "image"
+                "pdf"
+              ];
+              output = [ "text" ];
+            };
+            variants = {
+              low = {
+                thinkingLevel = "low";
+              };
+              high = {
+                thinkingLevel = "high";
+              };
+            };
+          };
+
           antigravity-gemini-3-flash = {
             name = "Gemini 3 Flash (Antigravity)";
             limit = {
@@ -60,8 +84,8 @@ _: {
             };
           };
 
-          antigravity-claude-sonnet-4-5 = {
-            name = "Claude Sonnet 4.5 (Antigravity)";
+          antigravity-claude-sonnet-4-6 = {
+            name = "Claude Sonnet 4.6 (Antigravity)";
             limit = {
               context = 200000;
               output = 64000;
@@ -73,62 +97,6 @@ _: {
                 "pdf"
               ];
               output = [ "text" ];
-            };
-          };
-
-          antigravity-claude-sonnet-4-5-thinking = {
-            name = "Claude Sonnet 4.5 Thinking (Antigravity)";
-            limit = {
-              context = 200000;
-              output = 64000;
-            };
-            modalities = {
-              input = [
-                "text"
-                "image"
-                "pdf"
-              ];
-              output = [ "text" ];
-            };
-            variants = {
-              low = {
-                thinkingConfig = {
-                  thinkingBudget = 8192;
-                };
-              };
-              max = {
-                thinkingConfig = {
-                  thinkingBudget = 32768;
-                };
-              };
-            };
-          };
-
-          antigravity-claude-opus-4-5-thinking = {
-            name = "Claude Opus 4.5 Thinking (Antigravity)";
-            limit = {
-              context = 200000;
-              output = 64000;
-            };
-            modalities = {
-              input = [
-                "text"
-                "image"
-                "pdf"
-              ];
-              output = [ "text" ];
-            };
-            variants = {
-              low = {
-                thinkingConfig = {
-                  thinkingBudget = 8192;
-                };
-              };
-              max = {
-                thinkingConfig = {
-                  thinkingBudget = 32768;
-                };
-              };
             };
           };
 
@@ -160,7 +128,7 @@ _: {
             };
           };
 
-          gemini-2_5-flash = {
+          "gemini-2.5-flash" = {
             name = "Gemini 2.5 Flash (Gemini CLI)";
             limit = {
               context = 1048576;
@@ -176,7 +144,7 @@ _: {
             };
           };
 
-          gemini-2_5-pro = {
+          "gemini-2.5-pro" = {
             name = "Gemini 2.5 Pro (Gemini CLI)";
             limit = {
               context = 1048576;
@@ -210,6 +178,38 @@ _: {
 
           gemini-3-pro-preview = {
             name = "Gemini 3 Pro Preview (Gemini CLI)";
+            limit = {
+              context = 1048576;
+              output = 65535;
+            };
+            modalities = {
+              input = [
+                "text"
+                "image"
+                "pdf"
+              ];
+              output = [ "text" ];
+            };
+          };
+
+          "gemini-3.1-pro-preview" = {
+            name = "Gemini 3.1 Pro Preview (Gemini CLI)";
+            limit = {
+              context = 1048576;
+              output = 65535;
+            };
+            modalities = {
+              input = [
+                "text"
+                "image"
+                "pdf"
+              ];
+              output = [ "text" ];
+            };
+          };
+
+          "gemini-3.1-pro-preview-customtools" = {
+            name = "Gemini 3.1 Pro Preview Custom Tools (Gemini CLI)";
             limit = {
               context = 1048576;
               output = 65535;
