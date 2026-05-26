@@ -164,6 +164,7 @@ timeout 30 ./potentially_hanging_script.sh || echo "Timed out"
 3. **Use `--help`** to discover non-interactive options: `cmd --help | grep -i "non-interactive\|force\|yes"`
 4. **Prefer OpenCode tools** over shell commands for file operations
 5. **Set timeout** for any command that might unexpectedly prompt
+6. **Use `jq` for JSON parsing** — NEVER use inline Python (`python -c "import json..."`) to parse or extract JSON from CLI output. `jq` is faster, more reliable, and purpose-built for this. Use `python -c` only for non-JSON tasks that genuinely require Python logic.
 
 ---
 
