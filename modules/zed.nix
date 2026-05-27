@@ -29,6 +29,7 @@
           "scss"
           "sql"
           "svelte"
+          "terraform"
           "toml"
         ];
         extraPackages = with pkgs; [
