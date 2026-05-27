@@ -13,6 +13,10 @@ in
         (inputs.import-tree ./_plugins)
       ];
 
+      home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+        pkgs.local.openchamber-desktop
+      ];
+
       programs.opencode = {
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
