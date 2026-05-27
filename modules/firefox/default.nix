@@ -23,8 +23,8 @@ in
         inputs.self.modules.homeManager.firefox
       ];
       system.defaults.dock.persistent-apps = [
-        "${pkgs.firefox}/Applications/Firefox.app/"
-        "${pkgs.firefox-devedition}/Applications/Firefox Developer Edition.app/"
+        "${pkgs._unstable.firefox}/Applications/Firefox.app/"
+        "${pkgs._unstable.firefox-devedition}/Applications/Firefox Developer Edition.app/"
       ];
     };
 
@@ -35,11 +35,11 @@ in
     in
     {
       home.packages = with pkgs; [
-        firefox-devedition
+        _unstable.firefox-devedition
       ];
       programs.firefox = {
         enable = true;
-        package = pkgs.firefox;
+        package = pkgs._unstable.firefox;
         languagePacks = [
           "sv-SE"
           "en-GB"
