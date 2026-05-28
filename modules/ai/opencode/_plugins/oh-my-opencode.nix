@@ -10,7 +10,7 @@ let
   glmVision = "zai-coding-plan/glm-4.6v";
 
   sonnet = "anthropic/claude-4.6-sonnet";
-  opus = "anthropic/claude-opus-4-7";
+  opus = "anthropic/claude-opus-4-8";
 in
 {
   programs.opencode.settings = {
