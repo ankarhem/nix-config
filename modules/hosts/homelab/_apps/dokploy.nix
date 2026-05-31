@@ -10,7 +10,9 @@ in
       proxyPass = "http://dokploy.local:${port}";
     };
   };
-  services.nginx.virtualHosts."*.traefik.me" = {
+  services.nginx.virtualHosts."*.hub.internetfeno.men" = {
+    forceSSL = true;
+    useACMEHost = "hub.internetfeno.men";
     locations."/" = {
       proxyPass = "http://dokploy.local";
     };

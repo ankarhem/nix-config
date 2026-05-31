@@ -79,6 +79,15 @@
       dnsPropagationCheck = true;
       environmentFile = config.sops.templates."cloudflare.env".path;
     };
+    certs."hub.internetfeno.men" = {
+      domain = "hub.internetfeno.men";
+      extraDomainNames = [ "*.hub.internetfeno.men" ];
+      email = "admin@internetfeno.men";
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      dnsPropagationCheck = true;
+      environmentFile = config.sops.templates."cloudflare.env".path;
+    };
   };
   users.users.nginx.extraGroups = [ "acme" ];
 
