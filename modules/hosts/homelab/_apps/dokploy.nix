@@ -14,6 +14,7 @@ in
     forceSSL = true;
     useACMEHost = "hub.internetfeno.men";
     locations."/" = {
+      proxyWebsockets = true;
       proxyPass = "http://dokploy.local";
     };
   };
