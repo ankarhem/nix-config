@@ -18,7 +18,7 @@ let
           system = prev.stdenv.hostPlatform.system;
           inherit config;
         };
-        pkgs-darwin = import inputs.nixpkgs-unstable {
+        pkgs-darwin = import inputs.nixpkgs-darwin {
           system = prev.stdenv.hostPlatform.system;
           inherit config;
         };
