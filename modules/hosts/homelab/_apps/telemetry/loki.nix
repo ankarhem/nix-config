@@ -126,10 +126,8 @@
         }
       }
 
-      discovery.journal "journal" {}
-
-      discovery.relabel "journal" {
-        targets = discovery.journal.journal.targets
+      loki.relabel "journal" {
+        forward_to = []
 
         rule {
           source_labels = ["__journal__systemd_unit"]
@@ -138,13 +136,13 @@
       }
 
       loki.source.journal "journal" {
-        max_age = "12h"
+        max_age       = "12h"
+        forward_to    = [loki.write.default.receiver]
+        relabel_rules = loki.relabel.journal.rules
         labels = {
-          job  = "systemd-journal"
-          host = "${config.networking.hostName}"
+          job  = "systemd-journal",
+          host = "${config.networking.hostName}",
         }
-        forward_to = [loki.write.default.receiver]
-        relabel_rules = discovery.relabel.journal.rules
       }
     '';
   };
