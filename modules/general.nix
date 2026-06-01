@@ -50,6 +50,7 @@
         "1password"
         "1password-cli"
         "azure-data-studio"
+        "bitwarden"
         "microsoft-excel"
         "microsoft-remote-desktop"
         "pairpods"
@@ -72,7 +73,7 @@
             "${pkgs._unstable.obsidian}/Applications/Obsidian.app/"
             "${pkgs._unstable.spotify}/Applications/Spotify.app/"
             "/Applications/1Password.app/"
-            "${pkgs._unstable.bitwarden-desktop}/Applications/Bitwarden.app/"
+            "/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
             "/System/Applications/Calendar.app/"
             "/System/Applications/Mail.app/"
@@ -145,7 +146,6 @@
       home.packages =
         with pkgs;
         [
-          _unstable.bitwarden-desktop
           google-chrome
           _unstable.obsidian
           _unstable.slack
@@ -157,6 +157,7 @@
             _1password-cli
             _1password-gui
             azuredatastudio
+            _unstable.bitwarden-desktop
             phoronix-test-suite
             runelite
             bolt-launcher
