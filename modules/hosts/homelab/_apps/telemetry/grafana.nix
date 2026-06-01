@@ -1,8 +1,6 @@
 { config, ... }:
 {
-  sops.secrets."grafana/secret_key" = {
-    owner = config.services.grafana.user;
-  };
+  sops.secrets."grafana/secret_key" = { };
 
   services.grafana = {
     enable = true;
