@@ -145,10 +145,10 @@
       home.packages =
         with pkgs;
         [
-          bitwarden-desktop
+          _unstable.bitwarden-desktop
           google-chrome
-          obsidian
-          slack
+          _unstable.obsidian
+          _unstable.slack
           _unstable.spotify
         ]
         ++ (lib.optionals pkgs.stdenv.isLinux (

@@ -12,13 +12,13 @@
     forceSSL = true;
     useACMEHost = "internetfeno.men";
     locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString config.services.jellyseerr.port}";
+      proxyPass = "http://127.0.0.1:${toString config.services.seerr.port}";
     };
   };
 
-  services.jellyseerr = {
+  services.seerr = {
     enable = true;
     port = 5055;
-    package = pkgs._unstable.jellyseerr;
+    package = pkgs._unstable.seerr;
   };
 }

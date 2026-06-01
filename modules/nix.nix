@@ -8,6 +8,7 @@ let
     allowUnfree = true;
     permittedInsecurePackages = [
       "olm-3.2.16"
+      "electron-39.8.10" # EOL in 26.05, needed by slack/obsidian
     ];
   };
   overlays = lib.attrValues inputs.self.overlays ++ [
