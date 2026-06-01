@@ -766,15 +766,16 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1778894098,
-        "narHash": "sha256-s0JnnN5Sf2EUS+5LZCEnnOo7w1NNBE2VTXQzMmPY5Nk=",
-        "owner": "pfassina",
+        "lastModified": 1780330989,
+        "narHash": "sha256-ROgsPx1T7vCt9hVq/eMUY9OuICR2HwNingcvbV0Ni8c=",
+        "owner": "ankarhem",
         "repo": "lazyvim-nix",
-        "rev": "681426e14b1aac9c2df2e26701024d29abf33532",
+        "rev": "f6f0e6a113c5fa8b5b8dfb5c4e647a14eb216dd8",
         "type": "github"
       },
       "original": {
-        "owner": "pfassina",
+        "owner": "ankarhem",
+        "ref": "fix/add-missing-nixpkg-mappings",
         "repo": "lazyvim-nix",
         "type": "github"
       }

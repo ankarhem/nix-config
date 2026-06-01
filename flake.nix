@@ -21,7 +21,8 @@
     homebrew-sikarugir.flake = false;
     homebrew-sikarugir.url = "github:Sikarugir-App/homebrew-sikarugir";
     import-tree.url = "github:vic/import-tree";
-    lazyvim.url = "github:pfassina/lazyvim-nix";
+    # reset to upstream when merged https://github.com/pfassina/lazyvim-nix/pull/85
+    lazyvim.url = "github:ankarhem/lazyvim-nix/fix/add-missing-nixpkg-mappings";
     llm-agents.url = "github:numtide/llm-agents.nix";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-26.05";
