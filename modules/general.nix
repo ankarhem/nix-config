@@ -69,10 +69,10 @@
           # Don’t rearrange spaces based on the most recent use
           mru-spaces = false;
           persistent-apps = [
-            "${pkgs.obsidian}/Applications/Obsidian.app/"
+            "${pkgs._unstable.obsidian}/Applications/Obsidian.app/"
             "${pkgs._unstable.spotify}/Applications/Spotify.app/"
             "/Applications/1Password.app/"
-            "${pkgs.bitwarden-desktop}/Applications/Bitwarden.app/"
+            "${pkgs._unstable.bitwarden-desktop}/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
             "/System/Applications/Calendar.app/"
             "/System/Applications/Mail.app/"
