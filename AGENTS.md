@@ -1,4 +1,4 @@
 - Use mcp-nixos when searching for nix packages or options
 - You can run `nix flake check` to check whether the flake evaluates and run its tests
 - Use `gh` cli to interact with GitHub from the command line. For example, `gh pr create` to create a pull request.
-
+- Never modify `secrets.yaml`. If a task needs sops secret changes, continue the implementation as if they were already applied, then end by telling the user what to change in sops.
