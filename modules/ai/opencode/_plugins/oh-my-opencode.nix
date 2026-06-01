@@ -13,8 +13,11 @@ let
   opus = "anthropic/claude-opus-4-8";
 in
 {
-  programs.opencode.settings = {
-    plugin = [
+  programs.opencode = {
+    tui.plugin = [
+      "oh-my-openagent/tui"
+    ];
+    settings.plugin = [
       "oh-my-openagent"
     ];
   };
