@@ -33,6 +33,7 @@ in
             ./language.md
           ];
           plugin = [
+            inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-opencode
             "@simonwjackson/opencode-direnv"
             "@ex-machina/opencode-anthropic-auth"
           ];
