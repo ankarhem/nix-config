@@ -13,7 +13,7 @@
       with pkgs;
       [
         pandoc
-        nodePackages.prettier
+        prettier
         markdownlint-cli
         markdownlint-cli2
       ]

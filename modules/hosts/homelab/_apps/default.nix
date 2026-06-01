@@ -101,16 +101,16 @@
   networking.useHostResolvConf = false;
   services.resolved = {
     enable = true;
-    fallbackDns = [
-      "1.1.1.1"
-      "1.0.0.1"
-      "8.8.8.8"
-      "8.8.4.4"
-    ];
-    extraConfig = ''
-      DNS=127.0.0.1
-      DNSStubListener=no
-    '';
+    settings.Resolve = {
+      DNS = [ "127.0.0.1" ];
+      DNSStubListener = "no";
+      FallbackDNS = [
+        "1.1.1.1"
+        "1.0.0.1"
+        "8.8.8.8"
+        "8.8.4.4"
+      ];
+    };
   };
   services.coredns = {
     enable = true;

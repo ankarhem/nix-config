@@ -50,6 +50,7 @@
         "1password"
         "1password-cli"
         "azure-data-studio"
+        "bitwarden"
         "microsoft-excel"
         "microsoft-remote-desktop"
         "pairpods"
@@ -69,10 +70,10 @@
           # Don’t rearrange spaces based on the most recent use
           mru-spaces = false;
           persistent-apps = [
-            "${pkgs.obsidian}/Applications/Obsidian.app/"
+            "${pkgs._unstable.obsidian}/Applications/Obsidian.app/"
             "${pkgs._unstable.spotify}/Applications/Spotify.app/"
             "/Applications/1Password.app/"
-            "${pkgs.bitwarden-desktop}/Applications/Bitwarden.app/"
+            "/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
             "/System/Applications/Calendar.app/"
             "/System/Applications/Mail.app/"
@@ -145,10 +146,9 @@
       home.packages =
         with pkgs;
         [
-          bitwarden-desktop
           google-chrome
-          obsidian
-          slack
+          _unstable.obsidian
+          _unstable.slack
           _unstable.spotify
         ]
         ++ (lib.optionals pkgs.stdenv.isLinux (
@@ -157,6 +157,7 @@
             _1password-cli
             _1password-gui
             azuredatastudio
+            _unstable.bitwarden-desktop
             phoronix-test-suite
             runelite
             bolt-launcher

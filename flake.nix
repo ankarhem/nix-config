@@ -11,7 +11,7 @@
     git-hooks.url = "github:cachix/git-hooks.nix";
     graylog-cli.url = "github:norcetech/graylog-cli";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     homebrew-bundle.flake = false;
     homebrew-bundle.url = "github:homebrew/homebrew-bundle";
     homebrew-cask.flake = false;
@@ -21,16 +21,17 @@
     homebrew-sikarugir.flake = false;
     homebrew-sikarugir.url = "github:Sikarugir-App/homebrew-sikarugir";
     import-tree.url = "github:vic/import-tree";
-    lazyvim.url = "github:pfassina/lazyvim-nix";
+    # reset to upstream when merged https://github.com/pfassina/lazyvim-nix/pull/85
+    lazyvim.url = "github:ankarhem/lazyvim-nix/fix/add-missing-nixpkg-mappings";
     llm-agents.url = "github:numtide/llm-agents.nix";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
-    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-26.05";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     nix-index-database.url = "github:nix-community/nix-index-database";
-    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     norce-agent-instructions.flake = false;
     norce-agent-instructions.url = "github:NorceTech/agent-instructions";
     nur.inputs.nixpkgs.follows = "nixpkgs";
@@ -80,7 +81,7 @@
           };
           pre-commit.settings.hooks = {
             ripsecrets.enable = true;
-            nixfmt-rfc-style.enable = true;
+            nixfmt.enable = true;
           };
           formatter = pkgs.nixfmt-tree;
           devShells.default = pkgs.mkShell {

@@ -1,5 +1,9 @@
 { config, ... }:
 {
+  sops.secrets."grafana/secret_key" = {
+    owner = config.services.grafana.user;
+  };
+
   services.grafana = {
     enable = true;
     settings = {
@@ -8,6 +12,7 @@
         http_port = 2342;
         domain = "grafana.internal.internetfeno.men";
       };
+      security.secret_key = "$__file{${config.sops.secrets."grafana/secret_key".path}}";
     };
   };
   services.nginx.virtualHosts.${config.services.grafana.settings.server.domain} = {

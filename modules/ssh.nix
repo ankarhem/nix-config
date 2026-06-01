@@ -12,38 +12,38 @@
         enable = true;
         enableDefaultConfig = false;
 
-        matchBlocks = {
+        settings = {
           "*" = {
-            identityFile = [ "~/.ssh/id_ed25519" ];
+            IdentityFile = [ "~/.ssh/id_ed25519" ];
           };
           "github.com" = {
-            user = "git";
-            hostname = "github.com";
-            identitiesOnly = true;
-            identityFile = [ "~/.ssh/id_ed25519" ];
-            controlMaster = "auto";
-            controlPath = "~/.ssh/S.%r@%h:%p";
-            controlPersist = "60m";
+            User = "git";
+            HostName = "github.com";
+            IdentitiesOnly = true;
+            IdentityFile = [ "~/.ssh/id_ed25519" ];
+            ControlMaster = "auto";
+            ControlPath = "~/.ssh/S.%r@%h:%p";
+            ControlPersist = "60m";
           };
           "synology" = {
-            setEnv = {
+            SetEnv = {
               TERM = "xterm-256color";
             };
-            hostname = "disketten.local";
-            user = "idealpink";
-            port = 1337;
-            identitiesOnly = true;
-            identityFile = [
+            HostName = "disketten.local";
+            User = "idealpink";
+            Port = 1337;
+            IdentitiesOnly = true;
+            IdentityFile = [
               "~/.ssh/id_ed25519_sk"
               "~/.ssh/id_ecdsa_sk"
             ];
           };
           "homelab" = {
-            hostname = "homelab.local";
-            user = "idealpink";
-            port = 22;
-            identitiesOnly = true;
-            identityFile = [
+            HostName = "homelab.local";
+            User = "idealpink";
+            Port = 22;
+            IdentitiesOnly = true;
+            IdentityFile = [
               "~/.ssh/id_ed25519"
               "~/.ssh/id_ed25519_sk"
               "~/.ssh/id_ecdsa_sk"

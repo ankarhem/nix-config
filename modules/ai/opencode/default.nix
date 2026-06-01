@@ -21,13 +21,13 @@ in
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
         enableMcpIntegration = true;
-        settings = {
+        tui = {
           theme = "catppuccin";
-          tui = {
-            scroll_acceleration = {
-              enabled = true;
-            };
+          scroll_acceleration = {
+            enabled = true;
           };
+        };
+        settings = {
           instructions = [
             ./non_interactivity.md
             ./language.md

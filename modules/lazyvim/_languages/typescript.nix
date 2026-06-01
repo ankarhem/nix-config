@@ -12,7 +12,7 @@
     extraPackages = with pkgs; [
       vtsls
       typescript
-      nodePackages.prettier
+      prettier
       tailwindcss
       # eslint_d
       # eslint
