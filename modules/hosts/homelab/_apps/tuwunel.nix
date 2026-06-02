@@ -171,7 +171,25 @@ in
     };
   };
 
+  # TODO: Remove when nixpkgs ships mautrix-meta >= v0.2605.1
+  # Fixes: "Fixed connecting to Instagram after an app ID change broke it."
   services.mautrix-meta = {
+    package = pkgs.mautrix-meta.overrideAttrs (old: rec {
+      version = "26.05.1";
+      tag = "v0.2605.1";
+      src = pkgs.fetchFromGitHub {
+        owner = "mautrix";
+        repo = "meta";
+        inherit tag;
+        hash = "sha256-Lc4DfZ1lznbTIKWi3SMbdOAefCoa9unUvvQlsP6ZdRo=";
+      };
+      ldflags = [
+        "-s"
+        "-w"
+        "-X"
+        "main.Tag=${tag}"
+      ];
+    });
     instances = {
       instagram = {
         enable = true;
