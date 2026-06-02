@@ -7,6 +7,7 @@ in
     forceSSL = true;
     useACMEHost = "ankarhem.dev";
     locations."/" = {
+      proxyWebsockets = true;
       proxyPass = "http://dokploy.local:${port}";
     };
   };
