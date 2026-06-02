@@ -5,6 +5,7 @@
     ./arrs/default.nix
     ./baikal.nix
     ./dokploy.nix
+    ./hermes.nix
     ./hitster.nix
     ./immich.nix
     ./obsidian-livesync.nix
