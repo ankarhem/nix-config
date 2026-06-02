@@ -77,10 +77,12 @@
           ...
         }:
         {
-          packages = lib.packagesFromDirectoryRecursive {
-            inherit (pkgs) callPackage;
-            directory = ./packages;
-          };
+          packages = lib.filterAttrs (_: drv: drv.meta.available or true) (
+            lib.packagesFromDirectoryRecursive {
+              inherit (pkgs) callPackage;
+              directory = ./packages;
+            }
+          );
           pre-commit.settings.hooks = {
             ripsecrets.enable = true;
             nixfmt.enable = true;
