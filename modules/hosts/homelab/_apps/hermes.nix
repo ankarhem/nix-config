@@ -12,8 +12,11 @@
   # open-webui and the MCP tooling) and render it as the env var the hermes
   # `zai` provider reads.
   sops.secrets."mcp_tokens/glm" = { };
+  sops.secrets."hermes/api_server_key" = { };
   sops.templates."hermes.env".content = ''
     GLM_API_KEY=${config.sops.placeholder."mcp_tokens/glm"}
+    API_SERVER_ENABLED=true
+    API_SERVER_KEY=${config.sops.placeholder."hermes/api_server_key"}
   '';
 
   services.hermes-agent = {
