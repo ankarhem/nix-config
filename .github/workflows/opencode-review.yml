@@ -99,6 +99,13 @@ jobs:
       - name: Configure agent prompts
         run: |
           OMO_JSON=~/.config/opencode/oh-my-openagent.json
+
+          # Fix agent key casing: install generates lowercase "sisyphus" but
+          # the agent registry requires capitalized "Sisyphus"
+          jq 'if .agents.sisyphus then .agents.Sisyphus = .agents.sisyphus | del(.agents.sisyphus) else . end' "$OMO_JSON" > /tmp/omo.json && mv /tmp/omo.json "$OMO_JSON"
+          jq 'if .agents["sisyphus-junior"] then .agents["Sisyphus-Junior"] = .agents["sisyphus-junior"] | del(.agents["sisyphus-junior"]) else . end' "$OMO_JSON" > /tmp/omo.json && mv /tmp/omo.json "$OMO_JSON"
+          jq '.default_run_agent = "Sisyphus"' "$OMO_JSON" > /tmp/omo.json && mv /tmp/omo.json "$OMO_JSON"
+
           PROMPT_APPEND=$(cat << 'PROMPT_EOF'
           <ultrawork-mode>
           [CODE RED] Maximum precision required. Ultrathink before acting.
@@ -375,7 +382,7 @@ jobs:
           PROMPT="${PROMPT//BRANCH_PLACEHOLDER/$DEFAULT_BRANCH}"
           PROMPT="${PROMPT//COMMENT_PLACEHOLDER/$USER_COMMENT}"
 
-          bunx oh-my-opencode run "$PROMPT"
+          bunx oh-my-opencode run --agent Sisyphus "$PROMPT"
 
       # Update reaction and remove label
       - name: Update reaction and remove label
