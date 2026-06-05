@@ -136,12 +136,6 @@
   };
   networking.firewall.allowedUDPPorts = [ 53 ];
 
-  services.nginx.virtualHosts."ankarhem.dev" = {
-    forceSSL = true;
-    useACMEHost = "ankarhem.dev";
-    root = "/var/www/ankarhem.dev";
-  };
-
   virtualisation.containers.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.docker.daemon.settings = {
