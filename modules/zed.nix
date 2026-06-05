@@ -26,6 +26,7 @@
           "just"
           "nginx"
           "nix"
+          "nunjucks"
           "scss"
           "sql"
           "svelte"
