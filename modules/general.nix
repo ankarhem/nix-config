@@ -57,6 +57,7 @@
         # "runelite"
         "sikarugir"
         "steam"
+        "tailscale"
         "tor-browser"
       ];
 
@@ -172,7 +173,6 @@
             mos
             _unstable.orbstack
             pinentry_mac
-            _unstable.tailscale-gui
           ]
         ));
     };
