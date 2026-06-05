@@ -163,7 +163,7 @@ in
         as_token = "$MAUTRIX_TELEGRAM_APPSERVICE_AS_TOKEN";
         hs_token = "$MAUTRIX_TELEGRAM_APPSERVICE_HS_TOKEN";
         address = "http://127.0.0.1:29317";
-        port = "29317";
+        port = 29317;
         bot_username = "telegrambot";
         bot_displayname = "Telegram bridge bot";
         bot_avatar = "mxc://maunium.net/tJCRmUyJDsgRNgqhOgoiHWbX";
