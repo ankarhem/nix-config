@@ -26,6 +26,7 @@
         blog
         cli
         colemak
+        deploy
         fish
         fonts
         forgejo
