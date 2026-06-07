@@ -17,13 +17,13 @@
         ./_fail2ban.nix
         ./_apps/default.nix
         "${self}/nixosModules/networking.nix"
+        inputs.blog.nixosModules.default
       ]
       ++ (with inputs.self.modules.nixos; [
         ai
         attic
         attic-client
         auto-upgrade
-        blog
         cli
         colemak
         deploy
@@ -44,6 +44,9 @@
       ++ (with inputs.self.modules.generic; [
         constants
       ]);
+
+      # Blog (ankarhem.dev) serving module, shipped by the blog flake.
+      services.blog.enable = true;
 
       boot.isContainer = true;
       proxmoxLXC.manageNetwork = true;

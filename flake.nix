@@ -6,6 +6,11 @@
     agent-browser.url = "github:vercel-labs/agent-browser";
     apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+    # Blog ships its own NixOS module (serving + cold-start seed); the homelab
+    # imports it and sets services.blog.enable = true. submodules=1 pulls the
+    # terminus theme; git+https so the private repo auth (access-tokens) applies.
+    # TODO: point ref at main once the blog PR is merged.
+    blog.url = "git+https://github.com/ankarhem/site?ref=feat/deploy-rs&submodules=1";
     comfyui-nix.url = "github:utensils/comfyui-nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks.url = "github:cachix/git-hooks.nix";
