@@ -27,7 +27,7 @@
           # nginx's built-in per-request token (16 bytes of entropy).
           # NOTE: requires the blog's <meta> CSP to be disabled, otherwise it
           # co-enforces without a nonce and re-blocks the injected scripts.
-          add_header Content-Security-Policy "default-src 'self'; base-uri 'self'; connect-src 'self' cloudflareinsights.com; form-action 'self'; img-src 'self' data:; script-src 'self' static.cloudflareinsights.com 'nonce-$request_id'" always;
+          add_header Content-Security-Policy "default-src 'self'; base-uri 'self'; connect-src 'self' cloudflareinsights.com; form-action 'self'; img-src 'self' data:; script-src 'self' static.cloudflareinsights.com 'nonce-$request_id'; style-src 'self' 'unsafe-inline'" always;
         '';
       };
     };
