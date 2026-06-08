@@ -56,16 +56,16 @@
       "locked": {
         "lastModified": 1780919480,
         "narHash": "sha256-JnC9Sq2IjzbtlFuZ/4jF6utNTSM43uuM1t4YHHM6Ges=",
-        "ref": "refs/heads/main",
+        "owner": "ankarhem",
+        "repo": "site",
         "rev": "872d2cf089455eb153792cf8cd8ef072eef71d6c",
-        "revCount": 9,
         "submodules": true,
-        "type": "git",
-        "url": "https://github.com/ankarhem/site"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://github.com/ankarhem/site"
+        "owner": "ankarhem",
+        "repo": "site",
+        "type": "github"
       }
     },
     "blueprint": {
