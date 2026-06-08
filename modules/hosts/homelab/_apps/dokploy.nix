@@ -11,14 +11,6 @@ in
       proxyPass = "http://dokploy.local:${port}";
     };
   };
-  services.nginx.virtualHosts."ankarhem.dev" = {
-    forceSSL = true;
-    useACMEHost = "ankarhem.dev";
-    locations."/" = {
-      proxyWebsockets = true;
-      proxyPass = "http://dokploy.local";
-    };
-  };
   services.nginx.virtualHosts."*.hub.internetfeno.men" = {
     forceSSL = true;
     useACMEHost = "hub.internetfeno.men";
