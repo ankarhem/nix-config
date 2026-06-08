@@ -54,17 +54,16 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1780868536,
-        "narHash": "sha256-z3ayOWIg1NyOgxvF4mo4X0bEgJ4f+yPeK1BaHDwRoWA=",
-        "ref": "feat/deploy-rs",
-        "rev": "c6c6ec875fc0b0ef57caa7879493070182e0e9e4",
-        "revCount": 14,
+        "lastModified": 1780913080,
+        "narHash": "sha256-RVt3PhBNGMdJI5vXg6xVtCI8aVwgThImmFqP6irPCpM=",
+        "ref": "refs/heads/main",
+        "rev": "0c7a565aaf6765f2292a7a3fd99e1e304b9c7142",
+        "revCount": 6,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/ankarhem/site"
       },
       "original": {
-        "ref": "feat/deploy-rs",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/ankarhem/site"
