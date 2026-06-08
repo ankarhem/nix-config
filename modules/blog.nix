@@ -12,9 +12,11 @@
           RemainAfterExit = true;
         };
         script = ''
-          # Seed the directory if it doesn't exist
-          if [ ! -f /var/lib/ankarhem.dev/ ]; then
-              mkdir -p /var/lib/ankarhem.dev/
+          # Cold-start seed: only link the blog build if nothing is serving yet.
+          # Once deploy-rs (or a previous seed) has pointed this at a valid
+          # directory, the guard is true and we leave the deployed build alone.
+          if [ ! -d /var/www/ankarhem.dev ]; then
+              mkdir -p /var/www
               ln -sfn "${inputs.blog.packages.${pkgs.hostPlatform.system}.blog}/public" /var/www/ankarhem.dev
           fi
         '';
