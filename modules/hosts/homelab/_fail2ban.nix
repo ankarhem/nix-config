@@ -29,16 +29,14 @@ in
     extraPackages = [ pkgs.curl ];
     jails = {
       nginx-http-auth.settings.enabled = true;
-      nginx-botsearch.settings.enabled = true;
       nginx-bad-request.settings.enabled = true;
-      # nginx-forbidden.settings.enabled = true;
-
       nginx-bruteforce.settings = {
         enabled = true;
         filter = "nginx-bruteforce";
         logpath = "/var/log/nginx/*.log";
         backend = "auto";
         findtime = "1d";
+        maxretry = 10;
         action = ''
           cf
           iptables-multiport[port="http,https"]
@@ -73,7 +71,6 @@ in
   '';
 
   environment.etc = {
-    # Defines a filter that detects URL probing by reading the Nginx access log
     "fail2ban/filter.d/nginx-bruteforce.local".text = pkgs.lib.mkDefault (
       pkgs.lib.mkAfter ''
         [Definition]
