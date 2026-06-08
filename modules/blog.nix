@@ -26,6 +26,11 @@
         forceSSL = true;
         useACMEHost = "ankarhem.dev";
         root = "/var/www/ankarhem.dev";
+        locations."/".tryFiles = "$uri $uri/ =404";
+        locations."= /404.html".extraConfig = "internal;";
+        extraConfig = ''
+          error_page 404 /404.html;
+        '';
       };
     };
 }
