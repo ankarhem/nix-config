@@ -23,8 +23,10 @@
         attic
         attic-client
         auto-upgrade
+        blog
         cli
         colemak
+        deploy
         fish
         fonts
         forgejo

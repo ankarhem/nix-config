@@ -6,6 +6,7 @@
     agent-browser.url = "github:vercel-labs/agent-browser";
     apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
+    blog.url = "git+https://github.com/ankarhem/site?submodules=1";
     comfyui-nix.url = "github:utensils/comfyui-nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks.url = "github:cachix/git-hooks.nix";
