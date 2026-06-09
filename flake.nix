@@ -2,8 +2,6 @@
   description = "MacOS System Configuration flake";
 
   inputs = {
-    agent-browser.flake = false;
-    agent-browser.url = "github:vercel-labs/agent-browser";
     apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     blog.url = "git+https://github.com/ankarhem/site";
