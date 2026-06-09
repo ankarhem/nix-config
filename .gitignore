@@ -4,4 +4,5 @@ result
 TASKS.md
 .pre-commit-config.yaml
 .direnv/
-.omo
+.omo/
+.sisyphus/

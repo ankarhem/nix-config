@@ -41,8 +41,8 @@ in
       sisyphus-junior.model = sonnet;
       # hephaestus.model = glm;
       oracle.model = opus;
-      librarian.model = glmFlash;
-      explore.model = glmFlash;
+      librarian.model = glm;
+      explore.model = glm;
       multimodal-looker.model = s_kimi;
       prometheus.model = opus;
       metis.model = opus;
@@ -54,8 +54,8 @@ in
       ultrabrain.model = opus;
       deep.model = glm;
       artistry.model = s_kimi;
-      quick.model = glmFlash;
-      unspecified-low.model = sonnet;
+      quick.model = s_kimi;
+      unspecified-low.model = s_kimi;
       unspecified-high.model = opus;
       writing.model = s_kimi;
     };
