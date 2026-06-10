@@ -14,16 +14,18 @@ in
   flake.modules.homeManager.skills =
     { lib, pkgs, ... }:
     let
-      agentBrowserDrv = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
-
       localSkills = readSkillsFrom ./.;
-      agentBrowserSkills = readSkillsFrom "${agentBrowserDrv}/share/agent-browser/skills";
       norceSkills = readSkillsFrom "${inputs.norce-agent-instructions}/skills";
       graylogCliSkills = readSkillsFrom "${inputs.graylog-cli}/skills";
+
+      llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+      agentBrowser = llm-agents.agent-browser;
+      hunk = llm-agents.hunk;
     in
     {
       home.packages = [
-        agentBrowserDrv
+        agentBrowser
+        hunk
         inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.ck
         pkgs.local.sonarqube-cli
       ];
@@ -32,9 +34,6 @@ in
         let
           skills =
             localSkills
-            // (lib.getAttrs [
-              "agent-browser"
-            ] agentBrowserSkills)
             // (lib.getAttrs [
               "argue"
               "checkout-domain"
@@ -51,6 +50,8 @@ in
             ] graylogCliSkills)
             // {
               "temporal-developer" = inputs.temporalio-skill;
+              "agent-browser" = (readSkillsFrom "${agentBrowser}/share/agent-browser/skills").agent-browser;
+              "hunk" = (readSkillsFrom "${hunk}/skills").hunk-review;
             };
         in
         pkgs.linkFarm "merged-skills" skills;
