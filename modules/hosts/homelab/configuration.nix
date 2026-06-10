@@ -40,6 +40,7 @@
         redlib
         secrets
         sshd
+        tangled-knot
       ])
       ++ (with inputs.self.modules.generic; [
         constants
