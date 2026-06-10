@@ -25,6 +25,8 @@
           };
           "mcp_tokens/glm" = {
           };
+          "mcp_tokens/sonarqube" = {
+          };
         };
       };
       programs.mcp = {
@@ -78,6 +80,30 @@
             url = "https://api.z.ai/api/mcp/web_search_prime/mcp";
             headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens/glm".path}}";
           };
+          # sonarqube = {
+          #   enable = false;
+          #   type = "stdio";
+          #   command = "docker";
+          #   args = [
+          #     "run"
+          #     "--init"
+          #     "--pull=always"
+          #     "-i"
+          #     "--rm"
+          #     "-e"
+          #     "SONARQUBE_TOKEN"
+          #     "-e"
+          #     "SONARQUBE_URL"
+          #     "-e"
+          #     "SONARQUBE_ORG"
+          #     "mcp/sonarqube"
+          #   ];
+          #   env = {
+          #     SONARQUBE_TOKEN = "{file:${config.sops.secrets."mcp_tokens/sonarqube".path}}";
+          #     SONARQUBE_URL = "https://sonarcloud.io";
+          #     SONARQUBE_ORG = "norcetech";
+          #   };
+          # };
         };
       };
     };
