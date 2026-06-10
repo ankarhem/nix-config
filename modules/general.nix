@@ -158,7 +158,7 @@
             _1password-cli
             _1password-gui
             azuredatastudio
-            _unstable.bitwarden-desktop
+            # _unstable.bitwarden-desktop
             phoronix-test-suite
             runelite
             bolt-launcher
