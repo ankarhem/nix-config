@@ -3,8 +3,11 @@
     services.openssh = {
       enable = true;
       settings = {
-        PermitRootLogin = "prohibit-password";
+        LoginGraceTime = 30;
+        MaxAuthTries = 3;
+        MaxStartups = "10:30:60";
         PasswordAuthentication = false;
+        PermitRootLogin = "prohibit-password";
       };
       extraConfig = ''
         StreamLocalBindUnlink yes

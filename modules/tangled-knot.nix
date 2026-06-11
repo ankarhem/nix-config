@@ -25,6 +25,10 @@
         };
         openFirewall = false;
       };
+      systemd.services.knot.serviceConfig = {
+        MemoryMax = "4G";
+        MemorySwapMax = "0";
+      };
 
       services.nginx.virtualHosts."${domain}" = {
         forceSSL = true;
@@ -41,16 +45,6 @@
         };
       };
 
-      systemd.services.knot.serviceConfig = {
-        MemoryMax = "4G";
-        MemorySwapMax = "0";
-      };
-
-      services.openssh.settings = {
-        MaxAuthTries = 3;
-        LoginGraceTime = 30;
-        MaxStartups = "10:30:60";
-      };
       services.fail2ban.jails.sshd.settings = {
         enabled = true;
         maxretry = 3;
