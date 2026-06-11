@@ -31,8 +31,29 @@
         useACMEHost = "ankarhem.dev";
         locations."/" = {
           proxyPass = "http://127.0.0.1:${publicPort}";
-          proxyWebsockets = true;
         };
+        locations."/events" = {
+          proxyPass = "http://127.0.0.1:${publicPort}";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_read_timeout 86400s;
+          '';
+        };
+      };
+
+      systemd.services.knot.serviceConfig = {
+        MemoryMax = "4G";
+        MemorySwapMax = "0";
+      };
+
+      services.openssh.settings = {
+        MaxAuthTries = 3;
+        LoginGraceTime = 30;
+        MaxStartups = "10:30:60";
+      };
+      services.fail2ban.jails.sshd.settings = {
+        enabled = true;
+        maxretry = 3;
       };
     };
 }
