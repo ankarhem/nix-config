@@ -17,7 +17,7 @@
         package = inputs.tangled.packages.${config.nixpkgs.hostPlatform.system}.knot;
         gitUser = "git";
         stateDir = "/var/lib/tangled-knot";
-        repo.scanPath = "/mnt/DISKETTEN_drive/tangled/repos";
+        repo.scanPath = "${cfg.stateDir}/repos";
         server = {
           listenAddr = "127.0.0.1:${publicPort}";
           internalListenAddr = "127.0.0.1:${internalPort}";
@@ -30,37 +30,6 @@
         MemoryMax = "4G";
         MemorySwapMax = "0";
       };
-
-      systemd.services.knot.preStart =
-        let
-          setMotd =
-            if cfg.motdFile != null && cfg.motd != null then
-              throw "motdFile and motd cannot be both set"
-            else
-              ''
-                ${lib.optionalString (cfg.motdFile != null) "cat ${cfg.motdFile} > ${cfg.stateDir}/motd"}
-                ${lib.optionalString (cfg.motd != null) ''printf "${cfg.motd}" > ${cfg.stateDir}/motd''}
-              '';
-        in
-        ''
-          mkdir -p "${cfg.repo.scanPath}"
-          # disabled because of root_squash on NFSv3 mount (Synology)
-          # chown -R ${cfg.gitUser}:${cfg.gitUser} "${cfg.repo.scanPath}"
-
-          mkdir -p "${cfg.stateDir}/.config/git"
-          cat > "${cfg.stateDir}/.config/git/config" << EOF
-          [user]
-              name = ${cfg.git.userName}
-              email = ${cfg.git.userEmail}
-          [receive]
-              advertisePushOptions = true
-          [uploadpack]
-              allowFilter = true
-              allowReachableSHA1InWant = true
-          EOF
-          ${setMotd}
-          chown -R ${cfg.gitUser}:${cfg.gitUser} "${cfg.stateDir}"
-        '';
 
       services.nginx.virtualHosts."${domain}" = {
         forceSSL = true;
