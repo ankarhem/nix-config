@@ -55,6 +55,9 @@
             IdentitiesOnly = true;
             IdentityFile = homelabKeys;
           };
+          # Tangled knot. The git user is no-pty, so Ghostty's ssh-terminfo
+          # install hangs/fails on every connect. Prime the cache to skip it:
+          #   ghostty +ssh-cache --add=git@knot.ankarhem.dev
           "knot.ankarhem.dev" = {
             HostName = homelabLanIp;
             User = "git";
