@@ -1,0 +1,6 @@
+# git remote remove origin
+# git config --local include.path ../.gitconfig
+[remote "origin"]
+    url = git@knot.ankarhem.dev:ankarhem.dev/nix-config
+    pushurl = git@knot.ankarhem.dev:ankarhem.dev/nix-config
+    pushurl = git@github.com:ankarhem/nix-config
