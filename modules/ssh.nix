@@ -1,7 +1,17 @@
 { inputs, ... }:
 {
   flake.modules.homeManager.ssh =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
+    let
+      # Identity files used for the homelab box (admin login and knot pushes).
+      homelabKeys = [
+        "~/.ssh/id_ed25519"
+        "~/.ssh/id_ed25519_sk"
+        "~/.ssh/id_ecdsa_sk"
+      ];
+
+      homelabLanIp = "192.168.1.221";
+    in
     {
       home.packages = with pkgs; [
         yubikey-personalization
@@ -39,15 +49,18 @@
             ];
           };
           "homelab" = {
-            HostName = "homelab.local";
+            HostName = homelabLanIp;
             User = "idealpink";
             Port = 22;
             IdentitiesOnly = true;
-            IdentityFile = [
-              "~/.ssh/id_ed25519"
-              "~/.ssh/id_ed25519_sk"
-              "~/.ssh/id_ecdsa_sk"
-            ];
+            IdentityFile = homelabKeys;
+          };
+          "knot.ankarhem.dev" = {
+            HostName = homelabLanIp;
+            User = "git";
+            Port = 22;
+            IdentitiesOnly = true;
+            IdentityFile = homelabKeys;
           };
         };
       };
