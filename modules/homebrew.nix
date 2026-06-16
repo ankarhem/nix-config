@@ -50,6 +50,8 @@ in
         };
 
         mutableTaps = false;
+
+        trust.casks = [ "sikarugir-app/sikarugir/sikarugir" ];
       };
 
       homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
