@@ -1,9 +1,9 @@
 { inputs, ... }:
 let
-  glm = "synthetic/hf:zai-org/GLM-5.1";
+  glm = "zai-coding-plan/glm-5.2";
   glmFlash = "zai-coding-plan/glm-5-turbo";
   # gpt = "openai/gpt-5.5-fast";
-  opus = "anthropic/claude-opus-4-7";
+  opus = "anthropic/claude-opus-4-8";
 in
 {
   flake.modules.homeManager.opencode =

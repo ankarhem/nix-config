@@ -1,13 +1,9 @@
 { pkgs, ... }:
 let
-  # gpt = "openai/gpt-5.5-fast";
+  kimi = "opencode-go/kimi-k2.7-code";
 
-  s_kimi = "synthetic/hf:moonshotai/Kimi-K2.6";
-  s_glm = "synthetic/hf:zai-org/GLM-5.1";
-
-  glm = "zai-coding-plan/glm-5-turbo";
+  glm = "zai-coding-plan/glm-5.2";
   glmFlash = "zai-coding-plan/glm-5-turbo";
-  glmVision = "zai-coding-plan/glm-4.6v";
 
   sonnet = "anthropic/claude-4.6-sonnet";
   opus = "anthropic/claude-opus-4-8";
@@ -37,27 +33,27 @@ in
       default_max_iterations = 25;
     };
     agents = {
-      sisyphus.model = s_glm;
-      sisyphus-junior.model = sonnet;
+      sisyphus.model = glm;
+      sisyphus-junior.model = glm;
       # hephaestus.model = glm;
       oracle.model = opus;
       librarian.model = glm;
       explore.model = glm;
-      multimodal-looker.model = s_kimi;
+      multimodal-looker.model = kimi;
       prometheus.model = opus;
       metis.model = opus;
       momus.model = opus;
       atlas.model = glm;
     };
     categories = {
-      visual-engineering.model = s_kimi;
+      visual-engineering.model = kimi;
       ultrabrain.model = opus;
       deep.model = glm;
-      artistry.model = s_kimi;
-      quick.model = s_kimi;
-      unspecified-low.model = s_kimi;
+      artistry.model = kimi;
+      quick.model = kimi;
+      unspecified-low.model = kimi;
       unspecified-high.model = opus;
-      writing.model = s_kimi;
+      writing.model = kimi;
     };
   };
 }
