@@ -86,7 +86,7 @@ in
         User = cfg.user;
         Group = "users";
         WorkingDirectory = cfg.workingDir;
-        ExecStart = "${cfg.package}/bin/opencode web --port ${toString cfg.port} --hostname ${cfg.hostname} ${corsOption}";
+        ExecStart = "${cfg.package}/bin/opencode serve --port ${toString cfg.port} --hostname ${cfg.hostname} ${corsOption}";
         Restart = "on-failure";
         RestartSec = 5;
         EnvironmentFile = cfg.environmentFiles;
