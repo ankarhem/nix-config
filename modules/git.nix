@@ -15,6 +15,13 @@
           key = lib.mkDefault "~/.ssh/id_ed25519.pub";
         };
 
+        ignores = [
+          ".omo/"
+          ".envrc"
+          ".direnv/"
+          ".pre-commit-config.yaml"
+        ];
+
         settings = {
           gpg.format = "ssh";
           user = {
