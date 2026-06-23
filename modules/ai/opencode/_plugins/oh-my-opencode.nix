@@ -27,10 +27,25 @@ in
     };
     team_mode = {
       enabled = true;
+      tmux_visualization = false;
+      max_parallel_members = 4;
+      max_members = 8;
+      max_messages_per_run = 10000;
+      max_wall_clock_minutes = 120;
+      max_member_turns = 500;
+      message_payload_max_bytes = 32768;
+      recipient_unread_max_bytes = 262144;
+      mailbox_poll_interval_ms = 3000;
     };
     ralph_loop = {
       enabled = true;
       default_max_iterations = 25;
+      default_strategy = "continue";
+    };
+    git_master = {
+      commit_footer = true;
+      include_co_authored_by = true;
+      git_env_prefix = "GIT_MASTER=1";
     };
     agents = {
       sisyphus.model = glm;
