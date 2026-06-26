@@ -34,6 +34,7 @@
         gh
         gpg
         home-manager
+        hon-stats
         idealpink
         lazyvim
         nix

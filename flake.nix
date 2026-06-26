@@ -11,6 +11,7 @@
     graylog-cli.url = "github:norcetech/graylog-cli";
     hermes-agent.inputs.nixpkgs.follows = "nixpkgs";
     hermes-agent.url = "github:NousResearch/hermes-agent";
+    hon-stats.url = "git+https://github.com/ankarhem/hon-stats";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     homebrew-bundle.flake = false;
