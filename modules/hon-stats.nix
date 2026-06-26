@@ -39,6 +39,7 @@
         };
         environment = {
           ASPNETCORE_URLS = "http://127.0.0.1:7034";
+          ASPNETCORE_CONTENTROOT = "/var/lib/hon-stats/current/lib/hon-stats";
           HonStats__Persistence__ConnectionString = "Data Source=/var/lib/hon-stats/honstats.db";
         };
       };
