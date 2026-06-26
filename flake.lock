@@ -1137,11 +1137,11 @@
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
-        "lastModified": 1782482404,
-        "narHash": "sha256-46SUiEmHNCV4bUzkjzdd6p06H8b5n1sFDR+3qK8vGto=",
+        "lastModified": 1782484983,
+        "narHash": "sha256-06h2F0vetX/k+SpT9tip4hsyNk7OBwgVncMC6licfqc=",
         "ref": "refs/heads/main",
-        "rev": "d3af4e9f0652040170f66ce717495a7e650154b9",
-        "revCount": 30,
+        "rev": "99c933e726e61c7ed1459f58df055786094e3b6e",
+        "revCount": 33,
         "type": "git",
         "url": "https://github.com/ankarhem/hon-stats"
       },

@@ -30,7 +30,7 @@
         wantedBy = [ "multi-user.target" ];
         after = [ "network.target" ];
         serviceConfig = {
-          ExecStart = "/var/lib/hon-stats/current/bin/hon-stats";
+          ExecStart = "/var/lib/hon-stats/current/bin/HonStats.Web";
           WorkingDirectory = "/var/lib/hon-stats";
           StateDirectory = "hon-stats";
           Restart = "always";
