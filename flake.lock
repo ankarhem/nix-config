@@ -2141,17 +2141,17 @@
         "sqlite-lib-src": "sqlite-lib-src"
       },
       "locked": {
-        "lastModified": 1781960677,
-        "narHash": "sha256-euaOliXTd7VGXDkyjIEBYUtDAb7payJOiBIH/U+SeX4=",
+        "lastModified": 1782408590,
+        "narHash": "sha256-N6MsDCH02ka4JfzM55LxhUGT3JIew38+UZee33VJ4L0=",
         "ref": "refs/heads/master",
-        "rev": "a63d05e2dd4776a9d22aba20b40e80fb1b3f1ecd",
-        "revCount": 2726,
+        "rev": "3f3b55233232f5c465e6f50a17210f8b2c5ec30e",
+        "revCount": 2749,
         "type": "git",
-        "url": "https://tangled.org/tangled.org/core"
+        "url": "https://tangled.org/@tangled.org/core"
       },
       "original": {
         "type": "git",
-        "url": "https://tangled.org/tangled.org/core"
+        "url": "https://tangled.org/@tangled.org/core"
       }
     },
     "temporalio-skill": {

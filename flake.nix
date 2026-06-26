@@ -45,7 +45,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
     tangled.inputs.flake-compat.url = "github:edolstra/flake-compat";
     tangled.inputs.nixpkgs.follows = "nixpkgs";
-    tangled.url = "git+https://tangled.org/tangled.org/core";
+    tangled.url = "git+https://tangled.org/@tangled.org/core";
     temporalio-skill.flake = false;
     temporalio-skill.url = "github:temporalio/skill-temporal-developer";
     truesight.inputs.nixpkgs.follows = "nixpkgs";
