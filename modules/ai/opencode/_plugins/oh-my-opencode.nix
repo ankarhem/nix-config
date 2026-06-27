@@ -3,10 +3,10 @@ let
   kimi = "opencode-go/kimi-k2.7-code";
 
   glm = "zai-coding-plan/glm-5.2";
-  glmFlash = "zai-coding-plan/glm-5-turbo";
 
-  sonnet = "anthropic/claude-4.6-sonnet";
-  opus = "anthropic/claude-opus-4-8";
+  # opus = "anthropic/claude-opus-4-8";
+  # Org sub is paused, use glm 5.2
+  opus = "zai-coding-plan/glm-5.2";
 in
 {
   programs.opencode = {
