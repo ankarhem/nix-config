@@ -87,6 +87,7 @@ in
           deno
           dig
           fd
+          ghidra
           git
           gitleaks
           grc
