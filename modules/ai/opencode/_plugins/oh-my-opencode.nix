@@ -4,9 +4,8 @@ let
 
   glm = "zai-coding-plan/glm-5.2";
 
-  # opus = "anthropic/claude-opus-4-8";
-  # Org sub is paused, use glm 5.2
-  opus = "zai-coding-plan/glm-5.2";
+  opus = "anthropic/claude-opus-4-8";
+  sonnet = "anthropic/claude-sonnet-5";
 in
 {
   programs.opencode = {
@@ -48,27 +47,84 @@ in
       git_env_prefix = "GIT_MASTER=1";
     };
     agents = {
-      sisyphus.model = glm;
-      sisyphus-junior.model = glm;
-      # hephaestus.model = glm;
-      oracle.model = opus;
-      librarian.model = glm;
-      explore.model = glm;
-      multimodal-looker.model = kimi;
-      prometheus.model = opus;
-      metis.model = opus;
-      momus.model = opus;
-      atlas.model = glm;
+      sisyphus = {
+        model = glm;
+        fallback_models = [ sonnet ];
+      };
+      sisyphus-junior = {
+        model = glm;
+        fallback_models = [ sonnet ];
+      };
+      # hephaestus = {
+      #   model = glm;
+      #   fallback_models = [ sonnet ];
+      # };
+      oracle = {
+        model = opus;
+        fallback_models = [ glm ];
+      };
+      librarian = {
+        model = glm;
+        fallback_models = [ sonnet ];
+      };
+      explore = {
+        model = glm;
+        fallback_models = [ sonnet ];
+      };
+      multimodal-looker = {
+        model = kimi;
+        fallback_models = [ sonnet ];
+      };
+      prometheus = {
+        model = opus;
+        fallback_models = [ glm ];
+      };
+      metis = {
+        model = opus;
+        fallback_models = [ glm ];
+      };
+      momus = {
+        model = opus;
+        fallback_models = [ glm ];
+      };
+      atlas = {
+        model = glm;
+        fallback_models = [ sonnet ];
+      };
     };
     categories = {
-      visual-engineering.model = kimi;
-      ultrabrain.model = opus;
-      deep.model = glm;
-      artistry.model = kimi;
-      quick.model = kimi;
-      unspecified-low.model = kimi;
-      unspecified-high.model = opus;
-      writing.model = kimi;
+      visual-engineering = {
+        model = kimi;
+        fallback_models = [ sonnet ];
+      };
+      ultrabrain = {
+        model = opus;
+        fallback_models = [ glm ];
+      };
+      deep = {
+        model = glm;
+        fallback_models = [ sonnet ];
+      };
+      artistry = {
+        model = kimi;
+        fallback_models = [ sonnet ];
+      };
+      quick = {
+        model = kimi;
+        fallback_models = [ sonnet ];
+      };
+      unspecified-low = {
+        model = kimi;
+        fallback_models = [ sonnet ];
+      };
+      unspecified-high = {
+        model = opus;
+        fallback_models = [ glm ];
+      };
+      writing = {
+        model = kimi;
+        fallback_models = [ sonnet ];
+      };
     };
   };
 }

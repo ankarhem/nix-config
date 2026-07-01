@@ -3,9 +3,7 @@ let
   glm = "zai-coding-plan/glm-5.2";
   glmFlash = "zai-coding-plan/glm-5-turbo";
 
-  # opus = "anthropic/claude-opus-4-8";
-  # Org sub is paused, use glm 5.2
-  opus = "zai-coding-plan/glm-5.2";
+  opus = "anthropic/claude-opus-4-8";
 in
 {
   flake.modules.homeManager.opencode =
