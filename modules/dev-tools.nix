@@ -14,8 +14,6 @@
       system.defaults.dock.persistent-apps = [
         "${pkgs.bruno}/Applications/Bruno.app/"
         "${pkgs.jetbrains.rider}/Applications/Rider.app/"
-        "${pkgs.jetbrains.rust-rover}/Applications/RustRover.app/"
-        "${pkgs.jetbrains.webstorm}/Applications/WebStorm.app/"
       ];
     };
 
@@ -62,8 +60,6 @@
           bun
           _unstable.acli
           jetbrains.rider
-          jetbrains.rust-rover
-          jetbrains.webstorm
           inputs.graylog-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
         ]
         ++ [ combinedDotnet ];
