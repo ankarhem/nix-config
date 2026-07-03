@@ -36,6 +36,7 @@ in
             inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-opencode
             "@simonwjackson/opencode-direnv"
             "@ex-machina/opencode-anthropic-auth"
+            "opencode-vcc@next"
           ];
 
           model = glm;
