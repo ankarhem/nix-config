@@ -6,6 +6,7 @@ let
 
   opus = "anthropic/claude-opus-4-8";
   sonnet = "anthropic/claude-sonnet-5";
+  fable = "anthropic/claude-fable-5";
 in
 {
   programs.opencode = {
@@ -60,8 +61,11 @@ in
       #   fallback_models = [ sonnet ];
       # };
       oracle = {
-        model = opus;
-        fallback_models = [ glm ];
+        model = fable;
+        fallback_models = [
+          opus
+          glm
+        ];
       };
       librarian = {
         model = glm;
@@ -76,8 +80,11 @@ in
         fallback_models = [ sonnet ];
       };
       prometheus = {
-        model = opus;
-        fallback_models = [ glm ];
+        model = fable;
+        fallback_models = [
+          opus
+          glm
+        ];
       };
       metis = {
         model = opus;
