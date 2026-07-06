@@ -4,10 +4,7 @@ let
   glmFlash = "zai-coding-plan/glm-5-turbo";
 
   opus = "anthropic/claude-opus-4-8";
-  deepseekV4FlashFree = {
-    model = "opencode/deepseek-v4-flash-free";
-    variant = "high";
-  };
+  deepseekV4FlashFree = "opencode/deepseek-v4-flash-free";
 in
 {
   flake.modules.homeManager.opencode =
