@@ -222,7 +222,7 @@ in
                       "separator"
                       {
                         name = "Order Board";
-                        url = "https://norce.atlassian.net/jira/software/c/projects/ORD/boards/48";
+                        url = "https://norce.atlassian.net/jira/software/c/projects/ORD/boards/48?assignee=62d03879a94a6f9c0eff057e&assignee=unassigned";
                       }
                       {
                         name = "Maintenance";
