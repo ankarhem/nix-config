@@ -1875,6 +1875,22 @@
         "type": "github"
       }
     },
+    "ponytail": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783651472,
+        "narHash": "sha256-aspTFUIRsyR2yiy3jqVsvwC/xiposWdM9j3DrVX06M8=",
+        "owner": "DietrichGebert",
+        "repo": "ponytail",
+        "rev": "14a0d79548d4de8fc2de95c1b94bb0de63a739d3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DietrichGebert",
+        "repo": "ponytail",
+        "type": "github"
+      }
+    },
     "pyproject-build-systems": {
       "inputs": {
         "nixpkgs": [
@@ -1952,6 +1968,7 @@
         "norce-agent-instructions": "norce-agent-instructions",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
+        "ponytail": "ponytail",
         "scripts": "scripts",
         "sops-nix": "sops-nix",
         "tangled": "tangled",

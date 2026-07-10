@@ -11,7 +11,6 @@
     graylog-cli.url = "github:norcetech/graylog-cli";
     hermes-agent.inputs.nixpkgs.follows = "nixpkgs";
     hermes-agent.url = "github:NousResearch/hermes-agent";
-    hon-stats.url = "git+https://github.com/ankarhem/hon-stats";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     homebrew-bundle.flake = false;
@@ -22,6 +21,7 @@
     homebrew-core.url = "github:homebrew/homebrew-core";
     homebrew-sikarugir.flake = false;
     homebrew-sikarugir.url = "github:Sikarugir-App/homebrew-sikarugir";
+    hon-stats.url = "git+https://github.com/ankarhem/hon-stats";
     import-tree.url = "github:vic/import-tree";
     # reset to upstream when merged https://github.com/pfassina/lazyvim-nix/pull/85
     lazyvim.url = "github:ankarhem/lazyvim-nix/fix/add-missing-nixpkg-mappings";
@@ -41,6 +41,8 @@
     plasma-manager.inputs.home-manager.follows = "home-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.url = "github:nix-community/plasma-manager";
+    ponytail.flake = false;
+    ponytail.url = "github:DietrichGebert/ponytail";
     scripts.url = "github:ankarhem/scripts";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
