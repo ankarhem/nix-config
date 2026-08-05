@@ -4,7 +4,7 @@
     {
       programs.zed-editor = {
         enable = true;
-        package = pkgs._unstable.zed-editor;
+        # package = pkgs._unstable.zed-editor;
         installRemoteServer = true;
         extensions = [
           "angular"
