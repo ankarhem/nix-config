@@ -149,7 +149,6 @@
         [
           google-chrome
           _unstable.obsidian
-          _unstable.slack
           _unstable.spotify
         ]
         ++ (lib.optionals pkgs.stdenv.isLinux (
