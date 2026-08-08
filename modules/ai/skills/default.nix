@@ -18,6 +18,7 @@ in
       norceSkills = readSkillsFrom "${inputs.norce-agent-instructions}/skills";
       graylogCliSkills = readSkillsFrom "${inputs.graylog-cli}/skills";
       ponytailSkills = readSkillsFrom "${inputs.ponytail}/skills";
+      impeccableSkills = readSkillsFrom "${inputs.impeccable-skill}/.opencode/skills";
 
       llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
       agentBrowser = llm-agents.agent-browser;
@@ -36,6 +37,7 @@ in
           skills =
             localSkills
             // ponytailSkills
+            // impeccableSkills
             // (lib.getAttrs [
               "argue"
               "checkout-domain"

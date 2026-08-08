@@ -1173,6 +1173,22 @@
         "url": "https://github.com/IBM/plex/releases/download/@ibm%2Fplex-mono@1.1.0/ibm-plex-mono.zip"
       }
     },
+    "impeccable-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786053200,
+        "narHash": "sha256-n3niY/ZUskJ0RZayMRcq3Qln+U0Fa0qrAlpZ/HFbPY4=",
+        "owner": "pbakaus",
+        "repo": "impeccable",
+        "rev": "aee6ce9352b842217b3f57c78296a7a4fa35a7f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pbakaus",
+        "repo": "impeccable",
+        "type": "github"
+      }
+    },
     "import-tree": {
       "locked": {
         "lastModified": 1784254960,
@@ -1962,6 +1978,7 @@
         "homebrew-core": "homebrew-core",
         "homebrew-sikarugir": "homebrew-sikarugir",
         "hon-stats": "hon-stats",
+        "impeccable-skill": "impeccable-skill",
         "import-tree": "import-tree",
         "lazyvim": "lazyvim",
         "llm-agents": "llm-agents",

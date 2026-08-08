@@ -14,6 +14,7 @@
           "codebook"
           "color-highlight"
           "csharp"
+          "deno"
           "discord-presence"
           "dockerfile"
           "env"

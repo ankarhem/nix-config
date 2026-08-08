@@ -22,6 +22,8 @@
     homebrew-sikarugir.flake = false;
     homebrew-sikarugir.url = "github:Sikarugir-App/homebrew-sikarugir";
     hon-stats.url = "git+https://github.com/ankarhem/hon-stats";
+    impeccable-skill.flake = false;
+    impeccable-skill.url = "github:pbakaus/impeccable";
     import-tree.url = "github:vic/import-tree";
     # reset to upstream when merged https://github.com/pfassina/lazyvim-nix/pull/85
     lazyvim.url = "github:ankarhem/lazyvim-nix/fix/add-missing-nixpkg-mappings";
