@@ -23,6 +23,7 @@
         attic
         attic-client
         auto-upgrade
+        apotekskarta
         blog
         cli
         colemak
