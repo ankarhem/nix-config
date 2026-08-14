@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  glm = "zai-coding-plan/glm-5.2";
+  glm = "zai-coding-plan/glm-5.3";
   glmFlash = "zai-coding-plan/glm-5-turbo";
 
   opus = "anthropic/claude-opus-4-8";

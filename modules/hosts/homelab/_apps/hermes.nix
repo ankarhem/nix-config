@@ -36,7 +36,7 @@
       # Coding Plan endpoint, which is what the GLM key is scoped to.
       model = {
         provider = "zai";
-        default = "glm-5.1";
+        default = "glm-5.3";
         base_url = "https://api.z.ai/api/coding/paas/v4";
       };
 

@@ -2,7 +2,7 @@
 let
   kimi = "opencode-go/kimi-k2.7-code";
 
-  glm = "zai-coding-plan/glm-5.2";
+  glm = "zai-coding-plan/glm-5.3";
 
   opus = "anthropic/claude-opus-4-8";
   sonnet = "anthropic/claude-sonnet-5";
