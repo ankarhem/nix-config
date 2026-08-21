@@ -41,7 +41,7 @@ in
         EnvironmentFile = config.sops.templates."hitster.env".path;
       };
       environment = {
-        PORT = port;
+        BIND_PORT = port;
       };
     };
 }
