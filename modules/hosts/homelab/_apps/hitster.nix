@@ -12,9 +12,6 @@ in
     content = ''
       SPOTIFY_CLIENT_ID=${config.sops.placeholder."spotify/client_id"}
       SPOTIFY_CLIENT_SECRET=${config.sops.placeholder."spotify/client_secret"}
-
-      HITSTER_SPOTIFY__CLIENT_ID=${config.sops.placeholder."spotify/client_id"}
-      HITSTER_SPOTIFY__CLIENT_SECRET=${config.sops.placeholder."spotify/client_secret"}
     '';
   };
 
@@ -25,21 +22,26 @@ in
       proxyPass = "http://127.0.0.1:${port}";
     };
   };
-  virtualisation.oci-containers = {
-    autoUpdater.containers.hitster.enable = true;
-    containers = {
-      hitster = {
-        image = "ghcr.io/ankarhem/hitster:latest";
-        ports = [ "127.0.0.1:${port}:3000" ];
-        environment = {
-          HITSTER_SERVER__HOST = "0.0.0.0";
-        };
-        environmentFiles = [ config.sops.templates."hitster.env".path ];
-        volumes = [
-          "/var/lib/hitster/db:/data/db"
-          "/var/lib/hitster/config:/config"
-        ];
+
+  systemd.services.hitster =
+    let
+      profile = "/nix/var/nix/profiles/per-user/root/hitster";
+      binary = "${profile}/bin/hitster";
+    in
+    {
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      unitConfig.ConditionPathExists = binary;
+      serviceConfig = {
+        ExecStart = binary;
+        WorkingDirectory = "/var/lib/hitster";
+        StateDirectory = "hitster";
+        Restart = "always";
+        RestartSec = "5s";
+        EnvironmentFile = config.sops.templates."hitster.env".path;
+      };
+      environment = {
+        PORT = port;
       };
     };
-  };
 }
