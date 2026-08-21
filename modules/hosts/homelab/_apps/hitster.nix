@@ -1,6 +1,7 @@
 { config, ... }:
 let
   port = "7033";
+  domain = "hitster.ankarhem.dev";
 in
 {
   sops.secrets = {
@@ -15,7 +16,7 @@ in
     '';
   };
 
-  services.nginx.virtualHosts."hitster.ankarhem.dev" = {
+  services.nginx.virtualHosts."${domain}" = {
     forceSSL = true;
     useACMEHost = "ankarhem.dev";
     locations."/" = {
@@ -41,6 +42,7 @@ in
         EnvironmentFile = config.sops.templates."hitster.env".path;
       };
       environment = {
+        BASE_URL = "https://${domain}";
         BIND_PORT = port;
       };
     };
