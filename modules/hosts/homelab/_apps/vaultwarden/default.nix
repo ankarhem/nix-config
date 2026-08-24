@@ -97,6 +97,7 @@ in
 
   services.vaultwarden = {
     enable = true;
+    package = pkgs._unstable.vaultwarden;
     dbBackend = "sqlite";
     backupDir = "/var/backup/vaultwarden";
     environmentFile = config.sops.templates."vaultwarden.env".path;
