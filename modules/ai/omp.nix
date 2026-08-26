@@ -69,9 +69,17 @@ in
       # Memory
 
       Your long-term memory lives in `vault://_/Agents/` — the only vault area you may touch.
-      Before non-trivial work, check it: list the folder and read notes relevant to the task.
-      When a task closes with a durable lesson, append a dated bullet to `vault://_/Agents/lessons.md`
-      (create the file or folder if missing).
+      Layout: `memory.md` holds generalized principles about the user and their environment;
+      `troubleshooting.md` holds recurring failure modes; `projects/<repo>.md` holds per-project
+      conventions. Create files on demand.
+
+      Before non-trivial work, list the folder and read what is relevant.
+
+      When a task closes with a durable lesson, curate rather than append:
+      - Generalize: record the most general principle that is true, with the specific case as an
+        example at most. Skip one-off incidents that are already resolved.
+      - Merge: read existing notes first; refine or supersede instead of duplicating.
+      - Date changed entries.
 
       Never read or write anything in the vault outside `vault://_/Agents/` — including vault-wide
       searches — without explicit user approval in the conversation.
