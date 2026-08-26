@@ -6,6 +6,7 @@ let
   home-manager.sharedModules = with inputs.self.modules.homeManager; [
     claude
     mcp
+    omp
     opencode
     skills
   ];
