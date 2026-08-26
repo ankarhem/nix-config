@@ -71,7 +71,9 @@ in
       Your long-term memory lives in `vault://_/Agents/` — the only vault area you may touch.
       Layout: `memory.md` holds generalized principles about the user and their environment;
       `troubleshooting.md` holds recurring failure modes; `projects/<repo>.md` holds per-project
-      conventions. Create files on demand.
+      conventions. This is a starting layout, not a closed set: when a note grows unwieldy or a
+      topic deserves its own file, split it and create new topical files (non-project ones
+      included) under `vault://_/Agents/`, linking related notes instead of duplicating.
 
       Before non-trivial work, list the folder and read what is relevant.
 
