@@ -1,7 +1,7 @@
 { inputs, ... }:
 let
   glm = "zai-coding-plan/glm-5.3";
-  glmFlash = "zai-coding-plan/glm-5-turbo";
+  glmFlash = "zai-coding-plan/glm-5.3-flash";
 
   opus = "anthropic/claude-opus-4-8";
   deepseekV4FlashFree = "opencode/deepseek-v4-flash-free";

@@ -60,6 +60,9 @@
           bun
           _unstable.acli
           jetbrains.rider
+          nixd
+          omnisharp-roslyn
+          typescript-language-server
           inputs.graylog-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
         ]
         ++ [ combinedDotnet ];

@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  kimi = "opencode-go/kimi-k2.7-code";
+  glmFlash = "zai-coding-plan/glm-5.3-flash";
 
   glm = "zai-coding-plan/glm-5.3";
 
@@ -76,7 +76,7 @@ in
         fallback_models = [ sonnet ];
       };
       multimodal-looker = {
-        model = kimi;
+        model = glmFlash;
         fallback_models = [ sonnet ];
       };
       prometheus = {
@@ -101,7 +101,7 @@ in
     };
     categories = {
       visual-engineering = {
-        model = kimi;
+        model = glmFlash;
         fallback_models = [ sonnet ];
       };
       ultrabrain = {
@@ -113,15 +113,15 @@ in
         fallback_models = [ sonnet ];
       };
       artistry = {
-        model = kimi;
+        model = glmFlash;
         fallback_models = [ sonnet ];
       };
       quick = {
-        model = kimi;
+        model = glmFlash;
         fallback_models = [ sonnet ];
       };
       unspecified-low = {
-        model = kimi;
+        model = glmFlash;
         fallback_models = [ sonnet ];
       };
       unspecified-high = {
@@ -129,7 +129,7 @@ in
         fallback_models = [ glm ];
       };
       writing = {
-        model = kimi;
+        model = glmFlash;
         fallback_models = [ sonnet ];
       };
     };
