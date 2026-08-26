@@ -51,7 +51,11 @@ in
         # onboarding marker; omp re-runs setup if absent, and the switch overwrites runtime writes
         setupVersion = 2;
         retry.fallbackChains.${glm} = [ opus ];
-        retry.fallbackChains.${glmFlash} = [ sonnet ];
+        task.maxConcurrency = 8;
+        edit.autoRepair.enabled = true;
+        secrets.enabled = true;
+        statusLine.preset = "nerd";
+        display.showTokenUsage = true;
       };
     };
     home.file.".omp/agent/AGENTS.md".text = ''
