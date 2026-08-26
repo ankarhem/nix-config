@@ -28,8 +28,9 @@ in
           commit = glmFlash;
           tiny = glmFlash; # session titles, memory, background classification
           task = glm;
-          advisor = glm;
+          advisor = glmFlash;
         };
+        advisor.enabled = true; # second-model reviewer (flash, role set above)
         symbolPreset = "nerd";
         composer.shape = "box";
         theme = {
@@ -38,6 +39,8 @@ in
         };
         defaultThinkingLevel = "high";
         astGrep.enabled = true;
+        github.enabled = true;
+        vault.enabled = true; # Obsidian vault:// read/edit; requires Obsidian CLI toggle (Settings > General > Advanced)
         interruptMode = "immediate";
         followUpMode = "all";
         edit.mode = "hashline";
@@ -62,6 +65,16 @@ in
       # Language Policy
 
       Never talk in Chinese unless it is absolutely and unambiguously relevant to the user's query.
+
+      # Memory
+
+      Your long-term memory lives in `vault://_/Agents/` — the only vault area you may touch.
+      Before non-trivial work, check it: list the folder and read notes relevant to the task.
+      When a task closes with a durable lesson, append a dated bullet to `vault://_/Agents/lessons.md`
+      (create the file or folder if missing).
+
+      Never read or write anything in the vault outside `vault://_/Agents/` — including vault-wide
+      searches — without explicit user approval in the conversation.
     '';
   };
 }
