@@ -41,6 +41,11 @@ in
         astGrep.enabled = true;
         github.enabled = true;
         vault.enabled = true; # Obsidian vault:// read/edit; requires Obsidian CLI toggle (Settings > General > Advanced)
+        # ~/.agents/skills is shared with opencode; skip skills duplicating omp built-ins
+        skills.ignoredSkills = [
+          "obsidian-cli" # vault:// is native
+          "using-git-worktrees" # omp worktree / task.isolation is native
+        ];
         interruptMode = "immediate";
         followUpMode = "all";
         edit.mode = "hashline";
