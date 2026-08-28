@@ -115,10 +115,12 @@ in
                   - low
                   - high
                   - max
+                defaultLevel: max
                 requiresEffort: true
               supportsTools: true
               contextWindow: 1000000
               maxTokens: 131072
+              # promo pricing until 2026-09-09; doubles to 0.15 / 0.5 / 0.03 after
               cost:
                 input: 0.075
                 output: 0.25
