@@ -7,7 +7,6 @@ let
   glmFlash = "zai/glm-5.3-flash";
   fable = "anthropic/claude-fable-5";
   opus = "anthropic/claude-opus-4-8";
-  sonnet = "anthropic/claude-sonnet-5";
 in
 {
   flake.modules.homeManager.omp = {
@@ -90,42 +89,6 @@ in
 
       Never read or write anything in the vault outside `vault://_/Agents/` — including vault-wide
       searches — without explicit user approval in the conversation.
-    '';
-
-    # Upstream catalog gap (can1357/oh-my-pi#9910): zai/glm-5.3-flash is served by
-    # api.z.ai/api/anthropic but missing from the bundled models.json (static provider,
-    # no runtime discovery). Verified by headless completion 2026-08-27; remove when
-    # `omp models find glm-5.3` lists it under zai after an input update.
-    home.file.".omp/agent/models.yml".text = ''
-      providers:
-        zai:
-          auth: oauth
-          api: anthropic-messages
-          baseUrl: https://api.z.ai/api/anthropic
-          models:
-            - id: glm-5.3-flash
-              name: GLM-5.3 Flash
-              reasoning: true
-              input:
-                - text
-                - image
-              thinking:
-                mode: effort
-                efforts:
-                  - low
-                  - high
-                  - max
-                defaultLevel: max
-                requiresEffort: true
-              supportsTools: true
-              contextWindow: 1000000
-              maxTokens: 131072
-              # promo pricing until 2026-09-09; doubles to 0.15 / 0.5 / 0.03 after
-              cost:
-                input: 0.075
-                output: 0.25
-                cacheRead: 0.015
-                cacheWrite: 0
     '';
   };
 }
