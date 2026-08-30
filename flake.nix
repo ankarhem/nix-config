@@ -46,6 +46,8 @@
     plasma-manager.url = "github:nix-community/plasma-manager";
     ponytail.flake = false;
     ponytail.url = "github:DietrichGebert/ponytail";
+    rust-skill.flake = false;
+    rust-skill.url = "github:leonardomso/rust-skills";
     scripts.url = "github:ankarhem/scripts";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";

@@ -2161,6 +2161,7 @@
         "omp": "omp",
         "plasma-manager": "plasma-manager",
         "ponytail": "ponytail",
+        "rust-skill": "rust-skill",
         "scripts": "scripts",
         "sops-nix": "sops-nix",
         "tangled": "tangled",
@@ -2277,6 +2278,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781477469,
+        "narHash": "sha256-B6E8JP78/wDdJYHp1l5cpEgxRuCzAhOhUtst4pueMw0=",
+        "owner": "leonardomso",
+        "repo": "rust-skills",
+        "rev": "fd2a861ab0406a4ac536a55274d14ea6fd1ca9c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "leonardomso",
+        "repo": "rust-skills",
         "type": "github"
       }
     },

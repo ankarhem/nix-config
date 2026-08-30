@@ -56,6 +56,7 @@ in
               "temporal-developer" = inputs.temporalio-skill;
               "agent-browser" = (readSkillsFrom "${agentBrowser}/share/agent-browser/skills").agent-browser;
               "hunk" = (readSkillsFrom "${hunk}/skills").hunk-review;
+              "rust-skill" = inputs.rust-skill;
             };
         in
         pkgs.linkFarm "merged-skills" skills;
