@@ -44,6 +44,9 @@ in
       environment = {
         BASE_URL = "https://${domain}";
         BIND_PORT = port;
+        # Homelab OTel collector (loops out to Loki/Tempo/Prometheus behind
+        # grafana.internal.internetfeno.men); same-host loopback receiver.
+        OTLP_ENDPOINT = "http://127.0.0.1:4318";
       };
     };
 }
