@@ -68,11 +68,11 @@ in
         ];
       };
       librarian = {
-        model = glm;
+        model = glmFlash;
         fallback_models = [ sonnet ];
       };
       explore = {
-        model = glm;
+        model = glmFlash;
         fallback_models = [ sonnet ];
       };
       multimodal-looker = {
