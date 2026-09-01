@@ -32,6 +32,7 @@ in
           instructions = [
             ./non_interactivity.md
             ./language.md
+            ./memory.md
           ];
           plugin = [
             inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-opencode
