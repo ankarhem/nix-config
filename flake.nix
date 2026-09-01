@@ -40,7 +40,6 @@
     norce-agent-instructions.url = "github:NorceTech/agent-instructions";
     nur.inputs.nixpkgs.follows = "nixpkgs";
     nur.url = "github:nix-community/NUR";
-    omp.url = "github:can1357/oh-my-pi";
     plasma-manager.inputs.home-manager.follows = "home-manager";
     plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
     plasma-manager.url = "github:nix-community/plasma-manager";
