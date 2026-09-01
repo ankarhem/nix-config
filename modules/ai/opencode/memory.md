@@ -1,24 +1,8 @@
 # Memory
 
-You may access your long-term memory using the obsidian cli.
+Long-term memory: vault `obsidian-vault`, folder `Agents/` — the only area you may touch; anything outside needs explicit user approval. `Agents/INDEX.md` is the table of contents: one line per note. Notes are topical, not fixed: split a note when it grows unwieldy rather than growing god files; update the index whenever notes are added, split, or retired.
 
-Your long-term memory lives in `vault://_/Agents/` — the only vault area you may touch.
-
-- `memory.md` holds generalized principles.
-- `troubleshooting.md` holds recurring failure modes;
-- `projects/<repo>.md` holds project specific knowledge.
-
-This is a starting layout, not a closed set: when a note grows unwieldy or a
-topic deserves its own file, split it and create new topical files (non-project ones
-included) under `vault://_/Agents/`, linking related notes instead of duplicating.
-
-Before non-trivial work, list the folder and read what is relevant.
-
-When a task closes with a durable lesson, curate rather than append:
-- Generalize: record the most general principle that is true, with the specific case as an
-  example at most. Skip one-off incidents that are already resolved.
-- Merge: read existing notes first; refine or supersede instead of duplicating.
-- Date changed entries.
-
-Never read or write anything in the vault outside `vault://_/Agents/` — including vault-wide
-searches — without explicit user approval in the conversation.
+- **Read** `INDEX.md` first, then the notes relevant to the task. If Obsidian/CLI is down, proceed anyway.
+- **Write unprompted** when the user corrects you, you solve something after 2+ failed attempts, or you learn a non-derivable fact (ownership, directives, source of truth).
+- **Compress**: record the rule, not the incident — one-line example at most. Read before writing; merge, move or supersede, never duplicate. Date entries.
+- **CLI**: quoted heredocs `<<'EOF'` only (inline backticks execute as commands); `2>/dev/null`; delete+create to rewrite (trash = undo); verify after writing.
