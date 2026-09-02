@@ -196,10 +196,6 @@ in
     '';
   };
 
-  # temporary allow olm-3.2.16 as insecure package
-  nixpkgs.config.permittedInsecurePackages = [
-    "olm-3.2.16"
-  ];
   services.mautrix-meta = {
     instances = {
       instagram = {
@@ -223,8 +219,6 @@ in
           network.mode = "messenger";
           appservice = {
             id = "messengerbot";
-            # Existing ghosts are @meta_*: pin the template so the upgraded
-            # bridge (v26.07) does not switch to a different default prefix.
             username_template = "meta_{{.}}";
             bot = {
               username = "messengerbot";
