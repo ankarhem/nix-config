@@ -118,10 +118,6 @@ in
 
   sops.secrets."matrix/doublepuppet_as_token" = { };
   sops.secrets."matrix/pickle_key" = { };
-  sops.secrets."matrix/telegram/as_token" = { };
-  sops.secrets."matrix/telegram/hs_token" = { };
-  sops.secrets."matrix/telegram/api_id" = { };
-  sops.secrets."matrix/telegram/api_hash" = { };
   sops.secrets."matrix/instagram/as_token" = { };
   sops.secrets."matrix/instagram/hs_token" = { };
   sops.secrets."matrix/messenger/as_token" = { };
@@ -133,10 +129,6 @@ in
     content = ''
       DOUBLEPUPPET_AS_TOKEN=${config.sops.placeholder."matrix/doublepuppet_as_token"}
       PICKLE_KEY=${config.sops.placeholder."matrix/pickle_key"}
-      MAUTRIX_TELEGRAM_APPSERVICE_AS_TOKEN=${config.sops.placeholder."matrix/telegram/as_token"}
-      MAUTRIX_TELEGRAM_APPSERVICE_HS_TOKEN=${config.sops.placeholder."matrix/telegram/hs_token"}
-      MAUTRIX_TELEGRAM_TELEGRAM_API_ID=${config.sops.placeholder."matrix/telegram/api_id"}
-      MAUTRIX_TELEGRAM_TELEGRAM_API_HASH=${config.sops.placeholder."matrix/telegram/api_hash"}
       MAUTRIX_INSTAGRAM_APPSERVICE_AS_TOKEN=${config.sops.placeholder."matrix/instagram/as_token"}
       MAUTRIX_INSTAGRAM_APPSERVICE_HS_TOKEN=${config.sops.placeholder."matrix/instagram/hs_token"}
       MAUTRIX_MESSENGER_APPSERVICE_AS_TOKEN=${config.sops.placeholder."matrix/messenger/as_token"}
@@ -150,27 +142,6 @@ in
   nixpkgs.config.permittedInsecurePackages = [
     "olm-3.2.16"
   ];
-  services.mautrix-telegram = {
-    enable = true;
-    environmentFile = config.sops.templates."mautrix-bridges.env".path;
-    settings = lib.recursiveUpdate defaultAppserviceConfig {
-      bridge = {
-        login_shared_secret_map."${domain}" = "as_token:$DOUBLEPUPPET_AS_TOKEN";
-        encryption = defaultAppserviceConfig.encryption;
-      };
-      appservice = {
-        id = "telegram";
-        as_token = "$MAUTRIX_TELEGRAM_APPSERVICE_AS_TOKEN";
-        hs_token = "$MAUTRIX_TELEGRAM_APPSERVICE_HS_TOKEN";
-        address = "http://127.0.0.1:29317";
-        port = 29317;
-        bot_username = "telegrambot";
-        bot_displayname = "Telegram bridge bot";
-        bot_avatar = "mxc://maunium.net/tJCRmUyJDsgRNgqhOgoiHWbX";
-      };
-    };
-  };
-
   # TODO: Remove when nixpkgs ships mautrix-meta >= v0.2605.1
   # Fixes: "Fixed connecting to Instagram after an app ID change broke it."
   services.mautrix-meta = {
