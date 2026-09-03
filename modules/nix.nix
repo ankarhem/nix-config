@@ -35,6 +35,7 @@ let
       nix = {
         enable = true;
         package = pkgs.nix;
+        optimise.automatic = true;
         gc = {
           automatic = true;
           options = "--delete-older-than 7d";
