@@ -40,10 +40,33 @@
   };
 
   flake.modules.darwin.general =
-    { pkgs, ... }:
+    {
+      lib,
+      pkgs,
+      ...
+    }:
+    let
+      fastpotify = inputs.fastpotify.packages."${pkgs.stdenv.hostPlatform.system}".fastpotify;
+      fastpotify-icon = pkgs.runCommand "fastpotify-icon" { nativeBuildInputs = [ pkgs.icnsify ]; } ''
+        icnsify ${inputs.fastpotify}/packaging/macos/icon-1024.png -o $out
+      '';
+      fastpotify-app = pkgs.runCommand "fastpotify-app" { } ''
+        app="$out/Applications/Fastpotify.app/Contents"
+        mkdir -p "$app/MacOS" "$app/Resources"
+        ln -s ${fastpotify}/bin/fastpotify "$app/MacOS/fastpotify"
+        cp ${fastpotify-icon} "$app/Resources/fastpotify.icns"
+        version="${lib.getVersion fastpotify}"
+        build="''${version%%-*}"
+        sed -e "s/__VERSION__/$version/g" -e "s/__BUILD__/$build/g" \
+          ${inputs.fastpotify}/packaging/macos/Info.plist > "$app/Info.plist"
+      '';
+    in
     {
       environment = {
         pathsToLink = [ "/Applications" ];
+        # GC-root the bundle: the Dock entry below only records a store path
+        # string, which the garbage collector cannot see.
+        systemPackages = [ fastpotify-app ];
       };
 
       homebrew.casks = [
@@ -72,7 +95,7 @@
           mru-spaces = false;
           persistent-apps = [
             "${pkgs._unstable.obsidian}/Applications/Obsidian.app/"
-            "${pkgs._unstable.spotify}/Applications/Spotify.app/"
+            "${fastpotify-app}/Applications/Fastpotify.app/"
             "/Applications/1Password.app/"
             "/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
@@ -149,7 +172,7 @@
         [
           google-chrome
           _unstable.obsidian
-          _unstable.spotify
+          inputs.fastpotify.packages.${pkgs.stdenv.hostPlatform.system}.fastpotify
         ]
         ++ (lib.optionals pkgs.stdenv.isLinux (
           with pkgs;
