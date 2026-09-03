@@ -47,19 +47,7 @@
     }:
     let
       fastpotify = inputs.fastpotify.packages."${pkgs.stdenv.hostPlatform.system}".fastpotify;
-      fastpotify-icon = pkgs.runCommand "fastpotify-icon" { nativeBuildInputs = [ pkgs.icnsify ]; } ''
-        icnsify ${inputs.fastpotify}/packaging/macos/icon-1024.png -o $out
-      '';
-      fastpotify-app = pkgs.runCommand "fastpotify-app" { } ''
-        app="$out/Applications/Fastpotify.app/Contents"
-        mkdir -p "$app/MacOS" "$app/Resources"
-        ln -s ${fastpotify}/bin/fastpotify "$app/MacOS/fastpotify"
-        cp ${fastpotify-icon} "$app/Resources/fastpotify.icns"
-        version="${lib.getVersion fastpotify}"
-        build="''${version%%-*}"
-        sed -e "s/__VERSION__/$version/g" -e "s/__BUILD__/$build/g" \
-          ${inputs.fastpotify}/packaging/macos/Info.plist > "$app/Info.plist"
-      '';
+      fastpotify-app = inputs.fastpotify.packages."${pkgs.stdenv.hostPlatform.system}".fastpotify-app;
     in
     {
       environment = {

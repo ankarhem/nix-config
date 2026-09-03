@@ -6,7 +6,8 @@
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     blog.url = "git+https://github.com/ankarhem/site";
     comfyui-nix.url = "github:utensils/comfyui-nix";
-    fastpotify.url = "github:crmne/fastpotify";
+    fastpotify.url = "github:ankarhem/fastpotify/add-darwin-appbundle";
+    # fastpotify.url = "github:crmne/fastpotify";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks.url = "github:cachix/git-hooks.nix";
     graylog-cli.url = "github:norcetech/graylog-cli";
