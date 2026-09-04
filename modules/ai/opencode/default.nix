@@ -4,6 +4,7 @@ let
   glmFlash = "zai-coding-plan/glm-5.3-flash";
 
   opus = "anthropic/claude-opus-4-8";
+  fable = "anthropic/claude-fable-5";
 in
 {
   flake.modules.homeManager.opencode =
@@ -41,7 +42,7 @@ in
           small_model = glmFlash;
           agent = {
             build.model = glm;
-            plan.model = opus;
+            plan.model = fable;
             general.model = opus;
             explore.model = glmFlash;
             compaction.model = glmFlash;
