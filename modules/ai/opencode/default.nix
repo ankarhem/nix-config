@@ -10,11 +10,7 @@ in
     { lib, pkgs, ... }:
     {
       imports = [
-        (inputs.import-tree ./_plugins)
-      ];
-
-      home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
-        pkgs.local.openchamber-desktop
+        # (inputs.import-tree ./_plugins)
       ];
       _module.args.inputs = inputs;
 
