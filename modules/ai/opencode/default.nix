@@ -7,19 +7,6 @@ let
   fable = "anthropic/claude-fable-5-1";
 in
 {
-  flake.modules.darwin.opencode = {
-    launchd.user.agents.opencode-desktop-v2-sidecar = {
-      serviceConfig = {
-        ProgramArguments = [
-          "/bin/launchctl"
-          "setenv"
-          "OPENCODE_SIDECAR_V2"
-          "1"
-        ];
-        RunAtLoad = true;
-      };
-    };
-  };
   flake.modules.homeManager.opencode =
     { lib, pkgs, ... }:
     {
@@ -32,7 +19,6 @@ in
       # the same config; the v2-native `plugins` key below only affects v2.
       home.packages = [
         inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode-desktop
       ];
 
       programs.opencode = {
