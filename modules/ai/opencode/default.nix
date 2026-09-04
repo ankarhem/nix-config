@@ -15,6 +15,12 @@ in
       ];
       _module.args.inputs = inputs;
 
+      # OpenCode 2 (beta) runs side by side with v1 as `opencode2` and reads
+      # the same config; the v2-native `plugins` key below only affects v2.
+      home.packages = [
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2
+      ];
+
       programs.opencode = {
         enable = true;
         package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
@@ -37,6 +43,8 @@ in
             "@simonwjackson/opencode-direnv"
             "@ex-machina/opencode-anthropic-auth"
           ];
+          # native v2 plugin config (only read by opencode2)
+          plugins = [ "opencode2-direnv" ];
 
           model = glm;
           small_model = glmFlash;
