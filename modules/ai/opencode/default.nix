@@ -16,6 +16,7 @@ in
       home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
         pkgs.local.openchamber-desktop
       ];
+      _module.args.inputs = inputs;
 
       programs.opencode = {
         enable = true;
@@ -34,7 +35,6 @@ in
             ./memory.md
           ];
           plugin = [
-            inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-opencode
             "@simonwjackson/opencode-direnv"
             "@ex-machina/opencode-anthropic-auth"
           ];

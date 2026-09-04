@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 let
   glmFlash = "zai-coding-plan/glm-5.3-flash";
 
@@ -11,10 +11,10 @@ in
 {
   programs.opencode = {
     tui.plugin = [
-      "oh-my-openagent/tui"
+      # "oh-my-openagent/tui"
     ];
     settings.plugin = [
-      "oh-my-openagent"
+      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-opencode
     ];
   };
 
