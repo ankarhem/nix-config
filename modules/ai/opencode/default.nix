@@ -17,8 +17,10 @@ in
 
       # OpenCode 2 (beta) runs side by side with v1 as `opencode2` and reads
       # the same config; the v2-native `plugins` key below only affects v2.
-      home.packages = [
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode2
+      home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
+        opencode2
+        t3code-desktop
+        # zcode
       ];
 
       programs.opencode = {
