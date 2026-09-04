@@ -7,6 +7,19 @@ let
   fable = "anthropic/claude-fable-5-1";
 in
 {
+  flake.modules.darwin.opencode = {
+    launchd.user.agents.opencode-desktop-v2-sidecar = {
+      serviceConfig = {
+        ProgramArguments = [
+          "/bin/launchctl"
+          "setenv"
+          "OPENCODE_SIDECAR_V2"
+          "1"
+        ];
+        RunAtLoad = true;
+      };
+    };
+  };
   flake.modules.homeManager.opencode =
     { lib, pkgs, ... }:
     {

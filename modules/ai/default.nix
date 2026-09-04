@@ -16,6 +16,6 @@ in
   };
   flake.modules.darwin.ai = {
     inherit home-manager;
-    imports = [ inputs.self.modules.darwin.opencode-desktop ];
+    imports = [ inputs.self.modules.darwin.opencode ];
   };
 }
