@@ -13,7 +13,8 @@
     }:
     let
       nodejs_lts = pkgs.nodejs_24;
-      nixPkg = config.nix.package;
+      npx = lib.getExe' nodejs_lts "npx";
+      uvx = lib.getExe' pkgs.uv "uvx";
       # truesight = inputs.truesight.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
@@ -34,7 +35,7 @@
         servers = {
           angular = {
             type = "stdio";
-            command = "${nodejs_lts}/bin/npx";
+            command = npx;
             args = [
               "-y"
               "@angular/cli"
@@ -50,7 +51,7 @@
           # };
           sequential-thinking = {
             type = "stdio";
-            command = "${nodejs_lts}/bin/npx";
+            command = npx;
             args = [
               "-y"
               "@modelcontextprotocol/server-sequential-thinking"
@@ -58,12 +59,8 @@
           };
           mcp-nixos = {
             type = "stdio";
-            command = "${nixPkg}/bin/nix";
-            args = [
-              "run"
-              "github:utensils/mcp-nixos"
-              "--"
-            ];
+            command = uvx;
+            args = [ "mcp-nixos" ];
           };
           context7 = {
             type = "http";
