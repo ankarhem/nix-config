@@ -4,7 +4,6 @@ let
   glmFlash = "zai-coding-plan/glm-5.3-flash";
 
   opus = "anthropic/claude-opus-4-8";
-  deepseekV4FlashFree = "opencode/deepseek-v4-flash-free";
 in
 {
   flake.modules.homeManager.opencode =
@@ -47,7 +46,7 @@ in
             plan.model = opus;
             general.model = opus;
             explore.model = glmFlash;
-            compaction.model = deepseekV4FlashFree;
+            compaction.model = glmFlash;
             title.model = glmFlash;
             summary.model = glmFlash;
           };
