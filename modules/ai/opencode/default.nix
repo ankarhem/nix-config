@@ -46,6 +46,10 @@ in
           # native v2 plugin config (only read by opencode2)
           plugins = [ "opencode2-direnv" ];
 
+          # opencode2 auto-updates itself by default; the binary is pinned
+          # by the flake, so only notify about available updates.
+          update = "notify";
+
           model = glm;
           small_model = glmFlash;
           agent = {
