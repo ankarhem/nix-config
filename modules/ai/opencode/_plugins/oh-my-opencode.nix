@@ -6,7 +6,7 @@ let
 
   opus = "anthropic/claude-opus-4-8";
   sonnet = "anthropic/claude-sonnet-5";
-  fable = "anthropic/claude-fable-5";
+  fable = "anthropic/claude-fable-5-1";
 in
 {
   programs.opencode = {
@@ -14,7 +14,7 @@ in
       # "oh-my-openagent/tui"
     ];
     settings.plugin = [
-      inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-opencode
+      # inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.oh-my-opencode
     ];
   };
 
