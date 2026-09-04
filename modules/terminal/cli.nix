@@ -80,6 +80,7 @@ in
         [
           age
           alejandra
+          ast-grep
           bat
           bottom
           coreutils
