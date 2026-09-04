@@ -17,7 +17,7 @@ The user account / home map folder must be named `ankarhem`.
 
 ### Important
 
-- Open raycast and initialize settings, via topbar replace hotkey to cmd+space
+- Open vicinae and grant accessibility permission via System Preferences > Privacy & Security > Accessibility, required for the global shortcut, paste and snippets
 - Make firefox default browser System Preferences > General > Default Web Browser
 - Fix yubikey
   1. Add ssh-keys manually from 1password

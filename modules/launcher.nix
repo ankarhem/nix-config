@@ -6,10 +6,10 @@
     ];
   };
   flake.modules.darwin.launcher =
-    { config, pkgs, ... }:
+    { config, ... }:
     {
-      environment.systemPackages = [
-        pkgs._unstable.raycast
+      home-manager.sharedModules = [
+        inputs.self.modules.homeManager.launcher
       ];
 
       system.defaults.CustomUserPreferences = {
@@ -42,54 +42,38 @@
     };
 
   flake.modules.homeManager.launcher =
-    { pkgs, ... }:
+    {
+      lib,
+      pkgs,
+      ...
+    }:
     let
-      mkRayCastExtension =
-        {
-          name,
-          sha256,
-          rev,
-        }:
-        let
-          src =
-            pkgs.fetchgit {
-              inherit rev sha256;
-              url = "https://github.com/raycast/extensions";
-              sparseCheckout = [
-                "/extensions/${name}"
-              ];
-            }
-            + "/extensions/${name}";
-        in
-        pkgs.buildNpmPackage {
-          inherit name src;
-          installPhase = ''
-            runHook preInstall
-
-            mkdir -p $out
-            cp -r /build/.config/raycast/extensions/${name}/* $out/
-
-            runHook postInstall
-          '';
-          npmDeps = pkgs.importNpmLock { npmRoot = src; };
-          inherit (pkgs.importNpmLock) npmConfigHook;
-        };
+      isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+      system = pkgs.stdenv.hostPlatform.system;
     in
     {
       imports = [
         inputs.vicinae.homeManagerModules.default
       ];
 
-      services.vicinae = {
+      programs.vicinae = {
         enable = true;
-        package = pkgs.vicinae;
-        systemd = {
+        # nixpkgs only packages vicinae for linux; on darwin use the flake's
+        # package which assembles the Vicinae.app bundle
+        package = if isDarwin then inputs.vicinae.packages.${system}.default else pkgs.vicinae;
+
+        systemd = lib.mkIf (!isDarwin) {
           enable = true;
           autoStart = true;
           environment = {
             USE_LAYER_SHELL = 1;
           };
         };
+        launchd = lib.mkIf isDarwin {
+          enable = true;
+          autoStart = true;
+        };
+
         settings = {
           close_on_focus_loss = true;
           consider_preedit = true;
@@ -115,25 +99,31 @@
           launcher_window = {
             opacity = 0.98;
           };
+        }
+        // lib.optionalAttrs isDarwin {
+          global_shortcuts.toggle = "cmd+space";
         };
 
         # https://github.com/vicinaehq/extensions/tree/main/extensions
         extensions =
-          (with inputs.vicinae-extensions.packages.${pkgs.stdenv.hostPlatform.system}; [
-            bluetooth
+          (with inputs.vicinae-extensions.packages.${system}; [
             case-converter
             firefox
             fuzzy-files
             it-tools
             nix
             port-killer
-            power-profile
             spongebob-text-transformer
           ])
+          ++ lib.optionals (!isDarwin) [
+            # wraps power-profiles-daemon, linux only
+            inputs.vicinae-extensions.packages.${system}.power-profile
+          ]
           ++ [
-            (mkRayCastExtension {
+            # https://github.com/raycast/extensions/tree/main/extensions
+            (inputs.vicinae.lib.${system}.mkRayCastExtension {
               name = "gif-search";
-              sha256 = "NKmNqRqAnxtOXipFZFXOIgFlVzc0c3B5/Qr4DzKzAx4=";
+              hash = "sha256-NKmNqRqAnxtOXipFZFXOIgFlVzc0c3B5/Qr4DzKzAx4=";
               rev = "3ec994afcd05b2b6258b3b71ab8b19d6b6f1e0e4";
             })
           ];
