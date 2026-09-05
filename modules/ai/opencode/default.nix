@@ -20,7 +20,7 @@ in
       home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
         opencode2
         t3code-desktop
-        # zcode
+        zcode
       ];
 
       programs.opencode = {

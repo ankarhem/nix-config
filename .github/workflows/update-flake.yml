@@ -15,10 +15,16 @@ jobs:
       ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.OMO_AGENT_PAT }}
           fetch-depth: 0
+
+      - name: Setup
+        uses: ./.github/actions/ai-setup
+        with:
+          github-token: ${{ secrets.NIX_PAT }}
+          attic-token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Configure commit signing
         shell: bash
@@ -47,22 +53,6 @@ jobs:
         run: |
           echo "${OMO_AGENT_PAT}" | gh auth login --with-token
           gh auth status
-
-      - name: Install Nix
-        uses: cachix/install-nix-action@v31
-        with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.NIX_PAT }}
-            netrc-file = /home/runner/.config/nix/netrc
-            extra-substituters = https://attic.internetfeno.men/main
-            extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
-
-      - name: Configure attic cache auth
-        if: env.ATTIC_TOKEN != ''
-        run: |
-          mkdir -p ~/.config/nix
-          printf 'machine attic.internetfeno.men\npassword %s\n' "$ATTIC_TOKEN" > ~/.config/nix/netrc
-          chmod 600 ~/.config/nix/netrc
 
       - name: Login to attic cache
         if: env.ATTIC_TOKEN != ''
