@@ -23,6 +23,12 @@ jobs:
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
       - name: Setup
         uses: ./.github/actions/ai-setup
         with:
@@ -30,7 +36,7 @@ jobs:
           attic-token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Run OpenCode review
-        uses: anomalyco/opencode/github@latest
+        uses: anomalyco/opencode/github@v1.2.9
         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
         with:
@@ -66,6 +72,12 @@ jobs:
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
       - name: Setup
         uses: ./.github/actions/ai-setup
         with:

@@ -1,7 +1,8 @@
 name: AI reviewer setup
 description: >-
-  Shared setup for AI review jobs: checkout plus a working Nix with the attic
-  cache so reviewers can evaluate the flake and verify packages/options exist.
+  Shared setup for AI jobs: a working Nix with the attic cache so reviewers can
+  evaluate the flake and verify packages/options exist. Run actions/checkout
+  before this — local actions are resolved from the workspace.
 
 inputs:
   github-token:
@@ -11,29 +12,10 @@ inputs:
     description: Optional attic cache token (skipped when empty)
     required: false
     default: ''
-  checkout-token:
-    description: Token for checkout (defaults to the runner's GITHUB_TOKEN)
-    required: false
-    default: ''
-  fetch-depth:
-    description: Checkout depth
-    required: false
-    default: '1'
-  persist-credentials:
-    description: Whether checkout persists credentials (needed to push)
-    required: false
-    default: 'false'
 
 runs:
   using: composite
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
-      with:
-        token: ${{ inputs.checkout-token || github.token }}
-        fetch-depth: ${{ inputs.fetch-depth }}
-        persist-credentials: ${{ inputs.persist-credentials }}
-
     - name: Install Nix
       uses: cachix/install-nix-action@v31
       with:

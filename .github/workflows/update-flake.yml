@@ -14,14 +14,17 @@ jobs:
     env:
       ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          token: ${{ secrets.OMO_AGENT_PAT }}
+          fetch-depth: 0
+
       - name: Setup
         uses: ./.github/actions/ai-setup
         with:
           github-token: ${{ secrets.NIX_PAT }}
           attic-token: ${{ secrets.ATTIC_TOKEN }}
-          checkout-token: ${{ secrets.OMO_AGENT_PAT }}
-          fetch-depth: '0'
-          persist-credentials: 'true'
 
       - name: Configure commit signing
         shell: bash
