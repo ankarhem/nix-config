@@ -1,0 +1,61 @@
+name: opencode-review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review:
+    # Skip automated branches (e.g. dependency bots) and untrusted authors.
+    if: >-
+      !startsWith(github.event.pull_request.head.ref, 'auto/') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
+    runs-on: ubuntu-latest
+    concurrency:
+      group: opencode-review-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: read
+      issues: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Run OpenCode review
+        uses: anomalyco/opencode/github@latest
+        env:
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+        with:
+          model: zai-coding-plan/glm-5.3-flash
+          prompt: |
+            Review this pull request. Do not modify any files — review only.
+
+            Approach:
+            - Read the PR description and the full diff before commenting; understand the intent of the change.
+            - Verify claims by reading the surrounding code, not just the diff hunks. If you are unsure whether something is a real bug, investigate before flagging it.
+
+            Report only issues that matter:
+            - Architectural issues: breaks SOLID principles, it should be elegant, extensible, maintainable and testable code
+            - Correctness: bugs, broken logic, unhandled errors, edge cases
+            - Security: leaked secrets or credentials, injection, unsafe permissions
+            - Breaking changes: API, CLI, or config changes that break existing users or workflows
+            - Performance or resource problems introduced by this change
+            - Missing test coverage for significant new behavior
+
+            Do not:
+            - Restate or summarize the diff
+            - Add praise or filler
+
+            Output:
+            - One comment, most important issues first.
+            - For each issue: file and line, what is wrong, why it matters, and a concrete suggested fix.
+            - If the PR is good, say so in one or two sentences and stop.
+
+            # Repo-specific checks (edit per repo, e.g.):
+            # - Verify packages/options exist in the pinned dependency set
+            # - Respect repo conventions documented in AGENTS.md / CONTRIBUTING.md
