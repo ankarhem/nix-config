@@ -47,7 +47,6 @@ in
               "create-pr"
               "git-bisect"
               "jira"
-              "using-git-worktrees"
             ] norceSkills)
             // (lib.getAttrs [
               "graylog-cli"
