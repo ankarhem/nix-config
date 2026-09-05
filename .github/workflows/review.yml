@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
 
-# One group per PR so a new push cancels both stale reviews at once.
+# One group per PR so a new push cancels all stale reviews at once.
 concurrency:
   group: ai-review-${{ github.event.pull_request.number }}
   cancel-in-progress: true
@@ -43,6 +43,64 @@ jobs:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
         with:
           model: zai-coding-plan/glm-5.3-flash
+          prompt: |
+            Review this pull request. Do not modify any files — review only.
+
+            Approach:
+            - Read the PR description and the full diff before commenting; understand the intent of the change.
+            - Verify claims by reading the surrounding code, not just the diff hunks. If you are unsure whether something is a real bug, investigate before flagging it.
+
+            Report only issues that matter:
+            - Architectural issues: breaks SOLID principles, it should be elegant, extensible, maintainable and testable code
+            - Correctness: bugs, broken logic, unhandled errors, edge cases
+            - Security: leaked secrets or credentials, injection, unsafe permissions
+            - Breaking changes: API, CLI, or config changes that break existing users or workflows
+            - Performance or resource problems introduced by this change
+            - Missing test coverage for significant new behavior
+
+            Do not:
+            - Restate or summarize the diff
+            - Add praise or filler
+
+            Output:
+            - One comment, most important issues first.
+            - For each issue: file and line, what is wrong, why it matters, and a concrete suggested fix.
+            - If the PR is good, say so in one or two sentences and stop.
+
+  muse-review:
+    # Muse Spark 1.3 via the OpenCode Go contributor route: heavily discounted,
+    # but prompts/completions may be used to train/feedback future models —
+    # switch the model id to opencode-go/muse-spark-1.3 for the metered
+    # no-training route if that matters.
+    # Skip automated branches (e.g. dependency bots) and untrusted authors.
+    if: >-
+      !startsWith(github.event.pull_request.head.ref, 'auto/') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required by the opencode action
+      contents: read
+      pull-requests: read
+      issues: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Setup
+        uses: ./.github/actions/ai-setup
+        with:
+          github-token: ${{ secrets.NIX_PAT }}
+          attic-token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Run Muse Spark review
+        uses: anomalyco/opencode/github@v1.2.9
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        with:
+          model: opencode-go/muse-spark-1.3-contributor
           prompt: |
             Review this pull request. Do not modify any files — review only.
 
