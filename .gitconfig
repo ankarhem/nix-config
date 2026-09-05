@@ -1,6 +1,8 @@
 # git remote remove origin
 # git config --local include.path ../.gitconfig
 [remote "origin"]
-    url = git@knot.ankarhem.dev:ankarhem.dev/nix-config
+    # fetch from github (canonical, has PR merges), push to both knot and github
+    url = git@github.com:ankarhem/nix-config
+    fetch = +refs/heads/*:refs/remotes/origin/*
     pushurl = git@knot.ankarhem.dev:ankarhem.dev/nix-config
     pushurl = git@github.com:ankarhem/nix-config
