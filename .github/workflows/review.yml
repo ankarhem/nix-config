@@ -101,7 +101,9 @@ jobs:
           plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
           plugins: "code-review@claude-code-plugins"
           prompt: "/code-review:code-review --comment"
-          # Yolo: skip Claude's internal tool-approval prompts. Actual GitHub
-          # access is capped by this job's permissions (comment only, no
-          # contents write).
+          # Yolo: skip Claude's internal tool-approval prompts. Containment is
+          # the trusted-author gate plus the Claude app installation's
+          # permissions — the agent's GitHub credential is the app installation
+          # token from the OIDC exchange, which the job's permissions block
+          # does not cap (that only scopes GITHUB_TOKEN, unused here).
           claude_args: '--dangerously-skip-permissions'

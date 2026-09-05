@@ -53,7 +53,10 @@
         layout="$HOME/Library/Keyboard Layouts/Colemak.keylayout"
         if ! cmp -s "${colemakKeylayout}" "$layout"; then
           $DRY_RUN_CMD mkdir -p "$(dirname "$layout")"
-          $DRY_RUN_CMD cp -f "${colemakKeylayout}" "$layout"
+          # rm first so a pre-existing symlink target isn't written through
+          # (BSD cp has no --remove-destination), and read-only files are replaced
+          $DRY_RUN_CMD rm -f "$layout"
+          $DRY_RUN_CMD cp "${colemakKeylayout}" "$layout"
           $DRY_RUN_CMD chmod 644 "$layout"
         fi
       '';
