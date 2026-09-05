@@ -1,51 +1,33 @@
-name: opencode-review
+name: AI review
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, ready_for_review, reopened]
+
+# One group per PR so a new push cancels both stale reviews at once.
+concurrency:
+  group: ai-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+  issues: write
 
 jobs:
-  review:
+  opencode-review:
     # Skip automated branches (e.g. dependency bots) and untrusted authors.
     if: >-
       !startsWith(github.event.pull_request.head.ref, 'auto/') &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
     runs-on: ubuntu-latest
-    concurrency:
-      group: opencode-review-${{ github.event.pull_request.number }}
-      cancel-in-progress: true
-    permissions:
-      id-token: write
-      contents: read
-      pull-requests: read
-      issues: read
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - name: Setup
+        uses: ./.github/actions/ai-setup
         with:
-          fetch-depth: 1
-          persist-credentials: false
-
-      # Give the reviewer a working nix so it can evaluate the flake and
-      # verify that packages/options actually exist.
-      - name: Install Nix
-        uses: cachix/install-nix-action@v31
-        with:
-          extra_nix_config: |
-            access-tokens = github.com=${{ secrets.NIX_PAT }}
-            netrc-file = /home/runner/.config/nix/netrc
-            extra-substituters = https://attic.internetfeno.men/main
-            extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
-
-      - name: Configure attic cache auth
-        # A step's own env is not visible in its `if`, so test the secret directly.
-        if: ${{ secrets.ATTIC_TOKEN != '' }}
-        env:
-          ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
-        run: |
-          mkdir -p ~/.config/nix
-          printf 'machine attic.internetfeno.men\npassword %s\n' "$ATTIC_TOKEN" > ~/.config/nix/netrc
-          chmod 600 ~/.config/nix/netrc
+          github-token: ${{ secrets.NIX_PAT }}
+          attic-token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Run OpenCode review
         uses: anomalyco/opencode/github@latest
@@ -76,3 +58,28 @@ jobs:
             - One comment, most important issues first.
             - For each issue: file and line, what is wrong, why it matters, and a concrete suggested fix.
             - If the PR is good, say so in one or two sentences and stop.
+
+  claude-review:
+    # Skip automated branches (e.g. dependency bots) and untrusted authors.
+    if: >-
+      !startsWith(github.event.pull_request.head.ref, 'auto/') &&
+      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup
+        uses: ./.github/actions/ai-setup
+        with:
+          github-token: ${{ secrets.NIX_PAT }}
+          attic-token: ${{ secrets.ATTIC_TOKEN }}
+
+      - name: Run Claude Code review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
+          plugins: "code-review@claude-code-plugins"
+          prompt: "/code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
+          # Yolo: skip Claude's internal tool-approval prompts. Actual GitHub
+          # access is still capped by the workflow permissions above (comment
+          # only, no contents write).
+          claude_args: '--dangerously-skip-permissions'

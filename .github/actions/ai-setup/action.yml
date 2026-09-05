@@ -1,0 +1,54 @@
+name: AI reviewer setup
+description: >-
+  Shared setup for AI review jobs: checkout plus a working Nix with the attic
+  cache so reviewers can evaluate the flake and verify packages/options exist.
+
+inputs:
+  github-token:
+    description: Token used for github.com access-tokens in nix.conf
+    required: true
+  attic-token:
+    description: Optional attic cache token (skipped when empty)
+    required: false
+    default: ''
+  checkout-token:
+    description: Token for checkout (defaults to the runner's GITHUB_TOKEN)
+    required: false
+    default: ''
+  fetch-depth:
+    description: Checkout depth
+    required: false
+    default: '1'
+  persist-credentials:
+    description: Whether checkout persists credentials (needed to push)
+    required: false
+    default: 'false'
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+      with:
+        token: ${{ inputs.checkout-token || github.token }}
+        fetch-depth: ${{ inputs.fetch-depth }}
+        persist-credentials: ${{ inputs.persist-credentials }}
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v31
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ inputs.github-token }}
+          netrc-file = /home/runner/.config/nix/netrc
+          extra-substituters = https://attic.internetfeno.men/main
+          extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
+
+    - name: Configure attic cache auth
+      if: ${{ inputs.attic-token != '' }}
+      shell: bash
+      env:
+        ATTIC_TOKEN: ${{ inputs.attic-token }}
+      run: |
+        mkdir -p ~/.config/nix
+        printf 'machine attic.internetfeno.men\npassword %s\n' "$ATTIC_TOKEN" > ~/.config/nix/netrc
+        chmod 600 ~/.config/nix/netrc
