@@ -10,10 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  id-token: write
   contents: read
-  pull-requests: write
-  issues: write
 
 jobs:
   opencode-review:
@@ -22,6 +19,11 @@ jobs:
       !startsWith(github.event.pull_request.head.ref, 'auto/') &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required by the opencode action
+      contents: read
+      pull-requests: read
+      issues: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -71,6 +73,12 @@ jobs:
       !startsWith(github.event.pull_request.head.ref, 'auto/') &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
     runs-on: ubuntu-latest
+    # Comment-only access, deliberately without id-token: write — a yolo agent
+    # over PR content should not be able to mint OIDC tokens.
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -85,13 +93,13 @@ jobs:
           attic-token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Run Claude Code review
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@v1.0.216
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
           plugins: "code-review@claude-code-plugins"
-          prompt: "/code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}"
+          prompt: "/code-review:code-review --comment"
           # Yolo: skip Claude's internal tool-approval prompts. Actual GitHub
-          # access is still capped by the workflow permissions above (comment
-          # only, no contents write).
+          # access is capped by this job's permissions (comment only, no
+          # contents write, no id-token).
           claude_args: '--dangerously-skip-permissions'
