@@ -26,6 +26,27 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
+      # Give the reviewer a working nix so it can evaluate the flake and
+      # verify that packages/options actually exist.
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.NIX_PAT }}
+            netrc-file = /home/runner/.config/nix/netrc
+            extra-substituters = https://attic.internetfeno.men/main
+            extra-trusted-public-keys = main:9AeGSCEdFACRMznpA8b1LZtZ6cLkpdeTQ0Hqa0RmQAA=
+
+      - name: Configure attic cache auth
+        # A step's own env is not visible in its `if`, so test the secret directly.
+        if: ${{ secrets.ATTIC_TOKEN != '' }}
+        env:
+          ATTIC_TOKEN: ${{ secrets.ATTIC_TOKEN }}
+        run: |
+          mkdir -p ~/.config/nix
+          printf 'machine attic.internetfeno.men\npassword %s\n' "$ATTIC_TOKEN" > ~/.config/nix/netrc
+          chmod 600 ~/.config/nix/netrc
+
       - name: Run OpenCode review
         uses: anomalyco/opencode/github@latest
         env:
@@ -55,7 +76,3 @@ jobs:
             - One comment, most important issues first.
             - For each issue: file and line, what is wrong, why it matters, and a concrete suggested fix.
             - If the PR is good, say so in one or two sentences and stop.
-
-            # Repo-specific checks (edit per repo, e.g.):
-            # - Verify packages/options exist in the pinned dependency set
-            # - Respect repo conventions documented in AGENTS.md / CONTRIBUTING.md
