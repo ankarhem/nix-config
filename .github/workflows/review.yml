@@ -73,12 +73,14 @@ jobs:
       !startsWith(github.event.pull_request.head.ref, 'auto/') &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
     runs-on: ubuntu-latest
-    # Comment-only access, deliberately without id-token: write — a yolo agent
-    # over PR content should not be able to mint OIDC tokens.
     permissions:
       contents: read
       pull-requests: write
       issues: write
+      # claude-code-action exchanges an OIDC token with api.anthropic.com for
+      # an app token (posts comments as the Claude app). OK to grant: the job
+      # only runs for trusted authors (OWNER/MEMBER/COLLABORATOR).
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -95,17 +97,11 @@ jobs:
       - name: Run Claude Code review
         uses: anthropics/claude-code-action@v1.0.216
         with:
-          # Without this the action mints an OIDC token and exchanges it with
-          # api.anthropic.com for a GitHub App token, which requires the
-          # id-token: write permission deliberately withheld above. The job's
-          # own GITHUB_TOKEN is comment-only, matching. Side effect: comments
-          # post as github-actions[bot] instead of the Claude app.
-          github_token: ${{ github.token }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
           plugins: "code-review@claude-code-plugins"
           prompt: "/code-review:code-review --comment"
           # Yolo: skip Claude's internal tool-approval prompts. Actual GitHub
           # access is capped by this job's permissions (comment only, no
-          # contents write, no id-token).
+          # contents write).
           claude_args: '--dangerously-skip-permissions'
