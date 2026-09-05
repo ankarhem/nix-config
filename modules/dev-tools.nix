@@ -13,7 +13,6 @@
       ];
       system.defaults.dock.persistent-apps = [
         "${pkgs.bruno}/Applications/Bruno.app/"
-        "${pkgs.jetbrains.rider}/Applications/Rider.app/"
       ];
     };
 
@@ -59,7 +58,6 @@
           bruno
           bun
           _unstable.acli
-          jetbrains.rider
           nixd
           omnisharp-roslyn
           typescript-language-server
