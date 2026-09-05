@@ -73,12 +73,14 @@ jobs:
       !startsWith(github.event.pull_request.head.ref, 'auto/') &&
       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.pull_request.author_association || '')
     runs-on: ubuntu-latest
-    # Comment-only access, deliberately without id-token: write — a yolo agent
-    # over PR content should not be able to mint OIDC tokens.
     permissions:
       contents: read
       pull-requests: write
       issues: write
+      # claude-code-action exchanges an OIDC token with api.anthropic.com for
+      # an app token (posts comments as the Claude app). OK to grant: the job
+      # only runs for trusted authors (OWNER/MEMBER/COLLABORATOR).
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -99,7 +101,9 @@ jobs:
           plugin_marketplaces: "https://github.com/anthropics/claude-code.git"
           plugins: "code-review@claude-code-plugins"
           prompt: "/code-review:code-review --comment"
-          # Yolo: skip Claude's internal tool-approval prompts. Actual GitHub
-          # access is capped by this job's permissions (comment only, no
-          # contents write, no id-token).
+          # Yolo: skip Claude's internal tool-approval prompts. Containment is
+          # the trusted-author gate plus the Claude app installation's
+          # permissions — the agent's GitHub credential is the app installation
+          # token from the OIDC exchange, which the job's permissions block
+          # does not cap (that only scopes GITHUB_TOKEN, unused here).
           claude_args: '--dangerously-skip-permissions'

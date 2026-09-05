@@ -8,12 +8,11 @@ The user account / home map folder must be named `ankarhem`.
 
 1. Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
 2. Install nix using [determinate systems](https://github.com/DeterminateSystems/nix-installer). ❗NOT the determinate distribution
-3. Install colemak `curl -O --output-dir ~/Library/Keyboard\ Layouts/ https://colemak.com/pub/mac/Colemak.keylayout`
-4. Install git `xcode-select --install`
-5. Replace default colemak System Preferences > Keyboard > Input Sources
-6. Add access token to `~/.config/nix/nix.conf`. `mkdir -p ~/.config/nix && echo "access-tokens = github.com=ghp_*****" > ~/.config/nix/nix.conf`
-7. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#mbp`
-8. Change shell with `chsh -s /run/current-system/sw/bin/fish`
+3. Install git `xcode-select --install`
+4. Add access token to `~/.config/nix/nix.conf`. `mkdir -p ~/.config/nix && echo "access-tokens = github.com=ghp_*****" > ~/.config/nix/nix.conf`
+5. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#mbp`
+6. Replace default colemak System Preferences > Keyboard > Input Sources (the layout is installed by the flake, log out and back in for it to show up)
+7. Change shell with `chsh -s /run/current-system/sw/bin/fish`
 
 ### Important
 

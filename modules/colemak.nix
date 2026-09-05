@@ -25,6 +25,8 @@
   };
 
   flake.modules.darwin.colemak = {
+    home-manager.sharedModules = [ inputs.self.modules.homeManager.colemak ];
+
     system.keyboard.enableKeyMapping = true;
     system.keyboard.remapCapsLockToEscape = true;
     system.keyboard.userKeyMapping = [
@@ -35,4 +37,28 @@
       }
     ];
   };
+
+  flake.modules.homeManager.colemak =
+    { pkgs, lib, ... }:
+    let
+      colemakKeylayout = pkgs.fetchurl {
+        url = "https://colemak.com/pub/mac/Colemak.keylayout";
+        hash = "sha256-dASDHgkNCm8aPNNg7pvUhJh7sx5aCExI8Ea8dim3ZZU=";
+      };
+    in
+    {
+      # macOS only picks up real files in ~/Library/Keyboard Layouts (not
+      # symlinks), so copy the pinned keylayout instead of linking it.
+      home.activation.colemakLayout = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        layout="$HOME/Library/Keyboard Layouts/Colemak.keylayout"
+        if ! cmp -s "${colemakKeylayout}" "$layout"; then
+          $DRY_RUN_CMD mkdir -p "$(dirname "$layout")"
+          # rm first so a pre-existing symlink target isn't written through
+          # (BSD cp has no --remove-destination), and read-only files are replaced
+          $DRY_RUN_CMD rm -f "$layout"
+          $DRY_RUN_CMD cp "${colemakKeylayout}" "$layout"
+          $DRY_RUN_CMD chmod 644 "$layout"
+        fi
+      '';
+    };
 }
