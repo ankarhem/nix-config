@@ -68,10 +68,12 @@ jobs:
             - If the PR is good, say so in one or two sentences and stop.
 
   muse-review:
-    # Muse Spark 1.3 via the OpenCode Go contributor route: heavily discounted,
-    # but prompts/completions may be used to train/feedback future models —
-    # switch the model id to opencode-go/muse-spark-1.3 for the metered
-    # no-training route if that matters.
+    # Muse Spark 1.3 via the OpenCode Zen contributor-free route (billed to the
+    # workspace the OPENCODE_API_KEY belongs to — no Go subscription). Free
+    # because it is a feedback route: prompts/completions may be used to
+    # train/improve future models, and the workspace setting "Allow models
+    # that train on request data" must be enabled. Switch to
+    # opencode/muse-spark-1.3 for the metered no-training route if that matters.
     # Skip automated branches (e.g. dependency bots) and untrusted authors.
     if: >-
       !startsWith(github.event.pull_request.head.ref, 'auto/') &&
@@ -100,7 +102,7 @@ jobs:
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
         with:
-          model: opencode-go/muse-spark-1.3-contributor
+          model: opencode/muse-spark-1.3-contributor-free
           prompt: |
             Review this pull request. Do not modify any files — review only.
 
