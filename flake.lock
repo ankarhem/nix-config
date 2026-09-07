@@ -238,16 +238,15 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1788429473,
-        "narHash": "sha256-D0TeVsITsJHWmSBNOCp8AhvFcfxWbL1duQFfsQZVS+E=",
-        "owner": "ankarhem",
+        "lastModified": 1788709650,
+        "narHash": "sha256-y4eSMbxr6P9USul0mG3np3xS/nI1LKYC2OxKAT9O4Uo=",
+        "owner": "crmne",
         "repo": "fastpotify",
-        "rev": "7e45fbe24f59d7423ab21ed25aa95fbe7cdcd265",
+        "rev": "40fded2dc310f24a939f9d9775b83f342fa544f4",
         "type": "github"
       },
       "original": {
-        "owner": "ankarhem",
-        "ref": "add-darwin-appbundle",
+        "owner": "crmne",
         "repo": "fastpotify",
         "type": "github"
       }
