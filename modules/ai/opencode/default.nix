@@ -11,7 +11,7 @@ in
     { lib, pkgs, ... }:
     {
       imports = [
-        # (inputs.import-tree ./_plugins)
+        (inputs.import-tree ./_plugins)
       ];
       _module.args.inputs = inputs;
 
