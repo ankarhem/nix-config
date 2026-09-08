@@ -42,7 +42,6 @@ in
               "argue"
               "checkout-domain"
               "checkout-config"
-              "ck"
               "commit"
               "create-pr"
               "git-bisect"
