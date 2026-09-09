@@ -15,6 +15,7 @@ in
       ...
     }:
     {
+      home.file.".omo/agent/AGENTS.md".source = ./opencode/language.md;
       home.file.".omo/omo.jsonc" = {
         # omo's own 2026-07-opencode-config-unification migration already created
         # this file; take it over from nix.
