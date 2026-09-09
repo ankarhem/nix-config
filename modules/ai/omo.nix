@@ -29,6 +29,13 @@ in
         text = builtins.toJSON {
           "$schema" =
             "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/omo.schema.json";
+          # omo.jsonc is a read-only nix store symlink, so omo can never write its
+          # own migration markers into it; without these it re-runs the migrations
+          # on every startup (and fails validating the unknown keys below).
+          _migrations = [
+            "2026-07-opencode-config-unification"
+            "2026-07-codex-config-jsonc"
+          ];
           git_master = {
             commit_footer = true;
             include_co_authored_by = true;
@@ -38,11 +45,13 @@ in
             max_parallel_members = 4;
             max_wall_clock_minutes = 120;
           };
-          browser_automation_engine.provider = "agent-browser";
-          goal = {
-            enabled = true;
-            default_max_iterations = 25;
-          };
+          # Not in any released omo schema yet (checked beta.48/51 + dev branch);
+          # uncomment when omo accepts them.
+          # browser_automation_engine.provider = "agent-browser";
+          # goal = {
+          #   enabled = true;
+          #   default_max_iterations = 25;
+          # };
           agents = {
             sisyphus = {
               models = [
