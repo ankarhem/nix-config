@@ -102,6 +102,7 @@ in
           ngrok
           nodejs_24
           pup
+          python3
           ripgrep
           rm-improved
           sops
