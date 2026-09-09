@@ -19,6 +19,9 @@ in
         pkgs.local.omo-ai
       ];
       home.file.".omo/agent/AGENTS.md".source = ./opencode/language.md;
+      # Vendored pi-direnv extension (see the file header for provenance);
+      # senpi auto-discovers extensions in ~/.omo/agent/extensions/.
+      home.file.".omo/agent/extensions/pi-direnv.ts".source = ./omo/pi-direnv.ts;
       home.file.".omo/omo.jsonc" = {
         # omo's own 2026-07-opencode-config-unification migration already created
         # this file; take it over from nix.

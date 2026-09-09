@@ -1,6 +1,7 @@
 {
   lib,
   buildNpmPackage,
+  direnv,
   fetchurl,
   fd,
   nodejs,
@@ -93,6 +94,7 @@ buildNpmPackage {
         nodejs
         fd
         ripgrep
+        direnv
       ]
     }"
     # Senpi needs fd/rg at runtime (same as pi); keep telemetry off unless
