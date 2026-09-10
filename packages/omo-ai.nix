@@ -15,7 +15,7 @@
 # Ported from https://github.com/numtide/llm-agents.nix/pull/9047 until it
 # merges; afterwards consume inputs.llm-agents.packages.${system}.omo-ai there.
 let
-  version = "5.0.0-0.beta.48";
+  version = "5.0.0-0.beta.52";
 
   # The npm tarball ships no lockfile; omo-ai's pinned engine
   # @code-yeongyu/senpi bundles a complete node_modules inside its tarball, so
@@ -37,7 +37,7 @@ let
         tar -xzf ${
           fetchurl {
             url = "https://registry.npmjs.org/omo-ai/-/omo-ai-${version}.tgz";
-            hash = "sha256-dKhcnkopYxA/PtsMEVItI7gea2YIhYqQkFDehp49Olo=";
+            hash = "sha256-cDvia7DP5vYLOYmpZAGBzXzC67KSibg3/neSM/6Bpr4=";
           }
         } -C $out --strip-components=1
         install -m 644 ${./omo-ai-package-lock.json} $out/package-lock.json
@@ -78,7 +78,7 @@ buildNpmPackage {
 
   src = srcWithLock;
 
-  npmDepsHash = "sha256-ONGjkH657QThfFdmnWIdT8fUPKzon5LCoFSyL4FknPE=";
+  npmDepsHash = "sha256-zicDYQStAFrIwx3ktFHrCQ3rpZY5/gMG2P2wO4Fublk=";
   makeCacheWritable = true;
   dontNpmBuild = true;
 
