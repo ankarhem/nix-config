@@ -12,6 +12,7 @@ in
   flake.modules.homeManager.omo =
     {
       pkgs,
+      config,
       ...
     }:
     {
@@ -19,6 +20,48 @@ in
         pkgs.local.omo-ai
       ];
       home.file.".omo/agent/AGENTS.md".source = ./opencode/language.md;
+      # Senpi websearch routing (strategy/priority/fallback per the engine's
+      # builtin websearch extension). Rendered via sops so the apiKeys never
+      # land in the world-readable nix store. omo loads it at session start;
+      # restart omo after switch. `/websearch status` shows the live routing.
+      # z-ai reuses the existing mcp_tokens/glm key (same api.z.ai Bearer
+      # scheme); exa uses the mcp_tokens/exa key from secrets.yaml.
+      sops.secrets."mcp_tokens/exa" = { };
+      sops.secrets."mcp_tokens/tavily" = { };
+      # Rendered straight to ~/.omo/websearch.json at activation (NOT via
+      # home.file.source: the rendered path lives outside the store, which
+      # pure evaluation forbids reading at build time).
+      sops.templates."websearch.json" = {
+        path = "${config.home.homeDirectory}/.omo/websearch.json";
+        content = ''
+          {
+            "strategy": "priority",
+            "fallback": true,
+            "auto": false,
+            "providers": [
+              {
+                "provider": "z-ai",
+                "apiKey": "${config.sops.placeholder."mcp_tokens/glm"}",
+                "maxResults": 10
+              },
+              {
+                "provider": "exa",
+                "apiKey": "${config.sops.placeholder."mcp_tokens/exa"}",
+                "maxResults": 10
+              },
+              {
+                "provider": "tavily",
+                "apiKey": "${config.sops.placeholder."mcp_tokens/tavily"}",
+                "maxResults": 10
+              },
+              {
+                "provider": "duckduckgo-html",
+                "maxResults": 10
+              }
+            ]
+          }
+        '';
+      };
       # Vendored pi-direnv extension (see the file header for provenance);
       # senpi auto-discovers extensions in ~/.omo/agent/extensions/.
       home.file.".omo/agent/extensions/pi-direnv.ts".source = ./omo/pi-direnv.ts;
