@@ -20,17 +20,10 @@ in
         pkgs.local.omo-ai
       ];
       home.file.".omo/agent/AGENTS.md".source = ./opencode/language.md;
-      # Senpi websearch routing (strategy/priority/fallback per the engine's
-      # builtin websearch extension). Rendered via sops so the apiKeys never
-      # land in the world-readable nix store. omo loads it at session start;
-      # restart omo after switch. `/websearch status` shows the live routing.
-      # z-ai reuses the existing mcp_tokens/glm key (same api.z.ai Bearer
-      # scheme); exa uses the mcp_tokens/exa key from secrets.yaml.
+
       sops.secrets."mcp_tokens/exa" = { };
       sops.secrets."mcp_tokens/tavily" = { };
-      # Rendered straight to ~/.omo/websearch.json at activation (NOT via
-      # home.file.source: the rendered path lives outside the store, which
-      # pure evaluation forbids reading at build time).
+      sops.secrets."mcp_tokens/brave" = { };
       sops.templates."websearch.json" = {
         path = "${config.home.homeDirectory}/.omo/websearch.json";
         content = ''
@@ -55,6 +48,11 @@ in
                 "maxResults": 10
               },
               {
+                "provider": "brave",
+                "apiKey": "${config.sops.placeholder."mcp_tokens/brave"}",
+                "maxResults": 10
+              },
+              {
                 "provider": "duckduckgo-html",
                 "maxResults": 10
               }
@@ -66,15 +64,10 @@ in
       # senpi auto-discovers extensions in ~/.omo/agent/extensions/.
       home.file.".omo/agent/extensions/pi-direnv.ts".source = ./omo/pi-direnv.ts;
       home.file.".omo/omo.jsonc" = {
-        # omo's own 2026-07-opencode-config-unification migration already created
-        # this file; take it over from nix.
         force = true;
         text = builtins.toJSON {
           "$schema" =
             "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/omo.schema.json";
-          # omo.jsonc is a read-only nix store symlink, so omo can never write its
-          # own migration markers into it; without these it re-runs the migrations
-          # on every startup (and fails validating the unknown keys below).
           _migrations = [
             "2026-07-opencode-config-unification"
             "2026-07-codex-config-jsonc"
