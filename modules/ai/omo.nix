@@ -4,9 +4,9 @@ let
 
   glm = "zai/glm-5.3";
 
-  opus = "anthropic/claude-opus-5";
-  sonnet = "anthropic/claude-sonnet-5";
-  fable = "anthropic/claude-fable-5-1";
+  opus = "claude-sdk-oauth/claude-opus-5";
+  sonnet = "claude-sdk-oauth/claude-sonnet-5";
+  fable = "claude-sdk-oauth/claude-fable-5-1";
 in
 {
   flake.modules.homeManager.omo =
