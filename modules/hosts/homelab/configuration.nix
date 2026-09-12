@@ -38,6 +38,7 @@
         hon-stats
         idealpink
         lazyvim
+        n8n
         nix
         redlib
         secrets
