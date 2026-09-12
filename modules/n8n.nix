@@ -15,6 +15,7 @@ in
           N8N_PORT = 5678;
           N8N_PROTOCOL = "https";
           N8N_LISTEN_ADDRESS = "127.0.0.1";
+          N8N_PROXY_HOPS = 1;
           N8N_WEBHOOK_URL = "https://${domain}";
           N8N_ENCRYPTION_KEY_FILE = config.sops.secrets."n8n/encryption_key".path;
         };
@@ -30,7 +31,7 @@ in
         '';
         locations."/" = {
           proxyWebsockets = true;
-          proxyPass = "http://127.0.0.1:${toString config.services.n8n.environment.N8N_PORT}";
+          proxyPass = "http://${config.services.n8n.environment.N8N_LISTEN_ADDRESS}:${toString config.services.n8n.environment.N8N_PORT}";
         };
       };
     };
