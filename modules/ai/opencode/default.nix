@@ -19,7 +19,6 @@ in
       # the same config; the v2-native `plugins` key below only affects v2.
       home.packages = with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
         opencode2
-        t3code-desktop
         zcode
       ];
 
