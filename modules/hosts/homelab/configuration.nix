@@ -39,6 +39,7 @@
         idealpink
         lazyvim
         nix
+        nitter
         redlib
         secrets
         sshd
