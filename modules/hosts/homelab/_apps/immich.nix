@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   domain = "photos.ankarhem.dev";
 
@@ -16,6 +16,7 @@ in
   };
   services.immich = {
     enable = true;
+    package = pkgs._unstable.immich;
     host = "0.0.0.0";
     openFirewall = true;
     mediaLocation = "/mnt/DISKETTEN_drive/immich";
