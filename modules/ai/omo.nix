@@ -81,8 +81,8 @@ in
             max_parallel_members = 4;
             max_wall_clock_minutes = 120;
           };
-          # Not in any released omo schema yet (checked beta.48/51 + dev branch);
-          # uncomment when omo accepts them.
+          # Goal + browser engine live under the [opencode] scope; this is
+          # the Native (senpi) edition, so they do not apply here.
           # browser_automation_engine.provider = "agent-browser";
           # goal = {
           #   enabled = true;
@@ -136,13 +136,13 @@ in
                 glm
               ];
             };
-            metis = {
+            plan-consultant = {
               models = [
                 opus
                 glm
               ];
             };
-            momus = {
+            plan-reviewer = {
               models = [
                 opus
                 glm
