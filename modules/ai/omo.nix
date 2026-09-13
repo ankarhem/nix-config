@@ -1,8 +1,14 @@
 { inputs, ... }:
 let
-  glmFlash = "zai/glm-5.3-flash";
+  glmFlash = {
+    model = "zai/glm-5.3-flash";
+    reasoning = "max";
+  };
 
-  glm = "zai/glm-5.3";
+  glm = {
+    model = "zai/glm-5.3";
+    reasoning = "max";
+  };
 
   opus = "claude-sdk-oauth/claude-opus-5";
   sonnet = "claude-sdk-oauth/claude-sonnet-5";
