@@ -26,6 +26,12 @@
           "*" = {
             IdentityFile = [ "~/.ssh/id_ed25519" ];
           };
+          "ssh.dev.azure.com" = {
+            User = "git";
+            HostName = "ssh.dev.azure.com";
+            IdentityFile = [ "~/.ssh/id_rsa" ];
+            IdentitiesOnly = true;
+          };
           "github.com" = {
             User = "git";
             HostName = "github.com";
