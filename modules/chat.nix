@@ -23,7 +23,6 @@
         inputs.self.modules.homeManager.chat
       ];
       homebrew.casks = [
-        "claude"
         "legcord"
         "microsoft-teams"
       ];
@@ -31,7 +30,6 @@
         "${pkgs.slack}/Applications/Slack.app/"
         "${pkgs._unstable.cinny-desktop}/Applications/Cinny.app/"
         "/Applications/Microsoft Teams.app/"
-        "/Applications/Claude.app/"
         "/Applications/legcord.app/"
         "/System/Applications/Messages.app/"
       ];
