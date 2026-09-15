@@ -83,7 +83,7 @@
           mru-spaces = false;
           persistent-apps = [
             "${pkgs._unstable.obsidian}/Applications/Obsidian.app/"
-            "${fastpotify-app}/Applications/Fastpotify.app/"
+            "${fastpotify-app}/Applications/Spotifast.app/"
             "/Applications/1Password.app/"
             "/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
