@@ -11,7 +11,10 @@ let
   };
 
   opus = "claude-sdk-oauth/claude-opus-5";
-  sonnet = "claude-sdk-oauth/claude-sonnet-5";
+  opusLow = {
+    model = "claude-sdk-oauth/claude-opus-5";
+    reasoning = "low";
+  };
   fable = "claude-sdk-oauth/claude-fable-5-1";
 in
 {
@@ -113,13 +116,13 @@ in
             sisyphus = {
               models = [
                 glm
-                sonnet
+                opus
               ];
             };
             sisyphus-junior = {
               models = [
                 glm
-                sonnet
+                opus
               ];
             };
             # hephaestus = {
@@ -143,19 +146,19 @@ in
             librarian = {
               models = [
                 glmFlash
-                sonnet
+                opusLow
               ];
             };
             explore = {
               models = [
                 glmFlash
-                sonnet
+                opusLow
               ];
             };
             multimodal-looker = {
               models = [
                 glmFlash
-                sonnet
+                opusLow
               ];
             };
             prometheus = {
@@ -180,7 +183,7 @@ in
             atlas = {
               models = [
                 glm
-                sonnet
+                opus
               ];
             };
           };
@@ -188,7 +191,7 @@ in
             visual-engineering = {
               models = [
                 glmFlash
-                sonnet
+                opus
               ];
             };
             ultrabrain = {
@@ -200,25 +203,25 @@ in
             deep = {
               models = [
                 glm
-                sonnet
+                opus
               ];
             };
             artistry = {
               models = [
                 glmFlash
-                sonnet
+                opus
               ];
             };
             quick = {
               models = [
                 glmFlash
-                sonnet
+                opus
               ];
             };
             unspecified-low = {
               models = [
                 glmFlash
-                sonnet
+                opus
               ];
             };
             unspecified-high = {
@@ -230,7 +233,7 @@ in
             writing = {
               models = [
                 glmFlash
-                sonnet
+                opusLow
               ];
             };
           };
