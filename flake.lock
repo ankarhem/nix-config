@@ -1015,11 +1015,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1789492875,
-        "narHash": "sha256-s+Mt5GH7pGu2Cax/AbNdB3RzhceFqzJvpSErM6rGiuM=",
+        "lastModified": 1789497500,
+        "narHash": "sha256-TPLE7lQdJAAA/ZOu6yd50WUgj4EdX4w7PX2r2TQYatQ=",
         "owner": "norcetech",
         "repo": "graylog-cli",
-        "rev": "0cd62f72b0a249426fbcb3fbeb1706b0a58f76c3",
+        "rev": "6de5afe6575e89ed61c710f9443664a0bcb60993",
         "type": "github"
       },
       "original": {
