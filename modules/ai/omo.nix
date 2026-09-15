@@ -132,6 +132,14 @@ in
                 glm
               ];
             };
+            oracle-free = {
+              models = [
+                {
+                  model = "opencode/muse-spark-1.3-contributor-free";
+                  reasoning = "xhigh";
+                }
+              ];
+            };
             librarian = {
               models = [
                 glmFlash
