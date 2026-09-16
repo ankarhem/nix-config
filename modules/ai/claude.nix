@@ -19,12 +19,16 @@
           }
         ) config.programs.mcp.servers
       );
+      llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
     in
 
     {
+      home.packages = with llmAgents; [
+        claude-desktop
+      ];
       programs.claude-code = {
         enable = true;
-        package = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;
+        package = llmAgents.claude-code;
 
         settings = {
           alwaysThinkingEnabled = true;
