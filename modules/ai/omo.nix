@@ -113,21 +113,32 @@ in
           #   default_max_iterations = 25;
           # };
           agents = {
-            sisyphus = {
+            # Built-in agents
+            explore = {
               models = [
-                glm
-                opus
+                glmFlash
+                opusLow
               ];
             };
-            sisyphus-junior = {
+            librarian = {
               models = [
-                glm
-                opus
+                glmFlash
+                opusLow
               ];
             };
-            # hephaestus = {
-            #   model = glm;
-            # };
+            plan-consultant = {
+              models = [
+                opus
+                glm
+              ];
+            };
+            plan-reviewer = {
+              models = [
+                opus
+                glm
+              ];
+            };
+            # Custom agents
             oracle = {
               models = [
                 fable
@@ -143,52 +154,29 @@ in
                 }
               ];
             };
-            librarian = {
-              models = [
-                glmFlash
-                opusLow
-              ];
-            };
-            explore = {
-              models = [
-                glmFlash
-                opusLow
-              ];
-            };
-            multimodal-looker = {
-              models = [
-                glmFlash
-                opusLow
-              ];
-            };
-            prometheus = {
+          };
+          categories = {
+            # Built-in categories
+            architect = {
               models = [
                 fable
                 opus
                 glm
               ];
             };
-            plan-consultant = {
+            artistry = {
               models = [
+                glmFlash
                 opus
-                glm
               ];
             };
-            plan-reviewer = {
-              models = [
-                opus
-                glm
-              ];
-            };
-            atlas = {
+            deep = {
               models = [
                 glm
                 opus
               ];
             };
-          };
-          categories = {
-            visual-engineering = {
+            quick = {
               models = [
                 glmFlash
                 opus
@@ -200,22 +188,10 @@ in
                 glm
               ];
             };
-            deep = {
+            unspecified-high = {
               models = [
+                opus
                 glm
-                opus
-              ];
-            };
-            artistry = {
-              models = [
-                glmFlash
-                opus
-              ];
-            };
-            quick = {
-              models = [
-                glmFlash
-                opus
               ];
             };
             unspecified-low = {
@@ -224,10 +200,10 @@ in
                 opus
               ];
             };
-            unspecified-high = {
+            visual-engineering = {
               models = [
+                glmFlash
                 opus
-                glm
               ];
             };
             writing = {
