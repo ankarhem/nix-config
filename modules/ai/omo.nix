@@ -16,6 +16,7 @@ let
     reasoning = "low";
   };
   fable = "claude-sdk-oauth/claude-fable-5-1";
+  museFree = "opencode/muse-spark-1.3-contributor-free";
 in
 {
   flake.modules.homeManager.omo =
@@ -100,6 +101,19 @@ in
             commit_footer = true;
             include_co_authored_by = true;
           };
+          retry = {
+            provider.minThroughputTokensPerSecond = 0;
+            fallbackChains = {
+              "zai/glm-5.3" = [
+                opus
+                museFree
+              ];
+              "zai/glm-5.3-flash" = [
+                opus
+                museFree
+              ];
+            };
+          };
           task.team = {
             max_members = 8;
             max_parallel_members = 4;
@@ -151,7 +165,7 @@ in
             oracle-free = {
               models = [
                 {
-                  model = "opencode/muse-spark-1.3-contributor-free";
+                  model = museFree;
                   reasoning = "xhigh";
                 }
               ];
