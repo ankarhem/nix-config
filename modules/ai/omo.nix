@@ -26,7 +26,8 @@ in
       ...
     }:
     let
-      omo-upstream = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.omo-ai;
+      llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+      omo-upstream = llmAgents.omo-ai;
       # Upstream omo-ai does not ship direnv on PATH; the vendored
       # pi-direnv extension shells out to `direnv export json`, so keep
       # the guarantee the old local package provided.
@@ -39,10 +40,12 @@ in
             --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.direnv ]}
         '';
       };
+      herdr = llmAgents.herdr;
     in
     {
       home.packages = [
         omo-ai
+        herdr
       ];
       home.file.".omo/agent/AGENTS.md".source = ./opencode/language.md;
 
