@@ -128,12 +128,14 @@ in
             };
             plan-consultant = {
               models = [
+                fable
                 opus
                 glm
               ];
             };
             plan-reviewer = {
               models = [
+                fable
                 opus
                 glm
               ];
