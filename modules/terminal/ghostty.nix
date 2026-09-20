@@ -4,7 +4,7 @@
     {
       programs.ghostty = {
         enable = true;
-        package = if pkgs.stdenv.isLinux then pkgs.ghostty else pkgs.ghostty-bin;
+        package = if pkgs.stdenv.hostPlatform.isLinux then pkgs.ghostty else pkgs.ghostty-bin;
         enableFishIntegration = true;
 
         settings = {

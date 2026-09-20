@@ -64,7 +64,7 @@ in
   config = mkIf cfg.enable {
     assertions = [
       {
-        assertion = !(cfg.enable && pkgs.stdenv.isDarwin);
+        assertion = !(cfg.enable && pkgs.stdenv.hostPlatform.isDarwin);
         message = "OpenCode server is only supported on NixOS Linux. On macOS, install via Homebrew.";
       }
     ];

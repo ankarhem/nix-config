@@ -111,7 +111,7 @@ in
           vim
           wget
         ]
-        ++ lib.optionals pkgs.stdenv.isLinux [
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
           _1password-cli
           tailscale
           nfs-utils

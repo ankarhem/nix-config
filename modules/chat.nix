@@ -43,11 +43,11 @@
         [
           slack
         ]
-        ++ lib.optionals pkgs.stdenv.isLinux [
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
           legcord
           teams-for-linux
         ]
-        ++ lib.optionals pkgs.stdenv.isDarwin [
+        ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
           _unstable.cinny-desktop
         ];
     };

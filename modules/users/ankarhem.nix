@@ -10,7 +10,7 @@ let
     { pkgs, ... }:
     {
       sops.age.keyFile =
-        if pkgs.stdenv.isLinux then
+        if pkgs.stdenv.hostPlatform.isLinux then
           "/home/${username}/.config/sops/age/age.key"
         else
           "/Users/${username}/.config/sops/age/age.key";

@@ -162,7 +162,7 @@
           _unstable.obsidian
           inputs.fastpotify.packages.${pkgs.stdenv.hostPlatform.system}.fastpotify
         ]
-        ++ (lib.optionals pkgs.stdenv.isLinux (
+        ++ (lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;
           [
             _1password-cli
@@ -175,7 +175,7 @@
             tor-browser
           ]
         ))
-        ++ (lib.optionals pkgs.stdenv.isDarwin (
+        ++ (lib.optionals pkgs.stdenv.hostPlatform.isDarwin (
           with pkgs;
           [
             betterdisplay

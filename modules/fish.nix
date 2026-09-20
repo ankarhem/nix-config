@@ -18,7 +18,7 @@ let
     { pkgs, ... }:
     {
       # Not sure if this is still needed but keep for now
-      programs.fish.loginShellInit = lib.mkIf pkgs.stdenv.isDarwin ''
+      programs.fish.loginShellInit = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin ''
         fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /nix/var/nix/profiles/default/bin /run/current-system/sw/bin
       '';
 
