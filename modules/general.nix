@@ -68,7 +68,7 @@
         # "runelite"
         "sikarugir"
         "steam"
-        "tailscale"
+        "tailscale-app"
         "tor-browser"
       ];
 

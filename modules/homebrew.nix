@@ -54,6 +54,15 @@ in
         trust.casks = [ "sikarugir-app/sikarugir/sikarugir" ];
       };
 
-      homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+      homebrew.taps =
+        builtins.filter (t: t != "Sikarugir-App/homebrew-sikarugir") (
+          builtins.attrNames config.nix-homebrew.taps
+        )
+        ++ [
+          {
+            name = "Sikarugir-App/homebrew-sikarugir";
+            trusted = true;
+          }
+        ];
     };
 }
