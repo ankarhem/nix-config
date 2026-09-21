@@ -189,7 +189,14 @@ in
                 opus
               ];
             };
-            deep = {
+            deep-high = {
+              models = [
+                fable
+                opus
+                glm
+              ];
+            };
+            deep-low = {
               models = [
                 glm
                 opus
