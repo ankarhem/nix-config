@@ -105,12 +105,15 @@
         # https://github.com/vicinaehq/extensions/tree/main/extensions
         extensions =
           (with inputs.vicinae-extensions.packages.${system}; [
+            bitwarden
             case-converter
+            color-converter
             firefox
             fuzzy-files
             it-tools
             nix
             port-killer
+            seerr
             spongebob-text-transformer
           ])
           ++ lib.optionals (!isDarwin) [
