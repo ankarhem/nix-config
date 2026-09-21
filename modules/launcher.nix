@@ -58,9 +58,7 @@
 
       programs.vicinae = {
         enable = true;
-        # nixpkgs only packages vicinae for linux; on darwin use the flake's
-        # package which assembles the Vicinae.app bundle
-        package = if isDarwin then inputs.vicinae.packages.${system}.default else pkgs.vicinae;
+        package = pkgs._unstable.vicinae;
 
         systemd = lib.mkIf (!isDarwin) {
           enable = true;
