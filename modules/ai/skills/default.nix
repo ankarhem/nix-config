@@ -53,7 +53,7 @@ in
             // {
               "temporal-developer" = inputs.temporalio-skill;
               "agent-browser" = (readSkillsFrom "${agentBrowser}/share/agent-browser/skills").agent-browser;
-              "hunk" = (readSkillsFrom "${hunk}/skills").hunk-review;
+              "hunk" = (readSkillsFrom "${hunk}/share/hunk/skills").hunk-review;
               "rust-skill" = inputs.rust-skill;
             };
         in
