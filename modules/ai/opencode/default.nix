@@ -3,7 +3,7 @@ let
   glm = "zai-coding-plan/glm-5.3";
   glmFlash = "zai-coding-plan/glm-5.3-flash";
 
-  opus = "anthropic/claude-opus-4-8";
+  opus = "anthropic/claude-opus-5-5";
   fable = "anthropic/claude-fable-5-1";
 in
 {

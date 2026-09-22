@@ -10,9 +10,9 @@ let
     reasoning = "max";
   };
 
-  opus = "claude-sdk-oauth/claude-opus-5";
+  opus = "claude-sdk-oauth/claude-opus-5-5";
   opusLow = {
-    model = "claude-sdk-oauth/claude-opus-5";
+    model = "claude-sdk-oauth/claude-opus-5-5";
     reasoning = "low";
   };
   fable = "claude-sdk-oauth/claude-fable-5-1";
