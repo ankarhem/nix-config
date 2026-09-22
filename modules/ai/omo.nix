@@ -10,12 +10,12 @@ let
     reasoning = "max";
   };
 
-  opus = "claude-sdk-oauth/claude-opus-5-5";
+  opus = "anthropic-subscription/claude-opus-5-5";
   opusLow = {
-    model = "claude-sdk-oauth/claude-opus-5-5";
+    model = "anthropic-subscription/claude-opus-5-5";
     reasoning = "low";
   };
-  fable = "claude-sdk-oauth/claude-fable-5-1";
+  fable = "anthropic-subscription/claude-fable-5-1";
   museFree = "opencode/muse-spark-1.3-contributor-free";
 in
 {
