@@ -7,6 +7,13 @@ let
   nixpkgs.overlays = [
     inputs.nur.overlays.default
   ];
+  firefoxDevedition =
+    pkgs: hm:
+    pkgs._unstable.firefox-devedition.override (
+      lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+        appDataDir = "${hm.home.homeDirectory}/${hm.programs.firefox.configPath}";
+      }
+    );
 in
 {
   flake.modules.nixos.firefox = {
@@ -16,30 +23,32 @@ in
     ];
   };
   flake.modules.darwin.firefox =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      hm = config.home-manager.users.${config.system.primaryUser};
+    in
     {
       inherit nixpkgs;
       home-manager.sharedModules = [
         inputs.self.modules.homeManager.firefox
       ];
       system.defaults.dock.persistent-apps = [
-        "${pkgs._unstable.firefox}/Applications/Firefox.app/"
-        "${pkgs._unstable.firefox-devedition}/Applications/Firefox Developer Edition.app/"
+        "${hm.programs.firefox.finalPackage}/Applications/Firefox.app/"
+        "${firefoxDevedition pkgs hm}/Applications/Firefox Developer Edition.app/"
       ];
     };
 
   flake.modules.homeManager.firefox =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     let
       inherit (pkgs.nur.repos.rycee) firefox-addons;
     in
     {
-      home.packages = with pkgs; [
-        _unstable.firefox-devedition
-      ];
+      home.packages = [ (firefoxDevedition pkgs config) ];
       programs.firefox = {
         enable = true;
         package = pkgs._unstable.firefox;
+        configPath = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin "Library/Application Support/org.nixos.firefox";
         languagePacks = [
           "sv-SE"
           "en-GB"
