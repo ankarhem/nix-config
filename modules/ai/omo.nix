@@ -40,13 +40,9 @@ in
             --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.direnv ]}
         '';
       };
-      herdr = llmAgents.herdr;
     in
     {
-      home.packages = [
-        omo-ai
-        herdr
-      ];
+      home.packages = [ omo-ai ];
       home.file.".omo/agent/AGENTS.md".source = ./opencode/language.md;
 
       sops.secrets."mcp_tokens/exa" = { };

@@ -12,6 +12,9 @@
     graylog-cli.url = "github:norcetech/graylog-cli";
     hermes-agent.inputs.nixpkgs.follows = "nixpkgs";
     hermes-agent.url = "github:NousResearch/hermes-agent";
+    # drop when programs.herdr lands in the home-manager release branch
+    home-manager-unstable.flake = false;
+    home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     homebrew-bundle.flake = false;

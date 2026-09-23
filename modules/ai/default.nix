@@ -5,6 +5,7 @@
 let
   home-manager.sharedModules = with inputs.self.modules.homeManager; [
     claude
+    herdr
     mcp
     omo
     opencode
