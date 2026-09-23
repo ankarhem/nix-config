@@ -86,11 +86,11 @@
           };
           theme = {
             light = {
-              name = "vicinae-light";
+              name = "catppuccin-latte";
               icon_theme = "default";
             };
             dark = {
-              name = "vicinae-dark";
+              name = "catppuccin-mocha";
               icon_theme = "default";
             };
           };
