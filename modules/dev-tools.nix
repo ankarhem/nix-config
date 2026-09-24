@@ -61,6 +61,7 @@
           nixd
           omnisharp-roslyn
           typescript-language-server
+          inputs.grafana-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
           inputs.graylog-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
         ]
         ++ [ combinedDotnet ];

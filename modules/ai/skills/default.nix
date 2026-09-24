@@ -16,6 +16,7 @@ in
     let
       localSkills = readSkillsFrom ./.;
       norceSkills = readSkillsFrom "${inputs.norce-agent-instructions}/skills";
+      grafanaCliSkills = readSkillsFrom "${inputs.grafana-cli}/skills";
       graylogCliSkills = readSkillsFrom "${inputs.graylog-cli}/skills";
       ponytailSkills = readSkillsFrom "${inputs.ponytail}/skills";
       impeccableSkills = readSkillsFrom "${inputs.impeccable-skill}/.opencode/skills";
@@ -47,6 +48,9 @@ in
               "git-bisect"
               "jira"
             ] norceSkills)
+            // (lib.getAttrs [
+              "gcli"
+            ] grafanaCliSkills)
             // (lib.getAttrs [
               "graylog-cli"
             ] graylogCliSkills)

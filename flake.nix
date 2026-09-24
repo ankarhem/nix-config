@@ -9,6 +9,7 @@
     fastpotify.url = "github:crmne/fastpotify";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks.url = "github:cachix/git-hooks.nix";
+    grafana-cli.url = "github:norcetech/grafana-cli";
     graylog-cli.url = "github:norcetech/graylog-cli";
     # drop when programs.herdr lands in the home-manager release branch
     home-manager-unstable.flake = false;

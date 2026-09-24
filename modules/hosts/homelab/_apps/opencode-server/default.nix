@@ -46,6 +46,7 @@ let
     ++ [
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
       inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.ck
+      inputs.grafana-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.graylog-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 in
