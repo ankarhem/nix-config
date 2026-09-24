@@ -10,8 +10,6 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks.url = "github:cachix/git-hooks.nix";
     graylog-cli.url = "github:norcetech/graylog-cli";
-    hermes-agent.inputs.nixpkgs.follows = "nixpkgs";
-    hermes-agent.url = "github:NousResearch/hermes-agent";
     # drop when programs.herdr lands in the home-manager release branch
     home-manager-unstable.flake = false;
     home-manager-unstable.url = "github:nix-community/home-manager";
@@ -29,8 +27,7 @@
     impeccable-skill.flake = false;
     impeccable-skill.url = "github:pbakaus/impeccable";
     import-tree.url = "github:vic/import-tree";
-    # reset to upstream when merged https://github.com/pfassina/lazyvim-nix/pull/85
-    lazyvim.url = "github:ankarhem/lazyvim-nix/fix/add-missing-nixpkg-mappings";
+    lazyvim.url = "github:pfassina/lazyvim-nix";
     llm-agents.url = "github:numtide/llm-agents.nix";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-26.05";
@@ -59,8 +56,6 @@
     tangled.url = "git+https://tangled.org/@tangled.org/core";
     temporalio-skill.flake = false;
     temporalio-skill.url = "github:temporalio/skill-temporal-developer";
-    truesight.inputs.nixpkgs.follows = "nixpkgs";
-    truesight.url = "github:ankarhem/truesight";
     vicinae-extensions.inputs.nixpkgs.follows = "nixpkgs";
     vicinae-extensions.url = "github:vicinaehq/extensions";
     vicinae.inputs.nixpkgs.follows = "nixpkgs";

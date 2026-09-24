@@ -15,7 +15,6 @@
       nodejs_lts = pkgs.nodejs_24;
       npx = lib.getExe' nodejs_lts "npx";
       uvx = lib.getExe' pkgs.uv "uvx";
-      # truesight = inputs.truesight.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
       sops = {
@@ -25,8 +24,6 @@
           "mcp_tokens/devin" = {
           };
           "mcp_tokens/glm" = {
-          };
-          "mcp_tokens/sonarqube" = {
           };
         };
       };
@@ -42,13 +39,6 @@
               "mcp"
             ];
           };
-          # truesight = {
-          #   type = "stdio";
-          #   command = "${lib.getExe truesight}";
-          #   args = [
-          #     "mcp"
-          #   ];
-          # };
           sequential-thinking = {
             type = "stdio";
             command = npx;
@@ -77,30 +67,6 @@
             url = "https://api.z.ai/api/mcp/web_search_prime/mcp";
             headers.Authorization = "Bearer {file:${config.sops.secrets."mcp_tokens/glm".path}}";
           };
-          # sonarqube = {
-          #   enable = false;
-          #   type = "stdio";
-          #   command = "docker";
-          #   args = [
-          #     "run"
-          #     "--init"
-          #     "--pull=always"
-          #     "-i"
-          #     "--rm"
-          #     "-e"
-          #     "SONARQUBE_TOKEN"
-          #     "-e"
-          #     "SONARQUBE_URL"
-          #     "-e"
-          #     "SONARQUBE_ORG"
-          #     "mcp/sonarqube"
-          #   ];
-          #   env = {
-          #     SONARQUBE_TOKEN = "{file:${config.sops.secrets."mcp_tokens/sonarqube".path}}";
-          #     SONARQUBE_URL = "https://sonarcloud.io";
-          #     SONARQUBE_ORG = "norcetech";
-          #   };
-          # };
         };
       };
     };
