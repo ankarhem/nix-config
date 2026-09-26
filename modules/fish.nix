@@ -57,10 +57,11 @@ let
             })
             [
               bang-bang
+              colored-man-pages
               fzf-fish
               git-abbr
               grc
-              colored-man-pages
+              macos
             ];
       };
       programs.fzf.enable = true;

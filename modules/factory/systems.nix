@@ -29,6 +29,7 @@
             nixpkgs.hostPlatform = lib.mkDefault system;
             networking.hostName = name;
             networking.computerName = name;
+            networking.localHostName = name;
           }
         ];
       };
