@@ -30,6 +30,7 @@ in
           PDS_HOSTNAME = domain;
           PDS_PORT = port;
           PDS_EMAIL_FROM_ADDRESS = "admin@ankarhem.dev";
+          PDS_CONTACT_EMAIL_ADDRESS = "jakob@ankarhem.dev";
         };
       };
 
