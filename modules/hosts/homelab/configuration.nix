@@ -40,6 +40,7 @@
         lazyvim
         n8n
         nix
+        pds
         redlib
         secrets
         sshd
