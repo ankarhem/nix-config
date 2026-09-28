@@ -65,7 +65,7 @@
           # install hangs/fails on every connect. Prime the cache to skip it:
           #   ghostty +ssh-cache --add=git@knot.ankarhem.dev
           "knot.ankarhem.dev" = {
-            HostName = homelabLanIp;
+            # HostName = homelabLanIp;
             User = "git";
             Port = 22;
             IdentitiesOnly = true;
