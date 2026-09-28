@@ -7,17 +7,15 @@
 The user account / home map folder must be named `ankarhem`.
 
 1. Install Rosetta 2 `softwareupdate --install-rosetta --agree-to-license`
-2. Install nix using [determinate systems](https://github.com/DeterminateSystems/nix-installer). ❗NOT the determinate distribution
-3. Install git `xcode-select --install`
-4. Add access token to `~/.config/nix/nix.conf`. `mkdir -p ~/.config/nix && echo "access-tokens = github.com=ghp_*****" > ~/.config/nix/nix.conf`
-5. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#mbp`
-6. Replace default colemak System Preferences > Keyboard > Input Sources (the layout is installed by the flake, log out and back in for it to show up)
-7. Change shell with `chsh -s /run/current-system/sw/bin/fish`
+2. Install git `xcode-select --install`
+3. Add access token to `~/.config/nix/nix.conf`. `mkdir -p ~/.config/nix && echo "access-tokens = github.com=ghp_*****" > ~/.config/nix/nix.conf`
+4. Bootstrap darwin build `nix run --extra-experimental-features flakes --extra-experimental-features nix-command nix-darwin -- switch --flake .#mbp`
+5. Replace default colemak System Preferences > Keyboard > Input Sources (the layout is installed by the flake, log out and back in for it to show up)
+6. Change shell with `chsh -s /run/current-system/sw/bin/fish`
 
 ### Important
 
 - Open vicinae and grant accessibility permission via System Preferences > Privacy & Security > Accessibility, required for the global shortcut, paste and snippets
-- Make firefox default browser System Preferences > General > Default Web Browser
 - Fix yubikey
   1. Add ssh-keys manually from 1password
   2. Fix permission on private key `chmod 400 ~/.ssh/id_ed25519_sk`
@@ -30,8 +28,6 @@ The user account / home map folder must be named `ankarhem`.
 - Add accounts System Preferences > Internet Accounts
   - Rename email acccounts in Mail app: Settings > Accounts
   - Filter accounts / calendar with focus modes
-- Open firefox and login to sync
-- Open slack and login using `jakob.ankarhem@norce.io`, select workspaces
 - Add home folder to finder sidebar in settings
 - Login to Github `gh auth login`
 - Clone all norce repos `mkdir -p ~/repos && cd ~/repos && clone_org NorceTech`
