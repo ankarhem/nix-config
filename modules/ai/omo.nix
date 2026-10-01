@@ -26,8 +26,8 @@ in
       ...
     }:
     let
-      llmAgents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
-      omo-upstream = llmAgents.omo-ai;
+      # Back to inputs.llm-agents once numtide/llm-agents.nix#10193 merges.
+      omo-upstream = inputs.llm-agents-omo.packages.${pkgs.stdenv.hostPlatform.system}.omo-ai;
       # Upstream omo-ai does not ship direnv on PATH; the vendored
       # pi-direnv extension shells out to `direnv export json`, so keep
       # the guarantee the old local package provided.

@@ -30,6 +30,8 @@
     import-tree.url = "github:vic/import-tree";
     lazyvim.url = "github:pfassina/lazyvim-nix";
     llm-agents.url = "github:numtide/llm-agents.nix";
+    # omo-ai 5.1.8 from our fork; drop when numtide/llm-agents.nix#10193 merges
+    llm-agents-omo.url = "github:ankarhem/llm-agents.nix/omo-ai-5.1.8";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-26.05";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
