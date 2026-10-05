@@ -24,6 +24,7 @@
         attic-client
         auto-upgrade
         apotekskarta
+        backups
         blog
         cli
         colemak

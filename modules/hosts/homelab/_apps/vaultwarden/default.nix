@@ -7,76 +7,15 @@
 let
   domain = "vault.ankarhem.dev";
   port = 8222;
-
-  backupGpgHomePath = "/var/lib/backup/.gnupg";
-  backupScript = pkgs.writeShellApplication {
-    name = "vaultwarden-backup";
-    runtimeInputs = [
-      pkgs.sqlite
-      pkgs.busybox
-      pkgs.gnupg
-    ];
-    text = (builtins.readFile ./backup.sh);
-  };
-
-  syncScript = pkgs.writeShellApplication {
-    name = "vaultwarden-sync";
-    runtimeInputs = [
-      pkgs.rsync
-      pkgs.openssh
-    ];
-    text = ''
-      #!/usr/bin/env bash
-      set -euo pipefail
-
-      DISKETTEN_PATH=/mnt/DISKETTEN_drive/vaultwarden
-      FILESHARE_PATH=/mnt/fileshare/vaultwarden
-      # Create folder if not exists
-      if [ ! -d "$DISKETTEN_PATH" ]; then
-        echo "Folder $DISKETTEN_PATH does not exist, creating it."
-        mkdir -p $DISKETTEN_PATH
-      fi
-
-      # BACKUP_FOLDER is a default environment variable set in the nixos module
-      # which is the folder set at services.vaultwarden.backupDir
-      rsync -avh --delete --no-owner --no-group "$BACKUP_FOLDER/" "$DISKETTEN_PATH/" || {
-        echo "Error: failed to sync Vaultwarden backup to Synology NAS." >&2
-        exit 1
-      }
-      echo "Successfully synced Vaultwarden backups to Synology NAS."
-      rsync -avh --delete --no-owner --no-group -e 'ssh -p 9023 -i ${
-        config.sops.secrets."vaultwarden/ssh_key".path
-      } -o UserKnownHostsFile=${
-        config.sops.secrets."vaultwarden/fileshare_known_hosts_file".path
-      } ' "$BACKUP_FOLDER/" internetfenomen-openssh-server@fileshare.se:"$FILESHARE_PATH/" || {
-        echo "Error: failed to sync Vaultwarden backup to Fileshare." >&2
-        exit 1
-      }
-      echo "Successfully synced Vaultwarden backups to Fileshare."
-    '';
-  };
+  dataDir = "/var/lib/bitwarden_rs";
 in
 {
-  environment.systemPackages = [ backupScript ];
-
   sops.secrets = {
     "smtp/username" = { };
     "smtp/password" = { };
     "vaultwarden/admin_token" = { };
     "vaultwarden/installation_id" = { };
     "vaultwarden/installation_key" = { };
-    "vaultwarden/fileshare_known_hosts_file" = {
-      owner = config.users.users.vaultwarden.name;
-      group = config.users.users.vaultwarden.group;
-    };
-    "vaultwarden/symmetric_key" = {
-      owner = config.users.users.vaultwarden.name;
-      group = config.users.users.vaultwarden.group;
-    };
-    "vaultwarden/ssh_key" = {
-      owner = config.users.users.vaultwarden.name;
-      group = config.users.users.vaultwarden.group;
-    };
   };
   sops.templates."vaultwarden.env" = {
     content = ''
@@ -99,7 +38,6 @@ in
     enable = true;
     package = pkgs._unstable.vaultwarden;
     dbBackend = "sqlite";
-    backupDir = "/var/backup/vaultwarden";
     environmentFile = config.sops.templates."vaultwarden.env".path;
     config = {
       domain = "https://${domain}";
@@ -110,19 +48,33 @@ in
     };
   };
 
-  ## Override the backup script, and make it more frequent
-  systemd.services.backup-vaultwarden = {
-    environment = {
-      GNUPGHOME = backupGpgHomePath;
-      PASSWORD_FILE = config.sops.secrets."vaultwarden/symmetric_key".path;
-      KNOWN_HOSTS_FILE = config.sops.secrets."vaultwarden/fileshare_known_hosts_file".path;
-    };
-    serviceConfig = {
-      ExecStart = lib.mkForce "${pkgs.bash}/bin/bash ${backupScript}/bin/${backupScript.name}";
-      ExecStartPost = "${pkgs.bash}/bin/bash ${syncScript}/bin/${syncScript.name}";
-    };
+  services.backups.sources.vaultwarden = {
+    paths = [ dataDir ];
+    exclude = [
+      "${dataDir}/db.sqlite3*"
+      "${dataDir}/backup/.tmp"
+      "${dataDir}/icon_cache"
+      "${dataDir}/tmp"
+    ];
+    prepareCommand = ''
+      test -s ${dataDir}/db.sqlite3 || { echo "${dataDir}/db.sqlite3 is missing or empty" >&2; exit 1; }
+      dump=${dataDir}/backup
+      install -d -m 0700 -o vaultwarden -g vaultwarden "$dump" "$dump/.tmp"
+      tmp=$(mktemp "$dump/.tmp/db.XXXXXX")
+      trap 'rm -f "$tmp" "$tmp-journal"' EXIT
+      chown vaultwarden:vaultwarden "$tmp"
+      ${lib.getExe' pkgs.util-linux "runuser"} -u vaultwarden -- \
+        ${lib.getExe' pkgs.sqlite "sqlite3"} ${dataDir}/db.sqlite3 \
+        ".timeout 30000" ".backup '$tmp'"
+      mv -f "$tmp" "$dump/db.sqlite3"
+    '';
+    onCalendar = "hourly";
+    pruneOpts = [
+      "--keep-hourly 48"
+      "--keep-daily 30"
+      "--keep-monthly 12"
+    ];
   };
-  systemd.timers.backup-vaultwarden.timerConfig.OnCalendar = "hourly";
 
   ## FIREWALL
   services.fail2ban = {
@@ -200,7 +152,6 @@ in
 
   systemd.tmpfiles.rules = [
     "d /var/log/nginx/vaultwarden 0750 nginx nginx - -"
-    "d ${backupGpgHomePath} 0700 vaultwarden vaultwarden - -"
   ];
   services.nginx.virtualHosts."${domain}" = {
     forceSSL = true;
