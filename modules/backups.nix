@@ -4,6 +4,7 @@ let
     host = "fileshare.se";
     port = 9023;
     user = "internetfenomen-openssh-server";
+    base = "/mnt/fileshare/restic";
   };
 in
 {
@@ -17,6 +18,16 @@ in
     let
       cfg = config.services.backups;
       inherit (lib) mkOption types;
+      fileshareSsh = lib.concatStringsSep " " [
+        "-o Port=${toString fileshare.port}"
+        "-o IdentityFile=${config.sops.secrets."restic/fileshare_ssh_key".path}"
+        "-o UserKnownHostsFile=${config.sops.secrets."restic/fileshare_known_hosts".path}"
+        "-o BatchMode=yes"
+        "-o IdentitiesOnly=yes"
+        "-o ConnectTimeout=30"
+        "-o ServerAliveInterval=30"
+        "${fileshare.user}@${fileshare.host}"
+      ];
       jobs = lib.concatMapAttrs (
         source: s:
         lib.mapAttrs' (
@@ -35,6 +46,11 @@ in
                 extraOptions = mkOption {
                   type = types.listOf types.str;
                   default = [ ];
+                };
+                precondition = mkOption {
+                  type = types.nullOr types.str;
+                  default = null;
+                  description = "Shell command that must succeed before a job touches the repository, proving the storage is the real one, so a missing mount fails the job instead of initialising a repository in the wrong place.";
                 };
               };
             }
@@ -85,18 +101,13 @@ in
         services.backups.providers = {
           disketten = {
             repository = "/mnt/DISKETTEN_drive/restic";
+            precondition = "[ \"$(stat -f -c %T /mnt/DISKETTEN_drive)\" = nfs ]";
             passwordFile = config.sops.secrets."restic/disketten".path;
           };
           fileshare = {
-            repository = "sftp:${fileshare.user}@${fileshare.host}:/mnt/fileshare/restic";
+            repository = "sftp:${fileshare.user}@${fileshare.host}:${fileshare.base}";
             passwordFile = config.sops.secrets."restic/fileshare".path;
-            extraOptions = [
-              "sftp.command='ssh -p ${toString fileshare.port} -i ${
-                config.sops.secrets."restic/fileshare_ssh_key".path
-              } -o UserKnownHostsFile=${
-                config.sops.secrets."restic/fileshare_known_hosts".path
-              } -o BatchMode=yes -o IdentitiesOnly=yes -o ConnectTimeout=30 -o ServerAliveInterval=30 ${fileshare.user}@${fileshare.host} -s sftp'"
-            ];
+            extraOptions = [ "sftp.command='ssh ${fileshareSsh} -s sftp'" ];
           };
         };
 
@@ -128,10 +139,23 @@ in
         systemd.services = lib.mapAttrs' (
           job:
           { p, ... }:
+          let
+            resticCmd = "${lib.getExe pkgs.restic}${lib.concatMapStrings (o: " -o ${o}") p.extraOptions}";
+          in
           lib.nameValuePair "restic-backups-${job}" {
-            preStart = lib.mkBefore "${lib.getExe pkgs.restic}${
-              lib.concatMapStrings (o: " -o ${o}") p.extraOptions
-            } unlock";
+            preStart = lib.mkBefore ''
+              ${lib.optionalString (p.precondition != null) ''
+                ${p.precondition} || { echo "${job}: provider precondition failed; refusing to back up" >&2; exit 1; }
+              ''}
+              rc=0
+              ${resticCmd} cat --no-lock config > /dev/null || rc=$?
+              if [ "$rc" -eq 10 ]; then
+                ${resticCmd} init
+              elif [ "$rc" -ne 0 ]; then
+                exit "$rc"
+              fi
+              ${resticCmd} unlock
+            '';
             serviceConfig.TimeoutStartSec = "4h";
           }
         ) jobs;
