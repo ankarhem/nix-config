@@ -6,7 +6,6 @@
     apple-fonts.url = "github:Lyndeno/apple-fonts.nix";
     blog.url = "git+https://github.com/ankarhem/site";
     comfyui-nix.url = "github:utensils/comfyui-nix";
-    fastpotify.url = "github:crmne/fastpotify";
     flake-parts.url = "github:hercules-ci/flake-parts";
     git-hooks.url = "github:cachix/git-hooks.nix";
     grafana-cli.url = "github:norcetech/grafana-cli";
@@ -52,6 +51,7 @@
     scripts.url = "github:ankarhem/scripts";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
+    spotifast.url = "github:crmne/spotifast";
     tangled.inputs.flake-compat.url = "github:edolstra/flake-compat";
     tangled.inputs.nixpkgs.follows = "nixpkgs";
     tangled.url = "git+https://tangled.org/@tangled.org/core";

@@ -46,15 +46,14 @@
       ...
     }:
     let
-      fastpotify = inputs.fastpotify.packages."${pkgs.stdenv.hostPlatform.system}".fastpotify;
-      fastpotify-app = inputs.fastpotify.packages."${pkgs.stdenv.hostPlatform.system}".fastpotify-app;
+      spotifast = inputs.spotifast.packages."${pkgs.stdenv.hostPlatform.system}".spotifast;
     in
     {
       environment = {
         pathsToLink = [ "/Applications" ];
         # GC-root the bundle: the Dock entry below only records a store path
         # string, which the garbage collector cannot see.
-        systemPackages = [ fastpotify-app ];
+        systemPackages = [ spotifast ];
       };
 
       homebrew.casks = [
@@ -83,7 +82,7 @@
           mru-spaces = false;
           persistent-apps = [
             "${pkgs._unstable.obsidian}/Applications/Obsidian.app/"
-            "${fastpotify-app}/Applications/Spotifast.app/"
+            "${spotifast}/Applications/Spotifast.app/"
             "/Applications/1Password.app/"
             "/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
@@ -160,7 +159,7 @@
         [
           google-chrome
           _unstable.obsidian
-          inputs.fastpotify.packages.${pkgs.stdenv.hostPlatform.system}.fastpotify
+          inputs.spotifast.packages.${pkgs.stdenv.hostPlatform.system}.spotifast
         ]
         ++ (lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;
