@@ -51,18 +51,18 @@
         in
         with pkgs;
         [
-          az
+          _unstable.acli
+          _unstable.bun
           argocd
+          az
+          bruno
+          inputs.grafana-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
+          inputs.graylog-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
           local.clone_org
           mitmproxy
-          bruno
-          bun
-          _unstable.acli
           nixd
           omnisharp-roslyn
           typescript-language-server
-          inputs.grafana-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
-          inputs.graylog-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
         ]
         ++ [ combinedDotnet ];
     };
