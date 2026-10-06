@@ -16,7 +16,6 @@
         api_key._secret = config.sops.secrets."arr_tokens/radarr".path;
 
         delete_old_custom_formats = true;
-        replace_existing_custom_formats = true;
 
         media_naming = {
           folder = "plex-tmdb";
@@ -26,11 +25,13 @@
           };
         };
 
-        include = [
-          # Comment out any of the following includes to disable them
-          { template = "radarr-quality-definition-movie"; }
-          { template = "radarr-quality-profile-hd-bluray-web"; }
-          { template = "radarr-custom-formats-hd-bluray-web"; }
+        quality_definition.type = "movie";
+        quality_profiles = [
+          {
+            trash_id = "d1d67249d3890e49bc12e275d989a7e9"; # HD Bluray + WEB
+            name = "HD Bluray + WEB";
+            reset_unmatched_scores.enabled = true;
+          }
         ];
       };
       sonarr.tv = {
@@ -38,7 +39,6 @@
         api_key._secret = config.sops.secrets."arr_tokens/sonarr".path;
 
         delete_old_custom_formats = true;
-        replace_existing_custom_formats = true;
 
         media_naming = {
           series = "default";
@@ -51,11 +51,13 @@
           };
         };
 
-        include = [
-          # Comment out any of the following includes to disable them
-          { template = "sonarr-quality-definition-series"; }
-          { template = "sonarr-v4-quality-profile-web-1080p"; }
-          { template = "sonarr-v4-custom-formats-web-1080p"; }
+        quality_definition.type = "series";
+        quality_profiles = [
+          {
+            trash_id = "72dae194fc92bf828f32cde7744e51a1"; # WEB-1080p
+            name = "WEB-1080p";
+            reset_unmatched_scores.enabled = true;
+          }
         ];
       };
     };
