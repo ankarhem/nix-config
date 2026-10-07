@@ -42,6 +42,7 @@
         n8n
         nix
         pds
+        profilarr
         redlib
         secrets
         sshd
