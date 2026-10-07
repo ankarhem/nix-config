@@ -1,70 +1,32 @@
 { ... }:
 let
   domain = "profilarr.internal.internetfeno.men";
-  port = 6868;
+  port = "6868";
   dataDir = "/var/lib/profilarr";
+  uid = "1000";
 in
 {
   flake.modules.nixos.profilarr =
-    { lib, pkgs, ... }:
-    let
-      package = pkgs.local.profilarr.override { inherit (pkgs._unstable) deno; };
-    in
+    { ... }:
     {
-      users.users.profilarr = {
-        isSystemUser = true;
-        group = "profilarr";
-        home = dataDir;
-      };
-      users.groups.profilarr = { };
+      systemd.tmpfiles.rules = [ "d ${dataDir} 0750 ${uid} ${uid} -" ];
 
-      systemd.services.profilarr = {
-        description = "Profilarr";
-        after = [ "network-online.target" ];
-        wants = [ "network-online.target" ];
-        wantedBy = [ "multi-user.target" ];
-
+      virtualisation.oci-containers.containers.profilarr = {
+        image = "ghcr.io/dictionarry-hub/profilarr:latest";
+        ports = [ "127.0.0.1:${port}:${port}" ];
+        volumes = [ "${dataDir}:/config" ];
         environment = {
-          APP_BASE_PATH = dataDir;
-          HOST = "127.0.0.1";
-          PORT = toString port;
+          PUID = uid;
+          PGID = uid;
+          UMASK = "027";
+          TZ = "Europe/Stockholm";
           ORIGIN = "https://${domain}";
         };
-
-        serviceConfig = {
-          ExecStart = lib.getExe package;
-          User = "profilarr";
-          Group = "profilarr";
-          StateDirectory = "profilarr";
-          StateDirectoryMode = "0750";
-          WorkingDirectory = dataDir;
-          Restart = "on-failure";
-          UMask = "0027";
-
-          CapabilityBoundingSet = "";
-          LockPersonality = true;
-          NoNewPrivileges = true;
-          PrivateDevices = true;
-          PrivateTmp = true;
-          ProtectClock = true;
-          ProtectControlGroups = true;
-          ProtectHome = true;
-          ProtectHostname = true;
-          ProtectKernelLogs = true;
-          ProtectKernelModules = true;
-          ProtectKernelTunables = true;
-          ProtectSystem = "strict";
-          RestrictAddressFamilies = [
-            "AF_INET"
-            "AF_INET6"
-            "AF_UNIX"
-          ];
-          RestrictRealtime = true;
-          RestrictSUIDSGID = true;
-        };
       };
 
-      services.backups.sources.profilarr.paths = [ "${dataDir}/backups" ];
+      virtualisation.oci-containers.autoUpdater.containers.profilarr.enable = true;
+
+      # services.backups.sources.profilarr.paths = [ "${dataDir}/backups" ];
 
       services.nginx.virtualHosts."${domain}" = {
         forceSSL = true;
@@ -73,7 +35,7 @@ in
           client_max_body_size 1G;
         '';
         locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString port}";
+          proxyPass = "http://127.0.0.1:${port}";
           proxyWebsockets = true;
         };
       };
