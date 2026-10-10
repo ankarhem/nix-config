@@ -64,6 +64,7 @@
         "microsoft-excel"
         "microsoft-remote-desktop"
         "pairpods"
+        "plex"
         # "runelite"
         "sikarugir"
         "steam"
