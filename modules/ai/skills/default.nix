@@ -29,7 +29,6 @@ in
       home.packages = [
         agentBrowser
         hunk
-        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.ck
         pkgs.local.sonarqube-cli
       ];
 

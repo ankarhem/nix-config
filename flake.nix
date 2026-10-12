@@ -10,9 +10,6 @@
     git-hooks.url = "github:cachix/git-hooks.nix";
     grafana-cli.url = "github:norcetech/grafana-cli";
     graylog-cli.url = "github:norcetech/graylog-cli";
-    # drop when programs.herdr lands in the home-manager release branch
-    home-manager-unstable.flake = false;
-    home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     homebrew-bundle.flake = false;

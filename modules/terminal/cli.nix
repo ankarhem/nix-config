@@ -88,7 +88,7 @@ in
           deno
           dig
           fd
-          ghidra
+          _unstable.ghidra
           git
           gitleaks
           grc
