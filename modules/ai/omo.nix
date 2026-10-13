@@ -21,6 +21,7 @@ in
 {
   flake.modules.homeManager.omo =
     {
+      lib,
       pkgs,
       config,
       ...
@@ -43,7 +44,10 @@ in
     in
     {
       home.packages = [ omo-ai ];
-      home.file.".omo/agent/AGENTS.md".source = ./opencode/language.md;
+      home.file.".omo/agent/AGENTS.md".text = lib.concatMapStringsSep "\n\n" builtins.readFile [
+        ./opencode/intelligence.md
+        ./opencode/language.md
+      ];
 
       sops.secrets."mcp_tokens/exa" = { };
       sops.secrets."mcp_tokens/tavily" = { };
