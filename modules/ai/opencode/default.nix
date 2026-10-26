@@ -34,11 +34,12 @@ in
         };
         settings = {
           instructions = [
-            ./cli.md
-            ./intelligence.md
-            ./language.md
-            ./memory.md
-            ./non_interactivity.md
+            ../steering/cli.md
+            ../steering/github.md
+            ../steering/intelligence.md
+            ../steering/language.md
+            ../steering/memory.md
+            ../steering/non_interactivity.md
           ];
           plugin = [
             "@simonwjackson/opencode-direnv"

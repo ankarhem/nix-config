@@ -45,8 +45,9 @@ in
     {
       home.packages = [ omo-ai ];
       home.file.".omo/agent/AGENTS.md".text = lib.concatMapStringsSep "\n\n" builtins.readFile [
-        ./opencode/intelligence.md
-        ./opencode/language.md
+        ./steering/intelligence.md
+        ./steering/language.md
+        ./steering/github.md
       ];
 
       sops.secrets."mcp_tokens/exa" = { };
