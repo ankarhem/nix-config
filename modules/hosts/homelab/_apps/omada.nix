@@ -16,6 +16,7 @@ let
     manager-v2 = "29814";
     transfer-v2 = "29815";
     rtty = "29816";
+    device-monitor = "29817";
   };
 
   udpPorts = [
@@ -37,7 +38,7 @@ in
   };
 
   virtualisation.oci-containers.containers."omada-controller" = {
-    image = "mbentley/omada-controller:5.15";
+    image = "mbentley/omada-controller:6.3.0.111";
     environment = {
       "MANAGE_HTTP_PORT" = ports.http;
       "MANAGE_HTTPS_PORT" = ports.https;
@@ -51,6 +52,7 @@ in
       "PORT_MANAGER_V2" = ports.manager-v2;
       "PORT_TRANSFER_V2" = ports.transfer-v2;
       "PORT_RTTY" = ports.rtty;
+      "PORT_DEVICE_MONITOR" = ports.device-monitor;
       "SHOW_MONGODB_LOGS" = "false";
       "SHOW_SERVER_LOGS" = "true";
       "TZ" = "Europe/Stockholm";
