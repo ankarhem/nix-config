@@ -33,7 +33,7 @@ in
     (lib.mkIf cfg.enable {
       virtualisation.oci-containers.containers.watchtower = lib.mkMerge [
         {
-          image = "containrrr/watchtower:latest";
+          image = "nickfedor/watchtower:latest";
           cmd = [
             # Only fetch new images, do not attempt to restart containers:
             "--no-restart"

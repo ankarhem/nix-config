@@ -1,4 +1,9 @@
-{ self, config, ... }:
+{
+  self,
+  config,
+  lib,
+  ...
+}:
 {
   imports = [
     "${self}/nixosModules/docker.nix"
@@ -116,20 +121,27 @@
     enable = true;
     config = ''
       . {
+        # The router has no NAT loopback, so names served by this nginx
+        # resolve to the LAN IP; everything else goes upstream.
+        hosts {
+          ${config.networking.custom.homelabIp} ${
+            lib.concatStringsSep " " (
+              builtins.filter (n: !lib.hasInfix "*" n) (builtins.attrNames config.services.nginx.virtualHosts)
+            )
+          }
+          fallthrough
+        }
         # Cloudflare and Google
         forward . 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
         cache
       }
 
-      internal.internetfeno.men {
+      internal.internetfeno.men internal.ankarhem.dev {
         template IN A  {
             answer "{{ .Name }} 0 IN A ${config.networking.custom.homelabIp}"
         }
-      }
-      internal.ankarhem.dev {
-        template IN A  {
-            answer "{{ .Name }} 0 IN A ${config.networking.custom.homelabIp}"
-        }
+        forward . 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
+        cache
       }
     '';
   };
