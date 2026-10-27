@@ -57,8 +57,8 @@
 
       networking.networkmanager.enable = lib.mkForce false;
       # Custom Networking
-      networking.custom.homelabIp = "192.168.1.221";
-      networking.custom.synologyIp = "192.168.1.163";
+      networking.custom.homelabIp = "192.168.1.126";
+      networking.custom.synologyIp = "192.168.1.234";
       networking.custom.lanNetwork = "192.168.1.0/24";
 
       system.stateVersion = "24.05";

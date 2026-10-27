@@ -10,7 +10,7 @@
         "~/.ssh/id_ecdsa_sk"
       ];
 
-      homelabLanIp = "192.168.1.221";
+      homelabLanIp = "192.168.1.126";
     in
     {
       home.packages = with pkgs; [
