@@ -12,6 +12,7 @@
     ./dokploy.nix
     ./hitster.nix
     ./immich.nix
+    ./internal-vhosts.nix
     ./obsidian-livesync.nix
     ./omada.nix
     ./open-webui.nix
@@ -36,6 +37,7 @@
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
+      53
       80
       443
     ];
