@@ -22,7 +22,6 @@
     ./swerdle.nix
     ./synology.nix
     ./telemetry/default.nix
-    ./tibia-api.nix
     ./tuwunel.nix
     ./vaultwarden/default.nix
   ];
