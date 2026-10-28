@@ -26,6 +26,8 @@ in
   services.fail2ban = {
     enable = true;
     bantime-increment.enable = true;
+    # LAN clients reach forwarded ports as the WAN IP (router NAT loopback).
+    ignoreIP = [ config.networking.custom.wanIp ];
     extraPackages = [ pkgs.curl ];
     jails = {
       nginx-http-auth.settings.enabled = true;

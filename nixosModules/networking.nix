@@ -22,6 +22,12 @@ in
       default = "";
       description = "Full LAN network CIDR";
     };
+
+    wanIp = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Public WAN IP address of the router";
+    };
   };
 
   config = lib.mkIf (cfg.homelabIp != "" && cfg.synologyIp != "" && cfg.lanNetwork != "") ({
@@ -37,6 +43,10 @@ in
       {
         assertion = builtins.match "([0-9]{1,3}\\.){3}[0-9]{1,3}/[0-9]{1,2}" cfg.lanNetwork != null;
         message = "networking.custom.lanNetwork must be a valid CIDR network";
+      }
+      {
+        assertion = cfg.wanIp == "" || builtins.match "([0-9]{1,3}\\.){3}[0-9]{1,3}" cfg.wanIp != null;
+        message = "networking.custom.wanIp must be a valid IP address";
       }
       {
         assertion = cfg.homelabIp != cfg.synologyIp;

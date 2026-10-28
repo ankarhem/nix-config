@@ -9,6 +9,7 @@ let
     "100.64.0.0/10" # tailscale
     "fd7a:115c:a1e0::/48" # tailscale
     "172.16.0.0/12" # docker
+    config.networking.custom.wanIp # the router's NAT loopback rewrites LAN clients to it
   ];
 in
 {
