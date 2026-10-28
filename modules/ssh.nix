@@ -40,6 +40,8 @@
             ControlMaster = "auto";
             ControlPath = "~/.ssh/S.%r@%h:%p";
             ControlPersist = "60m";
+            ServerAliveInterval = 15;
+            ServerAliveCountMax = 3;
           };
           "synology" = {
             SetEnv = {
