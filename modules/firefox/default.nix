@@ -183,6 +183,7 @@ in
               "extensions.activeThemeID" = "default-theme@mozilla.org";
               "extensions.pocket.enabled" = false;
               "identity.fxaccounts.enabled" = false;
+              "network.trr.mode" = 5;
               "privacy.trackingprotection.enabled" = true;
               "privacy.trackingprotection.socialtracking.enabled" = true;
               "sidebar.revamp" = true;
