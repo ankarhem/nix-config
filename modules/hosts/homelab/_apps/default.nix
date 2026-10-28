@@ -141,12 +141,11 @@
         template IN A  {
             answer "{{ .Name }} 0 IN A ${config.networking.custom.homelabIp}"
         }
-        # Empty AAAA, otherwise Cloudflare's public IPv6 wins over the LAN A.
-        template IN AAAA {
+        # Everything else empty: Cloudflare's AAAA and HTTPS (ECH) records
+        # would send clients to Cloudflare instead of the LAN A.
+        template ANY ANY {
             rcode NOERROR
         }
-        forward . 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
-        cache
       }
     '';
   };
