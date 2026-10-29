@@ -15,7 +15,7 @@
     ./internal-vhosts.nix
     ./obsidian-livesync.nix
     ./omada.nix
-    ./open-webui.nix
+    # ./open-webui.nix
     ./opencode-server/default.nix
     ./picoshare.nix
     ./seafile.nix
