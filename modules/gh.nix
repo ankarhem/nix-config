@@ -11,10 +11,12 @@ in
   flake.modules.darwin.gh = {
     inherit home-manager;
   };
-  flake.modules.homeManager.gh = {
+  flake.modules.homeManager.gh = { pkgs, ... }: {
     programs.gh = {
       enable = true;
+      package = pkgs._unstable.gh;
 
+      extensions = [ pkgs._unstable.gh-stack ];
       settings = {
         git_protocol = "ssh";
         prompt = "enabled";
