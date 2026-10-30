@@ -1,32 +1,48 @@
 { inputs, ... }: {
   flake.modules.nixos.tangled-knot =
-    { config, lib, ... }:
+    { config, ... }:
     let
       domain = "knot.ankarhem.dev";
-      internalPort = "5444";
       publicPort = "5555";
-
-      cfg = config.services.tangled.knot;
     in
     {
       imports = [
-        inputs.tangled.nixosModules.knot
+        inputs.tangled.nixosModules.knot-rs
       ];
-      services.tangled.knot = {
+
+      sops.secrets."knot/master_key" = { };
+      sops.templates."knot.env".content = ''
+        KNOT_MASTER_KEY=${config.sops.placeholder."knot/master_key"}
+      '';
+
+      services.tangled.knot-rs = {
         enable = true;
-        package = inputs.tangled.packages.${config.nixpkgs.hostPlatform.system}.knot;
-        gitUser = "git";
-        stateDir = "/var/lib/tangled-knot";
-        repo.scanPath = "${cfg.stateDir}/repos";
-        server = {
-          listenAddr = "127.0.0.1:${publicPort}";
-          internalListenAddr = "127.0.0.1:${internalPort}";
-          hostname = domain;
-          owner = "did:plc:freiumm55hanqgziwfajvhn6";
+        environmentFile = config.sops.templates."knot.env".path;
+        settings = {
+          server = {
+            hostname = domain;
+            admins = [ "did:plc:freiumm55hanqgziwfajvhn6" ];
+            listen_addr = "127.0.0.1:${publicPort}";
+            # Public 22 is forwarded to the admin sshd; the router forwards 2222 here.
+            ssh_listen_addr = "[::]:2222";
+          };
+          git.object_format = "sha1";
+          lfs.store_path = "/var/lib/knot/lfs";
+          contact.email = "admin@ankarhem.dev";
+          atproto.plc_directory = "https://plc.directory";
+          # pds.ankarhem.dev resolves to the LAN address here, and the knot's
+          # outbound guard refuses private addresses, so it can't read SSH keys.
+          http.block_private_addresses = false;
+          xrpc = {
+            trusted_proxy_header = "x-forwarded-for";
+            trusted_proxies = [
+              "127.0.0.1"
+              "::1"
+            ];
+          };
         };
-        openFirewall = false;
       };
-      systemd.services.knot.serviceConfig = {
+      systemd.services.knot-rs.serviceConfig = {
         MemoryMax = "4G";
         MemorySwapMax = "0";
       };

@@ -63,13 +63,14 @@
             IdentitiesOnly = true;
             IdentityFile = homelabKeys;
           };
-          # Tangled knot. The git user is no-pty, so Ghostty's ssh-terminfo
-          # install hangs/fails on every connect. Prime the cache to skip it:
+          # Tangled knot (knot-rs, in-process ssh on 2222). The knot serves no
+          # pty, so Ghostty's ssh-terminfo install hangs/fails on every connect.
+          # Prime the cache to skip it:
           #   ghostty +ssh-cache --add=git@knot.ankarhem.dev
           "knot.ankarhem.dev" = {
             # HostName = homelabLanIp;
             User = "git";
-            Port = 22;
+            Port = 2222;
             IdentitiesOnly = true;
             IdentityFile = homelabKeys;
           };

@@ -31,7 +31,6 @@
         deploy
         fish
         fonts
-        forgejo
         general
         gh
         gpg
