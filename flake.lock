@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "actor-typeahead-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1762835797,
-        "narHash": "sha256-heizoWUKDdar6ymfZTnj3ytcEv/L4d4fzSmtr0HlXsQ=",
-        "ref": "refs/heads/main",
-        "rev": "677fe7f743050a4e7f09d4a6f87bbf1325a06f6b",
-        "revCount": 6,
-        "type": "git",
-        "url": "https://tangled.org/@jakelazaroff.com/actor-typeahead"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://tangled.org/@jakelazaroff.com/actor-typeahead"
-      }
-    },
     "apple-fonts": {
       "inputs": {
         "ci": "ci",
@@ -1004,18 +988,6 @@
         "type": "github"
       }
     },
-    "hls-src": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-mmxgaQRXXWzRG6/OlOn5efV+NmzhvmXTQaFbODqh0b8=",
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -1056,11 +1028,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1793354036,
-        "narHash": "sha256-6ZWu5B9Z0K7OvnTjRBm65TkwlZx3eeJQxcximgl6yLI=",
+        "lastModified": 1793439918,
+        "narHash": "sha256-U6GD7ePf6kn/FJ9IznEi0I0NCbuDd/kXm+a/9Fp/734=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "41a4657be6b9840bf88f1a54f4129fe9a33a7494",
+        "rev": "380ef5bca4fc16c5add95cecdb7f71f33103bfae",
         "type": "github"
       },
       "original": {
@@ -1072,11 +1044,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1793353506,
-        "narHash": "sha256-JTw8SRcRT4HniFq24zIga+HMKjL1eLiErLB7WqCTt8A=",
+        "lastModified": 1793440995,
+        "narHash": "sha256-puOi2/hB143DpyT1P0svjJRbKskE0L0p5i5Tt3p0tck=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "c48d966391c9a986cd8c7ba7f0c59e62a40d91d4",
+        "rev": "2b20348ed37f303002059785b2173cdc2a3f70f2",
         "type": "github"
       },
       "original": {
@@ -1121,30 +1093,6 @@
       "original": {
         "type": "git",
         "url": "https://github.com/ankarhem/hon-stats"
-      }
-    },
-    "htmx-src": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-2D8I0L0u6qb57QpeVn88RrT0xatDwQwG/lWOTjuEFPc=",
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
-      }
-    },
-    "htmx-ws-src": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-woiluaeAoxH/CyDkpk6LYNWCzxH8PHgwgnrlBFGJxgk=",
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/htmx-ext-ws@2.0.4"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/htmx-ext-ws@2.0.4"
       }
     },
     "hydrant": {
@@ -1195,11 +1143,11 @@
     "impeccable-skill": {
       "flake": false,
       "locked": {
-        "lastModified": 1793299304,
-        "narHash": "sha256-Yu02irBHcflxV+btYAeqSQYbPhvZlHbrNVO6lsiM584=",
+        "lastModified": 1793428911,
+        "narHash": "sha256-whh7YDevl4sCVBKEhV3fNNCOTMTmmYzCFJEe7VHbgGw=",
         "owner": "pbakaus",
         "repo": "impeccable",
-        "rev": "02523aec3e4c4580102d996d1b6a71fbe062e03f",
+        "rev": "b7a89176e4e87422b40f98adabceb051dbb5448b",
         "type": "github"
       },
       "original": {
@@ -1239,19 +1187,6 @@
         "type": "github"
       }
     },
-    "inter-fonts-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1731687360,
-        "narHash": "sha256-5vdKKvHAeZi6igrfpbOdhZlDX2/5+UvzlnCQV6DdqoQ=",
-        "type": "tarball",
-        "url": "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip"
-      }
-    },
     "lazyvim": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -1280,54 +1215,17 @@
         "treefmt-nix": "treefmt-nix_5"
       },
       "locked": {
-        "lastModified": 1793337267,
-        "narHash": "sha256-HiJivFTcq8no0L9bac+3MkaPeFy5gP+LLQMZXQNo5O8=",
+        "lastModified": 1793435943,
+        "narHash": "sha256-kl4L50m8mMMyQLjH2d46ljtdzR+9vlgpoDmOrpNV/SU=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "467c27cb367fa1059583bcadf28390611f66550b",
+        "rev": "b14f9d18b6d127221bd9f63817a40e1cca2b344b",
         "type": "github"
       },
       "original": {
         "owner": "numtide",
         "repo": "llm-agents.nix",
         "type": "github"
-      }
-    },
-    "lucide-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1754044466,
-        "narHash": "sha256-+exBR2OToB1iv7ZQI2S4B0lXA/QRvC9n6U99UxGpJGs=",
-        "type": "tarball",
-        "url": "https://github.com/lucide-icons/lucide/releases/download/0.536.0/lucide-icons-0.536.0.zip"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/lucide-icons/lucide/releases/download/0.536.0/lucide-icons-0.536.0.zip"
-      }
-    },
-    "mathjax-src": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-eqg25bKfiDzynRMR2RfeWNfo0EefHF/eRRFafl9RnNI=",
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/mathjax@4.1.2/tex-svg.js"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/mathjax@4.1.2/tex-svg.js"
-      }
-    },
-    "mermaid-src": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-/YOdECG2V5c3kJ1QfGvhziTT6K/Dx/4mOk2mr3Fs/do=",
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/mermaid@11.12.3/dist/mermaid.min.js"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://cdn.jsdelivr.net/npm/mermaid@11.12.3/dist/mermaid.min.js"
       }
     },
     "microvm": {
@@ -1586,11 +1484,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1793110635,
-        "narHash": "sha256-dhoW6VgFWlaodSY5jrBn+CF2FLmaUvDVgM7+C7T2+NM=",
+        "lastModified": 1793341285,
+        "narHash": "sha256-Y1CiZ4SoBUjLQyQM/pY+rS2dXD3CHLPstF0lmOc73D4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "31ecbaca1bdefa45dffc409f0250bd8039ea0010",
+        "rev": "1c89083e451e891152365b799595cf7790a43325",
         "type": "github"
       },
       "original": {
@@ -1602,11 +1500,11 @@
     },
     "nixpkgs_10": {
       "locked": {
-        "lastModified": 1793225069,
-        "narHash": "sha256-sx1f99WGrDfJ83KKuQrqGPmot0rnDgmpLJDzpU2oHQQ=",
+        "lastModified": 1793345420,
+        "narHash": "sha256-e/yiZ31gXRROBDcnOtT3YwDQ73NVG9Cepccbt86LIn8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e62746b0b472753ef019baceab6f1e2e52014980",
+        "rev": "885ba4d038f10c3d17d7a92e8c3cc185b99c9158",
         "type": "github"
       },
       "original": {
@@ -1868,11 +1766,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793354867,
-        "narHash": "sha256-x5Qa78qx0Mr7oiNCrN2P4s89ZtJg/Ut4oUq6lNyTsDI=",
+        "lastModified": 1793439894,
+        "narHash": "sha256-z1pKTNxRHckIaEjXJhF647mpU5k1yvp0y+HjIaQZl60=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "6f477257e56cd8763a0548fa5d4664efbb78fc69",
+        "rev": "76efe6d9b2734bf554f9672f588953b9019756c5",
         "type": "github"
       },
       "original": {
@@ -2266,11 +2164,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1793300182,
-        "narHash": "sha256-Fe/MONuReBS2tnezQg8TmXSZg/ALZIllLCWklJKID60=",
+        "lastModified": 1793385716,
+        "narHash": "sha256-+ITcRMdCbkLhxLDdRzvOa4MYP/GtqNnUaRD2Wc4aVCQ=",
         "owner": "crmne",
         "repo": "spotifast",
-        "rev": "af906d8e4d50bdbe9915271c6841118fe6143ecc",
+        "rev": "01c2642dc7d30f0c5c103d088c93951f1ba2560f",
         "type": "github"
       },
       "original": {
@@ -2397,52 +2295,30 @@
         "type": "github"
       }
     },
-    "tailwindcss-animated-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 499162500,
-        "narHash": "sha256-l3esIcsAwj0PHOhnHBLWiLzzRiOo1yOk9VYEGpn6fyQ=",
-        "type": "tarball",
-        "url": "https://registry.npmjs.org/tailwindcss-animated/-/tailwindcss-animated-1.1.2.tgz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://registry.npmjs.org/tailwindcss-animated/-/tailwindcss-animated-1.1.2.tgz"
-      }
-    },
     "tangled": {
       "inputs": {
-        "actor-typeahead-src": "actor-typeahead-src",
         "fenix": "fenix_4",
         "fetch-tangled": "fetch-tangled",
         "flake-compat": "flake-compat_9",
         "gomod2nix": "gomod2nix",
-        "hls-src": "hls-src",
-        "htmx-src": "htmx-src",
-        "htmx-ws-src": "htmx-ws-src",
         "hydrant": "hydrant",
         "hydrant-dev": "hydrant-dev",
         "ibm-plex-mono-src": "ibm-plex-mono-src",
         "indigo": "indigo",
-        "inter-fonts-src": "inter-fonts-src",
-        "lucide-src": "lucide-src",
-        "mathjax-src": "mathjax-src",
-        "mermaid-src": "mermaid-src",
         "microvm": "microvm",
         "nixpkgs": [
           "nixpkgs"
         ],
         "nixpkgs-pds": "nixpkgs-pds",
         "sqlite-lib-src": "sqlite-lib-src",
-        "tailwindcss-animated-src": "tailwindcss-animated-src",
         "timeless-fonts-src": "timeless-fonts-src"
       },
       "locked": {
-        "lastModified": 1793354951,
-        "narHash": "sha256-5Q5bJvpE/eB0FJirmsL7YXXN+FXjtrQmXaOXJ3f1rEQ=",
+        "lastModified": 1793438711,
+        "narHash": "sha256-HekNMOcKg8g3xkcwpdeQGjJJXebepG9kz5sD+WyuIxY=",
         "ref": "refs/heads/master",
-        "rev": "2096d06d938e680297adeadd71b8320c9f3491d4",
-        "revCount": 6025,
+        "rev": "f8cd5c23462cded0fefafcaacdf69c9079e9c40c",
+        "revCount": 6074,
         "type": "git",
         "url": "https://tangled.org/@tangled.org/core"
       },
