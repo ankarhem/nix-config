@@ -25,6 +25,7 @@ in
       volumes = [ "/mnt/DISKETTEN_drive/picoshare:/data" ];
       environment = {
         PORT = port;
+        PS_BEHIND_PROXY = "true";
       };
       environmentFiles = [ config.sops.templates."picoshare.env".path ];
       cmd = [
