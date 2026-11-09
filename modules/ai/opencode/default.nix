@@ -4,7 +4,7 @@ let
   glmFlash = "zai-coding-plan/glm-5.3-flash";
 
   opus = "anthropic/claude-opus-5-5";
-  fable = "anthropic/claude-fable-5-1";
+  fable = "anthropic/claude-fable-5-2";
 in
 {
   flake.modules.homeManager.opencode =

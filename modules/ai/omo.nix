@@ -15,7 +15,7 @@ let
     model = "anthropic-subscription/claude-opus-5-5";
     reasoning = "low";
   };
-  fable = "anthropic-subscription/claude-fable-5-1";
+  fable = "anthropic-subscription/claude-fable-5-2";
   museFree = "opencode/muse-spark-1.3-contributor-free";
 in
 {
