@@ -1,4 +1,21 @@
 { inputs, ... }:
+let
+  # Spotifast's Soloist audio checks @available(macOS 14.2). Built for the
+  # default 14.0 target that check calls ___isPlatformVersionAtLeast, which
+  # thin LTO strips from Rust's std, so the link fails. Building for 14.2
+  # folds the check away.
+  spotifastFor =
+    pkgs:
+    let
+      spotifast = inputs.spotifast.packages.${pkgs.stdenv.hostPlatform.system}.spotifast;
+    in
+    if pkgs.stdenv.hostPlatform.isDarwin then
+      spotifast.overrideAttrs (old: {
+        buildInputs = (old.buildInputs or [ ]) ++ [ (pkgs.darwinMinVersionHook "14.2") ];
+      })
+    else
+      spotifast;
+in
 {
   flake.modules.nixos.general = {
     programs.thunderbird = {
@@ -46,7 +63,7 @@
       ...
     }:
     let
-      spotifast = inputs.spotifast.packages."${pkgs.stdenv.hostPlatform.system}".spotifast;
+      spotifast = spotifastFor pkgs;
     in
     {
       environment = {
@@ -160,7 +177,7 @@
         [
           google-chrome
           _unstable.obsidian
-          inputs.spotifast.packages.${pkgs.stdenv.hostPlatform.system}.spotifast
+          (spotifastFor pkgs)
         ]
         ++ (lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;

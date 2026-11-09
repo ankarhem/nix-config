@@ -20,9 +20,9 @@
     { config, pkgs, ... }:
     let
       combinedDotnet = pkgs.dotnetCorePackages.combinePackages [
-        pkgs.dotnet-sdk_8
-        pkgs.dotnet-sdk_9
-        pkgs.dotnet-sdk_10
+        pkgs.dotnetCorePackages.sdk_9_0-bin
+        pkgs.dotnetCorePackages.sdk_10_0-bin
+        pkgs.dotnetCorePackages.sdk_11_0-bin
       ];
     in
     {

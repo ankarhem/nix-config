@@ -13,11 +13,9 @@
       csharpier
       omnisharp-roslyn
       (dotnetCorePackages.combinePackages [
-        # dotnet-sdk_6
-        # dotnet-sdk_7
-        dotnet-sdk
-        dotnet-sdk_9
-        dotnet-sdk_10
+        dotnetCorePackages.sdk_9_0-bin
+        dotnetCorePackages.sdk_10_0-bin
+        dotnetCorePackages.sdk_11_0-bin
       ])
     ];
   };
