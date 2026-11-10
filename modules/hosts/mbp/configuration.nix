@@ -42,7 +42,7 @@
       ];
 
       # Disable mouse acceleration (linear movement)
-      system.defaults.".GlobalPreferences"."com.apple.mouse.scaling" = -1.0;
+      system.defaults.CustomUserPreferences.NSGlobalDomain."com.apple.mouse.linear" = true;
 
       system.stateVersion = 5;
     };
