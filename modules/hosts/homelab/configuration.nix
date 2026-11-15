@@ -46,6 +46,7 @@
         secrets
         sshd
         tangled-knot
+        threadfin
       ])
       ++ (with inputs.self.modules.generic; [
         constants
