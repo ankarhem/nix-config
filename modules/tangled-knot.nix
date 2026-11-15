@@ -53,7 +53,7 @@
         locations."/" = {
           proxyPass = "http://127.0.0.1:${publicPort}";
         };
-        locations."/events" = {
+        locations."/xrpc/com.atproto.sync.subscribeRepos" = {
           proxyPass = "http://127.0.0.1:${publicPort}";
           proxyWebsockets = true;
           extraConfig = ''
