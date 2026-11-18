@@ -7,9 +7,11 @@ let
     https = "8043";
     # portal-http = "8088";
     # portal-https = "8843";
+    upgrade-es = "8044";
 
     app-discovery = "27001"; # UDP
     discovery = "29810"; # UDP
+    device-discovery = "19810"; # UDP
     manager-v1 = "29811";
     adopt-v1 = "29812";
     upgrade-v1 = "29813";
@@ -22,6 +24,7 @@ let
   udpPorts = [
     ports.app-discovery
     ports.discovery
+    ports.device-discovery
   ];
   tcpPorts = builtins.filter (port: !builtins.elem port udpPorts) (builtins.attrValues ports);
 in
@@ -44,6 +47,7 @@ in
       "MANAGE_HTTPS_PORT" = ports.https;
       "PORTAL_HTTP_PORT" = ports.http;
       "PORTAL_HTTPS_PORT" = ports.https;
+      "UPGRADE_ES_HTTPS_PORT" = ports.upgrade-es;
       "PORT_APP_DISCOVERY" = ports.app-discovery;
       "PORT_DISCOVERY" = ports.discovery;
       "PORT_MANAGER_V1" = ports.manager-v1;
@@ -57,9 +61,13 @@ in
       "SHOW_SERVER_LOGS" = "true";
       "TZ" = "Europe/Stockholm";
     };
-    ports =
-      (builtins.map (port: "${port}:${port}") tcpPorts)
-      ++ (builtins.map (port: "${port}:${port}/udp") udpPorts);
+    # Host networking: on a bridge the controller hands devices its container
+    # address, which they cannot reach, so adoption times out.
+    extraOptions = [
+      "--network=host"
+      "--stop-timeout=60"
+      "--ulimit=nofile=4096:8192"
+    ];
     volumes = [
       "/var/lib/omada/data:/opt/tplink/EAPController/data:rw"
       "/var/lib/omada/logs:/opt/tplink/EAPController/logs:rw"
