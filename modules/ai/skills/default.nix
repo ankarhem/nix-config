@@ -55,6 +55,32 @@ in
           done
         '';
       };
+      skills =
+        localSkills
+        // ponytailSkills
+        // impeccableSkills
+        // (lib.getAttrs [
+          "argue"
+          "checkout-domain"
+          "checkout-config"
+          "commit"
+          "create-pr"
+          "git-bisect"
+          "jira"
+        ] norceSkills)
+        // (lib.getAttrs [
+          "gcli"
+        ] grafanaCliSkills)
+        // (lib.getAttrs [
+          "graylog-cli"
+        ] graylogCliSkills)
+        // {
+          "temporal-developer" = inputs.temporalio-skill;
+          "agent-browser" = (readSkillsFrom "${agentBrowser}/share/agent-browser/skills").agent-browser;
+          "hunk" = (readSkillsFrom "${hunk}/share/hunk/skills").hunk-review;
+          "rust-skill" = inputs.rust-skill;
+        };
+      skillsFarm = pkgs.linkFarm "merged-skills" skills;
     in
     {
       sops.secrets."picoshare/guest_link" = { };
@@ -66,34 +92,8 @@ in
         picoUpload
       ];
 
-      home.file.".agents/skills".source =
-        let
-          skills =
-            localSkills
-            // ponytailSkills
-            // impeccableSkills
-            // (lib.getAttrs [
-              "argue"
-              "checkout-domain"
-              "checkout-config"
-              "commit"
-              "create-pr"
-              "git-bisect"
-              "jira"
-            ] norceSkills)
-            // (lib.getAttrs [
-              "gcli"
-            ] grafanaCliSkills)
-            // (lib.getAttrs [
-              "graylog-cli"
-            ] graylogCliSkills)
-            // {
-              "temporal-developer" = inputs.temporalio-skill;
-              "agent-browser" = (readSkillsFrom "${agentBrowser}/share/agent-browser/skills").agent-browser;
-              "hunk" = (readSkillsFrom "${hunk}/share/hunk/skills").hunk-review;
-              "rust-skill" = inputs.rust-skill;
-            };
-        in
-        pkgs.linkFarm "merged-skills" skills;
+      home.file.".agents/skills".source = skillsFarm;
+      # Only skills dir read globally by all Antigravity flavors (app, CLI, IDE)
+      home.file.".gemini/config/skills".source = skillsFarm;
     };
 }
