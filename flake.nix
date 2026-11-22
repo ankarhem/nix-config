@@ -48,7 +48,6 @@
     scripts.url = "github:ankarhem/scripts";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.url = "github:Mic92/sops-nix";
-    spotifast.url = "github:crmne/spotifast";
     tangled.inputs.flake-compat.url = "github:edolstra/flake-compat";
     tangled.inputs.nixpkgs.follows = "nixpkgs";
     tangled.url = "git+https://tangled.org/@tangled.org/core";

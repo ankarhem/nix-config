@@ -4,6 +4,7 @@
 }:
 let
   home-manager.sharedModules = with inputs.self.modules.homeManager; [
+    ai-apps
     claude
     mcp
     omo

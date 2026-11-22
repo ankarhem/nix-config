@@ -1,21 +1,4 @@
 { inputs, ... }:
-let
-  # Spotifast's Soloist audio checks @available(macOS 14.2). Built for the
-  # default 14.0 target that check calls ___isPlatformVersionAtLeast, which
-  # thin LTO strips from Rust's std, so the link fails. Building for 14.2
-  # folds the check away.
-  spotifastFor =
-    pkgs:
-    let
-      spotifast = inputs.spotifast.packages.${pkgs.stdenv.hostPlatform.system}.spotifast;
-    in
-    if pkgs.stdenv.hostPlatform.isDarwin then
-      spotifast.overrideAttrs (old: {
-        buildInputs = (old.buildInputs or [ ]) ++ [ (pkgs.darwinMinVersionHook "14.2") ];
-      })
-    else
-      spotifast;
-in
 {
   flake.modules.nixos.general = {
     programs.thunderbird = {
@@ -62,15 +45,12 @@ in
       pkgs,
       ...
     }:
-    let
-      spotifast = spotifastFor pkgs;
-    in
     {
       environment = {
         pathsToLink = [ "/Applications" ];
         # GC-root the bundle: the Dock entry below only records a store path
         # string, which the garbage collector cannot see.
-        systemPackages = [ spotifast ];
+        systemPackages = [ pkgs._unstable.spotifast ];
       };
 
       homebrew.casks = [
@@ -100,7 +80,7 @@ in
           mru-spaces = false;
           persistent-apps = [
             "${pkgs._unstable.obsidian}/Applications/Obsidian.app/"
-            "${spotifast}/Applications/Spotifast.app/"
+            "${pkgs._unstable.spotifast}/Applications/Spotifast.app/"
             "/Applications/1Password.app/"
             "/Applications/Bitwarden.app/"
             "/Applications/Microsoft Excel.app/"
@@ -177,7 +157,7 @@ in
         [
           google-chrome
           _unstable.obsidian
-          (spotifastFor pkgs)
+          _unstable.spotifast
         ]
         ++ (lib.optionals pkgs.stdenv.hostPlatform.isLinux (
           with pkgs;

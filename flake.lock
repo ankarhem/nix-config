@@ -1576,22 +1576,6 @@
         "url": "https://flakehub.com/f/NixOS/nixpkgs/0.1"
       }
     },
-    "nixpkgs_15": {
-      "locked": {
-        "lastModified": 1787736819,
-        "narHash": "sha256-cV5xEJJK3BvhU8rEd4mC9UsmDi5qscv/kzGPhBRC5WA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "9fbb54b33e91ee4ca368e35a78e0613c720600b3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1770107345,
@@ -1862,7 +1846,6 @@
         "rust-skill": "rust-skill",
         "scripts": "scripts",
         "sops-nix": "sops-nix",
-        "spotifast": "spotifast",
         "tangled": "tangled",
         "temporalio-skill": "temporalio-skill",
         "vicinae": "vicinae",
@@ -1950,27 +1933,6 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "4f5f89f1cfd8553b1285a4a0879ea1b2b05ad286",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "rust-overlay_2": {
-      "inputs": {
-        "nixpkgs": [
-          "spotifast",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1787834454,
-        "narHash": "sha256-jXSvqn04IOecJCvSvl8+g3PsbDVNP6qKs6dKUs/b16k=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "dc2fd1acc537f3583744e1373597a5731ff7a6e3",
         "type": "github"
       },
       "original": {
@@ -2156,25 +2118,6 @@
       "original": {
         "type": "git",
         "url": "https://spectrum-os.org/git/spectrum"
-      }
-    },
-    "spotifast": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_15",
-        "rust-overlay": "rust-overlay_2"
-      },
-      "locked": {
-        "lastModified": 1794950020,
-        "narHash": "sha256-JYzMT8MeGSca37XNcgAm3cw7dXYHfzKB1QYJMWw2TKg=",
-        "owner": "crmne",
-        "repo": "spotifast",
-        "rev": "eaaf3c6c12be1f97bc0043a3686d9b407df216f8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "crmne",
-        "repo": "spotifast",
-        "type": "github"
       }
     },
     "sqlite-lib-src": {
