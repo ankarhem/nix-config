@@ -29,10 +29,7 @@ in
         ];
         users.users.${username} = {
           extraGroups = [ "podman" ];
-          openssh.authorizedKeys.keys = self.lib.getGithubKeys {
-            username = "ankarhem";
-            sha256 = "0wqcmrsff263md06nksm8zrgiyd53vh4gxyv5rqgbz9kdb0fb0zh";
-          };
+          openssh.authorizedKeys.keys = self.lib.authorizedKeys;
         };
       };
 

@@ -35,6 +35,7 @@ in
         ];
       };
       homeManager.${username} = {
+        home.file.".ssh/authorized_keys".text = lib.concatStringsSep "\n" self.lib.authorizedKeys + "\n";
         home.sessionVariables = {
           SOPS_AGE_KEY_FILE = "$HOME/.config/sops/age/age.key";
         };
