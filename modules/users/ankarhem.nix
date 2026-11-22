@@ -27,15 +27,16 @@ in
         imports = [
           sopsKeyModule
         ];
+        users.users.${username}.openssh.authorizedKeys.keys = self.lib.authorizedKeys;
       };
 
       darwin.${username} = {
         imports = [
           sopsKeyModule
         ];
+        users.users.${username}.openssh.authorizedKeys.keys = self.lib.authorizedKeys;
       };
       homeManager.${username} = {
-        home.file.".ssh/authorized_keys".text = lib.concatStringsSep "\n" self.lib.authorizedKeys + "\n";
         home.sessionVariables = {
           SOPS_AGE_KEY_FILE = "$HOME/.config/sops/age/age.key";
         };
