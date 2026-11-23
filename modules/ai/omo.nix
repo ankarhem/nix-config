@@ -6,7 +6,7 @@ let
   };
 
   glm = {
-    model = "zai/glm-5.3";
+    model = "zai/glm-5.4";
     reasoning = "max";
   };
 
@@ -92,6 +92,47 @@ in
       # Vendored pi-direnv extension (see the file header for provenance);
       # senpi auto-discovers extensions in ~/.omo/agent/extensions/.
       home.file.".omo/agent/extensions/pi-direnv.ts".source = ./omo/pi-direnv.ts;
+      # glm-5.4 is not in senpi's zai catalog yet; metadata from models.dev
+      # zai-coding-plan, compat copied from the built-in zai/glm-5.3.
+      home.file.".omo/agent/models.json".text = builtins.toJSON {
+        providers.zai.models = [
+          {
+            id = "glm-5.4";
+            name = "GLM-5.4";
+            reasoning = true;
+            thinkingLevelMap = {
+              off = null;
+              minimal = null;
+              low = "low";
+              medium = null;
+              high = "high";
+              xhigh = null;
+              max = "max";
+            };
+            input = [
+              "text"
+              "image"
+            ];
+            contextWindow = 1000000;
+            maxTokens = 131072;
+            cost = {
+              input = 0;
+              output = 0;
+              cacheRead = 0;
+              cacheWrite = 0;
+            };
+            compat = {
+              supportsStore = false;
+              supportsDeveloperRole = false;
+              supportsReasoningEffort = true;
+              maxTokensField = "max_tokens";
+              thinkingFormat = "zai";
+              supportsStrictMode = true;
+              zaiToolStream = true;
+            };
+          }
+        ];
+      };
       home.file.".omo/omo.jsonc" = {
         force = true;
         text = builtins.toJSON {
@@ -108,11 +149,11 @@ in
           retry = {
             provider.minThroughputTokensPerSecond = 0;
             fallbackChains = {
-              "zai/glm-5.3" = [
+              ${glm.model} = [
                 opus
                 museFree
               ];
-              "zai/glm-5.3-flash" = [
+              ${glmFlash.model} = [
                 opus
                 museFree
               ];
