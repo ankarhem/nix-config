@@ -10,13 +10,18 @@ let
     reasoning = "max";
   };
 
+  glm53 = {
+    model = "zai/glm-5.3";
+    reasoning = "max";
+  };
+
   opus = "anthropic-subscription/claude-opus-5-5";
   opusLow = {
     model = "anthropic-subscription/claude-opus-5-5";
     reasoning = "low";
   };
   fable = "anthropic-subscription/claude-fable-5-2";
-  museFree = "opencode/muse-spark-1.3-contributor-free";
+  deepseek = "opencode-go/deepseek-v4.1-flash";
 in
 {
   flake.modules.homeManager.omo =
@@ -150,12 +155,13 @@ in
             provider.minThroughputTokensPerSecond = 0;
             fallbackChains = {
               ${glm.model} = [
+                glm53.model
                 opus
-                museFree
+                deepseek
               ];
               ${glmFlash.model} = [
                 opus
-                museFree
+                deepseek
               ];
             };
           };
@@ -210,8 +216,8 @@ in
             oracle-free = {
               models = [
                 {
-                  model = museFree;
-                  reasoning = "xhigh";
+                  model = deepseek;
+                  reasoning = "max";
                 }
               ];
             };
@@ -241,6 +247,7 @@ in
             deep-low = {
               models = [
                 glm
+                glm53
                 opus
               ];
             };
